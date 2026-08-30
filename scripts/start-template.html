@@ -6,6 +6,7 @@
   <title>MosoFin-diagram Start — Four steps to a diagram you can share</title>
   <meta name="description" content="Add the skill, describe the business, ask one question, and share the map — without sending repository or diagram content to this page.">
   <meta name="theme-color" content="#ffffff">
+  <meta name="generator" content="mosofin start [[MOSOFIN_VERSION]] development">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mosofin Start — Four steps to a diagram you can share">
   <meta property="og:description" content="Add the skill, describe the business, ask one question, then share the map.">
@@ -181,6 +182,8 @@
       .lead, .slides { animation:none; }
       .slides-track { transition:none; }
     }
+  
+[[SITE_FOOTER_STYLES]]
   </style>
 </head>
 <body>
@@ -302,11 +305,8 @@
       </div>
     </section>
 
-    <footer class="page-footer">
-      <span data-en="Mosofin v[[MOSOFIN_VERSION]] · development · self-contained HTML · typed JSON source">Mosofin v[[MOSOFIN_VERSION]] · development · self-contained HTML · typed JSON source</span>
-      <span id="copy-status" role="status" aria-live="polite"></span>
-      <a href="https://github.com/MosoFin/mosofin-diagram" data-en="View source on GitHub ↗">View source on GitHub ↗</a>
-    </footer>
+    <p class="site-provenance"><a href="https://github.com/MosoFin/mosofin-diagram" target="_blank" rel="noopener" data-en="View source on GitHub ↗">View source on GitHub ↗</a></p>
+  [[SITE_FOOTER]]
   </main>
 
   <script id="start-data" type="application/json">[[START_JSON]]</script>

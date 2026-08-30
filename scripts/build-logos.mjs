@@ -7,6 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { siteFooter, siteFooterStyles } from './site-footer.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -170,6 +171,8 @@ const html = `<!DOCTYPE html>
       .nav-logo { width:32px; height:32px; }
       .nav-brand-suffix, .nav-right .nav-link { display:none; }
     }
+  
+${siteFooterStyles()}
   </style>
 </head>
 <body>
@@ -216,14 +219,7 @@ ${businessCards}
     <p class="empty" id="empty">No logo matches that search. If your software is missing, <a href="${esc(ISSUE_URL)}" target="_blank" rel="noopener">request it</a>.</p>
   </div>
 
-  <footer>
-    <div class="foot-inner">
-      <span>MosoFin-diagram &nbsp;·&nbsp; v${esc(packageJson.version)} &nbsp;·&nbsp; MIT License</span>
-      <span>
-        <a href="https://github.com/MosoFin/mosofin-diagram" target="_blank" rel="noopener">GitHub</a>
-      </span>
-    </div>
-  </footer>
+  ${siteFooter({ version: packageJson.version, page: 'logos' })}
 
   <script>
   (function () {

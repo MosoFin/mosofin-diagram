@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SCENARIO_RECIPES } from '../mosofin/recipes/scenarios.mjs';
+import { siteFooter, siteFooterStyles } from './site-footer.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -40,6 +41,8 @@ const startJson = JSON.stringify(startData)
 
 const replacements = {
   '[[MOSOFIN_VERSION]]': packageJson.version,
+  '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'start' }),
+  '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
   '[[START_JSON]]': startJson,
 };
 

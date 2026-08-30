@@ -188,6 +188,8 @@
       html { scroll-behavior:auto; }
       .hero, .chooser, .library, .result.visible { animation:none; }
     }
+  
+[[SITE_FOOTER_STYLES]]
   </style>
 </head>
 <body>
@@ -248,7 +250,8 @@
     </section>
   </main>
 
-  <footer><div class="shell"><span data-i18n="footerLeft">Generated from the same recipe source as the Mosofin CLI.</span><span>mosofin guide "your scenario"</span><span data-i18n="versionLabel">Scenario guide / development / v[[MOSOFIN_VERSION]]</span></div></footer>
+  <p class="guide-cli-hint"><span data-i18n="footerLeft">Generated from the same recipe source as the Mosofin CLI.</span> <code>mosofin guide "your scenario"</code></p>
+  [[SITE_FOOTER]]
 
   <script id="guide-data" type="application/json">[[GUIDE_JSON]]</script>
   <script>

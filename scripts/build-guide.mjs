@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { publicGuideData } from '../mosofin/recipes/scenarios.mjs';
+import { siteFooter, siteFooterStyles } from './site-footer.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -18,6 +19,8 @@ const guideJson = JSON.stringify(publicGuideData())
 
 const replacements = {
   '[[MOSOFIN_VERSION]]': packageJson.version,
+  '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'guide' }),
+  '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
   '[[RECIPE_COUNT]]': String(publicGuideData().length),
   '[[GUIDE_JSON]]': guideJson,
 };

@@ -67,6 +67,19 @@
       div[style*="repeat(4,1fr)"]{grid-template-columns:1fr !important;border-right:0 !important}
       div[style*="repeat(4,1fr)"] > div{border-right:0 !important;border-bottom:1px solid #e6e8ec}
     }
+  
+.site-footer{border-top:1px solid #e6e8ec;background:#f7f8f9;padding:44px 0;margin-top:96px}
+.site-footer-inner{width:min(1120px,calc(100% - 48px));margin:0 auto}
+.site-footer-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:flex-start}
+.site-footer-brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#0a0b0d;text-decoration:none}
+.site-footer-cols{display:flex;gap:40px;flex-wrap:wrap}
+.site-footer-col{display:grid;gap:8px;align-content:start}
+.site-footer-heading{margin:0;font:600 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.07em;text-transform:uppercase;color:#8b919c}
+.site-footer-col a{font-size:13.5px;color:#5c6370;text-decoration:none}
+.site-footer-col a:hover{color:#0bb330}
+.site-footer-legal{margin:32px 0 0;padding-top:18px;border-top:1px solid #e6e8ec;font:400 12px/1.6 'JetBrains Mono',ui-monospace,monospace;color:#8b919c}
+.site-footer-legal a{color:#8b919c;text-decoration:underline}
+@media (max-width:720px){.site-footer-cols{gap:28px}.site-footer{margin-top:64px}}
   </style>
 </head>
 <body>
@@ -378,33 +391,39 @@
   </div>
 </section>
 
-<footer style="border-top:1px solid #e6e8ec;background:#f7f8f9;padding:44px 0">
-  <div style="width:min(1120px,calc(100% - 48px));margin:0 auto">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:flex-start">
-      <div style="display:flex;align-items:center;gap:10px">
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-top">
+      <a class="site-footer-brand" href="#">
         <img src="assets/mosofin-mark.png" alt="" width="26" height="26">
-        <span style="font-size:15px;font-weight:700;color:#0a0b0d">MosoFin-diagram</span>
-      </div>
-      <div style="display:flex;gap:40px;flex-wrap:wrap">
-        <div style="display:grid;gap:8px">
-          <p style="margin:0;font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:#8b919c">Product</p>
-          <a href="#how" style="font-size:13.5px;color:#5c6370">How it works</a>
-          <a href="#types" style="font-size:13.5px;color:#5c6370">Examples</a>
-          <a href="#install" style="font-size:13.5px;color:#5c6370">Get started</a>
+        <span>MosoFin-diagram</span>
+      </a>
+      <div class="site-footer-cols">
+        <div class="site-footer-col">
+          <p class="site-footer-heading">Product</p>
+          <a href="#how">How it works</a>
+          <a href="#types">Examples</a>
+          <a href="#install">Get started</a>
         </div>
-        <div style="display:grid;gap:8px">
-          <p style="margin:0;font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:#8b919c">Project</p>
-          <a href="https://github.com/MosoFin/mosofin-diagram" target="_blank" rel="noopener" style="font-size:13.5px;color:#5c6370">GitHub</a>
-          <a href="https://github.com/MosoFin/mosofin-diagram/blob/main/CHANGELOG.md" target="_blank" rel="noopener" style="font-size:13.5px;color:#5c6370">Changelog</a>
-          <a href="https://github.com/MosoFin/mosofin-diagram/blob/main/LICENSE" target="_blank" rel="noopener" style="font-size:13.5px;color:#5c6370">License</a>
+        <div class="site-footer-col">
+          <p class="site-footer-heading">Explore</p>
+          <a href="/gallery.html">Gallery</a>
+          <a href="/guide.html">Guide</a>
+          <a href="/logos.html">Logos</a>
         </div>
-        <div style="display:grid;gap:8px">
-          <p style="margin:0;font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:#8b919c">MosoFin</p>
-          <a href="https://mosofin.com/?utm_source=diagram.mosofin.com&amp;utm_medium=referral&amp;utm_campaign=mosofin-diagram&amp;utm_content=footer-credit" target="_blank" rel="noopener" style="font-size:13.5px;color:#5c6370">mosofin.com ↗</a>
+        <div class="site-footer-col">
+          <p class="site-footer-heading">Project</p>
+          <a href="https://github.com/MosoFin/mosofin-diagram" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/MosoFin/mosofin-diagram/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+          <a href="https://github.com/MosoFin/mosofin-diagram/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        </div>
+        <div class="site-footer-col">
+          <p class="site-footer-heading">MosoFin</p>
+          <a href="https://mosofin.com/?utm_source=diagram.mosofin.com&amp;utm_medium=referral&amp;utm_campaign=mosofin-diagram&amp;utm_content=footer-credit" target="_blank" rel="noopener">mosofin.com ↗</a>
         </div>
       </div>
     </div>
-    <p style="margin:32px 0 0;padding-top:18px;border-top:1px solid #e6e8ec;font:400 12px/1.6 'JetBrains Mono',monospace;color:#8b919c">development · v1.0.0-dev.0 · MIT License · a fork of <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener" style="color:#8b919c;text-decoration:underline">Archify</a></p>
+    <p class="site-footer-legal">development · v1.0.0-dev.0 · MIT License · a fork of <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">Archify</a></p>
   </div>
 </footer>
 

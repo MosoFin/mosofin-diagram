@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="mosofin gallery [[MOSOFIN_VERSION]]">
+  <meta name="generator" content="mosofin gallery [[MOSOFIN_VERSION]] development">
   <title>MosoFin-diagram Gallery — Generated Diagram Gallery</title>
   <meta name="description" content="A generated gallery of validated, self-contained diagrams from the free MosoFin-diagram skill. Every preview links to its exact JSON source and interactive HTML artifact.">
   <meta name="theme-color" content="#ffffff">
@@ -237,6 +237,8 @@
       .showcase-card { opacity:1; transform:none; transition:none; }
       .slides-track { transition:none; }
     }
+  
+[[SITE_FOOTER_STYLES]]
   </style>
 </head>
 <body>
@@ -371,12 +373,8 @@ receipt [[CHECK_COUNT]] checks / [[ENTRY_COUNT]] artifacts / deterministic hashe
     </section>
   </main>
 
-  <footer>
-    <div class="shell footer-inner">
-      <span data-en="Generated from Mosofin's checked-in examples. No hand-authored capability claims.">Generated from Mosofin's checked-in examples. No hand-authored capability claims.</span>
-      <span data-en="Mosofin v[[MOSOFIN_VERSION]] · development · MIT">Mosofin v[[MOSOFIN_VERSION]] · development · MIT</span>
-    </div>
-  </footer>
+  <p class="site-provenance"><span data-en="Generated from Mosofin's checked-in examples. No hand-authored capability claims.">Generated from Mosofin's checked-in examples. No hand-authored capability claims.</span></p>
+  [[SITE_FOOTER]]
 
   <script id="gallery-manifest" type="application/json">[[MANIFEST_JSON]]</script>
   <script>

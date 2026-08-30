@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { siteFooter, siteFooterStyles } from './site-footer.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -290,6 +291,8 @@ fs.writeFileSync(path.join(outputRoot, 'gallery', 'manifest.json'), `${manifestJ
 
 const replacements = {
   '[[MOSOFIN_VERSION]]': packageJson.version,
+  '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'gallery' }),
+  '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
   '[[ENTRY_COUNT]]': String(manifest.entryCount),
   '[[CHECK_COUNT]]': String(manifest.checkCount),
   '[[GALLERY_CARDS]]': entries.map(renderCard).join('\n'),
