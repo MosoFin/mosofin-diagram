@@ -13,6 +13,7 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'mosofin-node-style-'));
 
 function render(spec, extraMeta) {
   const source = JSON.parse(fs.readFileSync(path.join(skillRoot, 'examples', spec), 'utf8'));
+  if (!Object.hasOwn(extraMeta, 'node_style')) delete source.meta.node_style;
   Object.assign(source.meta, extraMeta);
   const input = path.join(tmp, `${Math.random().toString(36).slice(2)}.json`);
   const output = input.replace(/\.json$/, '.html');
