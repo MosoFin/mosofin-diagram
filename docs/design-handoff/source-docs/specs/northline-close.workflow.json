@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+    "output": "northline-close.html",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "pull-sources",
+        "label": "Pull the sources",
+        "focus": [
+          "freeze",
+          "export_payouts",
+          "bank_statement",
+          "sync_receipts"
+        ],
+        "note": "Each system hands over its month: Shopify orders, Stripe payouts and fees, the Chase statement, and the QuickBooks sync."
+      },
+      {
+        "id": "reconcile-and-review",
+        "label": "Reconcile and review",
+        "focus": [
+          "book_fees",
+          "bank_rec",
+          "review_pl",
+          "lock"
+        ],
+        "note": "The controller books fees, reconciles Chase 1002 to zero difference, reviews the P&L, and only then locks the period."
+      },
+      {
+        "id": "breaks",
+        "label": "When it does not tie",
+        "focus": [
+          "bank_rec",
+          "unmatched",
+          "book_fees"
+        ],
+        "note": "An unmatched deposit stops the close. It is investigated and re-booked; the period is never locked with an open break."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "shopify",
+      "label": "Shopify"
+    },
+    {
+      "id": "stripe",
+      "label": "Stripe"
+    },
+    {
+      "id": "bank",
+      "label": "Chase 1002"
+    },
+    {
+      "id": "books",
+      "label": "QuickBooks"
+    },
+    {
+      "id": "controller",
+      "label": "Controller"
+    },
+    {
+      "id": "exceptions",
+      "label": "Breaks",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "gather",
+      "label": "Gather (day 1–2)",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "tie",
+      "label": "Tie out (day 3–4)",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "sign",
+      "label": "Sign off (day 5)",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "groups": [
+    {
+      "id": "tie_out",
+      "label": "Zero-difference gate",
+      "lane": "controller",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    }
+  ],
+  "mainPath": [
+    "freeze",
+    "export_payouts",
+    "bank_statement",
+    "sync_receipts",
+    "book_fees",
+    "bank_rec",
+    "review_pl",
+    "lock"
+  ],
+  "nodes": [
+    {
+      "id": "freeze",
+      "lane": "shopify",
+      "col": 0,
+      "type": "frontend",
+      "label": "Freeze",
+      "sublabel": "July orders",
+      "brand": "shopify"
+    },
+    {
+      "id": "export_payouts",
+      "lane": "stripe",
+      "col": 1,
+      "type": "backend",
+      "label": "Export",
+      "sublabel": "payouts + fees",
+      "brand": "stripe"
+    },
+    {
+      "id": "bank_statement",
+      "lane": "bank",
+      "col": 2,
+      "type": "database",
+      "label": "Statement",
+      "sublabel": "Chase 1002 July",
+      "tag": "cash SoT"
+    },
+    {
+      "id": "sync_receipts",
+      "lane": "books",
+      "col": 2,
+      "type": "database",
+      "label": "Sync receipts",
+      "sublabel": "sales + tax"
+    },
+    {
+      "id": "book_fees",
+      "lane": "books",
+      "col": 3,
+      "type": "database",
+      "label": "Book fees",
+      "sublabel": "Stripe export"
+    },
+    {
+      "id": "bank_rec",
+      "lane": "controller",
+      "col": 3,
+      "type": "security",
+      "label": "Reconcile",
+      "sublabel": "Chase = QBO",
+      "tag": "0 difference"
+    },
+    {
+      "id": "review_pl",
+      "lane": "controller",
+      "col": 5,
+      "type": "security",
+      "label": "Review P&L",
+      "sublabel": "flux vs June",
+      "tag": "human gate"
+    },
+    {
+      "id": "lock",
+      "lane": "books",
+      "col": 5,
+      "type": "database",
+      "label": "Lock period",
+      "sublabel": "close date set",
+      "tag": "books SoT"
+    },
+    {
+      "id": "unmatched",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Unmatched",
+      "sublabel": "deposit break",
+      "tag": "owner: controller"
+    }
+  ],
+  "edges": [
+    {
+      "from": "freeze",
+      "to": "export_payouts",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "export_payouts",
+      "to": "bank_statement",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "bank_statement",
+      "to": "sync_receipts",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "sync_receipts",
+      "to": "book_fees"
+    },
+    {
+      "from": "book_fees",
+      "to": "bank_rec",
+      "label": "tie",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "bank_rec",
+      "to": "review_pl",
+      "label": "0 diff"
+    },
+    {
+      "from": "review_pl",
+      "to": "lock",
+      "label": "signed",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        625,
+        539
+      ]
+    },
+    {
+      "from": "bank_rec",
+      "to": "unmatched",
+      "label": "break",
+      "variant": "security",
+      "role": "error",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        430,
+        663
+      ]
+    },
+    {
+      "from": "unmatched",
+      "to": "book_fees",
+      "label": "re-book",
+      "variant": "dashed",
+      "role": "return",
+      "route": "return-left",
+      "fromSide": "left",
+      "toSide": "left"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Who owns each gate",
+      "items": [
+        "Shopify freeze: operations",
+        "Stripe export and statement pull: bookkeeper",
+        "Reconcile, review, and lock: controller"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Stop conditions",
+      "items": [
+        "Chase 1002 does not reconcile to a zero difference",
+        "A deposit has no Stripe payout or wholesale ACH behind it",
+        "The period is never locked with an open break"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Evidence kept",
+      "items": [
+        "Stripe payout export and Chase statement filed with the close",
+        "Reconciliation report at zero difference",
+        "Lock date recorded in QuickBooks"
+      ]
+    }
+  ]
+}

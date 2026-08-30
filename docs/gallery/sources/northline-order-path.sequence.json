@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+    "output": "northline-order-path.html",
+    "viewBox": [
+      820,
+      760
+    ],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "checkout-to-charge",
+        "label": "Checkout to charge",
+        "focus": [
+          "customer",
+          "shopify",
+          "stripe"
+        ],
+        "note": "The order is created in Shopify and the card is captured by Stripe. Shopify owns the order; Stripe owns the charge and its fee."
+      },
+      {
+        "id": "payout-to-bank",
+        "label": "Payout to bank",
+        "focus": [
+          "stripe",
+          "chase"
+        ],
+        "note": "Stripe batches the charge into a payout net of fees. Cash is only real once Chase 1002 shows the deposit."
+      },
+      {
+        "id": "books-catch-up",
+        "label": "What the books record",
+        "focus": [
+          "shopify",
+          "stripe",
+          "chase",
+          "quickbooks"
+        ],
+        "note": "QuickBooks receives the sales receipt, the fee, and the deposit as three facts and matches them. Nothing is revenue until it lands here."
+      }
+    ]
+  },
+  "participants": [
+    {
+      "id": "customer",
+      "type": "external",
+      "label": "DTC customer",
+      "sublabel": "web checkout"
+    },
+    {
+      "id": "shopify",
+      "type": "frontend",
+      "label": "Shopify",
+      "sublabel": "orders SoT",
+      "brand": "shopify"
+    },
+    {
+      "id": "stripe",
+      "type": "backend",
+      "label": "Stripe",
+      "sublabel": "charges · fees",
+      "brand": "stripe"
+    },
+    {
+      "id": "chase",
+      "type": "database",
+      "label": "Chase 1002",
+      "sublabel": "cash SoT"
+    },
+    {
+      "id": "quickbooks",
+      "type": "database",
+      "label": "QuickBooks",
+      "sublabel": "books SoT"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 330,
+      "label": "Order + charge"
+    },
+    {
+      "from": 350,
+      "to": 490,
+      "label": "Payout (T+2)"
+    },
+    {
+      "from": 510,
+      "to": 680,
+      "label": "Books catch up"
+    }
+  ],
+  "messages": [
+    {
+      "id": "place-order",
+      "from": "customer",
+      "to": "shopify",
+      "y": 185,
+      "label": "place order",
+      "variant": "emphasis"
+    },
+    {
+      "id": "capture-card",
+      "from": "shopify",
+      "to": "stripe",
+      "y": 228,
+      "label": "capture card",
+      "variant": "emphasis"
+    },
+    {
+      "id": "charge-ok",
+      "from": "stripe",
+      "to": "shopify",
+      "y": 268,
+      "label": "charge succeeded (fee known)",
+      "variant": "return"
+    },
+    {
+      "id": "order-confirmed",
+      "from": "shopify",
+      "to": "customer",
+      "y": 308,
+      "label": "order confirmed",
+      "variant": "return"
+    },
+    {
+      "id": "payout",
+      "from": "stripe",
+      "to": "chase",
+      "y": 390,
+      "label": "payout, net of fees",
+      "variant": "emphasis"
+    },
+    {
+      "id": "deposit-posted",
+      "from": "chase",
+      "to": "stripe",
+      "y": 440,
+      "label": "deposit posted",
+      "variant": "return"
+    },
+    {
+      "id": "sales-receipt",
+      "from": "shopify",
+      "to": "quickbooks",
+      "y": 545,
+      "label": "sales receipt + tax collected",
+      "variant": "dashed"
+    },
+    {
+      "id": "fee-entry",
+      "from": "stripe",
+      "to": "quickbooks",
+      "y": 590,
+      "label": "processing fee",
+      "variant": "dashed"
+    },
+    {
+      "id": "bank-feed",
+      "from": "chase",
+      "to": "quickbooks",
+      "y": 635,
+      "label": "bank feed: deposit",
+      "variant": "default"
+    },
+    {
+      "id": "match",
+      "from": "quickbooks",
+      "to": "chase",
+      "y": 672,
+      "label": "matched: receipt − fee = deposit",
+      "variant": "return"
+    }
+  ],
+  "activations": [
+    {
+      "participant": "shopify",
+      "from": 180,
+      "to": 312,
+      "type": "frontend"
+    },
+    {
+      "participant": "stripe",
+      "from": 223,
+      "to": 272,
+      "type": "backend"
+    },
+    {
+      "participant": "stripe",
+      "from": 385,
+      "to": 445,
+      "type": "backend"
+    },
+    {
+      "participant": "chase",
+      "from": 385,
+      "to": 445,
+      "type": "database"
+    },
+    {
+      "participant": "quickbooks",
+      "from": 540,
+      "to": 678,
+      "type": "database"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "One order, three facts",
+      "items": [
+        "Shopify: the order, the customer, the tax collected",
+        "Stripe: the charge and its fee",
+        "Chase 1002: the net deposit — the only cash fact"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "A DTC checkout is a sales receipt; no invoice and no A/R",
+        "The fee gap is expected, not a break: receipt − fee = deposit",
+        "No amounts drawn — none were supplied for this order"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Timing",
+      "items": [
+        "Charge and order happen at checkout",
+        "Payout reaches Chase on Stripe's T+2 schedule",
+        "Books match after the bank feed, not at checkout"
+      ]
+    }
+  ]
+}

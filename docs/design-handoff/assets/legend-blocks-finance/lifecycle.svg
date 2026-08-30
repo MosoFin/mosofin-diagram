@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="564" height="40" viewBox="0 0 564 40">
+  <title>Proposed finance legend for the lifecycle renderer</title>
+  <desc>Proposed default labels from 02-REDESIGN-BRIEF. Kind ids unchanged; the &#34;money&#34; swatch previews the proposed cash colour (site accent) and is a colour proposal, not a shipped token. Every label needs a zh sibling.</desc>
+  <rect width="564" height="40" fill="#ffffff"></rect>
+  <g transform="translate(12 8)">
+    <g data-legend-kind="start"><rect x="0" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#0891b2" stroke-width="1"></rect><text x="22" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Opened</text></g>
+    <g data-legend-kind="active"><rect x="84" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#059669" stroke-width="1"></rect><text x="106" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">In flight</text></g>
+    <g data-legend-kind="waiting"><rect x="186" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#d97706" stroke-width="1"></rect><text x="208" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Awaiting bank</text></g>
+    <g data-legend-kind="decision"><rect x="312" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#7c3aed" stroke-width="1"></rect><text x="334" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Tie-out</text></g>
+    <g data-legend-kind="success"><rect x="402" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#059669" stroke-width="1"></rect><text x="424" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Booked</text></g>
+    <g data-legend-kind="failure"><rect x="486" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1"></rect><text x="508" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Break</text></g>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+name: Request a logo
+description: Ask for a software logo so it can be drawn on a node in logo mode.
+title: "[Logo]: "
+labels:
+  - logo-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every request is tracked in [`mosofin/brand-marks/requests.json`](https://github.com/MosoFin/mosofin-diagram/blob/main/mosofin/brand-marks/requests.json)
+        and published with a status on the [logo catalogue](https://diagram.mosofin.com/logos.html), so you can
+        watch it without chasing this thread.
+
+        **Check first:** search the catalogue — the mark may already ship under a different name.
+
+  - type: input
+    id: software
+    attributes:
+      label: Software name
+      description: The product as its vendor writes it.
+      placeholder: e.g. Rippling
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Business & finance (ledger, payments, bank, payroll, spend, tax)
+        - Commerce & supply chain
+        - Data
+        - Cloud
+        - Engineering
+        - AI
+        - Collaboration
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: brand-page
+    attributes:
+      label: Vendor brand or press page
+      description: >
+        A page the vendor owns, where the logo and its usage terms live. This is what
+        makes a request shippable — art from a third-party icon dump cannot be used.
+      placeholder: https://example.com/brand
+    validations:
+      required: true
+
+  - type: textarea
+    id: artwork
+    attributes:
+      label: Artwork
+      description: >
+        Paste an SVG, or link a PNG/WebP on a domain the vendor owns. Leave blank if you
+        only have the brand page — maintainers will look, but it may end up `blocked`
+        until usable artwork exists.
+      render: text
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Where it appears in a diagram
+      description: >
+        Which node would carry it — the ledger, the bank, the 3PL? This helps prioritise
+        marks that show up in real maps.
+      placeholder: e.g. the payroll node, alongside the Gusto mark that already ships.
+
+  - type: checkboxes
+    id: honesty
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the catalogue and this logo is not already there.
+          required: true
+        - label: >
+            I understand a logo is only added when the vendor's own artwork and terms allow
+            it — the skill never ships a guessed or borrowed mark.
+          required: true

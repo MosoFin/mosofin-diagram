@@ -1,0 +1,541 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "How the business runs — logo mode (as of 2026-07)",
+    "output": "business-operating-map-logo.html",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "order-to-cash",
+        "label": "Order to cash",
+        "focus": [
+          "crm",
+          "commerce",
+          "payments",
+          "bank",
+          "books_a"
+        ],
+        "note": "A lead becomes an order, the order becomes a charge, the charge settles as cash, and only then does it reach the books."
+      },
+      {
+        "id": "supply-side",
+        "label": "Supply and fulfilment",
+        "focus": [
+          "suppliers",
+          "erp",
+          "wms",
+          "commerce",
+          "spend"
+        ],
+        "note": "Purchase orders, inventory and 3PL fulfilment. What leaves the shelf must match what the ledger says it cost."
+      },
+      {
+        "id": "three-ledgers",
+        "label": "One stack, three ledgers",
+        "focus": [
+          "books_a",
+          "books_b",
+          "books_c",
+          "close"
+        ],
+        "note": "Operations are shared across the group; the books are not. Each entity closes its own period in its own QuickBooks company."
+      }
+    ],
+    "node_style": "logo"
+  },
+  "components": [
+    {
+      "id": "crm",
+      "type": "external",
+      "label": "Demand · CRM",
+      "sublabel": "HubSpot · pipeline",
+      "brand": "hubspot",
+      "pos": [
+        40,
+        340
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "customers"
+    },
+    {
+      "id": "commerce",
+      "type": "frontend",
+      "label": "Commerce",
+      "sublabel": "Shopify · orders · tax",
+      "brand": "shopify",
+      "pos": [
+        290,
+        340
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "tag": "orders SoT"
+    },
+    {
+      "id": "suppliers",
+      "type": "external",
+      "label": "Suppliers",
+      "sublabel": "vendors · lead times",
+      "pos": [
+        40,
+        60
+      ],
+      "size": [
+        150,
+        62
+      ]
+    },
+    {
+      "id": "erp",
+      "type": "backend",
+      "label": "Supply chain · ERP",
+      "sublabel": "purchase orders · BOM",
+      "pos": [
+        290,
+        60
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "tag": "cost SoT"
+    },
+    {
+      "id": "wms",
+      "type": "backend",
+      "label": "Inventory · 3PL",
+      "sublabel": "warehouse · fulfilment",
+      "pos": [
+        290,
+        200
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "tag": "units"
+    },
+    {
+      "id": "payments",
+      "type": "backend",
+      "label": "Payments",
+      "sublabel": "Stripe · fees · payouts",
+      "brand": "stripe",
+      "pos": [
+        550,
+        340
+      ],
+      "size": [
+        150,
+        62
+      ]
+    },
+    {
+      "id": "spend",
+      "type": "security",
+      "label": "Spend · AP",
+      "sublabel": "bills · cards · approvals",
+      "pos": [
+        550,
+        60
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "approval gate",
+      "brand": {
+        "url": "https://ramp.com/favicon.ico",
+        "sha256": "7a1cfe36a490c907981e16d044be910f938319786cea6746d354b555c2abaec8"
+      }
+    },
+    {
+      "id": "payroll",
+      "type": "security",
+      "label": "Payroll · HR",
+      "sublabel": "wages · taxes",
+      "pos": [
+        550,
+        200
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "brand": "gusto"
+    },
+    {
+      "id": "bank",
+      "type": "cloud",
+      "label": "Bank",
+      "sublabel": "operating accounts",
+      "pos": [
+        800,
+        200
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "cash SoT",
+      "brand": "chase"
+    },
+    {
+      "id": "books_a",
+      "type": "database",
+      "label": "Books — Entity A",
+      "sublabel": "QuickBooks company A",
+      "pos": [
+        1050,
+        60
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "books SoT",
+      "brand": "quickbooks"
+    },
+    {
+      "id": "books_b",
+      "type": "database",
+      "label": "Books — Entity B",
+      "sublabel": "QuickBooks company B",
+      "pos": [
+        1050,
+        200
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "books SoT",
+      "brand": "quickbooks"
+    },
+    {
+      "id": "books_c",
+      "type": "database",
+      "label": "Books — Entity C",
+      "sublabel": "QuickBooks company C",
+      "pos": [
+        1050,
+        340
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "books SoT",
+      "brand": "quickbooks"
+    },
+    {
+      "id": "close",
+      "type": "external",
+      "label": "Close · reporting",
+      "sublabel": "controller · per entity",
+      "pos": [
+        800,
+        470
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "owner"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Shared operating stack — one instance serves all three entities",
+      "wraps": [
+        "crm",
+        "commerce",
+        "suppliers",
+        "erp",
+        "wms"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Separate books — one entity per ledger, never consolidated here",
+      "wraps": [
+        "books_a",
+        "books_b",
+        "books_c"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "lead",
+      "from": "crm",
+      "to": "commerce",
+      "label": "accounts",
+      "variant": "default"
+    },
+    {
+      "id": "po",
+      "from": "suppliers",
+      "to": "erp",
+      "label": "purchase orders",
+      "variant": "default"
+    },
+    {
+      "id": "stock",
+      "from": "erp",
+      "to": "wms",
+      "label": "receipts · COGS",
+      "variant": "dashed",
+      "labelAt": [
+        370,
+        136
+      ]
+    },
+    {
+      "id": "supply",
+      "from": "wms",
+      "to": "commerce",
+      "label": "available to sell",
+      "variant": "dashed",
+      "labelAt": [
+        370,
+        276
+      ]
+    },
+    {
+      "id": "charge",
+      "from": "commerce",
+      "to": "payments",
+      "label": "charge",
+      "variant": "emphasis"
+    },
+    {
+      "id": "payout",
+      "from": "payments",
+      "to": "bank",
+      "label": "net payout",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "bottom",
+      "via": [
+        [
+          750,
+          371
+        ],
+        [
+          875,
+          371
+        ]
+      ],
+      "labelAt": [
+        812,
+        383
+      ]
+    },
+    {
+      "id": "bills",
+      "from": "erp",
+      "to": "spend",
+      "label": "vendor bills",
+      "variant": "default",
+      "fromSide": "top",
+      "toSide": "left",
+      "via": [
+        [
+          370,
+          20
+        ],
+        [
+          510,
+          20
+        ],
+        [
+          510,
+          91
+        ]
+      ],
+      "labelAt": [
+        440,
+        8
+      ]
+    },
+    {
+      "id": "pay_run",
+      "from": "spend",
+      "to": "bank",
+      "label": "payment run",
+      "variant": "security",
+      "fromSide": "right",
+      "toSide": "top",
+      "via": [
+        [
+          750,
+          91
+        ],
+        [
+          875,
+          91
+        ]
+      ],
+      "labelAt": [
+        812,
+        79
+      ]
+    },
+    {
+      "id": "wages",
+      "from": "payroll",
+      "to": "bank",
+      "label": "wages · taxes",
+      "variant": "security"
+    },
+    {
+      "id": "feed_a",
+      "from": "bank",
+      "to": "books_a",
+      "label": "bank feed",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "left",
+      "via": [
+        [
+          875,
+          20
+        ],
+        [
+          1010,
+          20
+        ],
+        [
+          1010,
+          91
+        ]
+      ],
+      "labelAt": [
+        942,
+        8
+      ]
+    },
+    {
+      "id": "feed_b",
+      "from": "bank",
+      "to": "books_b",
+      "label": "bank feed",
+      "variant": "emphasis"
+    },
+    {
+      "id": "feed_c",
+      "from": "bank",
+      "to": "books_c",
+      "label": "bank feed",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "left",
+      "via": [
+        [
+          875,
+          410
+        ],
+        [
+          1010,
+          410
+        ],
+        [
+          1010,
+          371
+        ]
+      ],
+      "labelAt": [
+        942,
+        422
+      ]
+    },
+    {
+      "id": "revenue",
+      "from": "commerce",
+      "to": "books_a",
+      "label": "sales + tax collected",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "right",
+      "via": [
+        [
+          370,
+          560
+        ],
+        [
+          1290,
+          560
+        ],
+        [
+          1290,
+          91
+        ]
+      ],
+      "labelAt": [
+        830,
+        572
+      ]
+    },
+    {
+      "id": "signoff",
+      "from": "close",
+      "to": "books_c",
+      "label": "closes the period",
+      "variant": "default",
+      "fromSide": "right",
+      "toSide": "bottom",
+      "via": [
+        [
+          985,
+          501
+        ],
+        [
+          1135,
+          501
+        ]
+      ],
+      "labelAt": [
+        1060,
+        489
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Source of truth per domain",
+      "items": [
+        "Customers and pipeline: CRM · Orders and tax collected: Commerce",
+        "Cost, purchase orders and inventory: ERP / WMS",
+        "Settled cash: the bank · Revenue, AP, payroll and P&L: QuickBooks"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "The operating stack is shared; the ledgers are not — one entity per company file",
+        "No consolidation is drawn: eliminations are a separate, stated decision",
+        "No amounts, balances or unit counts shown — none were supplied for 2026-07"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "How to read it",
+      "items": [
+        "Solid emphasis is the money rail: order → charge → payout → bank → books",
+        "Dashed lines carry facts that are not cash: stock, COGS, sales sync",
+        "Red-outlined nodes are approval gates — spend and payroll leave cash only through them"
+      ]
+    }
+  ]
+}

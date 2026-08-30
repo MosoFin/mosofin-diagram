@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Agent + tooling scratch
+.harnessed/
+.claude/
+.lore/
+
+# Local duplicates macOS creates when a folder is copied ("docs 2", "docs copy")
+* [0-9]
+* [0-9].*
+* ([0-9])*
+* copy
+* copy.*
+
+# Build scratch
+*.tmp
+*.log

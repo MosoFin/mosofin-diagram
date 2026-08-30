@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="546" height="40" viewBox="0 0 546 40">
+  <title>Proposed finance legend for the dataflow renderer</title>
+  <desc>Proposed default labels from 02-REDESIGN-BRIEF. Kind ids unchanged; the &#34;money&#34; swatch previews the proposed cash colour (site accent) and is a colour proposal, not a shipped token. Every label needs a zh sibling.</desc>
+  <rect width="546" height="40" fill="#ffffff"></rect>
+  <g transform="translate(12 8)">
+    <g data-legend-kind="money"><rect x="0" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#e14a0e" stroke-width="1"></rect><text x="22" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">money</text></g>
+    <g data-legend-kind="security"><rect x="78" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1"></rect><text x="100" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">contra / deduction</text></g>
+    <g data-legend-kind="waiting"><rect x="234" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#d97706" stroke-width="1"></rect><text x="256" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">timing difference</text></g>
+    <g data-legend-kind="database"><rect x="384" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#7c3aed" stroke-width="1"></rect><text x="406" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">account</text></g>
+    <g data-legend-kind="messagebus"><rect x="474" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#ea580c" stroke-width="1"></rect><text x="496" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">sync</text></g>
+  </g>
+</svg>

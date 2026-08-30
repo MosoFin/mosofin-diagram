@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Counterparty semantic sigil (proposed)">
+  <title>Counterparty — proposed finance sigil for kind id &#34;external&#34;</title>
+  <desc>Proposed redesign: person — customer, vendor, processor. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;external&#34;.</desc>
+  <g fill="none" stroke="#475569" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <circle cx="8" cy="5.2" r="2.6"></circle>
+    <path d="M3.4 13.6c.5-2.7 2.3-4.1 4.6-4.1s4.1 1.4 4.6 4.1"></path>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Bank semantic sigil (proposed)">
+  <title>Bank — proposed finance sigil for kind id &#34;cloud&#34;</title>
+  <desc>Proposed redesign: bank facade — settled cash. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;cloud&#34;.</desc>
+  <g fill="none" stroke="#d97706" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M8 2.4 13.6 5.6H2.4Z"></path>
+    <path d="M4.2 5.6v4.8M8 5.6v4.8M11.8 5.6v4.8"></path>
+    <path d="M2.8 12.8h10.4"></path>
+  </g>
+</svg>

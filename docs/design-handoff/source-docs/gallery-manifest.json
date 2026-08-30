@@ -1,0 +1,909 @@
+{
+  "schemaVersion": 1,
+  "generator": "scripts/build-gallery.mjs",
+  "mosofinVersion": "1.0.0-dev.0",
+  "entryCount": 9,
+  "checkCount": 81,
+  "entries": [
+    {
+      "id": "business-map",
+      "type": "architecture",
+      "title": "How the business runs — demand to books across three entities (as of 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/business-operating-map.architecture.json",
+      "artifact": "gallery/artifacts/business-operating-map.architecture.html",
+      "focus": "bank",
+      "view": "order-to-cash",
+      "viewCount": 3,
+      "viewIds": [
+        "order-to-cash",
+        "supply-side",
+        "three-ledgers"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 13,
+      "edgeCount": 14,
+      "artifactBytes": 754466,
+      "artifactSha256": "c8f2d0628e9105f83cb1d0dee1ea1acb47c53e681c6318ef929511cf1538ca5e",
+      "sourceBytes": 10368,
+      "sourceSha256": "5794583f33a46b8fd9c95803a95a7b22c80c480292ccf70a81eb733c05271726",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 31.6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 3,
+          "routesOverSuggestedBends": 4,
+          "maxStretch": 1.5,
+          "routesOverSuggestedStretch": 3,
+          "minSegmentPx": 39,
+          "minInteriorSegmentPx": 39,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "money-map",
+      "type": "architecture",
+      "title": "Northline Coffee — Money Map (as of 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-money-map.architecture.json",
+      "artifact": "gallery/artifacts/northline-money-map.architecture.html",
+      "focus": "chase",
+      "view": "order-to-cash",
+      "viewCount": 3,
+      "viewIds": [
+        "order-to-cash",
+        "wholesale-ar",
+        "books-sync"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 6,
+      "edgeCount": 8,
+      "artifactBytes": 708085,
+      "artifactSha256": "c397ba70bd93bbbe72b07d7392b1466e48df8f75938e0590758a5fbcf2c0f2db",
+      "sourceBytes": 5102,
+      "sourceSha256": "e170a603b504a71a8696167a60d3e5c432b98b7a46b86a657b4f467031a48cf0",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1.102,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 24,
+          "minInteriorSegmentPx": 472,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "order-path",
+      "type": "sequence",
+      "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-order-path.sequence.json",
+      "artifact": "gallery/artifacts/northline-order-path.sequence.html",
+      "focus": "stripe",
+      "view": "books-catch-up",
+      "viewCount": 3,
+      "viewIds": [
+        "checkout-to-charge",
+        "payout-to-bank",
+        "books-catch-up"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 5,
+      "edgeCount": 10,
+      "artifactBytes": 709278,
+      "artifactSha256": "9aa3c0017c8af86c84acbeddc054734fea37604f22d5670fd6131e9a86eca8dd",
+      "sourceBytes": 5311,
+      "sourceSha256": "5251a487ab4c18364d51b93437274ccde0409de61215543f80590b5377dcb87c",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 17,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 0,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 94,
+          "minInteriorSegmentPx": null,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "revenue-walk",
+      "type": "dataflow",
+      "title": "Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-revenue-walk.dataflow.json",
+      "artifact": "gallery/artifacts/northline-revenue-walk.dataflow.html",
+      "focus": "netsales",
+      "view": "books-line",
+      "viewCount": 3,
+      "viewIds": [
+        "gross-to-net",
+        "pass-through",
+        "books-line"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 713288,
+      "artifactSha256": "22ca0514a4e3c3d0b3c7c9243aef2076eb6a16d5b48f08bf069f310cbf4aef62",
+      "sourceBytes": 4839,
+      "sourceSha256": "86f8b4b8772c1b2b04919897e1636640103700b4abc074142b1d61257cbd8899",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 57.4,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 49,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "close",
+      "type": "workflow",
+      "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-close.workflow.json",
+      "artifact": "gallery/artifacts/northline-close.workflow.html",
+      "focus": "bank_rec",
+      "view": "reconcile-and-review",
+      "viewCount": 3,
+      "viewIds": [
+        "pull-sources",
+        "reconcile-and-review",
+        "breaks"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 9,
+      "artifactBytes": 713226,
+      "artifactSha256": "fcdc756d06ef986a0c1ff2bf990d43705eb53769fe64ad87ac84cf42472fa7f3",
+      "sourceBytes": 6566,
+      "sourceSha256": "7afb0c25d51afb7ad370a4254a775efa5e09576072e74d689be968beb897e05d",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 41.1,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1.226,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 21,
+          "minInteriorSegmentPx": 80,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "dispute",
+      "type": "lifecycle",
+      "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-dispute.lifecycle.json",
+      "artifact": "gallery/artifacts/northline-dispute.lifecycle.html",
+      "focus": "landed",
+      "view": "dispute-waits",
+      "viewCount": 3,
+      "viewIds": [
+        "refund-path",
+        "dispute-waits",
+        "exits"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 10,
+      "edgeCount": 6,
+      "artifactBytes": 708385,
+      "artifactSha256": "6d0d7840292cc83ff8b90afc23188cc2ddea17a42250abc8640f935bd720d0ea",
+      "sourceBytes": 6221,
+      "sourceSha256": "4220d1005b770c3c70488263ebd8ff174a26ecc4dce88ca7e270cea6e318a4de",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": null,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 3,
+          "routesOverSuggestedBends": 2,
+          "maxStretch": 3.267,
+          "routesOverSuggestedStretch": 2,
+          "minSegmentPx": 18,
+          "minInteriorSegmentPx": 78,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "payout-rec",
+      "type": "dataflow",
+      "title": "Northline Coffee — Stripe Payout Reconciliation to Chase 1002 (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-payout-rec.dataflow.json",
+      "artifact": "gallery/artifacts/northline-payout-rec.dataflow.html",
+      "focus": "residual",
+      "view": "residual",
+      "viewCount": 3,
+      "viewIds": [
+        "stripe-side",
+        "timing",
+        "residual"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 711926,
+      "artifactSha256": "3ec3fad69d051052b4a915ffd06bbf44c40193d9286eda8ac93089f0f306e34f",
+      "sourceBytes": 6837,
+      "sourceSha256": "aba3a2aa6ebdbb82aabdac81e087ce8371812779b3ab652794896359da4a76ad",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 14.6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 19,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "customer-ar",
+      "type": "architecture",
+      "title": "Northline Coffee — Who Can Say a Customer Owes Us (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-customer-ar.architecture.json",
+      "artifact": "gallery/artifacts/northline-customer-ar.architecture.html",
+      "focus": "aging",
+      "view": "wholesale-ar",
+      "viewCount": 3,
+      "viewIds": [
+        "dtc-no-ar",
+        "wholesale-ar",
+        "who-chases"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "static",
+      "engineeringProfile": null,
+      "nodeCount": 8,
+      "edgeCount": 7,
+      "artifactBytes": 710849,
+      "artifactSha256": "b7ee151c1c33d8cc505c418bc1f1ae05bacf88402db7381c47a7a62d8628183b",
+      "sourceBytes": 5763,
+      "sourceSha256": "727d5d00c565fcb5692d6acaf22c2a1a1c1ab562508b7538a936b917a43361ad",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 87.2,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 4,
+          "routesOverSuggestedBends": 1,
+          "maxStretch": 1.348,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 16,
+          "minInteriorSegmentPx": 16,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "cash-runway",
+      "type": "dataflow",
+      "title": "Northline Coffee — Cash to Payroll Date (as of 2026-07-31)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-cash-runway.dataflow.json",
+      "artifact": "gallery/artifacts/northline-cash-runway.dataflow.html",
+      "focus": "position",
+      "view": "commitments",
+      "viewCount": 3,
+      "viewIds": [
+        "opening",
+        "named-inflows",
+        "commitments"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 711698,
+      "artifactSha256": "671160994d278313dbed04844f1ae454386c3649a303e8bd89364959a336ae59",
+      "sourceBytes": 6892,
+      "sourceSha256": "999cc77ee74eafbd2e782b7c9263be59dc5bb74c2208fc9d9f1909385ed56249",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 47,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 49,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    }
+  ]
+}

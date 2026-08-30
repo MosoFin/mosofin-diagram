@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Payments semantic sigil (proposed)">
+  <title>Payments — proposed finance sigil for kind id &#34;backend&#34;</title>
+  <desc>Proposed redesign: payment card, money in motion. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;backend&#34;.</desc>
+  <g fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <rect x="2" y="3.6" width="12" height="8.8" rx="1.5"></rect>
+    <path d="M2 6.4h12"></path>
+    <path d="M4.3 10.2h3.4"></path>
+  </g>
+</svg>

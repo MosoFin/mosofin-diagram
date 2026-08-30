@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Success semantic sigil">
+  <title>Success semantic sigil (Mosofin)</title>
+  <desc>Verbatim geometry from mosofin/renderers/shared/utils.mjs SIGIL_SHAPE.success (tone database). In the viewer the group is placed at translate(nodeX+6, nodeY+6) scale(0.6875) and inherits fill none, stroke currentColor, stroke-width 1.35, round caps and joins, opacity 0.76. currentColor resolves to --database-stroke: #7c3aed (light) / #7c3aed (dark).</desc>
+  <g fill="none" stroke="#7c3aed" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <circle cx="8" cy="8" r="5.3"/> <path d="m5.2 8 1.8 1.8 3.8-4"/>
+  </g>
+</svg>

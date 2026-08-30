@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Control semantic sigil (proposed)">
+  <title>Control — proposed finance sigil for kind id &#34;security&#34;</title>
+  <desc>Proposed redesign: approval gate — unchanged shield. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;security&#34;.</desc>
+  <g fill="none" stroke="#dc2626" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"></path>
+    <path d="m5.8 8 1.5 1.5 3-3"></path>
+  </g>
+</svg>

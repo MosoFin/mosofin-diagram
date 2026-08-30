@@ -1,0 +1,73 @@
+{
+  "$comment": "Tracked state for logo requests. This file is the source of truth: docs/logos.html is generated from it plus the shipped catalogue, so a request's status is visible to whoever asked without anyone chasing an issue thread. Edit this file, then run `npm run build:logos` and commit both.",
+  "schemaVersion": 1,
+  "statuses": {
+    "requested": "Asked for, not yet reviewed.",
+    "planned": "Accepted. It will ship in a coming release.",
+    "blocked": "Cannot ship yet — the reason is stated on the row.",
+    "shipped": "In the catalogue. The row links to the mark.",
+    "declined": "Will not ship — the reason is stated on the row."
+  },
+  "requests": [
+    {
+      "id": "netsuite",
+      "title": "NetSuite",
+      "category": "business",
+      "status": "blocked",
+      "requested": "2026-08-29",
+      "updated": "2026-08-29",
+      "note": "No icon exists in Simple Icons, and oracle.com refuses automated capture (HTTP 403). Needs a PNG or WebP on an Oracle-owned domain, or a traced vector cleared against Oracle's brand guidelines.",
+      "source": "https://www.netsuite.com/portal/company/brand-guidelines.shtml"
+    },
+    {
+      "id": "bill-com",
+      "title": "Bill.com",
+      "category": "business",
+      "status": "blocked",
+      "requested": "2026-08-29",
+      "updated": "2026-08-29",
+      "note": "Only raster art is available in open libraries. A vector redraw is needed before it can ship as a catalogue mark.",
+      "source": "https://www.bill.com/"
+    },
+    {
+      "id": "plaid",
+      "title": "Plaid",
+      "category": "business",
+      "status": "requested",
+      "requested": "2026-08-29",
+      "updated": "2026-08-29",
+      "note": "Bank-connection layer that appears in most money maps.",
+      "source": "https://plaid.com/"
+    },
+    {
+      "id": "brex",
+      "title": "Brex",
+      "category": "business",
+      "status": "requested",
+      "requested": "2026-08-29",
+      "updated": "2026-08-29",
+      "note": "Spend and card management; pairs with the Ramp mark already shipped.",
+      "source": "https://www.brex.com/"
+    },
+    {
+      "id": "rippling",
+      "title": "Rippling",
+      "category": "business",
+      "status": "requested",
+      "requested": "2026-08-29",
+      "updated": "2026-08-29",
+      "note": "Payroll and HR, alongside the shipped Gusto mark.",
+      "source": "https://www.rippling.com/"
+    },
+    {
+      "id": "quickbooks",
+      "title": "QuickBooks",
+      "category": "business",
+      "status": "shipped",
+      "requested": "2026-08-28",
+      "updated": "2026-08-29",
+      "note": "The ledger node in every finance map. Shipped with Intuit, Gusto and Chase in the same release.",
+      "source": "https://design.intuit.com/quickbooks/brand"
+    }
+  ]
+}

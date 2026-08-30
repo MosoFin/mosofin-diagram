@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Ledger semantic sigil (proposed)">
+  <title>Ledger — proposed finance sigil for kind id &#34;database&#34;</title>
+  <desc>Proposed redesign: bound book of account. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;database&#34;.</desc>
+  <g fill="none" stroke="#7c3aed" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <rect x="3.2" y="2.4" width="9.6" height="11.2" rx="1.2"></rect>
+    <path d="M5.6 2.4v11.2"></path>
+    <path d="M7.8 5.6h3M7.8 8.2h3"></path>
+  </g>
+</svg>

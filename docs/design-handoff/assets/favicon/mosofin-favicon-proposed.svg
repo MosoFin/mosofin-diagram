@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" role="img" aria-label="Mosofin proposed favicon — a footed total">
+  <title>Mosofin proposed favicon — a footed total</title>
+  <desc>Revision 2. Ink plate in the drafted-sheet identity; the paper check of a tie-out above, and the double underline an accountant draws beneath a total that foots. Replaces the inherited Archify cyan hexagon. Fixes rev 1, where the single rule collided with the check.</desc>
+  <rect x="2" y="2" width="24" height="24" rx="6" fill="#15181b"></rect>
+  <path d="M8 12.4 12.4 16.8 20.1 8.3" fill="none" stroke="#eff2f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M8 20.4h12" stroke="#e14a0e" stroke-width="1.9" stroke-linecap="round"></path>
+  <path d="M8 23.4h12" stroke="#e14a0e" stroke-width="1.9" stroke-linecap="round"></path>
+</svg>

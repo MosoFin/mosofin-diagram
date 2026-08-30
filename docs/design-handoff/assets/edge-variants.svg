@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="268" viewBox="0 0 600 268">
+  <title>Mosofin relationship strokes and arrowheads</title>
+  <desc>Stroke classes from mosofin/assets/template.html; markers lifted verbatim from a delivered artifact defs block.</desc>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" class="m-default"></polygon></marker>
+    <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" class="m-emphasis"></polygon></marker>
+    <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" class="m-security"></polygon></marker>
+    <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" class="m-dashed"></polygon></marker>
+  </defs>
+  <rect width="600" height="268" fill="#ffffff"></rect>
+  <g transform="translate(24 8)">
+  <g>
+    <text x="0" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#64748b">.a-default · default relationship</text>
+    <path d="M0 44 H300" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"></path>
+    <text x="316" y="48" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#94a3b8">#94a3b8 (arrow token)</text>
+  </g>
+  <g>
+    <text x="0" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#64748b">.a-emphasis · emphasis: the money rail</text>
+    <path d="M0 100 H300" fill="none" stroke="#f59e0b" stroke-width="2.4" marker-end="url(#arrowhead-emphasis)"></path>
+    <text x="316" y="104" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#94a3b8">#f59e0b (arrow-emphasis)</text>
+  </g>
+  <g>
+    <text x="0" y="142" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#64748b">.a-security · security / control edge</text>
+    <path d="M0 156 H300" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrowhead-security)"></path>
+    <text x="316" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#94a3b8">#dc2626 (security-stroke) · dash 5,5</text>
+  </g>
+  <g>
+    <text x="0" y="198" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#64748b">.a-dashed · async / book-sync edge</text>
+    <path d="M0 212 H300" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowhead-dashed)"></path>
+    <text x="316" y="216" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#94a3b8">#7c3aed (database-stroke) · dash 4,4</text>
+  </g>
+  </g>
+</svg>

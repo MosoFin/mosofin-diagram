@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" width="64" height="64" role="img" aria-label="Ramp brand mark plate">
+  <title>Ramp brand mark plate (authored 16x16, shown at 64)</title>
+  <desc>Candidate mark for the Mosofin catalogue, sourced from the MIT-licensed ComposioHQ/open-logos library via composio.dev/toolkits. Same containment rule as the shipped catalogue: white plate, #cbd5e1 frame, vendor colour stays inside.</desc>
+  <rect width="16" height="16" rx="4" fill="#ffffff"></rect>
+  <svg x="3" y="3" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 500 500" fill="none">
+<g clip-path="url(#ramp-clip0_1430_2532)">
+<path d="M250 500C388.071 500 500 388.071 500 250C500 111.929 388.071 0 250 0C111.929 0 0 111.929 0 250C0 388.071 111.929 500 250 500Z" fill="#E4F323"></path>
+<path d="M382 357.969V359.099L218.605 359.147V357.969C242.176 344.678 258.435 331.162 273.075 317.016H340.164L382 357.969ZM341.523 145.533L300.108 105H298.895C298.895 105 299.591 180.576 230.059 249.304C162.015 316.58 82 316.725 82 316.725V317.904L124.192 359.164C124.192 359.164 203.042 359.939 272.703 291.743C342.106 223.757 341.523 145.533 341.523 145.533Z" fill="black"></path>
+</g>
+<defs>
+<clipPath id="ramp-clip0_1430_2532">
+<rect width="500" height="500" fill="white"></rect>
+</clipPath>
+</defs>
+</svg>
+  <rect width="16" height="16" rx="4" fill="none" stroke="#cbd5e1" stroke-width="0.8"></rect>
+</svg>

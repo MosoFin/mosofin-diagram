@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Sync semantic sigil (proposed)">
+  <title>Sync — proposed finance sigil for kind id &#34;messagebus&#34;</title>
+  <desc>Proposed redesign: two-way feed — replaces bus rails. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;messagebus&#34;.</desc>
+  <g fill="none" stroke="#ea580c" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M3 6.2h8.3M9.6 4.2l2 2-2 2"></path>
+    <path d="M13 10.2H4.7M6.4 12.2l-2-2 2-2"></path>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" width="64" height="64" role="img" aria-label="QuickBooks brand mark plate">
+  <title>QuickBooks brand mark plate (authored 16x16, shown at 64)</title>
+  <desc>Candidate mark for the Mosofin catalogue, sourced from the MIT-licensed ComposioHQ/open-logos library via composio.dev/toolkits. Raster source (needs a vector redraw before shipping); the art references the sibling file in ../raw/. White plate and #cbd5e1 frame per the containment rule.</desc>
+  <rect width="16" height="16" rx="4" fill="#ffffff"></rect>
+  <image x="3" y="3" width="10" height="10" preserveAspectRatio="xMidYMid meet" href="../raw/quickbooks.webp" xlink:href="../raw/quickbooks.webp"></image>
+  <rect width="16" height="16" rx="4" fill="none" stroke="#cbd5e1" stroke-width="0.8"></rect>
+</svg>

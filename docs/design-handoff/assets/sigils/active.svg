@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Active semantic sigil">
+  <title>Active semantic sigil (Mosofin)</title>
+  <desc>Verbatim geometry from mosofin/renderers/shared/utils.mjs SIGIL_SHAPE.active (tone backend). In the viewer the group is placed at translate(nodeX+6, nodeY+6) scale(0.6875) and inherits fill none, stroke currentColor, stroke-width 1.35, round caps and joins, opacity 0.76. currentColor resolves to --backend-stroke: #059669 (light) / #059669 (dark).</desc>
+  <g fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M2 8h3l1.5-3.5L9 12l1.6-4H14"/>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="In flight semantic sigil (proposed)">
+  <title>In flight — proposed finance sigil for kind id &#34;active&#34;</title>
+  <desc>Proposed redesign: unchanged pulse. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;active&#34;.</desc>
+  <g fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M2 8h3l1.5-3.5L9 12l1.6-4H14"></path>
+  </g>
+</svg>

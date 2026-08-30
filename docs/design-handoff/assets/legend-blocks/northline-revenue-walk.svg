@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="40" viewBox="0 0 520 40">
+  <title>Legend as delivered for northline-revenue-walk (unknown type)</title>
+  <desc>Labels are the live strings from the delivered artifact, not defaults from source. Several are still Archify agent vocabulary.</desc>
+  <rect width="520" height="40" fill="#ffffff"></rect>
+  <g transform="translate(12 8)">
+    <g data-legend-kind="database"><rect x="0" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#7c3aed" stroke-width="1"></rect><text x="22" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#64748b">data store</text></g>
+  </g>
+</svg>

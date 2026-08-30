@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en" data-preview-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="mosofin gallery 1.0.0-dev.0">
+  <title>MosoFin-diagram Gallery — Generated Diagram Gallery</title>
+  <meta name="description" content="A generated gallery of validated, self-contained diagrams from the free MosoFin-diagram skill. Every preview links to its exact JSON source and interactive HTML artifact.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="assets/mosofin-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Drafted-sheet palette — shared with the project page */
+      --paper-site:#ffffff; --paper-raised:#ffffff; --paper-2:#f5f6f8;
+      --ink-site:#0a0b0d; --ink-soft:#333333; --muted:#717884; --dim:#9aa0ab;
+      --line:#e4e6ea; --line-hi:#d4d7dd;
+      --accent-site:#0bb330; --accent-soft:#e9fbee;
+      --plate:#0a0b0d;
+      --emerald:#047857;
+      --font-display:'Onest',system-ui,-apple-system,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Helvetica,Arial,sans-serif;
+      --font-body:'Onest',system-ui,-apple-system,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Helvetica,Arial,sans-serif;
+      --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+      --ease-out:cubic-bezier(.22,1,.36,1);
+      --content: 1320px;
+    }
+    *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family:var(--font-body);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      background:var(--paper-site); color:var(--ink-site); min-height:100vh; overflow-x:hidden;
+    }
+    ::selection { background:#e9fbee; color:#063e16; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font:inherit; }
+    :focus-visible { outline: 2px solid var(--accent-site); outline-offset: 3px; border-radius:4px; }
+
+    .grid-bg {
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image:linear-gradient(rgba(20,23,26,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(20,23,26,.045) 1px,transparent 1px);
+      background-size:56px 56px;
+      -webkit-mask-image:radial-gradient(ellipse 95% 62% at 50% -6%, black 12%, transparent 75%);
+      mask-image:radial-gradient(ellipse 95% 62% at 50% -6%, black 12%, transparent 75%);
+    }
+    .shell { position:relative; z-index:1; width: min(var(--content), calc(100% - 48px)); margin: 0 auto; }
+
+    /* NAV — same chrome as mosofin.com / the landing page */
+    nav { position:sticky; top:0; left:0; right:0; z-index:100; height:72px; display:flex; align-items:center; background:rgba(255,255,255,.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--line); }
+    .nav-inner { width: min(var(--content), calc(100% - 48px)); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
+    .nav-brand-wrapper { display:inline-flex; align-items:center; min-height: 44px; gap:10px; text-decoration:none; }
+    .nav-logo-container { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .nav-logo { display:block; width:36px; height:36px; object-fit:contain; }
+    .nav-brand-title { margin:0; white-space:nowrap; font:600 1.125rem/1.2 var(--font-display); color:var(--ink-site); }
+    .nav-brand-suffix { display:none; }
+    .nav-right { display:flex; align-items:center; gap:1.5rem; }
+    .nav-link { font-family:var(--font-body); font-size:.9375rem; font-weight:500; color:var(--muted); text-decoration:none; }
+    .nav-link:hover { color:var(--ink-site); }
+    .nav-link[aria-current] { color:var(--ink-site); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.4rem; min-height:44px; padding:.7rem 1.2rem; border-radius:8px; font-family:var(--font-body); font-size:.9375rem; font-weight:600; letter-spacing:-.005em; cursor:pointer; text-decoration:none; white-space:nowrap; border:1px solid var(--ink-site); background:#fff; color:var(--ink-site); }
+    .btn-primary { background:var(--ink-site); color:#fff; }
+    .btn-primary:hover { background:#1c1f24; }
+    .btn-lang { display:inline-flex; align-items:center; background:transparent; color:var(--muted); border:1px solid var(--line-hi); padding:.45rem .8rem; font-family:var(--font-mono); font-size:.5625rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; min-width:44px; justify-content:center; border-radius:6px; cursor:pointer; transition:all .2s var(--ease-out); }
+    .btn-lang:hover { color:var(--ink-site); border-color:var(--ink-site); }
+
+    /* HERO */
+    .hero { padding: 4.5rem 0 3.5rem; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(310px, 0.55fr); gap: 4.5rem; align-items: end; }
+    .lead-label { display:flex; align-items:center; gap:.875rem; margin-bottom:1.5rem; font-family:var(--font-mono); font-size:.625rem; font-weight:500; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; }
+    .lead-label::before { content:''; width:2.75rem; height:1px; background:var(--line-hi); }
+    .hero h1 {
+      max-width: 860px;
+      font-family:var(--font-display); font-optical-sizing:auto;
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-weight:400; line-height: 1.02; letter-spacing: -.03em;
+      color:var(--ink-site); text-wrap: balance;
+    }
+    .hero h1 em { font-style:italic; color: var(--accent-site); }
+    .hero-copy { margin-top: 1.5rem; max-width: 640px; color: var(--muted); font-size: .9375rem; line-height: 1.72; text-wrap:pretty; }
+    .hero-copy strong { color: var(--ink-site); font-weight: 500; }
+    .proof-board { border:1px solid var(--line-hi); border-radius:12px; background:var(--paper-raised); overflow:hidden; }
+    .proof-row { min-height: 64px; display: grid; grid-template-columns: 88px 1fr; align-items: center; gap:1rem; padding:.9rem 1.25rem; border-bottom: 1px solid var(--line); }
+    .proof-row:last-child { border-bottom:0; }
+    .proof-value { font-family:var(--font-display); font-style:italic; font-weight:400; font-size: 1.625rem; line-height:1; color: var(--ink-site); }
+    .proof-label { color: var(--dim); font-family:var(--font-mono); font-size: .5625rem; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+    .proof-status { display: inline-flex; align-items: center; gap: .5rem; color: var(--emerald); font-style:normal; font-family:var(--font-mono); font-size:.8125rem; font-weight:600; letter-spacing:.08em; }
+    .proof-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); }
+
+    /* CONTROLS */
+    .controls { padding: 1.25rem 0; border-top:1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .controls-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .filter-group { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem; }
+    .filter-button {
+      min-height: 44px;
+      padding: 0 .85rem;
+      border: 1px solid var(--line-hi);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-family:var(--font-mono); font-size:.5625rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+      cursor: pointer;
+      transition:all .18s var(--ease-out);
+    }
+    .filter-button:hover { color: var(--ink-site); border-color:var(--ink-site); }
+    .filter-button[aria-pressed="true"] { color: var(--paper-site); background:var(--ink-site); border-color:var(--ink-site); }
+    .controls-note { color: var(--dim); font-family:var(--font-mono); font-size: .5625rem; letter-spacing: .12em; text-align: right; text-transform: uppercase; }
+
+    /* GALLERY */
+    .gallery-section { padding: 4rem 0 6rem; }
+    .section-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 1.75rem; }
+    .section-intro h2 { font-family:var(--font-display); font-size: clamp(1.75rem, 3.4vw, 2.75rem); font-weight:400; letter-spacing: -.026em; color:var(--ink-site); }
+    .section-intro p { max-width: 440px; color: var(--muted); font-size: .8125rem; line-height: 1.7; text-align: right; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .showcase-card {
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line-hi);
+      border-radius: 14px;
+      background: var(--paper-raised);
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .5s var(--ease-out), transform .5s var(--ease-out), border-color .2s var(--ease-out), box-shadow .2s var(--ease-out);
+    }
+    .showcase-card.visible { opacity: 1; transform: translateY(0); }
+    .showcase-card:hover { border-color: var(--ink-site); box-shadow:0 22px 54px rgba(20,23,26,.12); }
+    .showcase-card:target { scroll-margin-top: 86px; border-color: var(--accent, var(--accent-site)); box-shadow: 0 0 0 1px var(--accent, var(--accent-site)), 0 24px 60px rgba(20,23,26,.14); }
+    .showcase-card.is-featured { grid-column: 1 / -1; }
+    .showcase-card[hidden] { display: none; }
+    .card-header { min-height: 76px; display: grid; grid-template-columns: 60px 1fr auto; align-items: center; border-bottom: 1px solid var(--line); }
+    .card-index { height: 100%; display: grid; place-items: center; border-right: 1px solid var(--line); color: var(--dim); font-family:var(--font-display); font-style:italic; font-size: 1.125rem; }
+    .card-title-wrap { min-width: 0; padding: 1rem 1.375rem; }
+    .card-kicker { margin-bottom: .35rem; color: var(--accent, var(--accent-site)); font-family:var(--font-mono); font-size: .5625rem; font-weight:600; letter-spacing: .14em; text-transform: uppercase; }
+    .card-title { font-family:var(--font-display); font-size: 1.375rem; font-weight:500; letter-spacing: -.02em; color:var(--ink-site); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-mode { margin-right: 1.375rem; padding: .4rem .65rem; border: 1px solid var(--line); border-radius:999px; color: var(--muted); font-family:var(--font-mono); font-size: .5625rem; letter-spacing: .1em; text-transform: uppercase; }
+    .preview-shell { position: relative; height: 370px; overflow: hidden; background: var(--plate); border-bottom: 1px solid var(--line); }
+    .showcase-card.is-featured .preview-shell { height: 600px; }
+    .preview-shell iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; background: var(--plate); }
+    .live-flag { position: absolute; z-index: 2; top: .875rem; left: .875rem; display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .6rem; border: 1px solid rgba(52,211,153,.35); border-radius:6px; background: rgba(15,18,22,.82); color: #34d399; font-family:var(--font-mono); font-size: .5rem; font-weight:600; letter-spacing: .14em; text-transform: uppercase; }
+    .live-flag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .card-body { padding: 1.5rem 1.625rem 1.5rem; }
+    .card-description { min-height: 44px; margin-bottom: 1.25rem; color: var(--muted); font-size: .8125rem; line-height: 1.7; text-wrap:pretty; }
+    .engineering-proof { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -.375rem 0 .875rem; padding: .6rem .8rem; border: 1px solid rgba(4,120,87,.3); border-radius: 8px; background: rgba(4,120,87,.05); color: var(--dim); font-family:var(--font-mono); font-size: .5625rem; letter-spacing: .12em; text-transform: uppercase; }
+    .engineering-proof strong { color: var(--emerald); font-weight: 600; white-space: nowrap; }
+    .receipt { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .receipt-cell { min-width: 0; padding: .7rem .8rem; border-right: 1px solid var(--line); }
+    .receipt-cell:last-child { border-right: 0; }
+    .receipt-label { display: block; margin-bottom: .35rem; color: var(--dim); font-family:var(--font-mono); font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; }
+    .receipt-value { display: block; color: var(--ink-soft); font-family:var(--font-mono); font-size: .625rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .receipt-value.ok { color: var(--emerald); }
+    .card-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; margin-top: 1.25rem; }
+    .card-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: 0 .9rem; border: 1px solid var(--line-hi); border-radius: 8px; color: var(--ink-soft); font-size: .75rem; font-weight: 500; text-decoration: none; transition: all .2s var(--ease-out); }
+    .card-link:hover { color: var(--ink-site); border-color: var(--ink-site); }
+    .card-link.primary { border-color: var(--ink-site); background:var(--ink-site); color: var(--paper-site); }
+    .card-link.primary:hover { background:var(--accent-site); border-color: var(--accent-site); color:var(--paper-site); }
+    .card-link.create-link { margin-left: auto; border-color: rgba(4,120,87,.35); color: var(--emerald); background: rgba(4,120,87,.05); }
+    .card-link.create-link:hover { border-color: var(--emerald); background: rgba(4,120,87,.1); color:var(--emerald); }
+    .empty-state { display: none; margin-top:14px; padding: 4rem 1.5rem; border: 1px dashed var(--line-hi); border-radius:14px; color: var(--muted); text-align: center; font-size: .8125rem; }
+    .empty-state.visible { display: block; }
+    .community-callout { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2rem; margin-top: 14px; padding: 1.75rem 2rem; border: 1px solid rgba(4,120,87,.3); border-radius:14px; background: rgba(4,120,87,.045); }
+    .community-callout-copy { max-width: 760px; }
+    .community-callout-title { display: block; margin-bottom: .5rem; color: var(--ink-site); font-family:var(--font-display); font-size: 1.25rem; font-weight:500; letter-spacing: -.02em; }
+    .community-callout p { color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+    .community-callout .card-link { min-width: 220px; border-color: rgba(4,120,87,.4); color: var(--emerald); background: rgba(4,120,87,.06); }
+    .community-callout .card-link:hover { border-color: var(--emerald); background: rgba(4,120,87,.12); color:var(--emerald); }
+
+    /* METHOD */
+    .method { border-top: 1px solid var(--line); padding: 4.5rem 0; }
+    .method-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4.5rem; }
+    .method h2 { font-family:var(--font-display); font-size: clamp(1.5rem,2.6vw,2.25rem); font-weight:400; letter-spacing: -.026em; color:var(--ink-site); }
+    .method-copy { color: var(--muted); font-size: .8125rem; line-height: 1.8; }
+    .slides { margin-top: 1.75rem; }
+    .slides-viewport { overflow:hidden; border:1px solid var(--line-hi); border-radius:12px; background:var(--paper-raised); touch-action:pan-y; }
+    .slides-track { display:flex; transition:transform .4s var(--ease-out); }
+    .slide { flex:0 0 100%; min-height:10rem; padding:1.5rem 1.35rem; box-sizing:border-box; }
+    .slide-kicker { display:block; font-size:.8125rem; font-weight:600; color:var(--accent-site); margin-bottom:.5rem; }
+    .slide h3 { font-size:1.125rem; font-weight:600; color:var(--ink-site); margin-bottom:.4rem; }
+    .slide p { font-size:.875rem; color:var(--muted); line-height:1.6; }
+    .slides-bar { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:1rem; }
+    .slides-status { font-size:.8125rem; font-weight:600; color:var(--muted); }
+    .slides-dots { display:flex; gap:.4rem; }
+    .slides-dots button { width:8px; height:8px; padding:0; border:0; border-radius:50%; background:var(--line-hi); cursor:pointer; }
+    .slides-dots button[aria-current="true"] { background:var(--ink-site); width:1.5rem; border-radius:999px; }
+    .slides-nav { display:flex; gap:.5rem; }
+    .slides-nav button { width:40px; height:40px; border:1px solid var(--line-hi); border-radius:8px; background:#fff; color:var(--ink-site); font-size:1.125rem; cursor:pointer; }
+    .method-code { border: 1px solid var(--ink-site); border-radius:12px; overflow:hidden; background: var(--plate); align-self:start; }
+    .method-code-bar { display: flex; justify-content: space-between; padding: .7rem 1rem; border-bottom: 1px solid rgba(232,237,242,.1); color: #7d8894; font-family:var(--font-mono); font-size: .5625rem; letter-spacing: .14em; text-transform: uppercase; }
+    .method-code pre { margin: 0; padding: 1.5rem; color: #aab3bb; font: 500 .6875rem/1.9 var(--font-mono); white-space: pre-wrap; }
+    .method-code .accent { color: var(--accent-site); }
+
+    footer { border-top: 1px solid var(--line); padding: 1.75rem 0 2.5rem; color: var(--dim); font-family:var(--font-mono); font-size: .625rem; letter-spacing:.04em; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1.5rem; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .method-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .proof-board { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .proof-row { grid-template-columns: 1fr; align-content: center; gap: .35rem; border-bottom:0; border-right: 1px solid var(--line); }
+      .proof-row:last-child { border-right:0; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .showcase-card.is-featured { grid-column: auto; }
+      .showcase-card.is-featured .preview-shell { height: 440px; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 28px, var(--content)); }
+      .nav-right .nav-link { display:none; }
+      .hero { padding: 3.5rem 0 2.5rem; }
+      .hero h1 { font-size: clamp(2.25rem, 11vw, 3rem); }
+      .proof-board { grid-template-columns: 1fr; }
+      .proof-row { grid-template-columns: 72px 1fr; min-height: 54px; border-right: 0; border-bottom:1px solid var(--line); }
+      .proof-row:last-child { border-bottom:0; }
+      .controls-inner, .section-intro { align-items: flex-start; flex-direction: column; }
+      .controls-note, .section-intro p { text-align: left; }
+      .filter-group { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .card-header { grid-template-columns: 48px 1fr; }
+      .card-mode { display: none; }
+      .card-title-wrap { padding: .9rem 1rem; }
+      .card-title { font-size: 1.125rem; }
+      .preview-shell, .showcase-card.is-featured .preview-shell { height: 310px; }
+      .card-body { padding: 1.125rem 1rem; }
+      .engineering-proof { align-items: flex-start; flex-direction: column; gap: .35rem; }
+      .receipt { grid-template-columns: 1fr 1fr; }
+      .receipt-cell:nth-child(2) { border-right: 0; }
+      .receipt-cell:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .card-actions { flex-wrap: wrap; }
+      .card-link { flex: 1; min-width: 118px; }
+      .card-link.create-link { margin-left: 0; }
+      .community-callout { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem 1.25rem; }
+      .community-callout .card-link { width: 100%; min-width: 0; }
+      .method { padding: 3.25rem 0; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .showcase-card { opacity:1; transform:none; transition:none; }
+      .slides-track { transition:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+    <a class="nav-brand-wrapper" href="./" aria-label="MosoFin-diagram home">
+      <span class="nav-logo-container">
+        <img class="nav-logo" src="assets/mosofin-mark.png" alt="" width="36" height="36">
+      </span>
+      <span class="nav-brand-title">MosoFin-diagram</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="guide.html" data-en="How it works" data-zh="工作原理">How it works</a>
+      <a class="nav-link" href="gallery.html" aria-current="page" data-en="Examples" data-zh="示例">Examples</a>
+      <a class="nav-link" href="logos.html" data-en="Logos" data-zh="标识">Logos</a>
+      <button class="btn-lang" id="preview-theme" type="button">Preview: dark</button>
+      <a class="btn btn-primary" href="start.html" data-en="Get started →" data-zh="开始使用 →">Get started →</a>
+    </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="lead-label" data-en="Examples" data-zh="示例">Examples</div>
+          <h1 data-en="See the diagrams.<br><em>Then get started.</em>" data-zh="先看这些图，<br><em>再开始使用。</em>">See the diagrams.<br><em>Then get started.</em></h1>
+          <p class="hero-copy" data-en="Every frame below is a live Mosofin artifact—not a mockup. Each one is regenerated from versioned JSON IR, checked for structural integrity, and linked to the exact source that produced it." data-zh="下面每一帧都是可运行的 Mosofin 成品，不是效果图。它们全部由版本化 JSON IR 重新生成、经过结构检查，并链接到产生它的精确源数据。">Every frame below is a live Mosofin artifact—not a mockup. Each one is regenerated from versioned JSON IR, checked for structural integrity, and linked to the exact source that produced it.</p>
+        </div>
+        <div class="proof-board" aria-label="Gallery quality summary">
+          <div class="proof-row"><span class="proof-value">9</span><span class="proof-label" data-en="scenario proofs<br>from real IR" data-zh="个场景成品<br>来自真实 IR">scenario proofs<br>from real IR</span></div>
+          <div class="proof-row"><span class="proof-value">81</span><span class="proof-label" data-en="structural checks<br>passed" data-zh="项结构检查<br>全部通过">structural checks<br>passed</span></div>
+          <div class="proof-row"><span class="proof-value proof-status">PASS</span><span class="proof-label" data-en="generated from<br>source of truth" data-zh="从源数据<br>自动生成">generated from<br>source of truth</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Gallery controls">
+      <div class="shell controls-inner">
+        <div class="filter-group" role="group" aria-label="Filter diagrams by type">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All / 9</button>
+          <button class="filter-button" type="button" data-filter="architecture" aria-pressed="false">Architecture</button>
+          <button class="filter-button" type="button" data-filter="workflow" aria-pressed="false">Workflow</button>
+          <button class="filter-button" type="button" data-filter="sequence" aria-pressed="false">Sequence</button>
+          <button class="filter-button" type="button" data-filter="dataflow" aria-pressed="false">Data flow</button>
+          <button class="filter-button" type="button" data-filter="lifecycle" aria-pressed="false">Lifecycle</button>
+        </div>
+        <div class="controls-note" data-en="Live HTML previews · open any artifact to explore" data-zh="实时 HTML 预览 · 打开任意成品继续探索">Live HTML previews · open any artifact to explore</div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="shell">
+        <div class="section-intro">
+          <h2 data-en="Five lenses. Nine business stories." data-zh="五种视角，九个业务故事。">Five lenses. Nine business stories.</h2>
+          <p data-en="Every scenario has named reader views with a path-aware Story Trail, shareable navigation, dark/light rendering, self-contained export, and a machine-readable quality receipt." data-zh="每个场景都有能辨别真实方向的 Story Trail 命名视图、可分享导航、深浅主题、自包含导出和机器可读质量凭证。">Every scenario has named reader views with a path-aware Story Trail, shareable navigation, dark/light rendering, self-contained export, and a machine-readable quality receipt.</p>
+        </div>
+        <div class="gallery-grid" id="gallery-grid">
+          <article class="showcase-card is-featured" id="proof-business-map" data-proof-id="business-map" data-type="architecture" style="--accent:#0891b2">
+            <header class="card-header">
+              <div class="card-index">01</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Architecture / 13 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Business Operating Map" data-zh="业务全景图">Business Operating Map</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/business-operating-map.architecture.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/business-operating-map.architecture.html" title="Business Operating Map live Mosofin preview" loading="eager"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="The whole business in one map: demand, supply chain, inventory, commerce, payments, spend, payroll, bank and three separate ledgers, each node naming its system of record." data-zh="一张图看懂整个业务：需求、供应链、库存、电商、支付、支出、薪酬、银行和三套独立账本，每个节点标明权威系统。">The whole business in one map: demand, supply chain, inventory, commerce, payments, spend, payroll, bank and three separate ledgers, each node naming its system of record.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">13N · 14E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="26c37e47e9650787dddcdd9c65ac726afed4e9c6c10cef3862689cced514259a">26c37e47e965</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/business-operating-map.architecture.html?present=1&amp;play=1#view=order-to-cash" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/business-operating-map.architecture.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/business-operating-map.architecture.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=architecture&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-money-map" data-proof-id="money-map" data-type="architecture" style="--accent:#0891b2">
+            <header class="card-header">
+              <div class="card-index">02</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Architecture / 6 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Money Map — Northline Coffee" data-zh="资金入账地图 — Northline Coffee">Money Map — Northline Coffee</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-money-map.architecture.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-money-map.architecture.html" title="Money Map — Northline Coffee live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Shopify → Stripe → Chase 1002 → QuickBooks with one source of truth per fact, the wholesale A/R loop, and no invented amounts." data-zh="Shopify → Stripe → Chase 1002 → QuickBooks，每项事实只有一个准据来源，含批发应收回路，不虚构金额。">Shopify → Stripe → Chase 1002 → QuickBooks with one source of truth per fact, the wholesale A/R loop, and no invented amounts.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">6N · 8E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="fa4f5270e1238a8088ea31a05f77b52c31ae9d34457e4cc26d6aa06b19212475">fa4f5270e123</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-money-map.architecture.html?present=1&amp;play=1#view=order-to-cash" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-money-map.architecture.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-money-map.architecture.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=architecture&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-order-path" data-proof-id="order-path" data-type="sequence" style="--accent:#6d28d9">
+            <header class="card-header">
+              <div class="card-index">03</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Sequence / 5 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="One DTC Order to the Books" data-zh="一笔 DTC 订单入账">One DTC Order to the Books</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-order-path.sequence.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-order-path.sequence.html" title="One DTC Order to the Books live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Checkout, card capture, the T+2 net payout, and the three facts QuickBooks matches: sales receipt, fee, and deposit." data-zh="结账、扣款、T+2 净打款，以及 QuickBooks 需匹配的三项事实：销售收据、手续费与存款。">Checkout, card capture, the T+2 net payout, and the three facts QuickBooks matches: sales receipt, fee, and deposit.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">5N · 10E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="56c6d786cd77a9c147c034361cbc406b1ce7fc539662f501179d7db21991eb0e">56c6d786cd77</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-order-path.sequence.html?present=1&amp;play=1#view=books-catch-up" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-order-path.sequence.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-order-path.sequence.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=sequence&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-revenue-walk" data-proof-id="revenue-walk" data-type="dataflow" style="--accent:#b45309">
+            <header class="card-header">
+              <div class="card-index">04</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Data flow / 9 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="July Revenue Walk" data-zh="七月收入对账走步">July Revenue Walk</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-revenue-walk.dataflow.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-revenue-walk.dataflow.html" title="July Revenue Walk live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Gross Shopify sales to the QuickBooks revenue line: contra items, pass-through tax and gift cards, and fees kept below revenue." data-zh="从 Shopify 毛销售到 QuickBooks 收入行：冲减项、代收税与礼品卡、以及不计入收入的手续费。">Gross Shopify sales to the QuickBooks revenue line: contra items, pass-through tax and gift cards, and fees kept below revenue.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">9N · 8E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="1a5483b449e9cc38bd9427b78435945b149cef34e6dfbe737e93736e9b76a99d">1a5483b449e9</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-revenue-walk.dataflow.html?present=1&amp;play=1#view=books-line" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-revenue-walk.dataflow.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-revenue-walk.dataflow.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=dataflow&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-close" data-proof-id="close" data-type="workflow" style="--accent:#047857">
+            <header class="card-header">
+              <div class="card-index">05</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Workflow / 9 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Month-End Close Runbook" data-zh="月结关账 Runbook">Month-End Close Runbook</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-close.workflow.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-close.workflow.html" title="Month-End Close Runbook live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Lanes by system, a zero-difference reconciliation gate owned by the controller, and a break lane that blocks the period lock." data-zh="按系统分泳道，由财务主管把守的零差异对账门，以及阻止锁定期间的异常泳道。">Lanes by system, a zero-difference reconciliation gate owned by the controller, and a break lane that blocks the period lock.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">9N · 9E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="352b2c603ffbf05f5f834cb15fcfe397f1a5e58c1eb8960828310bbff9da3bf7">352b2c603ffb</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-close.workflow.html?present=1&amp;play=1#view=reconcile-and-review" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-close.workflow.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-close.workflow.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=workflow&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-dispute" data-proof-id="dispute" data-type="lifecycle" style="--accent:#be123c">
+            <header class="card-header">
+              <div class="card-index">06</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Lifecycle / 10 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Refund and Chargeback Lifecycle" data-zh="退款与拒付生命周期">Refund and Chargeback Lifecycle</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-dispute.lifecycle.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-dispute.lifecycle.html" title="Refund and Chargeback Lifecycle live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Refund, Stripe reversal, payout netting, and the QuickBooks entry — with chargeback waits, terminal losses, and a recoverable books miss." data-zh="退款、Stripe 冲正、打款抵扣与 QuickBooks 入账，含拒付等待、终态损失与可恢复的漏记。">Refund, Stripe reversal, payout netting, and the QuickBooks entry — with chargeback waits, terminal losses, and a recoverable books miss.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">10N · 6E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="ddce5b946c8d113dadf9f2a539daa0128e76cccfdd81af8256e4c04e808aeeb1">ddce5b946c8d</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-dispute.lifecycle.html?present=1&amp;play=1#view=dispute-waits" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-dispute.lifecycle.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-dispute.lifecycle.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=lifecycle&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-payout-rec" data-proof-id="payout-rec" data-type="dataflow" style="--accent:#b45309">
+            <header class="card-header">
+              <div class="card-index">07</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Data flow / 9 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Stripe Payout Reconciliation" data-zh="Stripe 打款对账">Stripe Payout Reconciliation</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-payout-rec.dataflow.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-payout-rec.dataflow.html" title="Stripe Payout Reconciliation live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="Gross charges less refunds less fees per payout, in-transit timing, wholesale ACH explained separately, and a residual that must be zero." data-zh="每笔打款 = 毛扣款 − 退款 − 手续费，在途时间差、单独解释的批发 ACH，以及必须为零的未解释差额。">Gross charges less refunds less fees per payout, in-transit timing, wholesale ACH explained separately, and a residual that must be zero.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">9N · 8E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="155caa5c1dfaefc01d458ce970b7a9441f8ed6b488d8f3aa80298aa1a58b6441">155caa5c1dfa</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-payout-rec.dataflow.html?present=1&amp;play=1#view=residual" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-payout-rec.dataflow.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-payout-rec.dataflow.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=dataflow&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-customer-ar" data-proof-id="customer-ar" data-type="architecture" style="--accent:#0891b2">
+            <header class="card-header">
+              <div class="card-index">08</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Architecture / 8 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Who Can Say a Customer Owes Us" data-zh="谁有资格说客户欠款">Who Can Say a Customer Owes Us</h3>
+              </div>
+              <div class="card-mode">classic</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-customer-ar.architecture.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-customer-ar.architecture.html" title="Who Can Say a Customer Owes Us live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="DTC checkout is a sales receipt with no receivable; only QuickBooks invoices create A/R, and the aging report is the only list of who owes." data-zh="DTC 结账是销售收据、不产生应收；只有 QuickBooks 发票形成应收，账龄表是唯一的欠款名单。">DTC checkout is a sales receipt with no receivable; only QuickBooks invoices create A/R, and the aging report is the only list of who owes.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">8N · 7E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="7e78f85b73b063441f591201b77d38fa2a8cc6cdfcb4fc9ebfe42fa1cc63927a">7e78f85b73b0</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-customer-ar.architecture.html?present=1&amp;play=1#view=wholesale-ar" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-customer-ar.architecture.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-customer-ar.architecture.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=architecture&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+          <article class="showcase-card" id="proof-cash-runway" data-proof-id="cash-runway" data-type="dataflow" style="--accent:#b45309">
+            <header class="card-header">
+              <div class="card-index">09</div>
+              <div class="card-title-wrap">
+                <div class="card-kicker">Data flow / 9 nodes / 3 views · play</div>
+                <h3 class="card-title" data-en="Cash to Payroll Date" data-zh="现金撑到发薪日">Cash to Payroll Date</h3>
+              </div>
+              <div class="card-mode">classic + trace</div>
+            </header>
+            <div class="preview-shell">
+              <div class="live-flag">Live artifact</div>
+              <iframe src="gallery/artifacts/northline-cash-runway.dataflow.html?embed=1&amp;theme=dark" data-src-base="gallery/artifacts/northline-cash-runway.dataflow.html" title="Cash to Payroll Date live Mosofin preview" loading="lazy"></iframe>
+            </div>
+            <div class="card-body">
+              <p class="card-description" data-en="A tied Chase opening balance, only named inflows, dated outflows to 15 August, and an answer that is unknown rather than guessed." data-zh="已对账的 Chase 期初余额、仅计具名流入、截至 8 月 15 日的定期流出，答案宁可未知也不猜测。">A tied Chase opening balance, only named inflows, dated outflows to 15 August, and an answer that is unknown rather than guessed.</p>
+              <div class="receipt" aria-label="Validation receipt">
+                <div class="receipt-cell"><span class="receipt-label">Artifact</span><span class="receipt-value ok">9/9 pass</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Composition</span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS</span></div>
+                <div class="receipt-cell"><span class="receipt-label">Graph</span><span class="receipt-value">9N · 8E</span></div>
+                <div class="receipt-cell"><span class="receipt-label">SHA-256</span><span class="receipt-value" title="da822c3db4e175c57e74a7f593661ce594271a37c5eabebdb1df0ba828509bde">da822c3db4e1</span></div>
+              </div>
+              <div class="card-actions">
+                <a class="card-link primary" href="gallery/artifacts/northline-cash-runway.dataflow.html?present=1&amp;play=1#view=commitments" target="_blank" rel="noopener" data-en="Play named chapter ↗" data-zh="播放命名章节 ↗">Play named chapter ↗</a>
+                <a class="card-link" href="gallery/artifacts/northline-cash-runway.dataflow.html" target="_blank" rel="noopener" data-en="Full artifact" data-zh="完整成品">Full artifact</a>
+                <a class="card-link" href="gallery/sources/northline-cash-runway.dataflow.json" target="_blank" rel="noopener">JSON IR</a>
+                <a class="card-link create-link" href="start.html?type=dataflow&amp;source=gallery" data-en="Create this type" data-zh="按此类型开始">Create this type</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="empty-state" id="empty-state" data-en="No proof cards match this filter." data-zh="当前筛选条件下没有成品。">No proof cards match this filter.</div>
+        <div class="community-callout">
+          <div class="community-callout-copy">
+            <strong class="community-callout-title" data-en="Built something real?" data-zh="做出了真实成品？">Built something real?</strong>
+            <p data-en="Share the redacted source, verified artifact, validation receipt, and visual-review result. Approved work can join the community gallery with attribution." data-zh="提交脱敏源数据、已验证成品、验证凭证和视觉审查结果。通过审核的作品可署名加入社区作品集。">Share the redacted source, verified artifact, validation receipt, and visual-review result. Approved work can join the community gallery with attribution.</p>
+          </div>
+          <a class="card-link" href="https://github.com/MosoFin/mosofin-diagram/issues/new?template=showcase.yml" target="_blank" rel="noopener noreferrer" data-en="Share a verified diagram ↗" data-zh="提交已验证成品 ↗">Share a verified diagram ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="method">
+      <div class="shell method-grid">
+        <div>
+          <div class="lead-label" data-en="How it works" data-zh="工作原理">How it works</div>
+          <h2 data-en="Four steps from add to a diagram you can forward." data-zh="四步，从添加到一张可转发的图。">Four steps from add to a diagram you can forward.</h2>
+          <div class="slides" id="gallery-slides">
+            <div class="slides-viewport" tabindex="0" aria-roledescription="carousel" aria-label="How it works">
+              <div class="slides-track">
+                <article class="slide">
+                  <span class="slide-kicker" data-en="Step 1" data-zh="第 1 步">Step 1</span>
+                  <h3 data-en="Add the skill" data-zh="添加技能">Add the skill</h3>
+                  <p data-en="Install once for Cursor, Codex, Claude Code, or OpenCode. Raven stays a manual ZIP install." data-zh="为 Cursor、Codex、Claude Code 或 OpenCode 安装一次。Raven 采用 ZIP 手动安装。">Install once for Cursor, Codex, Claude Code, or OpenCode. Raven stays a manual ZIP install.</p>
+                </article>
+                <article class="slide">
+                  <span class="slide-kicker" data-en="Step 2" data-zh="第 2 步">Step 2</span>
+                  <h3 data-en="Describe the business" data-zh="描述业务">Describe the business</h3>
+                  <p data-en="A short interview: what the business does, which entities are in scope, and which system owns each domain." data-zh="一次简短访谈：业务做什么、涉及哪些主体、每个领域由哪个系统说了算。">A short interview: what the business does, which entities are in scope, and which system owns each domain.</p>
+                </article>
+                <article class="slide">
+                  <span class="slide-kicker" data-en="Step 3" data-zh="第 3 步">Step 3</span>
+                  <h3 data-en="Ask one question" data-zh="提出一个问题">Ask one question</h3>
+                  <p data-en="Mosofin picks the diagram type, checks it, and hands back one HTML file you can refine in chat." data-zh="Mosofin 选择图型、完成检查，并交回一个可在对话中继续迭代的 HTML 文件。">Mosofin picks the diagram type, checks it, and hands back one HTML file you can refine in chat.</p>
+                </article>
+                <article class="slide">
+                  <span class="slide-kicker" data-en="Step 4" data-zh="第 4 步">Step 4</span>
+                  <h3 data-en="Share the map" data-zh="分享这张图">Share the map</h3>
+                  <p data-en="Forward the HTML, export a share card, or walk a guided view. Every gallery card is that same file." data-zh="转发 HTML、导出分享卡，或走一遍引导视图。画廊里每张卡片都是同一份文件。">Forward the HTML, export a share card, or walk a guided view. Every gallery card is that same file.</p>
+                </article>
+              </div>
+            </div>
+            <div class="slides-bar">
+              <p class="slides-status" aria-live="polite">Step 1 of 4</p>
+              <div class="slides-dots" role="tablist" aria-label="Steps">
+                <button type="button" aria-current="true" aria-label="Step 1"></button>
+                <button type="button" aria-label="Step 2"></button>
+                <button type="button" aria-label="Step 3"></button>
+                <button type="button" aria-label="Step 4"></button>
+              </div>
+              <div class="slides-nav">
+                <button type="button" data-slides-prev aria-label="Previous step">←</button>
+                <button type="button" data-slides-next aria-label="Next step">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="method-code">
+          <div class="method-code-bar"><span>reproduce locally</span><span>zero runtime deps</span></div>
+          <pre><span class="accent">$ node scripts/build-gallery.mjs</span>
+
+render  workflow      ✓
+render  sequence      ✓
+render  dataflow      ✓
+render  lifecycle     ✓
+render  architecture  ✓
+
+receipt 81 checks / 9 artifacts / deterministic hashes</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span data-en="Generated from Mosofin's checked-in examples. No hand-authored capability claims." data-zh="由 Mosofin 仓库内示例自动生成，不手写可能过期的能力声明。">Generated from Mosofin's checked-in examples. No hand-authored capability claims.</span>
+      <span data-en="Mosofin v1.0.0-dev.0 · development · MIT" data-zh="Mosofin v1.0.0-dev.0 · 开发版 · MIT">Mosofin v1.0.0-dev.0 · development · MIT</span>
+    </div>
+  </footer>
+
+  <script id="gallery-manifest" type="application/json">{
+  "schemaVersion": 1,
+  "generator": "scripts/build-gallery.mjs",
+  "mosofinVersion": "1.0.0-dev.0",
+  "entryCount": 9,
+  "checkCount": 81,
+  "entries": [
+    {
+      "id": "business-map",
+      "type": "architecture",
+      "title": "How the business runs — demand to books across three entities (as of 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/business-operating-map.architecture.json",
+      "artifact": "gallery/artifacts/business-operating-map.architecture.html",
+      "focus": "bank",
+      "view": "order-to-cash",
+      "viewCount": 3,
+      "viewIds": [
+        "order-to-cash",
+        "supply-side",
+        "three-ledgers"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 13,
+      "edgeCount": 14,
+      "artifactBytes": 792219,
+      "artifactSha256": "26c37e47e9650787dddcdd9c65ac726afed4e9c6c10cef3862689cced514259a",
+      "sourceBytes": 10394,
+      "sourceSha256": "d16648089bc36f51f9b79b016f20ecedf9aaaaacdbdaef8eb750f4cc6d0ac28f",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 31.6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 3,
+          "routesOverSuggestedBends": 4,
+          "maxStretch": 1.5,
+          "routesOverSuggestedStretch": 3,
+          "minSegmentPx": 39,
+          "minInteriorSegmentPx": 39,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "money-map",
+      "type": "architecture",
+      "title": "Northline Coffee — Money Map (as of 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-money-map.architecture.json",
+      "artifact": "gallery/artifacts/northline-money-map.architecture.html",
+      "focus": "chase",
+      "view": "order-to-cash",
+      "viewCount": 3,
+      "viewIds": [
+        "order-to-cash",
+        "wholesale-ar",
+        "books-sync"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 6,
+      "edgeCount": 8,
+      "artifactBytes": 720371,
+      "artifactSha256": "fa4f5270e1238a8088ea31a05f77b52c31ae9d34457e4cc26d6aa06b19212475",
+      "sourceBytes": 5181,
+      "sourceSha256": "58c8231f8459b2cb620d8d9c69f93a2bb3fa5a6a4823843f607aaad62047bed3",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1.102,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 24,
+          "minInteriorSegmentPx": 472,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "order-path",
+      "type": "sequence",
+      "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-order-path.sequence.json",
+      "artifact": "gallery/artifacts/northline-order-path.sequence.html",
+      "focus": "stripe",
+      "view": "books-catch-up",
+      "viewCount": 3,
+      "viewIds": [
+        "checkout-to-charge",
+        "payout-to-bank",
+        "books-catch-up"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 5,
+      "edgeCount": 10,
+      "artifactBytes": 713732,
+      "artifactSha256": "56c6d786cd77a9c147c034361cbc406b1ce7fc539662f501179d7db21991eb0e",
+      "sourceBytes": 5311,
+      "sourceSha256": "5251a487ab4c18364d51b93437274ccde0409de61215543f80590b5377dcb87c",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 17,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 0,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 94,
+          "minInteriorSegmentPx": null,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "revenue-walk",
+      "type": "dataflow",
+      "title": "Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-revenue-walk.dataflow.json",
+      "artifact": "gallery/artifacts/northline-revenue-walk.dataflow.html",
+      "focus": "netsales",
+      "view": "books-line",
+      "viewCount": 3,
+      "viewIds": [
+        "gross-to-net",
+        "pass-through",
+        "books-line"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 717742,
+      "artifactSha256": "1a5483b449e9cc38bd9427b78435945b149cef34e6dfbe737e93736e9b76a99d",
+      "sourceBytes": 4839,
+      "sourceSha256": "86f8b4b8772c1b2b04919897e1636640103700b4abc074142b1d61257cbd8899",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 57.4,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 49,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "close",
+      "type": "workflow",
+      "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-close.workflow.json",
+      "artifact": "gallery/artifacts/northline-close.workflow.html",
+      "focus": "bank_rec",
+      "view": "reconcile-and-review",
+      "viewCount": 3,
+      "viewIds": [
+        "pull-sources",
+        "reconcile-and-review",
+        "breaks"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 9,
+      "artifactBytes": 717680,
+      "artifactSha256": "352b2c603ffbf05f5f834cb15fcfe397f1a5e58c1eb8960828310bbff9da3bf7",
+      "sourceBytes": 6566,
+      "sourceSha256": "7afb0c25d51afb7ad370a4254a775efa5e09576072e74d689be968beb897e05d",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 41.1,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1.226,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 21,
+          "minInteriorSegmentPx": 80,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "dispute",
+      "type": "lifecycle",
+      "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-dispute.lifecycle.json",
+      "artifact": "gallery/artifacts/northline-dispute.lifecycle.html",
+      "focus": "landed",
+      "view": "dispute-waits",
+      "viewCount": 3,
+      "viewIds": [
+        "refund-path",
+        "dispute-waits",
+        "exits"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 10,
+      "edgeCount": 6,
+      "artifactBytes": 712839,
+      "artifactSha256": "ddce5b946c8d113dadf9f2a539daa0128e76cccfdd81af8256e4c04e808aeeb1",
+      "sourceBytes": 6221,
+      "sourceSha256": "4220d1005b770c3c70488263ebd8ff174a26ecc4dce88ca7e270cea6e318a4de",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": null,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 3,
+          "routesOverSuggestedBends": 2,
+          "maxStretch": 3.267,
+          "routesOverSuggestedStretch": 2,
+          "minSegmentPx": 18,
+          "minInteriorSegmentPx": 78,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "payout-rec",
+      "type": "dataflow",
+      "title": "Northline Coffee — Stripe Payout Reconciliation to Chase 1002 (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-payout-rec.dataflow.json",
+      "artifact": "gallery/artifacts/northline-payout-rec.dataflow.html",
+      "focus": "residual",
+      "view": "residual",
+      "viewCount": 3,
+      "viewIds": [
+        "stripe-side",
+        "timing",
+        "residual"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 716380,
+      "artifactSha256": "155caa5c1dfaefc01d458ce970b7a9441f8ed6b488d8f3aa80298aa1a58b6441",
+      "sourceBytes": 6837,
+      "sourceSha256": "aba3a2aa6ebdbb82aabdac81e087ce8371812779b3ab652794896359da4a76ad",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 14.6,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 19,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "customer-ar",
+      "type": "architecture",
+      "title": "Northline Coffee — Who Can Say a Customer Owes Us (2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-customer-ar.architecture.json",
+      "artifact": "gallery/artifacts/northline-customer-ar.architecture.html",
+      "focus": "aging",
+      "view": "wholesale-ar",
+      "viewCount": 3,
+      "viewIds": [
+        "dtc-no-ar",
+        "wholesale-ar",
+        "who-chases"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "static",
+      "engineeringProfile": null,
+      "nodeCount": 8,
+      "edgeCount": 7,
+      "artifactBytes": 724391,
+      "artifactSha256": "7e78f85b73b063441f591201b77d38fa2a8cc6cdfcb4fc9ebfe42fa1cc63927a",
+      "sourceBytes": 5842,
+      "sourceSha256": "e5661ecb639b8a69c69acae419c658035f122572b1ad4de8b119cc06f6d812cb",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 87.2,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 4,
+          "routesOverSuggestedBends": 1,
+          "maxStretch": 1.348,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 16,
+          "minInteriorSegmentPx": 16,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "cash-runway",
+      "type": "dataflow",
+      "title": "Northline Coffee — Cash to Payroll Date (as of 2026-07-31)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-cash-runway.dataflow.json",
+      "artifact": "gallery/artifacts/northline-cash-runway.dataflow.html",
+      "focus": "position",
+      "view": "commitments",
+      "viewCount": 3,
+      "viewIds": [
+        "opening",
+        "named-inflows",
+        "commitments"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "artifactBytes": 716152,
+      "artifactSha256": "da822c3db4e175c57e74a7f593661ce594271a37c5eabebdb1df0ba828509bde",
+      "sourceBytes": 6892,
+      "sourceSha256": "999cc77ee74eafbd2e782b7c9263be59dc5bb74c2208fc9d9f1909385ed56249",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 47,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 49,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    }
+  ]
+}</script>
+  <script>
+    (function () {
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.showcase-card'));
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
+      var empty = document.getElementById('empty-state');
+      var previewTheme = 'dark';
+      var language = localStorage.getItem('mosofin-gallery-language') || 'en';
+
+      function applyLanguage(next) {
+        language = next === 'zh' ? 'zh' : 'en';
+        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+        localStorage.setItem('mosofin-gallery-language', language);
+        document.querySelectorAll('[data-en][data-zh]').forEach(function (node) {
+          node.innerHTML = node.getAttribute(language === 'zh' ? 'data-zh' : 'data-en');
+        });
+        if (window.__mosofinGallerySlides) window.__mosofinGallerySlides.refresh();
+      }
+
+      function applyFilter(type, updateUrl) {
+        var visible = 0;
+        cards.forEach(function (card) {
+          var match = type === 'all' || card.getAttribute('data-type') === type;
+          card.hidden = !match;
+          if (match) visible += 1;
+        });
+        filterButtons.forEach(function (button) {
+          button.setAttribute('aria-pressed', button.getAttribute('data-filter') === type ? 'true' : 'false');
+        });
+        empty.classList.toggle('visible', visible === 0);
+        if (updateUrl) {
+          var url = new URL(location.href);
+          if (type === 'all') url.searchParams.delete('type');
+          else url.searchParams.set('type', type);
+          history.replaceState(null, '', url.pathname + url.search + url.hash);
+        }
+      }
+
+      function applyPreviewTheme(next) {
+        previewTheme = next === 'light' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-preview-theme', previewTheme);
+        document.getElementById('preview-theme').textContent = 'Preview: ' + previewTheme;
+        document.querySelectorAll('iframe[data-src-base]').forEach(function (frame) {
+          frame.src = frame.getAttribute('data-src-base') + '?embed=1&theme=' + previewTheme;
+        });
+      }
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () { applyFilter(button.getAttribute('data-filter'), true); });
+      });
+      document.getElementById('preview-theme').addEventListener('click', function () { applyPreviewTheme(previewTheme === 'dark' ? 'light' : 'dark'); });
+
+      var allowed = ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle'];
+      var requested = new URLSearchParams(location.search).get('type') || 'all';
+      applyFilter(allowed.indexOf(requested) >= 0 ? requested : 'all', false);
+
+      (function bindSlides() {
+        var root = document.getElementById('gallery-slides');
+        if (!root) return;
+        var track = root.querySelector('.slides-track');
+        var slides = root.querySelectorAll('.slide');
+        var dots = root.querySelectorAll('.slides-dots button');
+        var status = root.querySelector('.slides-status');
+        var viewport = root.querySelector('.slides-viewport');
+        var index = 0;
+        var startX = 0;
+        function go(next) {
+          index = (next + slides.length) % slides.length;
+          track.style.transform = 'translateX(' + (-index * 100) + '%)';
+          dots.forEach(function (dot, i) {
+            if (i === index) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+          });
+          status.textContent = language === 'zh'
+            ? ('第 ' + (index + 1) + ' 步，共 4 步')
+            : ('Step ' + (index + 1) + ' of 4');
+        }
+        root.querySelector('[data-slides-prev]').addEventListener('click', function () { go(index - 1); });
+        root.querySelector('[data-slides-next]').addEventListener('click', function () { go(index + 1); });
+        dots.forEach(function (dot, i) {
+          dot.addEventListener('click', function () { go(i); });
+        });
+        viewport.addEventListener('keydown', function (event) {
+          if (event.key === 'ArrowRight') { event.preventDefault(); go(index + 1); }
+          else if (event.key === 'ArrowLeft') { event.preventDefault(); go(index - 1); }
+        });
+        viewport.addEventListener('touchstart', function (event) {
+          startX = event.changedTouches[0].clientX;
+        }, { passive: true });
+        viewport.addEventListener('touchend', function (event) {
+          var dx = event.changedTouches[0].clientX - startX;
+          if (dx > 40) go(index - 1);
+          else if (dx < -40) go(index + 1);
+        });
+        window.__mosofinGallerySlides = { refresh: function () { go(index); } };
+        go(0);
+      })();
+
+      applyLanguage(language);
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        cards.forEach(function (card) { observer.observe(card); });
+      } else {
+        cards.forEach(function (card) { card.classList.add('visible'); });
+      }
+    })();
+  </script>
+</body>
+</html>

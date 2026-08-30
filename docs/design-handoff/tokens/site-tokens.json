@@ -1,0 +1,50 @@
+{
+  "_source": "docs/index.html :root (drafted-sheet palette)",
+  "variables": {
+    "--paper": "#eff2f1",
+    "--paper-raised": "#f8faf9",
+    "--ink": "#15181b",
+    "--ink-soft": "#363c41",
+    "--muted": "#60686d",
+    "--dim": "#929a9e",
+    "--line": "rgba(20,23,26,0.14)",
+    "--line-hi": "rgba(20,23,26,0.3)",
+    "--accent": "#e14a0e",
+    "--accent-soft": "rgba(225,74,14,0.08)",
+    "--plate": "#0f1216",
+    "--cyan": "#0891b2",
+    "--emerald": "#047857",
+    "--violet": "#6d28d9",
+    "--amber": "#b45309",
+    "--rose": "#be123c",
+    "--orange": "#c2410c",
+    "--slate": "#475569",
+    "--cyan-fill": "rgba(8,145,178,0.12)",
+    "--emerald-fill": "rgba(4,120,87,0.11)",
+    "--violet-fill": "rgba(109,40,217,0.1)",
+    "--amber-fill": "rgba(180,83,9,0.13)",
+    "--rose-fill": "rgba(190,18,60,0.09)",
+    "--orange-fill": "rgba(194,65,12,0.11)",
+    "--slate-fill": "rgba(71,85,105,0.1)",
+    "--font-display": "'Fraunces','Songti SC','STSong',Georgia,serif",
+    "--font-grot": "'Space Grotesk','Inter',-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
+    "--font-body": "'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
+    "--font-mono": "'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace",
+    "--ease-out": "cubic-bezier(.22,1,.36,1)",
+    "--bento-gap": "14px"
+  },
+  "grainTexture": {
+    "selector": "body::after",
+    "opacity": ".05",
+    "blend": "multiply",
+    "size": "140×140",
+    "note": "inline feTurbulence noise, see assets/grain-texture.svg"
+  },
+  "favicon": {
+    "viewBox": "0 0 28 28",
+    "plate": "#083344",
+    "stroke": "#22d3ee",
+    "dot": "#22d3ee r=2.5",
+    "note": "CYAN HEXAGON — inherited Archify engineering mark, used unchanged on all four site pages. Primary redesign target."
+  }
+}

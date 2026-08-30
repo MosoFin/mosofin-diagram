@@ -1,0 +1,4 @@
+# Keep repository governance and automation changes under the owner's review.
+/.github/CODEOWNERS @travisliang001
+/.github/workflows/** @travisliang001
+/.github/actions/** @travisliang001

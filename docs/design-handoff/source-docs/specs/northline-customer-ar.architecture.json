@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Northline Coffee — Who Can Say a Customer Owes Us (2026-07)",
+    "output": "northline-customer-ar.html",
+    "quality_profile": "showcase",
+    "node_style": "logo",
+    "views": [
+      {
+        "id": "dtc-no-ar",
+        "label": "DTC: paid at checkout",
+        "focus": [
+          "dtc",
+          "shopify",
+          "stripe"
+        ],
+        "note": "A DTC customer pays at checkout. Shopify records a sales receipt; Stripe holds the charge. There is never a receivable on this path."
+      },
+      {
+        "id": "wholesale-ar",
+        "label": "Wholesale: the only A/R",
+        "focus": [
+          "wholesale",
+          "quickbooks",
+          "aging",
+          "chase"
+        ],
+        "note": "A wholesale account is invoiced from QuickBooks on net-30 terms. The invoice creates A/R; the ACH into Chase 1002 clears it."
+      },
+      {
+        "id": "who-chases",
+        "label": "Who chases",
+        "focus": [
+          "aging",
+          "controller",
+          "wholesale"
+        ],
+        "note": "The QuickBooks aging report is the only list of who owes Northline. The controller works it; Shopify customers are not debtors."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "dtc",
+      "type": "external",
+      "label": "DTC customer",
+      "sublabel": "pays at checkout",
+      "pos": [
+        40,
+        150
+      ],
+      "size": [
+        130,
+        60
+      ]
+    },
+    {
+      "id": "shopify",
+      "type": "frontend",
+      "label": "Shopify",
+      "sublabel": "sales receipt · CRM",
+      "brand": "shopify",
+      "pos": [
+        260,
+        150
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "orders SoT · no A/R"
+    },
+    {
+      "id": "stripe",
+      "type": "backend",
+      "label": "Stripe",
+      "sublabel": "charge captured",
+      "brand": "stripe",
+      "pos": [
+        500,
+        150
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "chase",
+      "type": "database",
+      "label": "Chase 1002",
+      "sublabel": "operating account",
+      "brand": "chase",
+      "pos": [
+        740,
+        150
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "cash SoT"
+    },
+    {
+      "id": "wholesale",
+      "type": "external",
+      "label": "Wholesale account",
+      "sublabel": "net-30 terms",
+      "pos": [
+        40,
+        400
+      ],
+      "size": [
+        130,
+        60
+      ]
+    },
+    {
+      "id": "quickbooks",
+      "type": "database",
+      "label": "QuickBooks",
+      "sublabel": "invoices · A/R",
+      "brand": "quickbooks",
+      "pos": [
+        260,
+        400
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "books SoT · A/R SoT"
+    },
+    {
+      "id": "aging",
+      "type": "security",
+      "label": "A/R aging",
+      "sublabel": "QuickBooks report",
+      "pos": [
+        500,
+        400
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "who owes us"
+    },
+    {
+      "id": "controller",
+      "type": "external",
+      "label": "Controller",
+      "sublabel": "collections owner",
+      "pos": [
+        740,
+        400
+      ],
+      "size": [
+        150,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "DTC path — paid at checkout, no receivable",
+      "wraps": [
+        "dtc",
+        "shopify",
+        "stripe"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Wholesale path — invoiced, the only A/R",
+      "wraps": [
+        "wholesale",
+        "quickbooks",
+        "aging"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "checkout",
+      "from": "dtc",
+      "to": "shopify",
+      "label": "order + payment",
+      "variant": "emphasis"
+    },
+    {
+      "id": "charge",
+      "from": "shopify",
+      "to": "stripe",
+      "label": "charge",
+      "variant": "emphasis"
+    },
+    {
+      "id": "payout",
+      "from": "stripe",
+      "to": "chase",
+      "label": "net payout",
+      "variant": "emphasis"
+    },
+    {
+      "id": "invoice",
+      "from": "quickbooks",
+      "to": "wholesale",
+      "label": "invoice (creates A/R)",
+      "variant": "emphasis",
+      "labelAt": [
+        215,
+        478
+      ]
+    },
+    {
+      "id": "aging-report",
+      "from": "quickbooks",
+      "to": "aging",
+      "label": "open invoices",
+      "variant": "default"
+    },
+    {
+      "id": "worklist",
+      "from": "aging",
+      "to": "controller",
+      "label": "past-due list",
+      "variant": "security"
+    },
+    {
+      "id": "ach",
+      "from": "wholesale",
+      "to": "chase",
+      "label": "ACH payment clears A/R",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "via": [
+        [
+          105,
+          320
+        ],
+        [
+          815,
+          320
+        ]
+      ],
+      "labelAt": [
+        460,
+        308
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Who may say “they owe us”",
+      "items": [
+        "Only QuickBooks, via an issued invoice",
+        "The A/R aging report is the single list of open balances",
+        "Shopify customers are buyers, not debtors"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "DTC checkout is a sales receipt — never book A/R for it",
+        "A Stripe charge in transit is cash timing, not a receivable",
+        "No balances shown: none were supplied for 2026-07"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Brief",
+      "items": [
+        "Entity: Northline Coffee LLC · accrual",
+        "Wholesale terms: net-30 by ACH into Chase 1002",
+        "Collections owner: controller"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="#15181b" data-note="Landing hero specimen-rail glyph 3 of 3, 34x26" width="34" height="26" viewBox="0 0 34 26" fill="none">
+                  <circle cx="6" cy="3.5" r="2.5" stroke-width="1.25"></circle>
+                  <circle cx="17" cy="3.5" r="2.5" stroke-width="1.25"></circle>
+                  <circle cx="28" cy="3.5" r="2.5" stroke-width="1.25"></circle>
+                  <path d="M6 6v18M17 6v18M28 6v18" stroke-width="1" stroke-dasharray="2.5 2.5" opacity=".45"></path>
+                  <path d="M6 11h9.5M13 9l2.5 2-2.5 2" stroke-width="1.25"></path>
+                  <path d="M17 17h9.5M24 15l2.5 2-2.5 2" stroke-width="1.25"></path>
+                </svg>

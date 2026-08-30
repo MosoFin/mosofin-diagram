@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Neutral semantic sigil">
+  <title>Neutral semantic sigil (Mosofin)</title>
+  <desc>Verbatim geometry from mosofin/renderers/shared/utils.mjs SIGIL_SHAPE.neutral (tone external). In the viewer the group is placed at translate(nodeX+6, nodeY+6) scale(0.6875) and inherits fill none, stroke currentColor, stroke-width 1.35, round caps and joins, opacity 0.76. currentColor resolves to --external-stroke: #64748b (light) / #64748b (dark).</desc>
+  <g fill="none" stroke="#64748b" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <rect x="3" y="3" width="10" height="10" rx="2"/> <circle cx="8" cy="8" r="1.2" fill="#64748b" stroke="none"/>
+  </g>
+</svg>

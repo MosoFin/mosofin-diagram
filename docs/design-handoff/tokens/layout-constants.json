@@ -1,0 +1,763 @@
+{
+  "_source": "copied from mosofin/renderers/**/*.mjs (module-local `layout` objects); build asserts the literals still exist",
+  "_howToRead": "Authored SVG user units. The viewer scales the whole viewBox; text is never rescaled independently.",
+  "perRenderer": {
+    "architecture": {
+      "file": "mosofin/renderers/architecture/render-architecture.mjs:64-80",
+      "layout": {
+        "defaultW": 120,
+        "defaultH": 60,
+        "margin": 40,
+        "boundaryPad": 30,
+        "boundaryExtraBottom": 20,
+        "boundaryLabelBaseline": 18,
+        "boundaryLabelClearance": 4,
+        "boundaryLabelFontPreferred": 9,
+        "boundaryLabelFontMinimum": 6,
+        "boundaryLabelMaskHeight": 16,
+        "boundaryLabelRailGap": 2,
+        "boundaryLabelFrameInset": 4,
+        "legendH": 28
+      },
+      "textFit": {
+        "sublabelPreferred": 9,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      },
+      "grid": {
+        "file": "mosofin/renderers/architecture/grid.mjs:3-11",
+        "origin": [
+          40,
+          80
+        ],
+        "cols": 4,
+        "gapX": 30,
+        "gapY": 40,
+        "cellW": 130,
+        "cellH": 64,
+        "cellPitch": [
+          160,
+          104
+        ]
+      },
+      "sigil": {
+        "at": "[x+6, y+6]",
+        "size": 11
+      },
+      "brandMark": {
+        "at": "[x+width-22, y+6]",
+        "size": 16
+      }
+    },
+    "workflow": {
+      "file": "mosofin/renderers/workflow/render-workflow.mjs:47-57",
+      "layout": {
+        "laneX": 40,
+        "laneY": 52,
+        "laneW": 640,
+        "laneH": 104,
+        "laneGap": 20,
+        "laneTitleH": 30,
+        "colXs": [
+          88,
+          220,
+          300,
+          430,
+          500,
+          625
+        ],
+        "nodeW": 92,
+        "nodeH": 52
+      },
+      "autoHeight": "laneY + lanes*laneH + (lanes-1)*laneGap + 124; default viewBox [720, autoHeight]",
+      "columnNote": "colXs are three pairs (0,1)(2,3)(4,5); adjacent columns across a pair boundary overlap a 92px node, so same-lane horizontal edges only work inside a pair",
+      "textFit": {
+        "labelPreferred": 11,
+        "labelMinimum": 9,
+        "sublabelPreferred": 8,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      },
+      "legend": {
+        "x": 20,
+        "fontSize": 7,
+        "itemGap": 7,
+        "width": "viewBox[0]-40"
+      }
+    },
+    "sequence": {
+      "file": "mosofin/renderers/sequence/render-sequence.mjs:41-51",
+      "layout": {
+        "topY": 72,
+        "participantH": 54,
+        "lifelineTop": 142,
+        "lifelineBottom": "viewBox[1]-65",
+        "legendY": "viewBox[1]-54",
+        "labelH": 16,
+        "sideMargin": 62
+      },
+      "columnFit": {
+        "fixed": {
+          "participantW": 86,
+          "colGap": 108
+        },
+        "spread": "participantW = clamp(86, 190, round((vbW-124)/count)-24); colGap = max(108, (vbW-40-62-participantW)/(count-1))"
+      },
+      "defaultViewBox": [
+        920,
+        760
+      ],
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6
+      }
+    },
+    "dataflow": {
+      "file": "mosofin/renderers/dataflow/render-dataflow.mjs:52-63",
+      "layout": {
+        "stageY": 46,
+        "stageH": 36,
+        "stageBottomPad": 74,
+        "leftX": 100,
+        "colGap": 215,
+        "stageW": 168,
+        "nodeW": 112,
+        "nodeH": 58,
+        "rowYs": [
+          128,
+          242,
+          356,
+          470,
+          584
+        ],
+        "labelH": 16
+      },
+      "derived": {
+        "stageCenterX": "100 + 215*stage",
+        "rowCenterY": [
+          157,
+          271,
+          385,
+          499,
+          613
+        ],
+        "interStageCorridorX": [
+          205,
+          420,
+          638,
+          852
+        ]
+      },
+      "defaultViewBox": [
+        940,
+        720
+      ],
+      "flowLabel": {
+        "width": "round(max(34, longestLine*4.9+12)*10)/10",
+        "height": "classification ? 27 : 16"
+      },
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      }
+    },
+    "lifecycle": {
+      "file": "mosofin/renderers/lifecycle/render-lifecycle.mjs:50-63",
+      "layout": {
+        "phaseY": 126,
+        "eventY": 278,
+        "outcomeY": 450,
+        "phaseW": 118,
+        "phaseH": 62,
+        "eventW": 126,
+        "eventH": 58,
+        "outcomeW": 118,
+        "outcomeH": 58,
+        "phaseXs": [
+          94,
+          248,
+          402,
+          556,
+          710
+        ],
+        "eventXs": [
+          402,
+          556,
+          710
+        ],
+        "outcomeXs": [
+          402,
+          556,
+          710
+        ]
+      },
+      "defaultViewBox": [
+        980,
+        660
+      ],
+      "typeClass": {
+        "start": "c-frontend",
+        "active": "c-backend",
+        "waiting": "c-cloud",
+        "decision": "c-security",
+        "success": "c-database",
+        "failure": "c-security",
+        "neutral": "c-external",
+        "external": "c-external"
+      },
+      "textClass": {
+        "start": "t-frontend",
+        "active": "t-backend",
+        "waiting": "t-cloud",
+        "decision": "t-security",
+        "success": "t-database",
+        "failure": "t-security",
+        "neutral": "t-muted",
+        "external": "t-muted"
+      },
+      "sigilNote": "sigil sits top-right (x+width-17) when the state has no brand mark, top-left (+6,+6) when it has one",
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      }
+    }
+  },
+  "shared": {
+    "textFit": {
+      "file": "mosofin/renderers/shared/text-fit.mjs:24-27",
+      "widthFactor": 0.6,
+      "horizontalPadding": 8
+    },
+    "desktopReadability": {
+      "file": "mosofin/renderers/shared/desktop-readability.mjs:1-5",
+      "viewport": [
+        1440,
+        900
+      ],
+      "readerMinWidth": 960,
+      "readerHorizontalChrome": 30,
+      "readerDiagramWidth": 930,
+      "minProjectedNodeTextPx": 6
+    },
+    "legend": {
+      "file": "mosofin/renderers/shared/legend.mjs:6-11",
+      "defaultFontSize": 8,
+      "itemGap": 22,
+      "lineGap": 22,
+      "swatchGap": 8,
+      "textAdvanceEm": 0.62,
+      "interactiveBadgeAllowance": 21,
+      "titleFontSize": 12,
+      "titleWeight": 650,
+      "defaultSwatchWidth": 14,
+      "lineSwatchWidth": 34
+    },
+    "sigil": {
+      "file": "mosofin/renderers/shared/utils.mjs:80-87",
+      "authoringBox": 16,
+      "renderedSize": 11,
+      "scale": 0.6875,
+      "strokeWidth": 1.35,
+      "opacity": 0.76
+    },
+    "brandMark": {
+      "file": "mosofin/renderers/shared/brand-marks.mjs:544-563",
+      "plate": 16,
+      "inset": 3,
+      "rx": 4,
+      "artScaleForViewBox24": 0.4166666666666667,
+      "frameStroke": "#cbd5e1 0.8px",
+      "plateFill": "#ffffff"
+    },
+    "markers": {
+      "file": "mosofin/renderers/shared/utils.mjs:11-30",
+      "size": [
+        10,
+        7
+      ],
+      "refX": 9,
+      "refY": 3.5,
+      "polygon": "0 0, 10 3.5, 0 7",
+      "gridPattern": 40
+    }
+  },
+  "observedInArtifacts": {
+    "architecture": {
+      "file": "mosofin/renderers/architecture/render-architecture.mjs:64-80",
+      "layout": {
+        "defaultW": 120,
+        "defaultH": 60,
+        "margin": 40,
+        "boundaryPad": 30,
+        "boundaryExtraBottom": 20,
+        "boundaryLabelBaseline": 18,
+        "boundaryLabelClearance": 4,
+        "boundaryLabelFontPreferred": 9,
+        "boundaryLabelFontMinimum": 6,
+        "boundaryLabelMaskHeight": 16,
+        "boundaryLabelRailGap": 2,
+        "boundaryLabelFrameInset": 4,
+        "legendH": 28
+      },
+      "textFit": {
+        "sublabelPreferred": 9,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      },
+      "grid": {
+        "file": "mosofin/renderers/architecture/grid.mjs:3-11",
+        "origin": [
+          40,
+          80
+        ],
+        "cols": 4,
+        "gapX": 30,
+        "gapY": 40,
+        "cellW": 130,
+        "cellH": 64,
+        "cellPitch": [
+          160,
+          104
+        ]
+      },
+      "sigil": {
+        "at": "[x+6, y+6]",
+        "size": 11
+      },
+      "brandMark": {
+        "at": "[x+width-22, y+6]",
+        "size": 16
+      }
+    },
+    "workflow": {
+      "file": "mosofin/renderers/workflow/render-workflow.mjs:47-57",
+      "layout": {
+        "laneX": 40,
+        "laneY": 52,
+        "laneW": 640,
+        "laneH": 104,
+        "laneGap": 20,
+        "laneTitleH": 30,
+        "colXs": [
+          88,
+          220,
+          300,
+          430,
+          500,
+          625
+        ],
+        "nodeW": 92,
+        "nodeH": 52
+      },
+      "autoHeight": "laneY + lanes*laneH + (lanes-1)*laneGap + 124; default viewBox [720, autoHeight]",
+      "columnNote": "colXs are three pairs (0,1)(2,3)(4,5); adjacent columns across a pair boundary overlap a 92px node, so same-lane horizontal edges only work inside a pair",
+      "textFit": {
+        "labelPreferred": 11,
+        "labelMinimum": 9,
+        "sublabelPreferred": 8,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      },
+      "legend": {
+        "x": 20,
+        "fontSize": 7,
+        "itemGap": 7,
+        "width": "viewBox[0]-40"
+      }
+    },
+    "sequence": {
+      "file": "mosofin/renderers/sequence/render-sequence.mjs:41-51",
+      "layout": {
+        "topY": 72,
+        "participantH": 54,
+        "lifelineTop": 142,
+        "lifelineBottom": "viewBox[1]-65",
+        "legendY": "viewBox[1]-54",
+        "labelH": 16,
+        "sideMargin": 62
+      },
+      "columnFit": {
+        "fixed": {
+          "participantW": 86,
+          "colGap": 108
+        },
+        "spread": "participantW = clamp(86, 190, round((vbW-124)/count)-24); colGap = max(108, (vbW-40-62-participantW)/(count-1))"
+      },
+      "defaultViewBox": [
+        920,
+        760
+      ],
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6
+      }
+    },
+    "dataflow": {
+      "file": "mosofin/renderers/dataflow/render-dataflow.mjs:52-63",
+      "layout": {
+        "stageY": 46,
+        "stageH": 36,
+        "stageBottomPad": 74,
+        "leftX": 100,
+        "colGap": 215,
+        "stageW": 168,
+        "nodeW": 112,
+        "nodeH": 58,
+        "rowYs": [
+          128,
+          242,
+          356,
+          470,
+          584
+        ],
+        "labelH": 16
+      },
+      "derived": {
+        "stageCenterX": "100 + 215*stage",
+        "rowCenterY": [
+          157,
+          271,
+          385,
+          499,
+          613
+        ],
+        "interStageCorridorX": [
+          205,
+          420,
+          638,
+          852
+        ]
+      },
+      "defaultViewBox": [
+        940,
+        720
+      ],
+      "flowLabel": {
+        "width": "round(max(34, longestLine*4.9+12)*10)/10",
+        "height": "classification ? 27 : 16"
+      },
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      }
+    },
+    "lifecycle": {
+      "file": "mosofin/renderers/lifecycle/render-lifecycle.mjs:50-63",
+      "layout": {
+        "phaseY": 126,
+        "eventY": 278,
+        "outcomeY": 450,
+        "phaseW": 118,
+        "phaseH": 62,
+        "eventW": 126,
+        "eventH": 58,
+        "outcomeW": 118,
+        "outcomeH": 58,
+        "phaseXs": [
+          94,
+          248,
+          402,
+          556,
+          710
+        ],
+        "eventXs": [
+          402,
+          556,
+          710
+        ],
+        "outcomeXs": [
+          402,
+          556,
+          710
+        ]
+      },
+      "defaultViewBox": [
+        980,
+        660
+      ],
+      "typeClass": {
+        "start": "c-frontend",
+        "active": "c-backend",
+        "waiting": "c-cloud",
+        "decision": "c-security",
+        "success": "c-database",
+        "failure": "c-security",
+        "neutral": "c-external",
+        "external": "c-external"
+      },
+      "textClass": {
+        "start": "t-frontend",
+        "active": "t-backend",
+        "waiting": "t-cloud",
+        "decision": "t-security",
+        "success": "t-database",
+        "failure": "t-security",
+        "neutral": "t-muted",
+        "external": "t-muted"
+      },
+      "sigilNote": "sigil sits top-right (x+width-17) when the state has no brand mark, top-left (+6,+6) when it has one",
+      "textFit": {
+        "sublabelPreferred": 7,
+        "sublabelMinimum": 6,
+        "tagPreferred": 7,
+        "tagMinimum": 6
+      }
+    }
+  },
+  "containment": {
+    "checkedViewports": [
+      "1440×900",
+      "1600×1000",
+      "1920×1080",
+      "2048×1320"
+    ],
+    "result": "money-map passes at all four in the full-width reading layout; the other seven exceed 900px height at 1440×900 and pass only in Present mode. Receipts: docs/samples/*.visual-check.json."
+  },
+  "perArtifact": {
+    "cash-runway": {
+      "type": "dataflow",
+      "viewBox": "0 0 1080 760",
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "boxes": [
+        "112x58 rx6 .c-backend",
+        "112x58 rx6 .c-cloud",
+        "112x58 rx6 .c-database",
+        "112x58 rx6 .c-external",
+        "112x58 rx6 .c-security",
+        "14x9 rx2 .c-database",
+        "168x640 rx10 .c-lane"
+      ],
+      "fontSizes": {
+        "7": 24,
+        "8": 8,
+        "9/600": 5,
+        "9.6/600": 2,
+        "10/600": 7,
+        "12/650": 1,
+        "10/500": 4
+      },
+      "lanes": 5,
+      "legendBaseline": "724"
+    },
+    "close": {
+      "type": "workflow",
+      "viewBox": "0 0 720 900",
+      "nodeCount": 9,
+      "edgeCount": 9,
+      "boxes": [
+        "14x9 rx2 .c-backend",
+        "14x9 rx2 .c-database",
+        "14x9 rx2 .c-frontend",
+        "14x9 rx2 .c-security",
+        "230x58 rx9 .c-lane",
+        "628x92 rx8 .c-security-group",
+        "640x104 rx10 .c-lane",
+        "92x52 rx6 .c-backend",
+        "92x52 rx6 .c-database",
+        "92x52 rx6 .c-frontend",
+        "92x68 rx6 .c-database",
+        "92x68 rx6 .c-security"
+      ],
+      "fontSizes": {
+        "7": 5,
+        "8": 14,
+        "10/600": 8,
+        "8/600": 3,
+        "7/600": 1,
+        "11/600": 6,
+        "10.7/600": 1,
+        "12/650": 1,
+        "7.5/500": 4
+      },
+      "lanes": 7,
+      "legendBaseline": "820"
+    },
+    "customer-ar": {
+      "type": "architecture",
+      "viewBox": "0 0 930 552",
+      "nodeCount": 8,
+      "edgeCount": 7,
+      "boxes": [
+        "130x60 rx6 .c-external",
+        "150x60 rx6 .c-external",
+        "150x64 rx6 .c-backend",
+        "150x64 rx6 .c-database",
+        "150x64 rx6 .c-frontend",
+        "150x64 rx6 .c-security",
+        "16x10 rx2.5 .c-backend",
+        "16x10 rx2.5 .c-database",
+        "16x10 rx2.5 .c-external",
+        "16x10 rx2.5 .c-frontend",
+        "16x10 rx2.5 .c-security",
+        "670x114 rx12 .c-region"
+      ],
+      "fontSizes": {
+        "7": 4,
+        "8": 7,
+        "9": 8,
+        "11/600": 8,
+        "9/600": 2,
+        "12/650": 1,
+        "10/500": 5
+      },
+      "lanes": 0,
+      "legendBaseline": "536"
+    },
+    "dispute": {
+      "type": "lifecycle",
+      "viewBox": "0 0 980 660",
+      "nodeCount": 10,
+      "edgeCount": 6,
+      "boxes": [
+        "118x58 rx7 .c-security",
+        "118x62 rx7 .c-backend",
+        "118x62 rx7 .c-database",
+        "118x62 rx7 .c-frontend",
+        "118x62 rx7 .c-security",
+        "126x58 rx7 .c-cloud",
+        "126x58 rx7 .c-security",
+        "14x9 rx2 .c-backend",
+        "14x9 rx2 .c-cloud",
+        "14x9 rx2 .c-database",
+        "14x9 rx2 .c-frontend",
+        "14x9 rx2 .c-security"
+      ],
+      "fontSizes": {
+        "7": 20,
+        "10/600": 11,
+        "7/700": 5,
+        "9.6/600": 1,
+        "9.1/600": 1,
+        "12/650": 1,
+        "10/500": 6
+      },
+      "lanes": 0,
+      "legendBaseline": "624"
+    },
+    "money-map": {
+      "type": "architecture",
+      "viewBox": "0 0 1140 578",
+      "nodeCount": 6,
+      "edgeCount": 8,
+      "boxes": [
+        "120x60 rx6 .c-external",
+        "150x64 rx6 .c-backend",
+        "150x64 rx6 .c-database",
+        "150x64 rx6 .c-frontend",
+        "160x60 rx6 .c-external",
+        "160x64 rx6 .c-database",
+        "16x10 rx2.5 .c-backend",
+        "16x10 rx2.5 .c-database",
+        "16x10 rx2.5 .c-external",
+        "16x10 rx2.5 .c-frontend",
+        "440x114 rx12 .c-region"
+      ],
+      "fontSizes": {
+        "7": 3,
+        "8": 8,
+        "9": 6,
+        "11/600": 6,
+        "9/600": 1,
+        "12/650": 1,
+        "10/500": 4
+      },
+      "lanes": 0,
+      "legendBaseline": "562"
+    },
+    "order-path": {
+      "type": "sequence",
+      "viewBox": "0 0 820 760",
+      "nodeCount": 5,
+      "edgeCount": 10,
+      "boxes": [
+        "10x132 rx3 .c-frontend",
+        "10x138 rx3 .c-database",
+        "10x49 rx3 .c-backend",
+        "10x60 rx3 .c-backend",
+        "10x60 rx3 .c-database",
+        "724x140 rx10 .c-lane",
+        "724x170 rx10 .c-lane",
+        "724x180 rx10 .c-lane",
+        "86x54 rx6 .c-backend",
+        "86x54 rx6 .c-database",
+        "86x54 rx6 .c-external",
+        "86x54 rx6 .c-frontend"
+      ],
+      "fontSizes": {
+        "7": 5,
+        "9": 10,
+        "9/600": 3,
+        "10.8/600": 1,
+        "8/600": 1,
+        "8.3/600": 1,
+        "11/600": 2,
+        "12/650": 1,
+        "10/500": 4
+      },
+      "lanes": 3,
+      "legendBaseline": "706"
+    },
+    "payout-rec": {
+      "type": "dataflow",
+      "viewBox": "0 0 1080 760",
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "boxes": [
+        "112x58 rx6 .c-backend",
+        "112x58 rx6 .c-cloud",
+        "112x58 rx6 .c-database",
+        "112x58 rx6 .c-external",
+        "112x58 rx6 .c-security",
+        "14x9 rx2 .c-database",
+        "168x640 rx10 .c-lane"
+      ],
+      "fontSizes": {
+        "7": 26,
+        "8": 8,
+        "9/600": 4,
+        "10/600": 9,
+        "12/650": 1,
+        "10/500": 5
+      },
+      "lanes": 4,
+      "legendBaseline": "724"
+    },
+    "revenue-walk": {
+      "type": "dataflow",
+      "viewBox": "0 0 1080 760",
+      "nodeCount": 9,
+      "edgeCount": 8,
+      "boxes": [
+        "112x58 rx6 .c-backend",
+        "112x58 rx6 .c-database",
+        "112x58 rx6 .c-frontend",
+        "112x58 rx6 .c-security",
+        "14x9 rx2 .c-database",
+        "168x640 rx10 .c-lane"
+      ],
+      "fontSizes": {
+        "7": 24,
+        "8": 8,
+        "9/600": 4,
+        "8.4/600": 2,
+        "9.1/600": 3,
+        "10/600": 4,
+        "12/650": 1,
+        "10/500": 4
+      },
+      "lanes": 4,
+      "legendBaseline": "724"
+    }
+  }
+}

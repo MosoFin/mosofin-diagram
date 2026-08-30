@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Break semantic sigil (proposed)">
+  <title>Break — proposed finance sigil for kind id &#34;failure&#34;</title>
+  <desc>Proposed redesign: annotation mark — a circled exclamation, a reconciliation break that needs attention, not a system fault. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;failure&#34;.</desc>
+  <g fill="none" stroke="#dc2626" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <circle cx="8" cy="8" r="5.3"></circle>
+    <path d="M8 5.1v3.4"></path>
+    <circle cx="8" cy="10.9" r="0.35" fill="#dc2626" stroke="none"></circle>
+  </g>
+</svg>

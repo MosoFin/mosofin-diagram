@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Waiting semantic sigil">
+  <title>Waiting semantic sigil (Mosofin)</title>
+  <desc>Verbatim geometry from mosofin/renderers/shared/utils.mjs SIGIL_SHAPE.waiting (tone cloud). In the viewer the group is placed at translate(nodeX+6, nodeY+6) scale(0.6875) and inherits fill none, stroke currentColor, stroke-width 1.35, round caps and joins, opacity 0.76. currentColor resolves to --cloud-stroke: #d97706 (light) / #d97706 (dark).</desc>
+  <g fill="none" stroke="#d97706" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <path d="M4 2.5h8M4 13.5h8M5 3c0 2.8 2 3.2 3 5-1 1.8-3 2.2-3 5M11 3c0 2.8-2 3.2-3 5 1 1.8 3 2.2 3 5"/>
+  </g>
+</svg>

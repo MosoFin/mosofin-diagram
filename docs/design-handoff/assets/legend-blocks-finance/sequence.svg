@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="40" viewBox="0 0 520 40">
+  <title>Proposed finance legend for the sequence renderer</title>
+  <desc>Proposed default labels from 02-REDESIGN-BRIEF. Kind ids unchanged; the &#34;money&#34; swatch previews the proposed cash colour (site accent) and is a colour proposal, not a shipped token. Every label needs a zh sibling.</desc>
+  <rect width="520" height="40" fill="#ffffff"></rect>
+  <g transform="translate(12 8)">
+    <g data-legend-kind="frontend"><rect x="0" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#0891b2" stroke-width="1"></rect><text x="22" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">charge / order</text></g>
+    <g data-legend-kind="backend"><rect x="132" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#059669" stroke-width="1"></rect><text x="154" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">settlement</text></g>
+    <g data-legend-kind="messagebus"><rect x="240" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#ea580c" stroke-width="1"></rect><text x="262" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">bank feed</text></g>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="558" height="40" viewBox="0 0 558 40">
+  <title>Proposed finance legend for the architecture renderer</title>
+  <desc>Proposed default labels from 02-REDESIGN-BRIEF. Kind ids unchanged; the &#34;money&#34; swatch previews the proposed cash colour (site accent) and is a colour proposal, not a shipped token. Every label needs a zh sibling.</desc>
+  <rect width="558" height="40" fill="#ffffff"></rect>
+  <g transform="translate(12 8)">
+    <g data-legend-kind="frontend"><rect x="0" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#0891b2" stroke-width="1"></rect><text x="22" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Commerce</text></g>
+    <g data-legend-kind="backend"><rect x="96" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#059669" stroke-width="1"></rect><text x="118" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Payments</text></g>
+    <g data-legend-kind="database"><rect x="192" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#7c3aed" stroke-width="1"></rect><text x="214" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Ledger</text></g>
+    <g data-legend-kind="cloud"><rect x="276" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#d97706" stroke-width="1"></rect><text x="298" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Bank</text></g>
+    <g data-legend-kind="security"><rect x="348" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1"></rect><text x="370" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Control</text></g>
+    <g data-legend-kind="external"><rect x="438" y="9" width="16" height="10" rx="2.5" fill="none" stroke="#475569" stroke-width="1"></rect><text x="460" y="18" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="500" fill="#60686d">Counterparty</text></g>
+  </g>
+</svg>

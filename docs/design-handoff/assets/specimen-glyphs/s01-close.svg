@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="#15181b" data-note="Landing hero specimen-rail glyph 1 of 3, 34x26" width="34" height="26" viewBox="0 0 34 26" fill="none">
+                  <path d="M1 5h32M1 13h32M1 21h32" stroke-width="1" opacity=".35"></path>
+                  <rect x="4" y="3" width="7" height="4" rx="1" stroke-width="1.25"></rect>
+                  <rect x="14" y="11" width="7" height="4" rx="1" stroke-width="1.25"></rect>
+                  <rect x="23" y="19" width="7" height="4" rx="1" stroke-width="1.25"></rect>
+                  <path d="M11 5h6v6M21 13h4v6" stroke-width="1.25"></path>
+                </svg>

@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Northline Coffee — Money Map (as of 2026-07)",
+    "output": "northline-money-map.html",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "node_style": "logo",
+    "views": [
+      {
+        "id": "order-to-cash",
+        "label": "DTC order to cash",
+        "focus": [
+          "customer",
+          "shopify",
+          "stripe",
+          "chase",
+          "quickbooks"
+        ],
+        "note": "One Shopify checkout becomes a Stripe charge, settles into Chase 1002 as a net payout, and is recognized in QuickBooks."
+      },
+      {
+        "id": "wholesale-ar",
+        "label": "Wholesale invoices",
+        "focus": [
+          "quickbooks",
+          "wholesale",
+          "chase"
+        ],
+        "note": "The only A/R Northline has: invoices raised in QuickBooks and paid by ACH into Chase."
+      },
+      {
+        "id": "books-sync",
+        "label": "What reaches the books",
+        "focus": [
+          "shopify",
+          "stripe",
+          "quickbooks"
+        ],
+        "note": "Orders and tax collected sync from Shopify; fees and disputes come from Stripe. Neither is the cash source of truth."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "customer",
+      "type": "external",
+      "label": "DTC customer",
+      "sublabel": "web checkout",
+      "pos": [
+        40,
+        270
+      ],
+      "size": [
+        120,
+        60
+      ]
+    },
+    {
+      "id": "shopify",
+      "type": "frontend",
+      "label": "Shopify",
+      "sublabel": "orders · customers · tax",
+      "brand": "shopify",
+      "pos": [
+        250,
+        270
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "orders SoT"
+    },
+    {
+      "id": "stripe",
+      "type": "backend",
+      "label": "Stripe",
+      "sublabel": "charges · fees · payouts",
+      "brand": "stripe",
+      "pos": [
+        480,
+        270
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "chase",
+      "type": "database",
+      "label": "Chase 1002",
+      "sublabel": "operating account",
+      "brand": "chase",
+      "pos": [
+        710,
+        270
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "cash SoT"
+    },
+    {
+      "id": "quickbooks",
+      "type": "database",
+      "label": "QuickBooks",
+      "sublabel": "accrual · P&L · tax payable",
+      "brand": "quickbooks",
+      "pos": [
+        940,
+        270
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "books SoT"
+    },
+    {
+      "id": "wholesale",
+      "type": "external",
+      "label": "Wholesale account",
+      "sublabel": "invoiced customer",
+      "pos": [
+        940,
+        450
+      ],
+      "size": [
+        160,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Cash lands here — Stripe payout to Chase",
+      "wraps": [
+        "stripe",
+        "chase"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "checkout",
+      "from": "customer",
+      "to": "shopify",
+      "label": "order",
+      "variant": "emphasis"
+    },
+    {
+      "id": "charge",
+      "from": "shopify",
+      "to": "stripe",
+      "label": "charge",
+      "variant": "emphasis"
+    },
+    {
+      "id": "payout",
+      "from": "stripe",
+      "to": "chase",
+      "label": "net payout",
+      "variant": "emphasis"
+    },
+    {
+      "id": "deposit",
+      "from": "chase",
+      "to": "quickbooks",
+      "label": "deposit",
+      "variant": "emphasis"
+    },
+    {
+      "id": "order-sync",
+      "from": "shopify",
+      "to": "quickbooks",
+      "label": "sales receipts + tax collected",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "top"
+    },
+    {
+      "id": "fee-sync",
+      "from": "stripe",
+      "to": "quickbooks",
+      "label": "fees · disputes",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "top"
+    },
+    {
+      "id": "invoice",
+      "from": "quickbooks",
+      "to": "wholesale",
+      "label": "invoice (A/R)",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 48
+    },
+    {
+      "id": "ach",
+      "from": "wholesale",
+      "to": "chase",
+      "label": "ACH payment",
+      "fromSide": "left",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Source of truth",
+      "items": [
+        "Orders, customers, tax collected: Shopify",
+        "Settled cash: Chase 1002",
+        "Revenue, deposits, tax payable, P&L: QuickBooks"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "DTC checkout is a sales receipt — no A/R",
+        "Only wholesale invoices create A/R",
+        "Stripe payouts are net of fees; the gross lives in Shopify",
+        "No amounts shown: none were supplied for 2026-07"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Brief",
+      "items": [
+        "Entity: Northline Coffee LLC (one entity)",
+        "Method: accrual · Proof: authored",
+        "Audience: controller first, founder share card second"
+      ]
+    }
+  ]
+}

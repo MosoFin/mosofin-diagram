@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)",
+    "output": "northline-revenue-walk.html",
+    "viewBox": [1080, 760],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      { "id": "gross-to-net", "label": "Gross to net sales", "focus": ["gross", "contra", "netsales"], "note": "Shopify gross sales less refunds and discounts is net sales. Both contra items are Shopify facts, not estimates." },
+      { "id": "pass-through", "label": "Pass-through items", "focus": ["gross", "tax", "giftcards", "taxpayable", "giftliab"], "note": "Sales tax collected and gift-card sales are liabilities, not revenue. They leave the walk before the P&L." },
+      { "id": "books-line", "label": "The QuickBooks revenue line", "focus": ["netsales", "fees", "revenue"], "note": "Revenue is net sales as recognized in QuickBooks. Stripe fees are an expense below it, never a deduction from revenue." }
+    ]
+  },
+  "stages": [
+    { "label": "Shopify (orders SoT)" },
+    { "label": "Deductions" },
+    { "label": "Net sales" },
+    { "label": "QuickBooks (books SoT)" }
+  ],
+  "nodes": [
+    { "id": "gross", "type": "frontend", "label": "Gross sales", "sublabel": "Shopify order total", "stage": 0, "row": 1, "tag": "amount: unknown", "brand": "shopify" },
+    { "id": "tax", "type": "database", "label": "Sales tax collected", "sublabel": "liability", "stage": 1, "row": 0, "tag": "not revenue" },
+    { "id": "giftcards", "type": "database", "label": "Gift cards sold", "sublabel": "deferred", "stage": 1, "row": 1, "tag": "not revenue" },
+    { "id": "contra", "type": "security", "label": "Refunds + discounts", "sublabel": "contra revenue", "stage": 1, "row": 3, "tag": "Shopify" },
+    { "id": "netsales", "type": "backend", "label": "Net sales", "sublabel": "gross − contra", "stage": 2, "row": 2, "tag": "recognized basis" },
+    { "id": "fees", "type": "backend", "label": "Stripe fees", "sublabel": "expense line", "stage": 2, "row": 4, "tag": "below revenue", "brand": "stripe" },
+    { "id": "revenue", "type": "database", "label": "Revenue", "sublabel": "QuickBooks P&L", "stage": 3, "row": 2, "tag": "books SoT" },
+    { "id": "taxpayable", "type": "database", "label": "Sales tax payable", "sublabel": "balance sheet", "stage": 3, "row": 0 },
+    { "id": "giftliab", "type": "database", "label": "Gift card liability", "sublabel": "balance sheet", "stage": 3, "row": 1 }
+  ],
+  "flows": [
+    { "id": "tax-out", "from": "gross", "to": "tax", "label": "tax collected", "classification": "pass-through", "variant": "dashed", "fromSide": "top", "toSide": "left", "via": [[100, 157]], "labelAt": [150, 145] },
+    { "id": "gift-out", "from": "gross", "to": "giftcards", "label": "gift cards", "classification": "pass-through", "variant": "dashed", "route": "straight", "labelAt": [207, 258] },
+    { "id": "less-contra", "from": "gross", "to": "contra", "label": "less refunds + discounts", "classification": "contra", "variant": "security", "fromSide": "bottom", "toSide": "left", "via": [[100, 499]], "labelAt": [150, 487] },
+    { "id": "equals-net", "from": "contra", "to": "netsales", "label": "= net sales", "classification": "Shopify", "variant": "emphasis", "fromSide": "right", "toSide": "left", "via": [[420, 499], [420, 385]], "labelAt": [420, 442] },
+    { "id": "net-to-revenue", "from": "netsales", "to": "revenue", "label": "recognized", "classification": "accrual", "variant": "emphasis", "route": "straight", "labelAt": [638, 372] },
+    { "id": "net-to-fees", "from": "netsales", "to": "fees", "label": "fees are an expense", "classification": "Stripe", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [530, 499] },
+    { "id": "tax-to-payable", "from": "tax", "to": "taxpayable", "label": "remit later", "classification": "liability", "variant": "dashed", "route": "straight", "labelAt": [530, 144] },
+    { "id": "gift-to-liab", "from": "giftcards", "to": "giftliab", "label": "until redeemed", "classification": "liability", "variant": "dashed", "route": "straight", "labelAt": [530, 258] }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "Why the dashboards differ", "items": ["Shopify shows gross sales including tax and gift cards", "Stripe shows net payouts after fees", "QuickBooks revenue is net sales — the only number to sign off"] },
+    { "dot": "amber", "title": "Guardrails", "items": ["Every node is a Shopify or QuickBooks fact; nothing is estimated", "Amounts are tagged unknown: none were supplied for 2026-07", "Fees reduce cash, not revenue"] },
+    { "dot": "cyan", "title": "Brief", "items": ["Entity: Northline Coffee LLC · accrual", "Orders SoT: Shopify · Books SoT: QuickBooks", "Audience: controller"] }
+  ]
+}

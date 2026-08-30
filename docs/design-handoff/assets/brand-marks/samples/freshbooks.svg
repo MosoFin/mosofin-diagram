@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" width="64" height="64" role="img" aria-label="FreshBooks brand mark plate">
+  <title>FreshBooks brand mark plate (authored 16x16, shown at 64)</title>
+  <desc>Candidate mark for the Mosofin catalogue, sourced from the MIT-licensed ComposioHQ/open-logos library via composio.dev/toolkits. Same containment rule as the shipped catalogue: white plate, #cbd5e1 frame, vendor colour stays inside.</desc>
+  <rect width="16" height="16" rx="4" fill="#ffffff"></rect>
+  <svg x="3" y="3" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox=".99522558 .9999996 253.69877442 253.6940004"><path d="m107.948 1a106.948 106.948 0 0 0 -106.948 106.966v146.728h146.727c59.067 0 106.955-47.88 106.967-106.948v-146.746zm86.724 43.635a34.6 34.6 0 0 1 -10.164 24.51 34.768 34.768 0 0 1 -24.562 10.152h-37.242v29.73h50.314v34.796h-50.065v71.663h-41.233v-179.891h40.983v32.625c1.072-18.32 16.275-32.625 34.668-32.625h37.358z" fill="#0075dd"></path></svg>
+  <rect width="16" height="16" rx="4" fill="none" stroke="#cbd5e1" stroke-width="0.8"></rect>
+</svg>

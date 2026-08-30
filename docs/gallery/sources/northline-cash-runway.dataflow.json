@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Northline Coffee — Cash to Payroll Date (as of 2026-07-31)",
+    "output": "northline-cash-runway.html",
+    "viewBox": [
+      1080,
+      760
+    ],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "opening",
+        "label": "A tied opening balance",
+        "focus": [
+          "opening",
+          "payouts",
+          "invoices",
+          "position"
+        ],
+        "note": "Start from the reconciled Chase 1002 balance at 31 July, then add only named inflows. An untied opening makes the rest meaningless."
+      },
+      {
+        "id": "named-inflows",
+        "label": "Only named inflows",
+        "focus": [
+          "payouts",
+          "invoices"
+        ],
+        "note": "Stripe payouts already initiated and wholesale invoices already issued and due. Next week's Shopify sales are not cash."
+      },
+      {
+        "id": "commitments",
+        "label": "Commitments to the date",
+        "focus": [
+          "position",
+          "payroll",
+          "rent",
+          "supplier",
+          "tax",
+          "answer"
+        ],
+        "note": "Payroll, rent, the green-coffee bill, and the July sales-tax remittance are the dated outflows. The answer is what remains."
+      }
+    ]
+  },
+  "stages": [
+    {
+      "label": "Opening (tied)"
+    },
+    {
+      "label": "Named inflows"
+    },
+    {
+      "label": "Available"
+    },
+    {
+      "label": "Dated outflows"
+    },
+    {
+      "label": "15 Aug"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "opening",
+      "type": "database",
+      "label": "Chase 1002 opening",
+      "sublabel": "reconciled 31 Jul",
+      "stage": 0,
+      "row": 1,
+      "tag": "cash SoT"
+    },
+    {
+      "id": "payouts",
+      "type": "backend",
+      "label": "Payouts",
+      "sublabel": "Stripe, in transit",
+      "stage": 1,
+      "row": 1,
+      "tag": "by payout ID",
+      "brand": "stripe"
+    },
+    {
+      "id": "invoices",
+      "type": "external",
+      "label": "Wholesale due",
+      "sublabel": "issued, due ≤ 15 Aug",
+      "stage": 1,
+      "row": 3,
+      "tag": "from A/R aging"
+    },
+    {
+      "id": "position",
+      "type": "cloud",
+      "label": "Available cash",
+      "sublabel": "opening + named inflows",
+      "stage": 2,
+      "row": 2,
+      "tag": "amount: unknown"
+    },
+    {
+      "id": "payroll",
+      "type": "security",
+      "label": "Payroll",
+      "sublabel": "15 Aug",
+      "stage": 3,
+      "row": 0,
+      "tag": "must clear"
+    },
+    {
+      "id": "rent",
+      "type": "security",
+      "label": "Rent",
+      "sublabel": "1 Aug",
+      "stage": 3,
+      "row": 1
+    },
+    {
+      "id": "supplier",
+      "type": "security",
+      "label": "Green coffee",
+      "sublabel": "supplier bill, 8 Aug",
+      "stage": 3,
+      "row": 2
+    },
+    {
+      "id": "tax",
+      "type": "security",
+      "label": "Sales tax remit",
+      "sublabel": "July, due 20 Aug",
+      "stage": 3,
+      "row": 3,
+      "tag": "after payroll"
+    },
+    {
+      "id": "answer",
+      "type": "database",
+      "label": "Cash after payroll",
+      "sublabel": "15 Aug",
+      "stage": 4,
+      "row": 2,
+      "tag": "the answer"
+    }
+  ],
+  "flows": [
+    {
+      "id": "opening-in",
+      "from": "opening",
+      "to": "payouts",
+      "label": "+ in-transit payouts",
+      "classification": "named",
+      "variant": "emphasis",
+      "route": "straight",
+      "labelAt": [
+        207,
+        314
+      ]
+    },
+    {
+      "id": "plus-invoices",
+      "from": "payouts",
+      "to": "invoices",
+      "label": "+ due wholesale ACH",
+      "classification": "named",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight",
+      "labelAt": [
+        315,
+        385
+      ]
+    },
+    {
+      "id": "equals-available",
+      "from": "invoices",
+      "to": "position",
+      "label": "= available",
+      "classification": "opening + inflows",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          420,
+          499
+        ],
+        [
+          420,
+          385
+        ]
+      ],
+      "labelAt": [
+        420,
+        442
+      ]
+    },
+    {
+      "id": "less-payroll",
+      "from": "position",
+      "to": "payroll",
+      "label": "− payroll",
+      "classification": "dated",
+      "variant": "security",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          638,
+          385
+        ],
+        [
+          638,
+          157
+        ]
+      ],
+      "labelAt": [
+        638,
+        271
+      ]
+    },
+    {
+      "id": "less-rent",
+      "from": "payroll",
+      "to": "rent",
+      "label": "− rent",
+      "classification": "dated",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight",
+      "labelAt": [
+        745,
+        214
+      ]
+    },
+    {
+      "id": "less-supplier",
+      "from": "rent",
+      "to": "supplier",
+      "label": "− supplier",
+      "classification": "dated",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight",
+      "labelAt": [
+        745,
+        328
+      ]
+    },
+    {
+      "id": "less-tax",
+      "from": "supplier",
+      "to": "tax",
+      "label": "− tax remit",
+      "classification": "dated",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight",
+      "labelAt": [
+        745,
+        442
+      ]
+    },
+    {
+      "id": "to-answer",
+      "from": "tax",
+      "to": "answer",
+      "label": "= cash after payroll",
+      "classification": "answer",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          852,
+          499
+        ],
+        [
+          852,
+          385
+        ]
+      ],
+      "labelAt": [
+        852,
+        442
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "What counts",
+      "items": [
+        "Opening: reconciled Chase 1002 balance only",
+        "Inflows: payouts already initiated and invoices already due",
+        "Outflows: dated commitments with an owner"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "No forecast sales — future Shopify orders are not cash",
+        "No amounts drawn: none were supplied as of 2026-07-31",
+        "Sales tax collected is not Northline's money; it is remitted"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "The question",
+      "items": [
+        "Can Northline make payroll on 15 Aug?",
+        "Answer = opening + named inflows − dated outflows",
+        "If any input is untied, the answer is unknown, not a guess"
+      ]
+    }
+  ]
+}

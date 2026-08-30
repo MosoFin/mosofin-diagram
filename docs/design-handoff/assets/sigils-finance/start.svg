@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" role="img" aria-label="Opened semantic sigil (proposed)">
+  <title>Opened — proposed finance sigil for kind id &#34;start&#34;</title>
+  <desc>Proposed redesign: unchanged. Same grammar as the shipped set: 16x16 authoring box, stroke 1.35, round caps and joins, opacity .76, colour = the kind stroke token. Kind id stays &#34;start&#34;.</desc>
+  <g fill="none" stroke="#0891b2" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" opacity="0.76">
+    <circle cx="8" cy="8" r="5"></circle>
+    <path d="m7 5.4 3.6 2.6L7 10.6Z" fill="#0891b2" stroke="none"></path>
+  </g>
+</svg>

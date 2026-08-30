@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+    "output": "northline-dispute.html",
+    "viewBox": [
+      980,
+      660
+    ],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "refund-path",
+        "label": "A clean refund",
+        "focus": [
+          "requested",
+          "refunded",
+          "reversed",
+          "landed",
+          "booked"
+        ],
+        "note": "Shopify marks the order refunded, Stripe reverses the charge, it nets out of a later payout, and QuickBooks posts the contra entry."
+      },
+      {
+        "id": "dispute-waits",
+        "label": "Chargeback waits",
+        "focus": [
+          "reversed",
+          "disputed",
+          "evidence",
+          "landed"
+        ],
+        "note": "A chargeback pulls the funds and fee immediately and then waits on the card network. Nothing is final while evidence is pending."
+      },
+      {
+        "id": "exits",
+        "label": "How it ends",
+        "focus": [
+          "evidence",
+          "lost",
+          "booked",
+          "stale"
+        ],
+        "note": "Won disputes rejoin the payout path. Lost is terminal and the fee stays. A refund the books missed is a recoverable failure, not an end."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Refund path"
+    },
+    {
+      "id": "waiting",
+      "label": "Waiting on Stripe / card network"
+    },
+    {
+      "id": "exceptions",
+      "label": "Books catch-up"
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal"
+    }
+  ],
+  "states": [
+    {
+      "id": "requested",
+      "type": "start",
+      "label": "Refund requested",
+      "sublabel": "customer / support",
+      "lane": "main",
+      "col": 0,
+      "step": "01",
+      "tag": "Shopify"
+    },
+    {
+      "id": "refunded",
+      "type": "active",
+      "label": "Refunded in Shopify",
+      "sublabel": "order marked refunded",
+      "lane": "main",
+      "col": 1,
+      "step": "02",
+      "tag": "orders SoT"
+    },
+    {
+      "id": "reversed",
+      "type": "active",
+      "label": "Stripe reversal",
+      "sublabel": "charge refunded",
+      "lane": "main",
+      "col": 2,
+      "step": "03",
+      "tag": "fee not returned"
+    },
+    {
+      "id": "landed",
+      "type": "decision",
+      "label": "Netted in payout",
+      "sublabel": "next Chase deposit",
+      "lane": "main",
+      "col": 3,
+      "step": "04",
+      "tag": "cash SoT"
+    },
+    {
+      "id": "booked",
+      "type": "success",
+      "label": "Booked in QuickBooks",
+      "sublabel": "contra revenue posted",
+      "lane": "main",
+      "col": 4,
+      "step": "05",
+      "tag": "done"
+    },
+    {
+      "id": "disputed",
+      "type": "waiting",
+      "label": "Chargeback opened",
+      "sublabel": "funds + fee held",
+      "lane": "waiting",
+      "col": 0,
+      "tag": "pause"
+    },
+    {
+      "id": "evidence",
+      "type": "waiting",
+      "label": "Evidence submitted",
+      "sublabel": "awaiting network",
+      "lane": "waiting",
+      "col": 1,
+      "tag": "wait"
+    },
+    {
+      "id": "stale",
+      "type": "failure",
+      "label": "Not in books",
+      "sublabel": "refund landed, no entry",
+      "lane": "exceptions",
+      "col": 0,
+      "yOffset": 78,
+      "tag": "recoverable"
+    },
+    {
+      "id": "lost",
+      "type": "failure",
+      "label": "Dispute lost",
+      "sublabel": "funds + fee gone",
+      "lane": "terminal",
+      "col": 0,
+      "tag": "terminal"
+    },
+    {
+      "id": "closed",
+      "type": "failure",
+      "label": "Refund declined",
+      "sublabel": "outside policy",
+      "lane": "terminal",
+      "col": 1,
+      "tag": "terminal"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "chargeback",
+      "from": "reversed",
+      "to": "disputed",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight"
+    },
+    {
+      "id": "submit-evidence",
+      "from": "landed",
+      "to": "evidence",
+      "variant": "default",
+      "route": "drop"
+    },
+    {
+      "id": "books-missed",
+      "from": "reversed",
+      "to": "stale",
+      "variant": "security",
+      "fromSide": "left",
+      "toSide": "left",
+      "via": [
+        [
+          320,
+          157
+        ],
+        [
+          320,
+          385
+        ]
+      ]
+    },
+    {
+      "id": "catch-up",
+      "from": "stale",
+      "to": "reversed",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "top",
+      "via": [
+        [
+          20,
+          385
+        ],
+        [
+          20,
+          80
+        ],
+        [
+          402,
+          80
+        ]
+      ]
+    },
+    {
+      "id": "dispute-lost",
+      "from": "evidence",
+      "to": "closed",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight"
+    },
+    {
+      "id": "declined",
+      "from": "disputed",
+      "to": "lost",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": [
+        [
+          480,
+          336
+        ],
+        [
+          480,
+          432
+        ],
+        [
+          402,
+          432
+        ]
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Refund path",
+      "items": [
+        "Shopify owns the order status; Stripe owns the money movement",
+        "A refund nets out of a later payout — it is not a separate withdrawal",
+        "The money is done only when QuickBooks has the contra entry"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Waits",
+      "items": [
+        "A chargeback holds funds and the dispute fee immediately",
+        "Evidence submission waits on the card network, often weeks",
+        "Neither wait is terminal; the order stays open in the close"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Exits and recovery",
+      "items": [
+        "Lost dispute and declined refund are terminal",
+        "Refund landed but not booked is recoverable: post the entry",
+        "Stripe's original processing fee is never returned"
+      ]
+    }
+  ]
+}
