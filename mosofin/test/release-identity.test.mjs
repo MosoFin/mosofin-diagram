@@ -31,13 +31,6 @@ function writeValidDevelopmentFixture(root, overrides = {}) {
     '',
     'Raven uses manual ZIP installation: extract mosofin.zip into `~/.raven/workspace/skills`, which yields `~/.raven/workspace/skills/mosofin`; Raven is not an agent-switcher target.',
   ].join('\n');
-  const chinese = [
-    '![开发版本](https://img.shields.io/badge/version-2.13.0--dev.0-blue)',
-    '',
-    `当前开发版本：\`v${version}\``,
-    '',
-    'Raven 使用 ZIP 手动安装：将 mosofin.zip 解压到 `~/.raven/workspace/skills`，解压后会得到 `~/.raven/workspace/skills/mosofin`；Raven 不属于 Agent 切换器目标。',
-  ].join('\n');
   const files = {
     'mosofin/package.json': JSON.stringify({ version }),
     'mosofin/package-lock.json': JSON.stringify({ version, packages: { '': { version } } }),
@@ -58,12 +51,11 @@ function writeValidDevelopmentFixture(root, overrides = {}) {
     ].join('\n'),
     'README.md': english,
     'README_EN.md': english,
-    'README_ZH.md': chinese,
-    'scripts/start-template.html': 'development · 开发版 · [[MOSOFIN_VERSION]]',
-    'scripts/guide-template.html': 'development · 开发版 · [[MOSOFIN_VERSION]]',
-    'scripts/gallery-template.html': 'development · 开发版 · [[MOSOFIN_VERSION]]',
-    'docs/index.html': `<span>development · v${version} · 开发版 · 9/9 checks</span><p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
-    'docs/start.html': `<span>development · v${version} · 开发版</span><p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
+    'scripts/start-template.html': 'development · [[MOSOFIN_VERSION]]',
+    'scripts/guide-template.html': 'development · [[MOSOFIN_VERSION]]',
+    'scripts/gallery-template.html': 'development · [[MOSOFIN_VERSION]]',
+    'docs/index.html': `<span>development · v${version} · 9/9 checks</span><p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
+    'docs/start.html': `<span>development · v${version}</span><p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
     'ROADMAP.md': `The current development line is \`v${version}\`; it contains the work under Changelog Unreleased and is not a stable release.`,
   };
   for (const [relativePath, content] of Object.entries({ ...files, ...overrides })) {
@@ -79,13 +71,6 @@ function writeValidStableFixture(root, overrides = {}) {
     `Current stable version: \`v${version}\``,
     '',
     'Raven uses manual ZIP installation: extract mosofin.zip into `~/.raven/workspace/skills`, which yields `~/.raven/workspace/skills/mosofin`; Raven is not an agent-switcher target.',
-  ].join('\n');
-  const chinese = [
-    '![稳定版本](https://img.shields.io/badge/version-2.13.0-blue)',
-    '',
-    `当前稳定版本：\`v${version}\``,
-    '',
-    'Raven 使用 ZIP 手动安装：将 mosofin.zip 解压到 `~/.raven/workspace/skills`，解压后会得到 `~/.raven/workspace/skills/mosofin`；Raven 不属于 Agent 切换器目标。',
   ].join('\n');
   const files = {
     'mosofin/package.json': JSON.stringify({ version }),
@@ -103,12 +88,11 @@ function writeValidStableFixture(root, overrides = {}) {
     ].join('\n'),
     'README.md': english,
     'README_EN.md': english,
-    'README_ZH.md': chinese,
-    'scripts/start-template.html': 'stable · 稳定版 · [[MOSOFIN_VERSION]]',
-    'scripts/guide-template.html': 'stable · 稳定版 · [[MOSOFIN_VERSION]]',
-    'scripts/gallery-template.html': 'stable · 稳定版 · [[MOSOFIN_VERSION]]',
-    'docs/index.html': `<span>stable · v${version} · 稳定版 · 9/9 checks</span><p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
-    'docs/start.html': `<span>stable · v${version} · 稳定版</span><p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
+    'scripts/start-template.html': 'stable · [[MOSOFIN_VERSION]]',
+    'scripts/guide-template.html': 'stable · [[MOSOFIN_VERSION]]',
+    'scripts/gallery-template.html': 'stable · [[MOSOFIN_VERSION]]',
+    'docs/index.html': `<span>stable · v${version} · 9/9 checks</span><p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
+    'docs/start.html': `<span>stable · v${version}</span><p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>`,
     'ROADMAP.md': `The current stable version is \`v${version}\`.`,
   };
   for (const [relativePath, content] of Object.entries({ ...files, ...overrides })) {
@@ -180,7 +164,7 @@ test('package, lockfile, Skill metadata, escaped Shields badge, and public docs 
     ].join('\n');
     writeFile(fixture, 'README.md', staleEnglish);
     writeFile(fixture, 'README_EN.md', staleEnglish);
-    writeFile(fixture, 'README_ZH.md', '![Version](https://img.shields.io/badge/version-2.13.0-blue)\n\nMosofin 2.12 包含未发布能力。\n');
+    writeFile(fixture, 'README.md', '![Version](https://img.shields.io/badge/version-2.13.0-blue)\n\nMosofin 2.12 includes unpublished capability.\n');
     writeFile(fixture, 'docs/index.html', '<span>Agent Skill · v2.12.0</span>');
     writeFile(fixture, 'docs/start.html', '<span>Mosofin v2.12.0</span>');
 
@@ -200,7 +184,7 @@ test('landing proof receipt matches the current nine-check artifact contract', (
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'mosofin-release-identity-'));
   try {
     writeValidDevelopmentFixture(fixture, {
-      'docs/index.html': '<span>development · v2.13.0-dev.0 · 开发版 · 8/8 checks</span><p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>',
+      'docs/index.html': '<span>development · v2.13.0-dev.0 · 8/8 checks</span><p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>',
     });
 
     const result = runCheck(fixture);
@@ -216,9 +200,9 @@ test('landing rejects every stale N/N contract count even when 9/9 is also prese
   try {
     writeValidDevelopmentFixture(fixture, {
       'docs/index.html': [
-        '<span>development · v2.13.0-dev.0 · 开发版 · 9/9 checks</span>',
+        '<span>development · v2.13.0-dev.0 · 9/9 checks</span>',
         '<span>legacy receipt · 7/7 checks</span>',
-        '<p>Raven manual ZIP / ZIP 手动安装: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; 将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>',
+        '<p>Raven manual ZIP: extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin; not an agent-switcher target.</p>',
       ].join('\n'),
     });
 
@@ -235,7 +219,7 @@ test('Raven stays a truthful manual ZIP install and never becomes a generated ag
   try {
     writeValidDevelopmentFixture(fixture, {
       'docs/start.html': [
-        '<span>development · v2.13.0-dev.0 · 开发版</span>',
+        '<span>development · v2.13.0-dev.0</span>',
         '<button data-agent="raven">Raven</button>',
         '<pre>npx skills add MosoFin/mosofin-diagram --agent raven</pre>',
       ].join('\n'),
@@ -311,7 +295,7 @@ test('generated public-page templates keep a development marker and version plac
 
     const result = runCheck(fixture);
     assert.notEqual(result.status, 0);
-    assert.match(result.stderr, /scripts\/gallery-template\.html must use \[\[MOSOFIN_VERSION\]\] with development and 开发版 labels/);
+    assert.match(result.stderr, /scripts\/gallery-template\.html must use \[\[MOSOFIN_VERSION\]\] with development labels/);
   } finally {
     fs.rmSync(fixture, { recursive: true, force: true });
   }

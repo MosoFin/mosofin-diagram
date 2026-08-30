@@ -1,13 +1,42 @@
-# Built-in brand-mark catalogue — all 111 marks, plated
+# Built-in brand-mark catalogue — all 181 marks, plated
 
 Every mark in `mosofin/brand-marks/catalog.json` (compiled into `renderers/shared/generated-brand-marks.mjs`
 from Simple Icons 16.28.0), rendered here exactly as the viewer plates
 it: 16×16 white plate, rx 4, vendor path at `translate(3 3) scale(10/viewBox)`, `#cbd5e1` 0.8 frame.
 Files: `catalog/<id>.svg`.
 
-The skew is the point: **engineering** 18 · **data** 17 · **cloud** 13 · **framework** 13 · **ai** 13 · **business** 12 · **collaboration** 10 · **channel** 10 · **language** 5.
+The skew is the point: **payments** 24 · **engineering** 18 · **data** 17 · **banking** 15 · **cloud** 13 · **framework** 13 · **ai** 13 · **commerce** 12 · **operations** 12 · **books** 12 · **channel** 10 · **collaboration** 8 · **logistics** 5 · **language** 5 · **people** 4.
 Only the `business` row is finance-adjacent, and it holds no ledger, no bank, no payroll, no AP tool.
 See `business-subset.md` for the 16 candidate marks added from open-logos and the remaining gap.
+
+## payments (24)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `adyen` | Adyen | `#0ABF53` | https://www.adyen.com/press-and-media/presskit |
+| `afterpay` | Afterpay | `#B2FCE4` | https://www.afterpay.com/en-AU/business/resources/marketing/logos |
+| `alipay` | Alipay | `#1677FF` | https://global.alipay.com/docs/ac/website_hk/design |
+| `american-express` | American Express | `#2E77BC` | https://commons.wikimedia.org/wiki/File:American_Express_logo_(2018).svg |
+| `apple-pay` | Apple Pay | `#000000` | https://developer.apple.com/apple-pay/marketing |
+| `braintree` | Braintree | `#000000` | https://www.braintreepayments.com/press |
+| `dodo-payments` | Dodo Payments | `#C6FE1E` | https://dodopayments.com/brand |
+| `google-pay` | Google Pay | `#4285F4` | https://pay.google.com/intl/en_us/about/ |
+| `klarna` | Klarna | `#FFB3C7` | https://klarna.design |
+| `mastercard` | MasterCard | `#EB001B` | https://www.mastercard.com/brandcenter/us/en/download-artwork.html |
+| `mercado-pago` | Mercado Pago | `#00B1EA` | https://www.mercadopago.com |
+| `moneygram` | MoneyGram | `#DA291C` | https://moneygram.com |
+| `payoneer` | Payoneer | `#FF4800` | https://www.payoneer.com |
+| `paypal` | PayPal | `#002991` | https://www.paypal.com/us |
+| `paysafe` | Paysafe | `#5A28FF` | https://brand.paysafe.com |
+| `paytm` | Paytm | `#20336B` | https://paytm.com |
+| `picpay` | PicPay | `#21C25E` | https://www.picpay.com/site/sobre-nos |
+| `razorpay` | Razorpay | `#0C2451` | https://razorpay.com/newsroom/brand-assets/ |
+| `samsung-pay` | Samsung Pay | `#1428A0` | https://pay.samsung.com/developers/resource/brand |
+| `square` | Square | `#3E4348` | https://squareup.com |
+| `stripe` | Stripe | `#635BFF` | https://stripe.com/newsroom/information |
+| `visa` | Visa | `#1A1F71` | https://merchantsignageeu.visa.com/product.asp?dptID=696 |
+| `viva-wallet` | Viva Wallet | `#1F263A` | https://www.vivawallet.com/gb_en/press-center-gb |
+| `webmoney` | WebMoney | `#036CB5` | https://www.webmoney.ru/rus/developers/logos.shtml |
 
 ## engineering (18)
 
@@ -53,6 +82,26 @@ See `business-subset.md` for the 16 candidate marks added from open-logos and th
 | `redis` | Redis | `#FF4438` | https://redis.io/brand-guidelines |
 | `snowflake` | Snowflake | `#29B5E8` | https://www.snowflake.com/brand-guidelines/ |
 | `sqlite` | SQLite | `#003B57` | https://github.com/sqlite/sqlite/blob/43e862723ec680542ca6f608f9963c0993dd7324/art/sqlite370.eps |
+
+## banking (15)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `axis-bank` | Axis Bank | `#971A4D` | https://www.axisbank.com/shareholders-corner/shareholders-information/annual-reports |
+| `bank-of-america` | Bank of America | `#012169` | https://www.bankofamerica.com |
+| `caixabank` | CaixaBank | `#007EAE` | https://www.caixabank.es/deployedfiles/particulares/Estaticos/Imagenes/Geolocalizador_CXB.svg |
+| `chase` | Chase | `#117ACA` | https://commons.wikimedia.org/wiki/File:Chase_logo_2007.svg |
+| `commerzbank` | Commerzbank | `#FFCC33` | https://commons.wikimedia.org/wiki/Category:Commerzbank_logos |
+| `deutsche-bank` | Deutsche Bank | `#0018A8` | https://www.db.com |
+| `hdfc-bank` | HDFC Bank | `#004B8D` | https://www.hdfcsales.com |
+| `hsbc` | HSBC | `#DB0011` | https://www.hsbc.com |
+| `icici-bank` | ICICI Bank | `#AE282E` | https://www.icicibank.com/ms/aboutus/annual-reports/2022-23/icici/assets/images/home-page/logo.svg |
+| `monzo` | Monzo | `#14233C` | https://monzo.com/press/ |
+| `nubank` | Nubank | `#820AD1` | https://nubank.com.br/en/press/ |
+| `revolut` | Revolut | `#191C1F` | https://developer.revolut.com/docs/resources/marketing-assets-guidelines/marketing-guidelines |
+| `starling-bank` | Starling Bank | `#6935D3` | https://www.starlingbank.com/media/ |
+| `wells-fargo` | Wells Fargo | `#D71E28` | https://www.wellsfargo.com/about |
+| `wise` | Wise | `#9FE870` | https://wise.design/foundations/logo |
 
 ## cloud (13)
 
@@ -108,37 +157,56 @@ See `business-subset.md` for the 16 candidate marks added from open-logos and th
 | `qwen` | QWen | `#6950EF` | https://qwen.ai |
 | `replicate` | Replicate | `#000000` | https://replicate.com |
 
-## business (12)
+## commerce (12)
 
 | id | title | hex | source |
 |---|---|---|---|
-| `chase` | Chase | `#117ACA` | https://commons.wikimedia.org/wiki/File:Chase_logo_2007.svg |
-| `gusto` | Gusto | `#F45D48` | https://gusto.com |
+| `bigcommerce` | BigCommerce | `#121118` | https://www.bigcommerce.co.uk/press |
+| `ebay` | eBay | `#E53238` | https://go.developer.ebay.com/logos |
+| `etsy` | Etsy | `#F16521` | https://www.etsy.com/uk/press |
+| `payhip` | Payhip | `#5C6AC4` | https://payhip.com |
+| `prestashop` | PrestaShop | `#DF0067` | https://prestashop.com/brand-book |
+| `shopee` | Shopee | `#EE4D2D` | https://shopee.com |
+| `shopify` | Shopify | `#7AB55C` | https://www.shopify.com/brand-assets |
+| `shopware` | Shopware | `#189EFF` | https://www.shopware.com/en/press/press-material/ |
+| `squarespace` | Squarespace | `#000000` | https://www.squarespace.com/logo-guidelines |
+| `trusted-shops` | Trusted Shops | `#FFDC0F` | https://brand.trustedshops.com/d/dorIFVeUmcN9/corporate-design |
+| `wix` | Wix | `#0C6EFC` | https://www.wix.com/about/design-assets |
+| `woocommerce` | WooCommerce | `#96588A` | https://woocommerce.com/style-guide |
+
+## operations (12)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `civicrm` | CiviCRM | `#81C459` | https://civicrm.org/trademark |
+| `clickup` | ClickUp | `#7B68EE` | https://clickup.com/brand |
+| `dropbox` | Dropbox | `#0061FF` | https://www.dropbox.com/branding |
+| `google-drive` | Google Drive | `#4285F4` | https://developers.google.com/drive/web/branding |
+| `google-sheets` | Google Sheets | `#34A853` | https://sheets.google.com |
 | `hubspot` | HubSpot | `#FF7A59` | https://www.hubspot.com/style-guide |
 | `intercom` | Intercom | `#6AFDEF` | https://www.intercom.com/press |
-| `intuit` | Intuit | `#236CFF` | https://www.intuit.com |
-| `paypal` | PayPal | `#002991` | https://www.paypal.com/us |
-| `quickbooks` | QuickBooks | `#2CA01C` | https://design.intuit.com/quickbooks/brand |
-| `shopify` | Shopify | `#7AB55C` | https://www.shopify.com/brand-assets |
-| `stripe` | Stripe | `#635BFF` | https://stripe.com/newsroom/information |
-| `woocommerce` | WooCommerce | `#96588A` | https://woocommerce.com/style-guide |
+| `mailchimp` | MailChimp | `#FFE01B` | https://mailchimp.com/about/brand-assets |
+| `trello` | Trello | `#0052CC` | https://atlassian.design/resources/logo-library |
 | `wordpress` | WordPress | `#21759B` | https://wordpress.org/about/logos |
 | `zendesk` | Zendesk | `#03363D` | https://brandland.zendesk.com |
+| `zoom` | Zoom | `#0B5CFF` | https://brand.zoom.us/media-library/ |
 
-## collaboration (10)
+## books (12)
 
 | id | title | hex | source |
 |---|---|---|---|
-| `airtable` | Airtable | `#18BFFF` | https://airtable.com/newsroom |
-| `asana` | Asana | `#F06A6A` | https://asana.com/brand |
-| `discord` | Discord | `#5865F2` | https://discord.com/branding |
-| `figma` | Figma | `#F24E1E` | https://www.figma.com/using-the-figma-brand/ |
-| `jira` | Jira | `#0052CC` | https://atlassian.design/resources/logo-library |
-| `linear` | Linear | `#5E6AD2` | https://linear.app |
-| `miro` | Miro | `#050038` | https://miro.com |
-| `notion` | Notion | `#000000` | https://www.notion.so |
-| `trello` | Trello | `#0052CC` | https://atlassian.design/resources/logo-library |
-| `zoom` | Zoom | `#0B5CFF` | https://brand.zoom.us/media-library/ |
+| `erpnext` | ERPNext | `#0089FF` | https://github.com/frappe/erpnext/blob/924911e74317f95a59f29e9410d4f141020a0411/erpnext/public/images/erpnext-logo.svg |
+| `expensify` | Expensify | `#0185FF` | https://use.expensify.com/press-kit |
+| `intuit` | Intuit | `#236CFF` | https://www.intuit.com |
+| `invoice-ninja` | Invoice Ninja | `#000000` | https://github.com/invoiceninja/invoiceninja/blob/2bdb26dd06123a0426cc7a8da77fc8fce7e5a222/public/images/round_logo.png |
+| `myob` | MYOB | `#7B14EF` | https://www.myob.com |
+| `odoo` | Odoo | `#714B67` | https://www.odoo.com/page/brand-assets |
+| `quickbooks` | QuickBooks | `#2CA01C` | https://design.intuit.com/quickbooks/brand |
+| `sage` | Sage | `#00D639` | https://www.sage.com |
+| `sap` | SAP | `#0FAAFF` | https://www.sap.com |
+| `taxbuzz` | TaxBuzz | `#ED8B0B` | https://www.taxbuzz.com |
+| `xero` | Xero | `#13B5EA` | https://www.xero.com/uk/about/media/downloads |
+| `zoho` | Zoho | `#E42527` | https://www.zoho.com/branding |
 
 ## channel (10)
 
@@ -155,6 +223,29 @@ See `business-subset.md` for the 16 candidate marks added from open-logos and th
 | `x` | X | `#000000` | https://x.com |
 | `youtube` | YouTube | `#FF0000` | https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors |
 
+## collaboration (8)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `airtable` | Airtable | `#18BFFF` | https://airtable.com/newsroom |
+| `asana` | Asana | `#F06A6A` | https://asana.com/brand |
+| `discord` | Discord | `#5865F2` | https://discord.com/branding |
+| `figma` | Figma | `#F24E1E` | https://www.figma.com/using-the-figma-brand/ |
+| `jira` | Jira | `#0052CC` | https://atlassian.design/resources/logo-library |
+| `linear` | Linear | `#5E6AD2` | https://linear.app |
+| `miro` | Miro | `#050038` | https://miro.com |
+| `notion` | Notion | `#000000` | https://www.notion.so |
+
+## logistics (5)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `aftership` | AfterShip | `#FF6B2B` | https://www.aftership.com |
+| `dhl` | DHL | `#FFCC00` | https://www.dpdhl-brands.com/dhl/en/guides/design-basics/logo-and-claim.html |
+| `fedex` | FedEx | `#4D148C` | https://newsroom.fedex.com |
+| `ups` | UPS | `#150400` | https://www.ups.com |
+| `usps` | USPS | `#333366` | https://www.usps.com |
+
 ## language (5)
 
 | id | title | hex | source |
@@ -164,3 +255,12 @@ See `business-subset.md` for the 16 candidate marks added from open-logos and th
 | `python` | Python | `#3776AB` | https://www.python.org/community/logos/ |
 | `rust` | Rust | `#000000` | https://www.rust-lang.org |
 | `typescript` | TypeScript | `#3178C6` | https://www.typescriptlang.org/branding |
+
+## people (4)
+
+| id | title | hex | source |
+|---|---|---|---|
+| `adp` | ADP | `#D0271D` | https://www.adp.com |
+| `gusto` | Gusto | `#F45D48` | https://gusto.com |
+| `paychex` | Paychex | `#004B8D` | https://www.paychex.com |
+| `personio` | Personio | `#000000` | https://www.personio.com |

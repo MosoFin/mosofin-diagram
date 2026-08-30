@@ -36,8 +36,7 @@ them, or widen the viewBox using the emitted diagnostic.
 Choose one primary authored language. An explicit user choice wins; otherwise
 use the language of the request, or the conversation's dominant language when
 the request itself is language-neutral. Separately choose the Viewer locale.
-For supported languages, always write the matching `meta.locale`: `"en"` for
-English or `"zh-CN"` for Simplified Chinese. The renderer consumes the authored
+Always write `meta.locale`: `"en"`. The renderer consumes the authored
 locale without inferring language from diagram strings. Documents that omit it
 remain valid and default to English.
 
@@ -50,13 +49,12 @@ guided views, legend label overrides, and cards. A bilingual diagram still
 chooses one primary locale for the Viewer; follow an explicit primary-language
 request, then prompt order or conversation dominance.
 
-For a requested language outside `en` and `zh-CN`, do not write an unsupported
+For a requested language other than English, do not write an unsupported
 locale. Keep every reader-facing authored string in the requested language,
 omit `meta.locale` so the renderer safely uses English, and explicitly tell the
 user that fixed Viewer UI and `<html lang>` remain English and the artifact is
 not fully localized. The fallback applies only to renderer-owned surfaces; it
-never permits authored copy to fall back to English. Do not silently substitute
-`zh-CN` for another language or Chinese locale.
+never permits authored copy to fall back to English.
 
 Keep exact product names, code identifiers, commands, protocols, API paths, and
 environment names intact. Those terms may remain English inside localized copy,

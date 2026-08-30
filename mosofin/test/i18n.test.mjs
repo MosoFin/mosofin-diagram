@@ -54,9 +54,7 @@ function authoredExample(type, locale) {
   let authoredIndex = 0;
   const nextAuthoredText = () => {
     authoredIndex += 1;
-    const value = locale === 'zh-CN'
-      ? `文案${String(authoredIndex).padStart(2, '0')}`
-      : `Copy${String(authoredIndex).padStart(2, '0')}`;
+    const value = `Copy${String(authoredIndex).padStart(2, '0')}`;
     authored.push(value);
     return value;
   };
@@ -133,34 +131,31 @@ async function loadArtifact(browser, artifactPath) {
   return sessionId;
 }
 
-test('zh-CN localizes renderer-owned output across all five modes without translating authored content', () => {
-  assert.deepEqual(SUPPORTED_LOCALES, ['en', 'zh-CN']);
+test('the renderer catalog is English-only', () => {
+  assert.deepEqual(SUPPORTED_LOCALES, ['en']);
   for (const type of Object.keys(EXAMPLES)) {
     const document = example(type);
     const authoredTitle = document.meta.title;
-    document.meta.locale = 'zh-CN';
+    document.meta.locale = 'en';
     delete document.meta.subtitle;
 
     const result = run(type, document);
     assert.equal(result.status, 0, `${type}: ${result.stderr || result.stdout}`);
-    assert.match(result.html, /^<!DOCTYPE html>\n<html lang="zh-CN"/);
-    assert.match(result.html, /<svg\b[^>]*\blang="zh-CN"/);
-    assert.ok(result.html.includes(`<title>${authoredTitle}</title>`), `${type}: authored title changed`);
+    assert.match(result.html, /^<!DOCTYPE html>\n<html lang="en"/);
+    assert.match(result.html, /<svg\b[^>]*\blang="en"/);
+    assert.ok(result.html.includes(`<title>${authoredTitle} Diagram</title>`), `${type}: authored title changed`);
     assert.ok(result.html.includes(`<h1>${authoredTitle}</h1>`), `${type}: authored heading changed`);
-    assert.match(result.html, /<text\b[^>]*>\u56fe\u4f8b<\/text>/);
-    assert.match(result.html, /aria-label="\u805a\u7126/);
-    assert.match(result.html, new RegExp(`<desc id="mosofin-diagram-description">\u7531 Mosofin \u751f\u6210\u7684`));
-    assert.match(result.html, /"locale":"zh-CN"/);
-    assert.match(result.html, />\u5bfc\u51fa\u56fe\u8868</);
+    assert.match(result.html, /<text\b[^>]*>Legend<\/text>/);
+    assert.match(result.html, /aria-label="Focus /);
+    assert.match(result.html, /"locale":"en"/);
+    assert.match(result.html, />Export diagram</);
     assert.doesNotMatch(result.html, /\{\{i18n:/);
   }
 });
 
-test('explicit en and zh-CN preserve complete authored field inventories across all five modes', () => {
+test('explicit en preserves complete authored field inventories across all five modes', () => {
   for (const type of Object.keys(EXAMPLES)) {
     const english = authoredExample(type, 'en');
-    const chinese = authoredExample(type, 'zh-CN');
-    assert.equal(english.authored.length, chinese.authored.length, `${type}: authored shapes differ`);
     assert.ok(english.authored.length >= 10, `${type}: authored inventory is unexpectedly small`);
     if (type === 'dataflow') {
       assert.ok(
@@ -175,31 +170,24 @@ test('explicit en and zh-CN preserve complete authored field inventories across 
       );
     }
 
-    for (const candidate of [english, chinese]) {
-      const locale = candidate.document.meta.locale;
-      const result = run(type, candidate.document);
-      assert.equal(result.status, 0, `${type}/${locale}: ${result.stderr || result.stdout}`);
-      assert.match(result.html, new RegExp(`^<!DOCTYPE html>\\n<html lang="${locale}"`));
-      assert.match(result.html, new RegExp(`<svg\\b[^>]*\\blang="${locale}"`));
-      assert.match(result.html, new RegExp(`"locale":"${locale}"`));
-      for (const authoredText of candidate.authored) {
-        assert.ok(result.html.includes(authoredText), `${type}/${locale}: lost authored text ${authoredText}`);
-      }
-      if (locale === 'zh-CN') {
-        assert.ok(result.html.includes(`<title>${candidate.document.meta.title}</title>`), type);
-        assert.match(result.html, />导出图表</);
-      } else {
-        assert.ok(result.html.includes(`<title>${candidate.document.meta.title} Diagram</title>`), type);
-        assert.match(result.html, />Export diagram</);
-      }
+    const locale = english.document.meta.locale;
+    const result = run(type, english.document);
+    assert.equal(result.status, 0, `${type}/${locale}: ${result.stderr || result.stdout}`);
+    assert.match(result.html, new RegExp(`^<!DOCTYPE html>\\n<html lang="${locale}"`));
+    assert.match(result.html, new RegExp(`<svg\\b[^>]*\\blang="${locale}"`));
+    assert.match(result.html, new RegExp(`"locale":"${locale}"`));
+    for (const authoredText of english.authored) {
+      assert.ok(result.html.includes(authoredText), `${type}/${locale}: lost authored text ${authoredText}`);
     }
+    assert.ok(result.html.includes(`<title>${english.document.meta.title} Diagram</title>`), type);
+    assert.match(result.html, />Export diagram</);
   }
 });
 
 test('omitted locale preserves non-English authored content and the English Viewer contract in all five modes', () => {
   for (const type of Object.keys(EXAMPLES)) {
     const document = example(type);
-    const authoredTitle = `作者内容-${type}`;
+    const authoredTitle = `Authored-${type}`;
     document.meta.title = authoredTitle;
     delete document.meta.locale;
     delete document.meta.subtitle;
@@ -217,7 +205,7 @@ test('omitted locale preserves non-English authored content and the English View
 });
 
 test('unsupported locale values fail schema validation in every mode', () => {
-  for (const locale of ['fr', 'zh-HK']) {
+  for (const locale of ['fr', 'zh-CN', 'zh-HK']) {
     for (const type of Object.keys(EXAMPLES)) {
       const document = example(type);
       document.meta.locale = locale;
@@ -230,15 +218,15 @@ test('unsupported locale values fail schema validation in every mode', () => {
   }
 });
 
-test('real Chrome keeps zh-CN Finder, Route, Export, and accessibility UI localized in all five modes', {
+test('real Chrome keeps English Finder, Route, Export, and accessibility UI in all five modes', {
   skip: chromePath ? false : 'Set MOSOFIN_CHROME to run the real browser localization regression.',
 }, async () => {
   const browser = new ChromeVisualBrowser(chromePath);
   try {
     for (const type of Object.keys(EXAMPLES)) {
       const document = example(type);
-      document.meta.locale = 'zh-CN';
-      document.meta.title = `浏览器本地化-${type}`;
+      document.meta.locale = 'en';
+      document.meta.title = `Browser localization-${type}`;
       const result = run(type, document);
       assert.equal(result.status, 0, `${type}: ${result.stderr || result.stdout}`);
 
@@ -289,27 +277,27 @@ test('real Chrome keeps zh-CN Finder, Route, Export, and accessibility UI locali
         };
       })()`);
 
-      assert.equal(state.htmlLang, 'zh-CN', type);
-      assert.equal(state.svgLang, 'zh-CN', type);
-      assert.equal(state.toolbarLabel, '图表视图控制', type);
+      assert.equal(state.htmlLang, 'en', type);
+      assert.equal(state.svgLang, 'en', type);
+      assert.equal(state.toolbarLabel, 'Diagram view controls', type);
       assert.deepEqual(state.finder, {
         hidden: false,
-        title: '查找节点',
-        searchLabel: '搜索图表节点',
+        title: 'Find a node',
+        searchLabel: 'Search diagram nodes',
       }, type);
       assert.deepEqual(state.route, {
         hidden: false,
-        title: '选择起点节点',
-        label: '清除已追踪路径',
+        title: 'Choose a start node',
+        label: 'Clear traced route',
       }, type);
       assert.equal(state.exportMenuOpen, true, type);
-      assert.equal(state.exportLabel, '导出图表', type);
-      assert.equal(state.exportMenuLabel, '导出', type);
-      assert.match(state.exportMenuText, /分享卡片/, type);
+      assert.equal(state.exportLabel, 'Export diagram', type);
+      assert.equal(state.exportMenuLabel, 'Export', type);
+      assert.match(state.exportMenuText, /Share Card/, type);
       assert.deepEqual(state.presetBadges, {
-        'signal-flow': { header: '信号流', plate: 'none' },
-        blueprint: { header: '蓝图 / 修订 01', plate: '' },
-        editorial: { header: '编辑风格 / 现场笔记', plate: 'MOSOFIN / 图版 04' },
+        'signal-flow': { header: 'SIGNAL FLOW', plate: 'none' },
+        blueprint: { header: 'BLUEPRINT / REV 01', plate: '' },
+        editorial: { header: 'EDITORIAL / FIELD NOTE', plate: 'MOSOFIN / PLATE 04' },
       }, type);
 
       const shareCardFailure = await evaluate(browser, sessionId, `(async function () {
@@ -326,7 +314,7 @@ test('real Chrome keeps zh-CN Finder, Route, Export, and accessibility UI locali
       })()`, true);
       assert.deepEqual(shareCardFailure, {
         rejected: true,
-        message: '无法为分享卡片创建二维画布上下文',
+        message: '2D canvas context unavailable for Share Card',
       }, type);
 
       const visual = spawnSync(process.execPath, [cli, 'visual-check', result.output, '--json'], {
@@ -379,34 +367,25 @@ test('every supported catalog is complete and preserves interpolation variables'
   }
 });
 
-test('runtime labels stay localized after composition', () => {
-  assert.equal(translateMessage('zh-CN', 'viewer.kind.backend'), '支付');
-  assert.equal(translateMessage('zh-CN', 'viewer.kind.decision'), '核对');
-  assert.equal(translateMessage('zh-CN', 'viewer.passport.relationship.connectsFrom'), '连接自');
-  assert.equal(translateMessage('zh-CN', 'viewer.nav.level.auto'), '自动');
-
-  const zhHops = translateCount('zh-CN', 'viewer.route.hop', 2);
-  assert.equal(
-    translateMessage('zh-CN', 'viewer.finder.result.routeTarget', { label: '终点', links: zhHops }),
-    '选择终点作为路径终点，2 跳',
-  );
+test('runtime labels stay English after composition', () => {
+  assert.equal(translateMessage('en', 'viewer.kind.backend'), 'Payments');
+  assert.equal(translateMessage('en', 'viewer.kind.decision'), 'Tie-out');
   const enHop = translateCount('en', 'viewer.route.overview.hop', 1);
   const enNode = translateCount('en', 'viewer.route.overview.node', 2);
   assert.equal(
     translateMessage('en', 'viewer.route.overview.status', { nodes: enNode, hops: enHop }),
     '2 nodes · 1 directed hop · shortest authored route',
   );
-
 });
 
 test('Share Card and export failures use catalog messages instead of fixed English', () => {
   assert.equal(
-    translateCount('zh-CN', 'viewer.export.card.routeSummary', 2, { source: '来源', target: '目标' }),
-    '路径：来源 → 目标 · 2 个有向跳转',
+    translateCount('en', 'viewer.export.card.routeSummary', 2, { source: 'Source', target: 'Target' }),
+    'Route: Source → Target · 2 directed hops',
   );
   assert.equal(
-    translateMessage('zh-CN', 'viewer.export.error.toBlobNull', { label: '分享卡片' }),
-    '分享卡片的 canvas.toBlob 未返回数据',
+    translateMessage('en', 'viewer.export.error.toBlobNull', { label: 'Share Card' }),
+    'canvas.toBlob returned no data for Share Card',
   );
 
   const template = fs.readFileSync(templatePath, 'utf8');

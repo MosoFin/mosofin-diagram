@@ -117,7 +117,7 @@ function serializeScriptJson(value) {
 }
 
 const TEMPLATE_PLACEHOLDERS = [
-  '<html lang="en" data-theme="dark" data-preset="[VISUAL PRESET]">',
+  '<html lang="en" data-theme="dark" data-preset="[VISUAL PRESET]" data-node-style="[NODE STYLE]">',
   '<title>[PROJECT NAME] Architecture Diagram</title>',
   '<h1>[PROJECT NAME] Architecture</h1>',
   GUIDED_VIEWS_PLACEHOLDER,
@@ -130,6 +130,7 @@ export function applyTemplate(template, {
   cards,
   locale,
   visualPreset = 'classic',
+  nodeStyle = 'box',
   guidedViews = [],
   sourceEvidence = null,
 }) {
@@ -168,7 +169,7 @@ export function applyTemplate(template, {
     ? localizedTemplate.replace(I18N_PLACEHOLDER, () => i18nData)
     : localizedTemplate.replace(GUIDED_VIEWS_PLACEHOLDER, () => `${i18nData}\n    ${GUIDED_VIEWS_PLACEHOLDER}`);
   return templateWithI18n
-    .replace(TEMPLATE_PLACEHOLDERS[0], () => `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}">`)
+    .replace(TEMPLATE_PLACEHOLDERS[0], () => `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}">`)
     .replace(TEMPLATE_PLACEHOLDERS[1], () => `<title>${esc(translateMessage(resolvedLocale, 'page.title', { title }))}</title>`)
     .replace(TEMPLATE_PLACEHOLDERS[2], () => `<h1>${esc(title)}</h1>`)
     .replace(SUBTITLE_SLOT_RE, (_match, indent, newline = '') => renderedSubtitle

@@ -314,7 +314,7 @@ test('strict per-renderer schemas reject malformed legend contracts with path-pr
 });
 
 test('measured legends fail explicitly instead of wrapping into diagram content', () => {
-  const label = '界'.repeat(40);
+  const label = '한'.repeat(40);
   const entries = Object.fromEntries(CATALOGS.workflow.map((kind) => [kind, { label }]));
   const failure = validateFailure('workflow', withLegend('workflow', { mode: 'all', entries }));
   const diagnostic = failure.diagnostics.find((entry) => entry.code === 'legend/vertical-overflow');
@@ -358,7 +358,7 @@ test('explicit Architecture viewBox rejects legend title rectangles that overlap
 
 test('a single unfit label fails with a path-specific width diagnostic', () => {
   const failure = validateFailure('architecture', withLegend('architecture', {
-    entries: { frontend: { label: '界'.repeat(80) } },
+    entries: { frontend: { label: '한'.repeat(80) } },
   }));
   const diagnostic = failure.diagnostics.find((entry) => entry.code === 'legend/label-too-wide');
   assert.ok(diagnostic, JSON.stringify(failure.diagnostics));
@@ -370,12 +370,12 @@ test('measured legend rows share baselines and stay within the viewBox for local
   const doc = withLegend('lifecycle', {
     mode: 'all',
     entries: {
-      start: { label: '开始 / Start of the complete lifecycle' },
-      active: { label: '正在执行 active processing' },
-      waiting: { label: '等待人工输入' },
+      start: { label: 'Opened / Start of the complete lifecycle' },
+      active: { label: 'In-flight active processing' },
+      waiting: { label: 'Awaiting operator input' },
       decision: { label: 'Decision gate with deterministic wrapping' },
-      success: { label: '成功完成' },
-      failure: { label: 'Failure / 失败' },
+      success: { label: 'Booked complete' },
+      failure: { label: 'Failure / break' },
       neutral: { label: 'Neutral state' },
       external: { label: 'External system' },
     },

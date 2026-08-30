@@ -101,6 +101,6 @@ document would stamp it.
 
 *(Verbatim sources are in this folder: `source-docs/finance-onboarding.md` (the interview, the
 closed source list, the intent → diagram-type table and the "Never" rules), `source-docs/finance-brief.md`
-(the Northline fixture), and `source-docs/scenarios.mjs` (all 19 recipe questions and prompts, en + zh).
+(the Northline fixture), and `source-docs/scenarios.mjs` (all 19 recipe questions and prompts).
 Read the interview file in full before choosing words — its intent table is the product's own
 mapping from a finance question to a diagram type.)*

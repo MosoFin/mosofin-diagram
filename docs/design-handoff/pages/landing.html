@@ -247,7 +247,7 @@
           </a>
           <a class="text-link" href="#how" data-i18n="hero-works">See how it works</a>
         </div>
-        <p class="fineprint" data-i18n="hero-fine">A free, MIT-licensed skill. Development · 开发版 · v1.0.0-dev.0 · every artifact carries a 9/9 receipt.</p>
+        <p class="fineprint" data-i18n="hero-fine">A free, MIT-licensed skill. Development · v1.0.0-dev.0 · every artifact carries a 9/9 receipt.</p>
       </div>
     </div>
   </section>
@@ -492,12 +492,6 @@
           <p class="install-cmt"># Install globally for Cursor</p>
           <p class="install-cmd">npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent cursor --global --copy --yes</p>
         </div>
-        <div id="code-zh" style="display:none">
-          <p class="install-cmt"># 全局安装到 Claude Code</p>
-          <p class="install-cmd">npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent claude-code --global --copy --yes</p>
-          <p class="install-cmt"># 全局安装到 Cursor</p>
-          <p class="install-cmd">npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent cursor --global --copy --yes</p>
-        </div>
       </div>
       <p class="kicker fade-up" style="margin-top:2.25rem" data-i18n="kbd-label">Keyboard shortcuts</p>
       <div class="keys fade-up">
@@ -539,7 +533,7 @@
       </details>
       <details>
         <summary data-i18n="faq4-q">Which agents does it support?</summary>
-        <p data-i18n="faq4-a">Cursor, Claude Code, Codex CLI, and OpenCode. Raven is not a switcher target; for a manual ZIP install, extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin. ZIP 手动安装：将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin.</p>
+        <p data-i18n="faq4-a">Cursor, Claude Code, Codex CLI, and OpenCode. Raven is not a switcher target; for a manual ZIP install, extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.</p>
       </details>
     </div>
   </section>
@@ -593,7 +587,7 @@
       'hero-h1':'See how your business<br>actually runs — <em>in one diagram.</em>',
       'hero-sub':'Describe the business once — the CRM, the storefront, the supply chain, payments, the bank, the books — then ask one question. MosoFin-diagram generates a checked, explorable HTML map where every node names the system that owns it, and no number is ever invented. Free, open source, and it runs in whichever coding agent you already use.',
       'hero-start':'Get started','hero-works':'See how it works',
-      'hero-fine':'A free, MIT-licensed skill. Development · 开发版 · v1.0.0-dev.0 · every artifact carries a 9/9 receipt.',
+      'hero-fine':'A free, MIT-licensed skill. Development · v1.0.0-dev.0 · every artifact carries a 9/9 receipt.',
       'demo-kicker':'See the diagram','demo-h':'A live map of demand to books.',
       'demo-p':'The same HTML file you would forward to a controller. Generated, checked, and interactive — not a marketing mock.',
       'proof-live':'Live proof','proof-open':'Open diagram',
@@ -636,70 +630,13 @@
       'faq1-q':'Is this the same product as mosofin.com?','faq1-a':'No. MosoFin is a read-only financial data workspace in Claude. MosoFin-diagram is a free, open-source skill that draws a map of how the business runs. They share a name and a team. They do not share data.',
       'faq2-q':'Does it invent numbers?','faq2-a':'No. If you did not supply an amount, it does not appear. The skill never calls QuickBooks, Stripe, Shopify, an ERP, or a bank.',
       'faq3-q':'What do I get back?','faq3-a':'One self-contained HTML file. Zero dependencies, no server, no runtime. Open it in any browser, forward it, or export PNG, JPEG, WebP, SVG, or WebM.',
-      'faq4-q':'Which agents does it support?','faq4-a':'Cursor, Claude Code, Codex CLI, and OpenCode. Raven is not a switcher target; for a manual ZIP install, extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin. ZIP 手动安装：将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin.',
+      'faq4-q':'Which agents does it support?','faq4-a':'Cursor, Claude Code, Codex CLI, and OpenCode. Raven is not a switcher target; for a manual ZIP install, extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.',
       'cta-kicker':'Get started','cta-h':'Describe the business once. Share the map.',
       'cta-sub':'One command installs MosoFin-diagram — free and MIT-licensed — for Cursor, Claude Code, Codex, or OpenCode — and the map of how your business runs is one question away.',
       'cta-install':'Get started',
       'foot-product':'MosoFin-diagram','foot-project':'Project','foot-mosofin':'MosoFin',
       'footer-made':'mosofin.com ↗','footer-changelog':'Changelog','footer-license':'License',
       'footer-meta':'v1.0.0-dev.0 · MIT License · a fork of <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">Archify</a>'
-    },
-    zh: {
-      'nav-guide':'工作原理','nav-gallery':'示例','nav-start':'开始使用','nav-logos':'标识',
-      'hero-kicker':'面向财务主管、记账员与创始人',
-      'hero-h1':'看清你的业务<br>究竟如何运转——<em>就在一张图里。</em>',
-      'hero-sub':'先描述一次业务——CRM、店铺、供应链、支付、银行、账本——再提出一个问题。该技能生成经过检查、可探索的 HTML 业务全景图，每个节点都标明权威系统，绝不编造数字。完全免费开源，可在你已经使用的任意编码 agent 中运行。',
-      'hero-start':'开始使用','hero-works':'了解工作原理',
-      'hero-fine':'免费 MIT 许可技能。development · 开发版 · v1.0.0-dev.0 · 每个成品都带 9/9 凭证。',
-      'demo-kicker':'查看这张图','demo-h':'一张从需求到账本的实时地图。',
-      'demo-p':'就是你会转发给财务主管的那份 HTML。自动生成、检查通过、可交互——不是营销稿。',
-      'proof-live':'实时成品','proof-open':'打开完整图',
-      'proof-hint':'钉住一个精确的故事时刻，复制稳定链接，让别人打开同一个作者节点。',
-      'what-kicker':'什么是 MosoFin-diagram？','what-h':'一张经过检查的业务运转地图。',
-      'what-p':'MosoFin-diagram 是免费、MIT 许可的 agent 技能。一次关于运营系统的简短访谈，会变成一份独立 HTML 图。每个节点标明事实归属的系统。渲染器从不编造金额、数量或人数。',
-      'what-s1-h':'每项事实只有一个权威系统','what-s2-h':'不编造数字',
-      'f1-p':'订单、现金和账本在图中各有且只有一个归属。两个系统争夺同一个数字是简报失败，而不是一张图——Mosofin 会停下来请你选择。',
-      'f2-p':'你没有提供的金额、数量或人数，图上就不会出现。渲染器从不调用 QuickBooks、Stripe、Shopify、ERP 或银行，也从不在差异非零时把对账标绿。',
-      'chip-html':'一份独立 HTML 文件','chip-mit':'MIT · 无需账号','chip-checks':'9/9 项验证','chip-types':'五种图型','chip-marks':'181 个品牌标识',
-      'how-kicker':'工作原理','how-h':'四步，从添加到一张可转发的图。',
-      'qs-body':'同一份经过检查的 Skill 可用于 Cursor、Claude Code、Codex 和 OpenCode，切换器会生成准确命令；Raven 采用 ZIP 手动安装：将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin。',
-      'step1-k':'第 1 步','step1-h':'添加技能','step1-p':'运行 <code>npx skills add MosoFin/mosofin-diagram -g</code>，或打开<a href="start.html?agent=cursor&amp;type=architecture">开始使用</a>页，获取准确的 Cursor、Codex、Claude Code 或 OpenCode 命令。Raven 不属于切换器目标；请将 mosofin.zip 解压到 <code>~/.raven/workspace/skills</code>，解压后会得到 <code>~/.raven/workspace/skills/mosofin</code>。',
-      'step2-k':'第 2 步','step2-h':'描述业务','step2-p':'一次简短访谈：业务做什么、涉及哪些主体、每个领域由哪个系统说了算——CRM、电商、供应链、支付、银行、账本。答案会保存为简报，只需回答一次。',
-      'step3-k':'第 3 步','step3-h':'提出一个问题','step3-p':'「画出我们的业务如何运转。」「为什么 Shopify 和 QuickBooks 对不上？」「15 号能发出工资吗？」Mosofin 选择图型、完成检查，并交回一个可在对话中继续迭代的 HTML 文件。',
-      'step4-k':'第 4 步','step4-h':'分享这张图','step4-p':'转发 HTML、导出分享卡，或走一遍引导视图。文件是独立的——无需账号、无需服务器、不编造数字。',
-      'slides-status':'第 {n} 步，共 4 步',
-      'who-kicker':'给谁用','who-h':'给你经营的公司，或你服务的客户。','who-p':'读者是财务主管、记账员、创始人或尽调分析师——不是工程师。他们打开一份 HTML，需要信得过这张图。',
-      'who-a-k':'经营者与创始人','who-a-h':'看清你真正在跑的系统','who-a-p':'把 CRM、电商、供应、支付、银行和账本放在一页上，每个节点标明权威系统。',
-      'who-a-1':'跨主体的一张运营全景','who-a-2':'共享系统与按主体分账','who-a-3':'可转发的文件，而不是看板登录',
-      'who-b-k':'财务主管与记账员','who-b-h':'一张敢签字的图','who-b-p':'走完关账、打款对账或订单路径，不编造金额。差额不是零，图就不会假装是零。',
-      'who-b-1':'月结关账与异常泳道','who-b-2':'收入走步、打款对账、现金跑道','who-b-3':'九项检查与 SHA-256 凭证',
-      'cap-kicker':'描述、检查、分享','cap-h':'让系统更容易复核、解释和信任。',
-      'f3-h':'交付前九项检查','f3-p':'每个成品都通过结构、几何、标签间距、交叉与容纳检查。showcase 通过意味着零错误零警告，并附 SHA-256 凭证。','f3-tag':'已验证 · 有凭证',
-      'f6-h':'对话式迭代','f6-p':'「加上批发发票路径」「把 Chase 1002 设为现金边界」「高亮退款路线」——用自然语言精调，无需学习任何图形编辑器。','f6-tag':'对话驱动',
-      'f7-h':'检查并播放真实路径','f7-p':'Route Journey 始终保留完整作者路径，可逐站检查，也可沿每条精确入向关系播放一次由读者控制的有限旅程。','f7-tag':'检查 · 播放 · 暂停',
-      'cap-q1':'「画出我们的业务如何运转。」','cap-q2':'「为什么 Shopify 和 QuickBooks 对不上？」','cap-q3':'「把关账走到差额为零。」',
-      'types-kicker':'五种看业务的方式','types-h2':'先选问题，再定图型。',
-      'types-body':'整个运营系统、一条流程、一笔订单、一次对账，或一个对象的状态——描述需求，Mosofin 自动选择最合适的可视化语言。下面每张图都是真实交付的成品。',
-      'types-more':'浏览全部九个已验证演示 →',
-      'arch-h':'架构图','arch-p':'一页看懂整个业务：CRM、电商、供应链、库存、支付、支出、薪酬、银行与账本——每个节点标明权威系统，并在主体分离处划出边界。',
-      'arch-li1':'业务全景图','arch-li2':'资金地图 · 订单到现金','arch-li3':'谁拥有哪个系统','arch-li4':'共享系统与按主体分账',
-      'wf-h':'工作流图','wf-p':'按团队或系统分泳道：月结关账、付款批次、审批链——每次交接具名，每道能叫停工作的关卡清晰，并用异常泳道表示差异。',
-      'seq-h':'时序图','seq-p':'按时间追踪一笔订单、发票或打款经过的每个系统——扣款、打款、银行流水，以及账本需匹配的三项事实。',
-      'flow-h':'数据流图','flow-p':'收入对账走步、打款对账与现金跑道：从毛到净、冲减与代收项、时间性差异，以及必须为零的未解释差额。',
-      'life-h':'生命周期图','life-p':'退款、拒付、发票与订阅的状态——什么在处理中、什么在等银行、什么已入账、什么是差异。',
-      'install-kicker':'开始使用','install-h':'安装技能，提出问题。','install-p':'下面的命令对每个支持的 agent 都是同一份 Skill。Raven 保持为切换器之外的 ZIP 手动安装。',
-      'kbd-label':'键盘快捷键','kbd-guide':'图表指南','kbd-theme':'切换主题','kbd-find':'查找节点 / 路径端点','kbd-route':'探查、检查并播放路径','kbd-radar':'语义雷达','kbd-lens':'对比语义类型','kbd-present':'演示舞台','kbd-export':'打开导出菜单','kbd-focus':'聚焦节点','kbd-views':'引导视图','kbd-play':'播放故事','kbd-zoom':'阅读层级 / 复位','kbd-nav':'菜单导航','kbd-close':'关闭菜单',
-      'faq-kicker':'常见问题','faq-h':'安装前人们会问的事。',
-      'faq1-q':'这和 mosofin.com 是同一个产品吗？','faq1-a':'不是。MosoFin 是 Claude 里只读的财务数据工作区。MosoFin-diagram 是免费开源技能，用来画出业务如何运转。它们共用名字和团队，不共用数据。',
-      'faq2-q':'会编造数字吗？','faq2-a':'不会。你没有提供的金额不会出现。该技能从不调用 QuickBooks、Stripe、Shopify、ERP 或银行。',
-      'faq3-q':'我得到什么？','faq3-a':'一份独立 HTML 文件。零依赖、无需服务器或运行时。任意浏览器打开，可转发，也可导出 PNG、JPEG、WebP、SVG 或 WebM。',
-      'faq4-q':'支持哪些 agent？','faq4-a':'Cursor、Claude Code、Codex CLI 与 OpenCode。Raven 不属于切换器目标；ZIP 手动安装：将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin。Raven is not a switcher target; for a manual ZIP install, extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.',
-      'cta-kicker':'开始使用','cta-h':'描述一次业务。分享这张图。',
-      'cta-sub':'一条命令即可为 Cursor、Claude Code、Codex 或 OpenCode 安装 MosoFin-diagram——完全免费，MIT 许可——你的业务全景图，只差一个问题。',
-      'cta-install':'开始使用',
-      'foot-product':'MosoFin-diagram','foot-project':'项目','foot-mosofin':'MosoFin',
-      'footer-made':'mosofin.com ↗','footer-changelog':'更新日志','footer-license':'许可证',
-      'footer-meta':'v1.0.0-dev.0 · MIT 许可证 · 派生自 <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">Archify</a>'
     }
   };
 
@@ -707,26 +644,26 @@
     signal: {
       artifact: 'gallery/artifacts/business-operating-map.architecture.html',
       view: 'order-to-cash',
-      iframeTitle: { en: 'Business Operating Map live Mosofin proof', zh: '业务全景图 Mosofin 实时成品' },
-      name: { en: 'Business Operating Map', zh: '业务全景图' },
-      meta: { en: 'Architecture · Classic · 13 nodes · 14 edges', zh: '架构图 · Classic · 13 节点 · 14 条关系' },
-      title: { en: 'How the business runs — demand to books across three entities', zh: '业务如何运转——从需求到账本，横跨三个主体' }
+      iframeTitle: 'Business Operating Map live Mosofin proof',
+      name: 'Business Operating Map',
+      meta: 'Architecture · Classic · 13 nodes · 14 edges',
+      title: 'How the business runs — demand to books across three entities'
     },
     blueprint: {
       artifact: 'gallery/artifacts/northline-close.workflow.html',
       view: 'reconcile-and-review',
-      iframeTitle: { en: 'Month-End Close live Mosofin proof', zh: '月结关账 Mosofin 实时成品' },
-      name: { en: 'Month-End Close', zh: '月结关账' },
-      meta: { en: 'Workflow · Classic · 9 nodes · 9 edges', zh: '工作流 · Classic · 9 节点 · 9 条关系' },
-      title: { en: 'Month-End Close — sources, a zero-difference gate, and the period lock', zh: '月结关账——数据来源、零差异对账门与期间锁定' }
+      iframeTitle: 'Month-End Close live Mosofin proof',
+      name: 'Month-End Close',
+      meta: 'Workflow · Classic · 9 nodes · 9 edges',
+      title: 'Month-End Close — sources, a zero-difference gate, and the period lock'
     },
     classic: {
       artifact: 'gallery/artifacts/northline-order-path.sequence.html',
       view: 'books-catch-up',
-      iframeTitle: { en: 'One DTC Order live Mosofin proof', zh: '一笔 DTC 订单 Mosofin 实时成品' },
-      name: { en: 'One Order to the Books', zh: '一笔订单入账' },
-      meta: { en: 'Sequence · Classic · 5 participants · 10 messages', zh: '时序图 · Classic · 5 个参与者 · 10 条消息' },
-      title: { en: 'One DTC Order — checkout, net payout, and the three facts the books match', zh: '一笔 DTC 订单——结账、净打款与账本匹配的三项事实' }
+      iframeTitle: 'One DTC Order live Mosofin proof',
+      name: 'One Order to the Books',
+      meta: 'Sequence · Classic · 5 participants · 10 messages',
+      title: 'One DTC Order — checkout, net payout, and the three facts the books match'
     }
   };
 
@@ -748,7 +685,7 @@
     document.querySelectorAll('.spec-card').forEach(card => {
       const proof = PROOFS[card.dataset.proof];
       if (!proof) return;
-      card.querySelector('.spec-name').textContent = proof.name[lang];
+      card.querySelector('.spec-name').textContent = proof.name;
     });
   }
 
@@ -765,9 +702,9 @@
     const selectedTab = document.querySelector(`.spec-card[data-proof="${key}"]`);
     proofPanel.setAttribute('aria-labelledby', selectedTab.id);
     proofOpen.href = `${proof.artifact}?present=1&play=1#view=${encodeURIComponent(proof.view)}`;
-    proofMeta.textContent = proof.meta[lang];
-    proofTitle.textContent = proof.title[lang];
-    proofFrame.title = proof.iframeTitle[lang];
+    proofMeta.textContent = proof.meta;
+    proofTitle.textContent = proof.title;
+    proofFrame.title = proof.iframeTitle;
     if (proofFrame.dataset.proof !== key) {
       if (deliberate) proofStage.dataset.proofPlayback = 'deliberate';
       proofStage.classList.add('is-loading');
@@ -796,17 +733,15 @@
   });
 
   function applyLang(l) {
-    lang = l;
-    document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
-    const dict = LANGS[l];
+    lang = 'en';
+    document.documentElement.lang = 'en';
+    const dict = LANGS.en;
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const v = dict[el.dataset.i18n];
       if (v !== undefined) el.innerHTML = v;
     });
     fillRail();
     renderProof(activeProof);
-    document.getElementById('code-en').style.display = l === 'en' ? '' : 'none';
-    document.getElementById('code-zh').style.display = l === 'zh' ? '' : 'none';
     if (window.__mosofinHowSlides) window.__mosofinHowSlides.refresh();
   }
 

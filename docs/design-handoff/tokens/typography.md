@@ -48,8 +48,8 @@ Four Google fonts, loaded from `fonts.googleapis.com` (one `<link>`, weights 300
 | `--font-body` | `'Inter',-apple-system,…CJK…,sans-serif` | body copy |
 | `--font-mono` | `'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace` | eyebrows, receipts, code |
 
-Every CJK fallback is deliberate: both the site and the viewer ship **en + zh** copy and the type
-has to hold both. Any font substitution must keep a CJK fallback in the same stack.
+CJK fallbacks in the stacks are leftover capacity for authored diagram copy, not a second UI
+language. The site and viewer catalogs are English-only.
 
 **Drift to note:** the site was already moved to a warm "drafted sheet" identity (Fraunces + paper
 `#eff2f1` + international orange `#e14a0e`). The artifact viewer was **not** — it is still the

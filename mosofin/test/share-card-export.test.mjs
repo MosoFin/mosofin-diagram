@@ -125,7 +125,7 @@ test('the skill and every README make the optional Share Card discoverable', () 
     const text = fs.readFileSync(path.join(repoRoot, readme), 'utf8');
     assert.match(text, /Share Card/i, readme);
     assert.match(text, /1200(?:×|x)630/, readme);
-    assert.match(text, /copy|复制/i, readme);
+    assert.match(text, /copy/i, readme);
   }
 });
 

@@ -90,12 +90,12 @@ legend.
 
 ### B3. Legend labels — the most visible drift
 
-Defaults are the `legend.<renderer>.<kind>` strings in `renderers/shared/i18n.mjs:30–61` (en + zh
-pairs; `tokens/i18n-labels.json` → `groups["legend.*"]`), in the catalogue order fixed by
+Defaults are the `legend.<renderer>.<kind>` strings in `renderers/shared/i18n.mjs:30–61` (English
+catalog; `tokens/i18n-labels.json` → `groups["legend.*"]`), in the catalogue order fixed by
 `render-architecture.mjs:82–90`, `render-workflow.mjs:680–688`, `render-sequence.mjs:396–408`,
 `render-dataflow.mjs:417–426`, `render-lifecycle.mjs:496–505` **[verified]**; the layout engine is
 `legend.mjs` (font 8, item gap 22, swatch 14 / 34 for lines). Authors override per artifact via
-`meta.legend.entries[kind].label`. The full default catalogues, both languages, are rendered in
+`meta.legend.entries[kind].label`. The full default catalogues are rendered in
 `assets/legend-blocks-default/*.svg`. What the **delivered finance artifacts actually render**
 (extracted into `assets/legend-blocks/*.svg`):
 
@@ -143,7 +143,7 @@ into every artifact **[verified]**: toolbar CSS :3046–3172 / markup :4845–49
 Semantic Lens :1300+, Semantic Radar :1055+, cards :2849–2951, Share Card constants :5629–5632 and
 rasterizer :6289–6395 (badge copy `i18n.mjs:182–186`). Icons in `assets/viewer-icons/` are verified
 byte-for-byte against the template's `mask-image` data-URIs (`VERIFIED.md`). Copy in
-`tokens/i18n-labels.json` (en + zh). Every surface is captured open in `screenshots/viewer-chrome/`.
+`tokens/i18n-labels.json` (English). Every surface is captured open in `screenshots/viewer-chrome/`.
 
 | Surface | Shortcut | Current naming | Verdict |
 |---|---|---|---|
@@ -228,8 +228,8 @@ All **[verified]** against `pages/`.
 | `gallery.html` | **286** | inner text said **"Five lenses. Eleven real stories."** while `data-en` said **"Eight finance stories."** | **FIXED** in `scripts/gallery-template.html`; rebuilt copy in `pages/gallery.html` |
 | `gallery.html` | 148–149, 217 | CSS class `.engineering-proof`, plus `engineeringProfile: null` on all 8 manifest entries | rename the class; the field is dead for finance |
 | `gallery.html` | 7, 241, 245 | *"Proof Lab"* in title, wordmark path and nav | as above |
-| `guide.html` | **245** | *"Eleven small, opinionated starting points."* — the library holds **19** recipes (8 finance + 11 inherited engineering) | **FIXED** (en + zh) in `scripts/guide-template.html:268,273`; rebuilt copy in `pages/guide.html` |
-| `guide.html` | 234, 269, 274 | placeholder *"API request with JWT auth, a Redis cache miss…"*; sample chips *API + cache miss*, *Kafka + DLQ*, *Incident* (en) and 274 (zh) | finance examples |
+| `guide.html` | **245** | *"Eleven small, opinionated starting points."* — the library holds **19** recipes (8 finance + 11 inherited engineering) | **FIXED** in `scripts/guide-template.html:268,273`; rebuilt copy in `pages/guide.html` |
+| `guide.html` | 234, 269, 274 | placeholder *"API request with JWT auth, a Redis cache miss…"*; sample chips *API + cache miss*, *Kafka + DLQ*, *Incident* | finance examples |
 | `start.html` | 204, 408 | *"Choose the technical question…"*, *"let your coding agent inspect the real repository"* | the reader has a client, not a repo |
 | `start.html` | 241 | *"This repository only"* | workspace framing |
 
@@ -256,7 +256,7 @@ The eleven inherited engineering recipes still in `guide-data` (`system-overview
 | `assets/sigils-finance/*.svg` + `png/` | 14 + 28 | proposed set, same previews |
 | `assets/viewer-icons/*.svg` | 14 | verified against `template.html` (`VERIFIED.md`) |
 | `assets/legend-blocks/*.svg` | 7 | one per artifact that renders a legend, as shipped |
-| `assets/legend-blocks-default/*.svg` | 5 | full default catalogue per renderer, en + zh rows |
+| `assets/legend-blocks-default/*.svg` | 5 | full default catalogue per renderer, English labels |
 | `assets/legend-blocks-finance/*.svg` | 5 | proposed |
 | `assets/brand-marks/catalog/*.svg` | 107 | the whole built-in catalogue, plated; index in `catalog-index.md` |
 | `assets/brand-marks/samples/*.svg` | 18 | shipped shopify + stripe, and 16 open-logos candidates |

@@ -21,12 +21,19 @@ level, so unknown fields are rejected rather than silently ignored.
 
 Every `meta` object also accepts `animation: "trace"` for opt-in SVG/CSS motion
 in generated HTML. Omit it, or set `"none"`, for the default static output.
-It also accepts `locale: "en" | "zh-CN"`. The field selects the fixed Viewer
+It also accepts `locale: "en"`. The field selects the fixed Viewer
 UI, renderer-owned default legend and accessibility copy, document-title
 suffix, and `<html lang>` value; it does not translate authored strings.
 Omitting it preserves legacy behavior and resolves to English. Unsupported
 locale values fail schema validation instead of being guessed or silently
 rewritten.
+`node_style` selects how a semantic node is drawn: `box` (the default rectangle) or
+`logo`, which draws each node’s brand mark large with the label beneath it. A node with no
+brand mark keeps a quiet outlined box in its semantic colour — a logo is never invented.
+Both layers are authored into every artifact and switched by one CSS rule, so a reader can
+flip a delivered file with the viewer’s Box/Logo control (or `?nodeStyle=logo`) without
+re-rendering. Geometry, ids and routes are identical in both styles.
+
 `visual_preset` accepts `classic` (the stable default), `signal-flow` (luminous
 motion-forward presentation), `blueprint` (high-contrast engineering review),
 or `editorial` (warm publication-style design review and documentation).
@@ -126,7 +133,7 @@ The five diagram schemas reference `common.schema.json#/$defs/...`:
 - `point` — an `[x, y]` pair of numbers (used by `via` and `labelAt`)
 - `componentType` — `frontend`, `backend`, `database`, `cloud`, `security`,
   `messagebus`, `external`
-- `locale` — the bounded renderer locale, `en` or `zh-CN`
+- `locale` — the bounded renderer locale, `en` only
 - `brandMark` — one optional built-in brand ID or explicit HTTP(S) site URL
 - `variant` — `default`, `emphasis`, `security`, `dashed` (sequence messages
   extend this list locally with `return`)

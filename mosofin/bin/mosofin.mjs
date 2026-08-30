@@ -22,7 +22,7 @@ function usage() {
   mosofin inspect <type> <input.json>
   mosofin check <output.html>
   mosofin visual-check <output.html> [--json]
-  mosofin guide [scenario or question] [--json] [--lang en|zh]
+  mosofin guide [scenario or question] [--json] [--lang en]
   mosofin brands [name, alias, domain, or category] [--json]
   mosofin brands capture <url> [--json]
   mosofin examples
@@ -1366,12 +1366,12 @@ async function commandGuide(args) {
       json = true;
     } else if (arg === '--lang') {
       const value = args[index + 1];
-      if (value !== 'en' && value !== 'zh') fail('--lang must be "en" or "zh".');
+      if (value !== 'en') fail('--lang must be "en".');
       lang = value;
       index += 1;
     } else if (arg.startsWith('--lang=')) {
       const value = arg.slice('--lang='.length);
-      if (value !== 'en' && value !== 'zh') fail('--lang must be "en" or "zh".');
+      if (value !== 'en') fail('--lang must be "en".');
       lang = value;
     } else if (arg.startsWith('--')) {
       fail(`Unknown guide option "${arg}".`);

@@ -579,19 +579,19 @@ test('labelPoint: explicit labelAt wins outright', () => {
 
 test('textUnits: ASCII=1, CJK=2, mixed sums, fullwidth supplementary=2', () => {
   assert.equal(textUnits('abc'), 3);
-  assert.equal(textUnits('中文'), 4);
-  assert.equal(textUnits('a中'), 3);
+  assert.equal(textUnits('한글'), 4);
+  assert.equal(textUnits('a한'), 3);
   assert.equal(textUnits(''), 0);
   assert.equal(textUnits(null), 0);
-  assert.equal(textUnits('𠀀'), 2); // CJK Ext-B (supplementary plane)
+  assert.equal(textUnits('😀'), 2); // supplementary-plane emoji
   assert.equal(textUnits('🚀'), 2); // emoji
-  assert.equal(textUnits('注入提示词'), 10); // issue #14 original label
+  assert.equal(textUnits('ＷＷＷＷＷ'), 10);
   assert.equal(textUnits('！＠＃０１２'), 12); // fullwidth punctuation + digits
 });
 
 test('textUnits follows wide and halfwidth East Asian presentation boundaries', () => {
   assert.equal(textUnits('あカ'), 4); // Hiragana + Katakana are wide
-  assert.equal(textUnits('ㄅㆠ'), 4); // Bopomofo + extended Bopomofo are wide
+  assert.equal(textUnits('가나'), 4); // Hangul syllables are wide
   assert.equal(textUnits('ㄱ'), 2); // Hangul compatibility letter is wide
   assert.equal(textUnits('︐︙'), 4); // vertical punctuation forms are wide
   assert.equal(textUnits('ｶﾀｶﾅ'), 4); // halfwidth Katakana stays one unit per glyph
@@ -671,7 +671,7 @@ test('unknown semantic sigils fail closed to a neutral role stamp', () => {
 });
 
 test('suggestLabelObstacleFix includes rects and labelAt/labelDy hints', () => {
-  const labelRect = { x: 100, y: 180, width: 48, height: 14, label: '写入' };
+  const labelRect = { x: 100, y: 180, width: 48, height: 14, label: 'write' };
   const obstacle = { id: 'memtool', x: 30, y: 130, width: 230, height: 58 };
   const hint = suggestLabelObstacleFix(labelRect, 124, 188, obstacle);
   assert.match(hint, /label rect: \[100, 180, 48, 14\]/);

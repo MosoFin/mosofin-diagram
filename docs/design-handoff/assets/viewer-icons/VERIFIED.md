@@ -1,7 +1,7 @@
 # Viewer icons — verified against `mosofin/assets/template.html`
 
 Each packaged mask SVG was normalised and compared byte-for-byte with the `mask-image` data-URI in the
-viewer template's stylesheet (28 mask rules found in the template).
+viewer template's stylesheet (30 mask rules found in the template).
 
 | file | status | first matching selector in template.html |
 |---|---|---|

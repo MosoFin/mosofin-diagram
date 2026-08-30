@@ -27,27 +27,58 @@ For the finance-first walkthrough — the exact prompt, command trail and receip
 [docs/USE-CASE.md](docs/USE-CASE.md) and its [money map](docs/samples/northline-money-map.html)
 ([spec](mosofin/examples/northline-money-map.architecture.json)).
 
-## Sample diagrams
+## See it
 
-The business operating map and all eight finance recipes are demonstrated on the same Northline group. Every artifact below validated at **9/9 checks, 0 errors, 0 warnings** under the `showcase` profile, carries no invented amounts, and is the live proof behind the [gallery](https://mosofin.github.io/mosofin-diagram/gallery.html). Screenshots are full-page captures of the delivered HTML (light theme; dark-theme captures sit beside them in [docs/samples/images/](docs/samples/images/)).
+Every image below is a real delivered artifact — no mockups. Each one validated at **9/9 checks,
+0 errors, 0 warnings** under the `showcase` profile and carries no invented amounts.
 
-| Recipe | Type | Screenshot | Artifact · spec |
+### The whole business on one page
+
+*How money and work move across a three-entity group: demand → supply chain → inventory → commerce →
+payments → bank → three separate ledgers. Every node names the system that owns it.*
+
+[![How the business runs — demand to books across three entities](docs/samples/images/business-operating-map.light.png)](docs/samples/business-operating-map.html)
+
+### It plays its own story
+
+Press **P** in any artifact and it walks the reader through the map hop by hop, dimming everything
+off the path and naming the source of truth at each stop. Recorded straight from the delivered HTML:
+
+**Money map — *DTC order to cash***
+
+![Money map guided story](docs/samples/images/northline-money-map.story.gif)
+
+**Month-end close — *Pull the sources***
+
+![Close runbook guided story](docs/samples/images/northline-close.story.gif)
+
+**Revenue walk — *Gross to net sales***
+
+![Revenue walk guided story](docs/samples/images/northline-revenue-walk.story.gif)
+
+### Dark theme, same file
+
+One artifact carries both themes; press **T** to flip.
+
+[![The business operating map in dark theme](docs/samples/images/business-operating-map.dark.png)](docs/samples/business-operating-map.html)
+
+### Every recipe, rendered
+
+The business operating map and all eight finance recipes, demonstrated on the same Northline group.
+Click any screenshot for the full-size capture; dark-theme versions sit beside them in
+[docs/samples/images/](docs/samples/images/).
+
+| Recipe | Type | Screenshot | Open |
 |---|---|---|---|
-| `business-operating-map` | architecture | [![Business operating map](docs/samples/images/business-operating-map.light.png)](docs/samples/images/business-operating-map.light.png) | [HTML](docs/samples/business-operating-map.html) · [JSON](mosofin/examples/business-operating-map.architecture.json) |
-| `finance-money-map` | architecture | [![Money map](docs/samples/images/northline-money-map.light.png)](docs/samples/images/northline-money-map.light.png) | [HTML](docs/samples/northline-money-map.html) · [JSON](mosofin/examples/northline-money-map.architecture.json) |
-| `finance-order-path` | sequence | [![One DTC order to the books](docs/samples/images/northline-order-path.light.png)](docs/samples/images/northline-order-path.light.png) | [HTML](docs/samples/northline-order-path.html) · [JSON](mosofin/examples/northline-order-path.sequence.json) |
-| `finance-revenue-walk` | dataflow | [![July revenue walk](docs/samples/images/northline-revenue-walk.light.png)](docs/samples/images/northline-revenue-walk.light.png) | [HTML](docs/samples/northline-revenue-walk.html) · [JSON](mosofin/examples/northline-revenue-walk.dataflow.json) |
-| `finance-close` | workflow | [![Month-end close runbook](docs/samples/images/northline-close.light.png)](docs/samples/images/northline-close.light.png) | [HTML](docs/samples/northline-close.html) · [JSON](mosofin/examples/northline-close.workflow.json) |
-| `finance-dispute-lifecycle` | lifecycle | [![Refund and chargeback lifecycle](docs/samples/images/northline-dispute.light.png)](docs/samples/images/northline-dispute.light.png) | [HTML](docs/samples/northline-dispute.html) · [JSON](mosofin/examples/northline-dispute.lifecycle.json) |
-| `finance-payout-rec` | dataflow | [![Stripe payout reconciliation](docs/samples/images/northline-payout-rec.light.png)](docs/samples/images/northline-payout-rec.light.png) | [HTML](docs/samples/northline-payout-rec.html) · [JSON](mosofin/examples/northline-payout-rec.dataflow.json) |
-| `finance-customer-ar` | architecture | [![Who can say a customer owes us](docs/samples/images/northline-customer-ar.light.png)](docs/samples/images/northline-customer-ar.light.png) | [HTML](docs/samples/northline-customer-ar.html) · [JSON](mosofin/examples/northline-customer-ar.architecture.json) |
-| `finance-cash-runway` | dataflow | [![Cash to payroll date](docs/samples/images/northline-cash-runway.light.png)](docs/samples/images/northline-cash-runway.light.png) | [HTML](docs/samples/northline-cash-runway.html) · [JSON](mosofin/examples/northline-cash-runway.dataflow.json) |
-
-Every artifact also plays its guided story (`?present=1&play=1#view=<id>`): each chapter walks the reader hop by hop, dims what is not on the path, and names the source of truth at every stop. Recorded from the delivered HTML:
-
-| Money map · *DTC order to cash* | Revenue walk · *Gross to net sales* | Close runbook · *Pull the sources* |
-|---|---|---|
-| ![Money map story](docs/samples/images/northline-money-map.story.gif) | ![Revenue walk story](docs/samples/images/northline-revenue-walk.story.gif) | ![Close runbook story](docs/samples/images/northline-close.story.gif) |
+| `business-operating-map` | architecture | [![Business operating map](docs/samples/images/business-operating-map.light.png)](docs/samples/images/business-operating-map.light.png) | [HTML](docs/samples/business-operating-map.html) · [spec](mosofin/examples/business-operating-map.architecture.json) |
+| `finance-money-map` | architecture | [![Money map](docs/samples/images/northline-money-map.light.png)](docs/samples/images/northline-money-map.light.png) | [HTML](docs/samples/northline-money-map.html) · [spec](mosofin/examples/northline-money-map.architecture.json) |
+| `finance-order-path` | sequence | [![One DTC order to the books](docs/samples/images/northline-order-path.light.png)](docs/samples/images/northline-order-path.light.png) | [HTML](docs/samples/northline-order-path.html) · [spec](mosofin/examples/northline-order-path.sequence.json) |
+| `finance-revenue-walk` | dataflow | [![July revenue walk](docs/samples/images/northline-revenue-walk.light.png)](docs/samples/images/northline-revenue-walk.light.png) | [HTML](docs/samples/northline-revenue-walk.html) · [spec](mosofin/examples/northline-revenue-walk.dataflow.json) |
+| `finance-close` | workflow | [![Month-end close runbook](docs/samples/images/northline-close.light.png)](docs/samples/images/northline-close.light.png) | [HTML](docs/samples/northline-close.html) · [spec](mosofin/examples/northline-close.workflow.json) |
+| `finance-dispute-lifecycle` | lifecycle | [![Refund and chargeback lifecycle](docs/samples/images/northline-dispute.light.png)](docs/samples/images/northline-dispute.light.png) | [HTML](docs/samples/northline-dispute.html) · [spec](mosofin/examples/northline-dispute.lifecycle.json) |
+| `finance-payout-rec` | dataflow | [![Stripe payout reconciliation](docs/samples/images/northline-payout-rec.light.png)](docs/samples/images/northline-payout-rec.light.png) | [HTML](docs/samples/northline-payout-rec.html) · [spec](mosofin/examples/northline-payout-rec.dataflow.json) |
+| `finance-customer-ar` | architecture | [![Who can say a customer owes us](docs/samples/images/northline-customer-ar.light.png)](docs/samples/images/northline-customer-ar.light.png) | [HTML](docs/samples/northline-customer-ar.html) · [spec](mosofin/examples/northline-customer-ar.architecture.json) |
+| `finance-cash-runway` | dataflow | [![Cash to payroll date](docs/samples/images/northline-cash-runway.light.png)](docs/samples/images/northline-cash-runway.light.png) | [HTML](docs/samples/northline-cash-runway.html) · [spec](mosofin/examples/northline-cash-runway.dataflow.json) |
 
 Reproduce any of them from the skill directory:
 
@@ -55,6 +86,8 @@ Reproduce any of them from the skill directory:
 cd mosofin
 node bin/mosofin.mjs deliver dataflow examples/northline-revenue-walk.dataflow.json out.html --quality showcase --json
 ```
+
+Or explore them live in the [proof gallery](https://diagram.mosofin.com/gallery.html).
 
 ## Quick start
 
@@ -93,6 +126,33 @@ Verify it landed:
 ```bash
 node ~/.claude/skills/mosofin/bin/mosofin.mjs doctor   # adjust the path for your agent
 ```
+
+### 1b. Update to the latest version
+
+**Re-run the same install command.** `skills add` overwrites an existing install in place, so the
+line you used above is also the update command — no uninstall step:
+
+```bash
+npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent claude-code --global --copy --yes
+```
+
+Check which build you have installed — the generator line in the packaged viewer template carries
+the exact version:
+
+```bash
+grep -o 'mosofin [0-9][^"]*' ~/.claude/skills/mosofin/assets/template.html | head -1
+# -> mosofin 1.0.0-dev.0        (adjust the path for your agent)
+```
+
+| You installed with | To update |
+|---|---|
+| `--copy` (the commands above) | re-run the install command — a copy never updates itself |
+| without `--copy` (symlinked to a clone) | `git pull` in your clone; the skill follows immediately |
+| `mosofin.zip` on Claude.ai | download [`mosofin.zip`](mosofin.zip) again and re-upload it under Settings → Capabilities → Skills |
+| `mosofin.zip` on Raven | download it again and re-extract over `~/.raven/workspace/skills` |
+
+[`mosofin.zip`](mosofin.zip) on the default branch is rebuilt automatically whenever anything inside
+`mosofin/` changes (see [Releasing](#releasing)), so it always matches the current skill.
 
 ### 2. Describe the business, then ask one question
 
@@ -145,7 +205,7 @@ Business recipes read `references/business-onboarding.md` and the workspace `BUS
 | `finance-customer-ar` | architecture | Who owes us money, through which channel, and who chases it? |
 | `finance-cash-runway` | dataflow | Can we make payroll on a named date? |
 
-Each recipe has a verified Northline artifact in [Sample diagrams](#sample-diagrams) and the [proof gallery](https://mosofin.github.io/mosofin-diagram/gallery.html); the generic engineering recipes link to the proof of the same diagram type.
+Each recipe has a verified Northline artifact in [Sample diagrams](#sample-diagrams) and the [proof gallery](https://diagram.mosofin.com/gallery.html); the generic engineering recipes link to the proof of the same diagram type.
 
 Finance recipe prompts begin by reading `references/finance-onboarding.md` and the workspace `FINANCE-BRIEF.md`. Both contracts carry the same guardrails: one system of record per fact, no invented amounts or volumes, `connected` is not a tie-out.
 
@@ -158,6 +218,17 @@ Finance recipe prompts begin by reading `references/finance-onboarding.md` and t
 | `sequence` | One order, invoice, or payout traced hop by hop across systems |
 | `dataflow` | Revenue walks, payout reconciliations, cash runway, data lineage |
 | `lifecycle` | Refund, dispute, invoice, and subscription states |
+
+The [logo catalogue](https://diagram.mosofin.com/logos.html) lists the financial marks the skill
+ships. It is generated by `npm run build:logos` from the shipped catalogue. The page is the
+finance catalogue — ledgers, processors, banks, payroll, storefronts and 3PLs (QuickBooks, Xero,
+Sage, SAP, Stripe, Adyen, Square, Visa, Mastercard, Chase, Gusto, ADP, Shopify, FedEx, DHL).
+Developer marks still render in logo mode but are not listed here.
+
+Set `meta.node_style: "logo"` to draw each node as its software logo instead of a labelled box. Every
+mark ships inside the skill: no network call, no account. A node whose software has no mark keeps its
+semantic role glyph rather than borrowing someone else's logo, and readers can switch either way in
+the viewer (**Box / Logo** in the toolbar) without re-rendering.
 
 Mosofin also accepts pasted Mermaid `flowchart`, `sequenceDiagram`, and `stateDiagram` input and re-authors it as a checked diagram.
 
@@ -194,11 +265,38 @@ Every artifact is one standalone HTML file with dark/light themes, pan/zoom, sea
 ## Reference and scope
 
 - [Skill](mosofin/SKILL.md) · [Business onboarding contract](mosofin/references/business-onboarding.md) · [Finance onboarding contract](mosofin/references/finance-onboarding.md) · [Schema reference](mosofin/schemas/README.md) · [Examples](mosofin/examples/) · [Agent cookbook](docs/authoring-cookbook.md)
-- [Use case](docs/USE-CASE.md) · [Scenario guide](https://mosofin.github.io/mosofin-diagram/guide.html) · [Proof gallery](https://mosofin.github.io/mosofin-diagram/gallery.html)
+- [Use case](docs/USE-CASE.md) · [Scenario guide](https://diagram.mosofin.com/guide.html) · [Proof gallery](https://diagram.mosofin.com/gallery.html)
 - [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
 - [Design handoff](docs/design-handoff/00-START-HERE.md) — every inherited visual component (logos, sigils, legends, chrome, presets, tokens) with sources, captures and a proposed finance redesign; rebuilt by `npm run build:design-handoff`
 
 Live accounting-system access, automatic Mermaid layout, hosted sharing, and WYSIWYG editing are intentionally outside scope. Mosofin draws what the brief and the user state; it does not pull or reconcile live ledger data.
+
+## Releasing
+
+`mosofin.zip` is the packaged skill. It is **generated, not hand-edited**, and its bytes are
+canonical — CI byte-compares the committed file against a fresh build, so a stale zip fails the build.
+
+**You normally do not build it.** Push a change under `mosofin/` and
+[`.github/workflows/refresh-zip.yml`](.github/workflows/refresh-zip.yml) rebuilds the zip on Node 22
+and commits it back to `main`, so the download always matches the skill. Run it by hand from the
+Actions tab (*refresh zip → Run workflow*) whenever you want.
+
+To build it locally — needed only if you are cutting a release or debugging packaging:
+
+```bash
+cd mosofin
+npm run build:zip     # refuses to run on anything but Node 22, with instructions
+```
+
+The Node major is pinned because zip bytes depend on the Node/zlib toolchain; CI, the release
+workflow, and this script all use Node 22 so the three agree exactly.
+
+| Job | Where | What it does |
+|---|---|---|
+| `refresh zip` | on push to `main` touching `mosofin/` | rebuilds and commits `mosofin.zip` |
+| `zip-freshness` | every CI run | fails if the committed zip is stale |
+| `package-smoke` | every CI run, on Linux/macOS/Windows | unpacks the zip and exercises the skill |
+| `release` | on a version tag | re-verifies the zip and attaches it to the GitHub Release |
 
 ## Origins and license
 

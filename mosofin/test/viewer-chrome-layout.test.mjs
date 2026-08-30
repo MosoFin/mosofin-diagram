@@ -356,11 +356,11 @@ test('localized multiline Legends remain clear across themes, presets, and zoom 
       text.textContent = '';
       var first = document.createElementNS(namespace, 'tspan');
       first.setAttribute('x', x);
-      first.textContent = '应用与运行时编排服务（本地化长标签）';
+      first.textContent = 'Application and runtime orchestration service (long label)';
       var second = document.createElementNS(namespace, 'tspan');
       second.setAttribute('x', x);
       second.setAttribute('dy', '14');
-      second.textContent = '第二行语义说明';
+      second.textContent = 'Second-line semantic note';
       text.appendChild(first);
       text.appendChild(second);
     })()`);

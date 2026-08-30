@@ -30,7 +30,6 @@ test('Cursor onboarding stays explicit, bilingual, and backed by the same Skill'
   assert.match(start, /data-agent="opencode">OpenCode<\/button>/);
   assert.match(start, /KNOWN_AGENTS\.has\(requestedAgent\)/);
   assert.match(start, /same Skill/);
-  assert.match(start, /同一份 Skill/);
   assert.doesNotMatch(start, /vendor-specific (?:renderer|schema|skill)/i);
 });
 

@@ -257,7 +257,7 @@
       var recipes = JSON.parse(document.getElementById('guide-data').textContent);
       var types = ['architecture','workflow','sequence','dataflow','lifecycle'];
       var colors = { architecture:'#0891b2', workflow:'#047857', sequence:'#6d28d9', dataflow:'#b45309', lifecycle:'#be123c' };
-      var language = localStorage.getItem('mosofin-guide-language') === 'zh' ? 'zh' : 'en';
+      var language = 'en';
       var activeType = 'all';
       var lastRecipe = null;
       var copy = {
@@ -265,16 +265,11 @@
           navGuide:'How it works',navProof:'Examples',navLogos:'Logos',navInstall:'Get started →',versionLabel:'Scenario guide / development / v[[MOSOFIN_VERSION]]',eyebrow:'Question-first diagramming', headline:'Choose the question.<br>Get the <em>right diagram.</em>', lede:'Describe what your audience needs to understand. Mosofin recommends one bounded visual recipe—plus the evidence it must contain, when not to use it, and a prompt you can copy.',
           metricRecipes:'real-world<br>recipes',metricModes:'typed diagram<br>modes',metricRuntime:'runtime<br>dependencies',chooserTitle:'What must the diagram explain?',chooserBody:'Write a situation, not a diagram type. Specific system facts produce a stronger recommendation.',placeholder:'Example: Map how our business runs, from HubSpot leads and NetSuite purchase orders through Shopify, Stripe and the bank into QuickBooks.',recommend:'Recommend a recipe →',clear:'Clear',libraryEyebrow:'Recipe library',libraryTitle:'Nineteen small, opinionated starting points.',libraryBody:'Each recipe answers one technical question. That boundary keeps the result legible, reviewable, and honest about missing evidence.',footerLeft:'Generated from the same recipe source as the Mosofin CLI.',all:'All recipes',recommended:'Recommended recipe',use:'Use when',avoid:'Avoid when',must:'Evidence to include',presentation:'Presentation',prompt:'Copy-ready prompt',copyPrompt:'Copy prompt',copied:'Copied',alternatives:'Other possible fits:',confidence:'confidence',open:'Open recipe',proofReady:'Verified proof',proofLink:'Open verified example ↗',
           samples:[['Whole business','Map how our business runs — HubSpot leads, Shopify orders, NetSuite purchase orders, Stripe payouts, Ramp bills and Gusto payroll landing in each entity\'s QuickBooks.'],['Revenue walk','Why doesn\'t Shopify revenue match QuickBooks for July? Walk gross to net with every deduction as its own step.'],['Month-end close','What is month-end in order, who owns each gate, and what stops the period lock?']]
-        },
-        zh: {
-          navGuide:'工作原理',navProof:'示例',navLogos:'标识',navInstall:'开始使用 →',versionLabel:'场景指南 / 开发版 / v[[MOSOFIN_VERSION]]',eyebrow:'先问题，后图表',headline:'先选对问题，<br>再得到<em>对的图。</em>',lede:'描述受众真正需要理解的内容。Mosofin 会推荐一个有边界的视觉配方，同时给出证据清单、禁用条件和可复制提示词。',
-          metricRecipes:'个真实场景<br>配方',metricModes:'种类型化<br>图表模式',metricRuntime:'个运行时<br>依赖',chooserTitle:'这张图必须解释什么？',chooserBody:'写清场景，不要只写图表类型。系统事实越具体，推荐越可靠。',placeholder:'例如：画出我们的业务如何运转，从 HubSpot 线索和 NetSuite 采购单，经过 Shopify、Stripe 和银行，进入 QuickBooks。',recommend:'推荐配方 →',clear:'清空',libraryEyebrow:'配方库',libraryTitle:'十九个小而专的起点。',libraryBody:'每个配方只回答一个技术问题。清晰的边界让图更易读、可评审，也不会掩盖证据缺口。',footerLeft:'网页与 Mosofin CLI 使用同一份配方数据生成。',all:'全部配方',recommended:'推荐配方',use:'适合',avoid:'不要这样用',must:'必须包含的证据',presentation:'表现建议',prompt:'可直接复制的提示词',copyPrompt:'复制提示词',copied:'已复制',alternatives:'其他可能：',confidence:'置信度',open:'打开配方',proofReady:'已验证成品',proofLink:'打开验证成品 ↗',
-          samples:[['业务全景','画出我们的业务如何运转——HubSpot 线索、Shopify 订单、NetSuite 采购单、Stripe 打款、Ramp 账单和 Gusto 薪酬，最终进入各主体的 QuickBooks。'],['收入对账','为什么七月 Shopify 收入和 QuickBooks 对不上？从毛到净，把每一项扣减单独列出。'],['月结关账','月结按什么顺序进行，每道门归谁，什么会阻止期间锁定？']]
         }
       };
 
-      function t(key) { return copy[language][key]; }
-      function local(recipe) { return Object.assign({}, recipe, recipe[language]); }
+      function t(key) { return copy.en[key]; }
+      function local(recipe) { return Object.assign({}, recipe, recipe.en); }
       function normalize(value) { return String(value || '').normalize('NFKC').toLowerCase().replace(/[\\s_]+/g,' ').trim(); }
       function rank(query) {
         var text = normalize(query);
@@ -294,8 +289,8 @@
         document.getElementById('samples').innerHTML = t('samples').map(function (sample) { return '<button class="chip" type="button" data-query="'+escapeHtml(sample[1])+'">'+escapeHtml(sample[0])+'</button>'; }).join('');
       }
       function renderFilters() {
-        var labels = { en:{architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle'}, zh:{architecture:'架构',workflow:'工作流',sequence:'时序',dataflow:'数据流',lifecycle:'生命周期'} };
-        document.getElementById('filters').innerHTML = ['all'].concat(types).map(function (type) { return '<button class="filter '+(activeType === type ? 'active':'')+'" type="button" data-filter="'+type+'">'+escapeHtml(type === 'all' ? t('all') : labels[language][type])+'</button>'; }).join('');
+        var labels = {architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle'};
+        document.getElementById('filters').innerHTML = ['all'].concat(types).map(function (type) { return '<button class="filter '+(activeType === type ? 'active':'')+'" type="button" data-filter="'+type+'">'+escapeHtml(type === 'all' ? t('all') : labels[type])+'</button>'; }).join('');
       }
       function renderCards() {
         var visible = recipes.filter(function (recipe) { return activeType === 'all' || recipe.type === activeType; });
@@ -322,10 +317,8 @@
         var picked = recommendation(query);
         renderResult(picked.recipe,picked.confidence,picked.alternatives);
       }
-      function applyLanguage(next) {
-        language = next === 'zh' ? 'zh' : 'en';
-        localStorage.setItem('mosofin-guide-language',language);
-        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+      function applyLanguage() {
+        document.documentElement.lang = 'en';
         document.querySelectorAll('[data-i18n]').forEach(function (node) { node.textContent=t(node.dataset.i18n); });
         document.querySelectorAll('[data-i18n-html]').forEach(function (node) { node.innerHTML=t(node.dataset.i18nHtml); });
         document.querySelectorAll('[data-i18n-placeholder]').forEach(function (node) { node.placeholder=t(node.dataset.i18nPlaceholder); });
@@ -347,7 +340,7 @@
       document.getElementById('filters').addEventListener('click',function (event) { var filter=event.target.closest('[data-filter]'); if (!filter) return; activeType=filter.dataset.filter; renderFilters(); renderCards(); });
       document.getElementById('cards').addEventListener('click',function (event) { var card=event.target.closest('[data-recipe]'); if (!card) return; var recipe=recipes.find(function (item) { return item.id === card.dataset.recipe; }); renderResult(recipe,'selected',[]); document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'}); });
       document.getElementById('result').addEventListener('click',function (event) { if (event.target.id === 'copy-prompt') copyPrompt(); var alt=event.target.closest('[data-alt]'); if (alt) renderResult(recipes.find(function (item) { return item.id === alt.dataset.alt; }),'selected',[]); });
-      applyLanguage(language);
+      applyLanguage();
     }());
   </script>
 </body>

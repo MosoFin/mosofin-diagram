@@ -35,8 +35,6 @@ test('start page: offers five bounded bilingual starts without ingesting source 
   }
   assert.match(html, /data-en="Four steps\."/);
   assert.match(html, /data-en="One diagram you can share\."/);
-  assert.match(html, /data-zh="四步。"/);
-  assert.match(html, /data-zh="一张可转发的图。"/);
   assert.match(html, /data-en="Add the skill"/);
   assert.match(html, /data-en="Describe the business"/);
   assert.match(html, /data-en="Ask one question"/);
@@ -44,16 +42,14 @@ test('start page: offers five bounded bilingual starts without ingesting source 
   assert.match(html, /Step 1 of 4/);
   assert.doesNotMatch(html, /\b[1-8]\/[1-8]\b/);
   assert.match(html, /No repository content or diagram data is sent to this page\./);
-  assert.match(html, /这个页面不会接收仓库内容或图表数据/);
   assert.match(html, /id="copy-starter"/);
   assert.match(html, /data-en="Copy install \+ prompt"/);
-  assert.match(html, /data-zh="复制安装命令 \+ 提示词"/);
 
   const dataMatch = html.match(/<script id="start-data" type="application\/json">([\s\S]*?)<\/script>/);
   assert.ok(dataMatch);
   const data = JSON.parse(dataMatch[1]);
   assert.deepEqual(Object.keys(data), ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
-  assert.ok(Object.values(data).every((entry) => entry.en.prompt && entry.zh.prompt && entry.proof));
+  assert.ok(Object.values(data).every((entry) => entry.en.prompt && entry.proof));
 
   const scriptMatch = html.match(/<script>\n([\s\S]*?)\n  <\/script>\n<\/body>/);
   assert.ok(scriptMatch);

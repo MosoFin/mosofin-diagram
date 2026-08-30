@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { esc, renderDefinitions, renderSemanticSigil, textUnits } from '../shared/utils.mjs';
 import { animateAttr, focusEdgeAttrs, focusNodeAttrs, focusNodeTitle, loadDiagramWithBrandMarks, writeDiagram, svgAccessibleText, svgRootAttrs } from '../shared/cli.mjs';
+import { renderLogoNode, renderLogolessBox } from '../shared/node-style.mjs';
 import { componentBox, boundaryBox, connectionPath } from '../shared/layout-report.mjs';
 import { throwDiagnosticProblems } from '../shared/diagnostics.mjs';
 import { legendFootprint, relationshipLegendObstacles, resolveLegend, renderLegend as renderResolvedLegend } from '../shared/legend.mjs';
@@ -1002,6 +1003,9 @@ function renderComponent(c) {
     ? `\n        <text data-detail="fine" x="${cx}" y="${c.y + c.height - 8}" class="${accent}" font-size="${fittedNodeFontSize(c.tag, c.width, componentTextFit.tagPreferred, componentTextFit.tagMinimum)}" text-anchor="middle">${esc(c.tag)}</text>`
     : '';
   const brand = renderBrandMark(c, { x: c.x + c.width - 22, y: c.y + 6 });
+  const logoArt = renderLogoNode(c, { x: c.x, y: c.y, width: c.width, height: c.height, label: c.label });
+  const logoLayer = logoArt || renderLogolessBox(c, { x: c.x, y: c.y, width: c.width, height: c.height, kind: c.type });
+  const logoLabelY = c.y + c.height - 9;
   const labelFontSize = fittedNodeFontSize(c.label, brandLabelFitWidth(c, c.width), 11, 8);
   const passport = { kind: c.type, sublabel: c.sublabel, tag: c.tag, context: componentContext(c), ...brandMetadataFor(c) };
   return `        <g ${focusNodeAttrs(c.id, c.label, passport, arch.meta.locale)}>
@@ -1010,6 +1014,8 @@ function renderComponent(c) {
           <rect x="${c.x}" y="${c.y}" width="${c.width}" height="${c.height}" rx="6" class="${fill}"${animateAttr(arch.meta, 'node', componentSteps.get(c.id))} stroke-width="1.5"/>
           ${renderSemanticSigil(c.type, { x: c.x + 6, y: c.y + 6 })}${brand ? `\n          ${brand}` : ''}
           <text data-node-label=""${hasSub ? ' data-detail-anchor=""' : ''} x="${cx}" y="${labelY}" class="t-primary" font-size="${labelFontSize}" font-weight="600" text-anchor="middle">${esc(c.label)}</text>${sub}${tag}
+          ${logoLayer}
+          <text class="node-logo-label" x="${cx}" y="${logoLabelY}" font-size="${Math.min(labelFontSize, 9.5)}" font-weight="600" text-anchor="middle">${esc(c.label)}</text>
         </g>`;
 }
 

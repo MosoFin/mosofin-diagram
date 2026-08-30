@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-preset="[VISUAL PRESET]">
+<html lang="en" data-theme="dark" data-preset="[VISUAL PRESET]" data-node-style="[NODE STYLE]">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3118,6 +3118,10 @@
       mask-repeat: no-repeat;
       mask-size: contain;
     }
+    .toolbar-icon.nodestyle {
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='2.5' y='4' width='6.5' height='6.5' rx='1.4' fill='none' stroke='black' stroke-width='1.6'/%3E%3Crect x='11' y='9.5' width='6.5' height='6.5' rx='1.4' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='2.5' y='4' width='6.5' height='6.5' rx='1.4' fill='none' stroke='black' stroke-width='1.6'/%3E%3Crect x='11' y='9.5' width='6.5' height='6.5' rx='1.4' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E");
+    }
     .toolbar-chevron {
       width: 0.65rem;
       height: 0.65rem;
@@ -3950,6 +3954,30 @@
     .t-security   { fill: var(--security-stroke); }
     .t-messagebus { fill: var(--messagebus-stroke); }
     .t-external   { fill: var(--external-stroke); }
+
+    /* ==========================================================
+       Node style — box (default) or logo. Both layers are authored into the
+       SVG; this rule chooses one, so a reader can switch a delivered artifact
+       without re-rendering and every export keeps the active view. Geometry is
+       identical in both, so routes, labels and focus targets never move. */
+    svg .node-logo, svg .node-logoless, svg .node-logo-label { display: none; }
+    svg .node-logo-plate { fill: #fff; stroke: none; }
+    svg .node-logo-frame { fill: none; stroke: #cbd5e1; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+    svg .node-logo-label { fill: var(--text); }
+    /* The no-logo fallback: a neutral plate carrying the node role sigil, sized to
+       match a real logo so the row reads evenly. The sigil keeps its own tone colour. */
+    svg .node-logoless-plate { fill: var(--mask); stroke: var(--lane-stroke); stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+    svg .node-logoless .semantic-sigil { opacity: .92; stroke-width: 1.1; }
+
+    [data-node-style="logo"] svg .node-logo,
+    [data-node-style="logo"] svg .node-logoless,
+    [data-node-style="logo"] svg .node-logo-label { display: block; }
+    /* In logo mode the box art, its sigil and the small corner badge step aside. */
+    [data-node-style="logo"] svg [data-node-id] > rect.c-mask,
+    [data-node-style="logo"] svg [data-node-id] > rect:not(.node-logoless-box):not(.node-logo-plate):not(.node-logo-frame),
+    [data-node-style="logo"] svg [data-node-id] > .semantic-sigil,
+    [data-node-style="logo"] svg [data-node-id] > .brand-mark,
+    [data-node-style="logo"] svg [data-node-id] > text:not(.node-logo-label) { display: none; }
 
     /* Semantic Sigils are small authored role stamps, not icons from a brand
        pack and not viewer controls. Prefix selectors with svg so the canonical
@@ -4889,6 +4917,10 @@
         </button>
       </div>
     </div>
+    <button id="btn-nodestyle" type="button" title="{{i18n:viewer.nodestyle.title}}" aria-pressed="false">
+      <span class="toolbar-icon nodestyle" aria-hidden="true"></span>
+      <span id="nodestyle-label">{{i18n:viewer.nodestyle.box}}</span>
+    </button>
     <button id="btn-motion" type="button" hidden
             title="{{i18n:viewer.motion.pause}}"
             aria-label="{{i18n:viewer.motion.pause}}"
@@ -5548,6 +5580,46 @@
     /* ============================================================
        Theme toggle — persists to localStorage, respects system pref
        ============================================================ */
+
+    Mosofin.nodeStyle = (function () {
+      var STORAGE_KEY = 'mosofin-node-style';
+      var html = document.documentElement;
+      var btn = document.getElementById('btn-nodestyle');
+      var label = document.getElementById('nodestyle-label');
+      var authored = html.getAttribute('data-node-style') === 'logo' ? 'logo' : 'box';
+
+      function readStored() {
+        try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; }
+      }
+      function writeStored(value) {
+        try { localStorage.setItem(STORAGE_KEY, value); } catch (_) {}
+      }
+      function urlOverride() {
+        try {
+          var param = new URLSearchParams(window.location.search).get('nodeStyle');
+          if (param === 'box' || param === 'logo') return param;
+        } catch (_) {}
+        return null;
+      }
+
+      function apply(style) {
+        html.setAttribute('data-node-style', style);
+        label.textContent = viewerText(style === 'logo' ? 'viewer.nodestyle.logo' : 'viewer.nodestyle.box');
+        btn.setAttribute('aria-pressed', style === 'logo' ? 'true' : 'false');
+      }
+
+      function toggle() {
+        var next = html.getAttribute('data-node-style') === 'logo' ? 'box' : 'logo';
+        apply(next);
+        writeStored(next);
+      }
+
+      // The authored default wins unless the reader or a share link says otherwise.
+      var saved = readStored();
+      apply(urlOverride() || (saved === 'box' || saved === 'logo' ? saved : authored));
+      btn.addEventListener('click', toggle);
+      return { apply: apply, toggle: toggle, current: function () { return html.getAttribute('data-node-style'); } };
+    })();
 
     Mosofin.theme = (function () {
       var STORAGE_KEY = 'mosofin-theme';

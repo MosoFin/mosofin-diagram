@@ -64,8 +64,8 @@ Three goals, in priority order:
    `security`, `messagebus`, `external`, `neutral`, `start`, `active`, `waiting`, `decision`,
    `success`, `failure` are authored in every spec file and every test fixture. **Rename the label,
    the glyph and the colour — never the id.**
-3. **Every user-visible string exists in en + zh.** Both the site (`LANGS` in `docs/index.html`) and
-   the viewer (`i18n.mjs`, ~470 keys) ship both. A new label without a Chinese sibling is a bug.
+3. **Every user-visible string is English.** Both the site (`LANGS.en` in `docs/index.html`) and
+   the viewer (`i18n.mjs`, ~470 keys) ship English only. Authored diagram copy is never translated.
 4. **Vendor colour stays inside the neutral brand plate.** A brand mark is a 16×16 white plate with
    a `#cbd5e1` frame. Stripe purple and Shopify green live *inside* that plate so vendor colour
    never competes with the semantic node vocabulary. See `assets/brand-marks/`.

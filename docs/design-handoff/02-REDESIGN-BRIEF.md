@@ -149,7 +149,7 @@ A recommendation is wanted here; this package deliberately does not make it.
 
 ## 7. Sequencing — if only some of this gets done
 
-1. **Legend labels + kind labels** (en + zh). Cheapest, most visible, fixes the worst read.
+1. **Legend labels + kind labels** (English catalog). Cheapest, most visible, fixes the worst read.
 2. **Sigils** for frontend / backend / database / cloud / messagebus, plus a new `decision` glyph.
 3. **Favicon and wordmark.** Three drawn candidates in `assets/favicon/`: `mosofin-favicon-proposed.svg`
    (the **footed total** — check over the accountant's double underline; recommended),

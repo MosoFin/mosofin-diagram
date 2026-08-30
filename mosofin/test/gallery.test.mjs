@@ -113,7 +113,6 @@ test('generated proof gallery matches its sources, receipts, and checked-in arti
   assert.match(html, /class="community-callout"/);
   assert.match(html, /href="https:\/\/github\.com\/MosoFin\/mosofin-diagram\/issues\/new\?template=showcase\.yml"[^>]+rel="noopener noreferrer"/);
   assert.match(html, /Share a verified diagram/);
-  assert.match(html, /提交已验证成品/);
 
   for (const relative of [
     'gallery.html',

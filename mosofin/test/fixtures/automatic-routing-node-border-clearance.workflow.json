@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "workflow",
   "meta": {
-    "title": "自动连线节点边框避让回归",
+    "title": "Automatic routing node-border clearance",
     "quality_profile": "showcase",
     "viewBox": [720, 360]
   },
@@ -16,15 +16,15 @@
       "lane": "orchestrator",
       "col": 2,
       "type": "backend",
-      "label": "team send 派单",
-      "sublabel": "选择目标 Worker"
+      "label": "team send",
+      "sublabel": "target Worker"
     },
     {
       "id": "inject",
       "lane": "runtime",
       "col": 1,
       "type": "security",
-      "label": "校验并注入输入",
+      "label": "inject",
       "sublabel": "UI token → PTY stdin"
     }
   ],

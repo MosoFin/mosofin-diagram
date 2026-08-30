@@ -176,14 +176,14 @@ test('cli: guide recommends a scenario as structured json', () => {
   assert.equal(parsed.recommendation.type, 'sequence');
 });
 
-test('cli: guide detects Chinese and explains the recommendation boundary', () => {
-  const result = run(['guide', '展示 Kafka topic 消费者组和死信队列']);
+test('cli: guide explains the recommendation boundary', () => {
+  const result = run(['guide', 'Show Kafka topic consumer group and dead letter']);
 
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /推荐: 事件流拓扑  \[dataflow\]/);
-  assert.match(result.stdout, /不要这样用:/);
-  assert.match(result.stdout, /必须包含:/);
-  assert.match(result.stdout, /可直接复制的提示词:/);
+  assert.match(result.stdout, /Recommendation: Event-stream topology  \[dataflow\]/);
+  assert.match(result.stdout, /Avoid when:/);
+  assert.match(result.stdout, /Must include:/);
+  assert.match(result.stdout, /Copy-ready prompt:/);
 });
 
 test('cli: guide works from an installed skill without node_modules', () => {
@@ -285,7 +285,7 @@ test('cli: deliver --open launches only the committed absolute artifact as one a
   skip: process.platform === 'win32',
 }, () => {
   const fake = makeFakeOpeners('successful-open');
-  const out = path.join(tmp, `-复杂 path 'quoted'`, 'verified diagram.html');
+  const out = path.join(tmp, `-awkward path 'quoted'`, 'verified diagram.html');
   const input = path.join(skillRoot, 'examples/agent-tool-call.workflow.json');
   const result = run(['deliver', 'workflow', input, out, '--open', '--json'], { env: fake.env });
 

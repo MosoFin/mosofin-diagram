@@ -8,6 +8,8 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Dropped Chinese from the public site, recipe guide, viewer catalog, and
+  identity gates. The skill is English-only: `meta.locale` accepts `en`.
 - How it works is now four named steps in a left-to-right slider: Add the skill,
   Describe the business, Ask one question, Share the map. Status reads “Step 1 of 4”
   (never a slash count). The same four terms and slider appear on Get started and

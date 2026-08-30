@@ -72,7 +72,6 @@
     .lead-label::before { content:''; width:2.75rem; height:1px; background:var(--line-hi); }
     h1 { max-width:780px; font-family:var(--font-display); font-size:clamp(2.5rem,5vw,4.25rem); font-weight:400; line-height:1.06; letter-spacing:-.028em; color:var(--ink); text-wrap:balance; }
     h1 em { font-style:italic; color:var(--accent); }
-    html[lang^="zh"] .title-gap { display:none; }
     .lead-copy { color:var(--muted); font-size:.9375rem; line-height:1.72; text-wrap:pretty; }
     .trust-line { display:flex; gap:.6rem; align-items:flex-start; margin-top:1.125rem; color:var(--emerald); font-family:var(--font-mono); font-size:.6875rem; line-height:1.65; }
     .trust-line::before { content:'✓'; flex:0 0 auto; }
@@ -196,10 +195,10 @@
       <span class="nav-brand-title">MosoFin-diagram</span>
     </a>
     <div class="nav-right">
-      <a class="nav-link" href="guide.html" data-en="How it works" data-zh="工作原理">How it works</a>
-      <a class="nav-link" href="gallery.html" data-en="Examples" data-zh="示例">Examples</a>
-      <a class="nav-link" href="logos.html" data-en="Logos" data-zh="标识">Logos</a>
-      <a class="btn" href="start.html" aria-current="page" data-en="Get started →" data-zh="开始使用 →">Get started →</a>
+      <a class="nav-link" href="guide.html" data-en="How it works">How it works</a>
+      <a class="nav-link" href="gallery.html" data-en="Examples">Examples</a>
+      <a class="nav-link" href="logos.html" data-en="Logos">Logos</a>
+      <a class="btn" href="start.html" aria-current="page" data-en="Get started →">Get started →</a>
     </div>
     </div>
   </nav>
@@ -207,12 +206,12 @@
   <main>
     <header class="lead">
       <div>
-        <p class="lead-label" data-en="From a real artifact to your own" data-zh="从真实成品到你自己的图">From a real artifact to your own</p>
-        <h1><span data-en="Four steps." data-zh="四步。">Four steps.</span><span class="title-gap" aria-hidden="true"> </span><em data-en="One diagram you can share." data-zh="一张可转发的图。">One diagram you can share.</em></h1>
+        <p class="lead-label" data-en="From a real artifact to your own">From a real artifact to your own</p>
+        <h1><span data-en="Four steps.">Four steps.</span><span class="title-gap" aria-hidden="true"> </span><em data-en="One diagram you can share.">One diagram you can share.</em></h1>
       </div>
       <div>
-        <p class="lead-copy" data-en="Slide left to right through all four steps: add the skill, describe the business, ask one question, then share the map. Nothing on this page receives your repository or diagram data." data-zh="从左到右滑过全部四步：添加技能、描述业务、提出一个问题、分享这张图。这个页面不会接收仓库内容或图表数据。">Slide left to right through all four steps: add the skill, describe the business, ask one question, then share the map. Nothing on this page receives your repository or diagram data.</p>
-        <div class="trust-line" data-en="No repository content or diagram data is sent to this page." data-zh="这个页面不会接收仓库内容或图表数据。">No repository content or diagram data is sent to this page.</div>
+        <p class="lead-copy" data-en="Slide left to right through all four steps: add the skill, describe the business, ask one question, then share the map. Nothing on this page receives your repository or diagram data.">Slide left to right through all four steps: add the skill, describe the business, ask one question, then share the map. Nothing on this page receives your repository or diagram data.</p>
+        <div class="trust-line" data-en="No repository content or diagram data is sent to this page.">No repository content or diagram data is sent to this page.</div>
       </div>
     </header>
 
@@ -220,12 +219,12 @@
       <div class="slides-viewport" tabindex="0" aria-roledescription="carousel" aria-label="Four steps">
         <div class="slides-track">
           <article class="slide" data-slide="1">
-            <span class="slide-kicker" data-en="Step 1" data-zh="第 1 步">Step 1</span>
-            <h2 data-en="Add the skill" data-zh="添加技能">Add the skill</h2>
-            <p class="slide-intro" data-en="Choose Cursor, Codex, Claude Code, or OpenCode. The switcher gives each one the same checked Skill. Raven stays a manual ZIP install." data-zh="选择 Cursor、Codex、Claude Code 或 OpenCode。切换器为每个 Agent 提供同一份经过检查的 Skill。Raven 采用 ZIP 手动安装。">Choose Cursor, Codex, Claude Code, or OpenCode. The switcher gives each one the same checked Skill. Raven stays a manual ZIP install.</p>
+            <span class="slide-kicker" data-en="Step 1">Step 1</span>
+            <h2 data-en="Add the skill">Add the skill</h2>
+            <p class="slide-intro" data-en="Choose Cursor, Codex, Claude Code, or OpenCode. The switcher gives each one the same checked Skill. Raven stays a manual ZIP install.">Choose Cursor, Codex, Claude Code, or OpenCode. The switcher gives each one the same checked Skill. Raven stays a manual ZIP install.</p>
 
             <div class="agent-picker">
-              <p class="agent-picker-head"><span data-en="Choose your coding agent" data-zh="选择你的编码 Agent">Choose your coding agent</span><strong id="agent-state">Codex · same Skill</strong></p>
+              <p class="agent-picker-head"><span data-en="Choose your coding agent">Choose your coding agent</span><strong id="agent-state">Codex · same Skill</strong></p>
               <div class="agent-tabs" role="tablist" aria-label="Coding agent">
                 <button class="agent-tab" type="button" role="tab" data-agent="cursor">Cursor</button>
                 <button class="agent-tab" type="button" role="tab" data-agent="codex">Codex</button>
@@ -235,54 +234,54 @@
             </div>
 
             <div class="command-block">
-              <div class="command-bar"><span data-en="Global install" data-zh="全局安装">Global install</span><button class="copy-button" type="button" data-copy-source="install-command" data-en="Copy" data-zh="复制">Copy</button></div>
+              <div class="command-bar"><span data-en="Global install">Global install</span><button class="copy-button" type="button" data-copy-source="install-command" data-en="Copy">Copy</button></div>
               <pre id="install-command">npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent codex --global --copy --yes</pre>
             </div>
             <div class="command-block">
-              <div class="command-bar"><span data-en="This repository only" data-zh="仅安装到当前仓库">This repository only</span><button class="copy-button" type="button" data-copy-source="project-command" data-en="Copy" data-zh="复制">Copy</button></div>
+              <div class="command-bar"><span data-en="This repository only">This repository only</span><button class="copy-button" type="button" data-copy-source="project-command" data-en="Copy">Copy</button></div>
               <pre id="project-command">npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent codex --copy --yes</pre>
             </div>
-            <p class="secondary-note" data-en="Raven is supported through a manual ZIP installation, not a generated agent-switcher command. Extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin." data-zh="Raven 采用 ZIP 手动安装，不使用 Agent 切换器生成命令。将 mosofin.zip 解压到 ~/.raven/workspace/skills，解压后会得到 ~/.raven/workspace/skills/mosofin。">Raven is supported through a manual ZIP installation, not a generated agent-switcher command. Extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.</p>
+            <p class="secondary-note" data-en="Raven is supported through a manual ZIP installation, not a generated agent-switcher command. Extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.">Raven is supported through a manual ZIP installation, not a generated agent-switcher command. Extract mosofin.zip into ~/.raven/workspace/skills, which yields ~/.raven/workspace/skills/mosofin.</p>
           </article>
 
           <article class="slide" data-slide="2">
-            <span class="slide-kicker" data-en="Step 2" data-zh="第 2 步">Step 2</span>
-            <h2 data-en="Describe the business" data-zh="描述业务">Describe the business</h2>
-            <p class="slide-intro" data-en="A short interview: what the business does, which entities are in scope, and which system owns each domain. Then pick the question shape closest to what you need to see." data-zh="一次简短访谈：业务做什么、涉及哪些主体、每个领域由哪个系统说了算。再选择最接近你要看清的问题形态。">A short interview: what the business does, which entities are in scope, and which system owns each domain. Then pick the question shape closest to what you need to see.</p>
+            <span class="slide-kicker" data-en="Step 2">Step 2</span>
+            <h2 data-en="Describe the business">Describe the business</h2>
+            <p class="slide-intro" data-en="A short interview: what the business does, which entities are in scope, and which system owns each domain. Then pick the question shape closest to what you need to see.">A short interview: what the business does, which entities are in scope, and which system owns each domain. Then pick the question shape closest to what you need to see.</p>
             <div class="type-shell" aria-labelledby="type-label">
-              <p class="type-label" id="type-label"><span data-en="Choose the question shape" data-zh="选择问题形态">Choose the question shape</span><strong data-en="Five diagram types" data-zh="五种图型">Five diagram types</strong></p>
+              <p class="type-label" id="type-label"><span data-en="Choose the question shape">Choose the question shape</span><strong data-en="Five diagram types">Five diagram types</strong></p>
               <div class="type-tabs" role="tablist" aria-label="Diagram type">
-                <button class="type-tab" type="button" role="tab" data-type="architecture" data-en="Architecture" data-zh="架构图">Architecture</button>
-                <button class="type-tab" type="button" role="tab" data-type="workflow" data-en="Workflow" data-zh="工作流">Workflow</button>
-                <button class="type-tab" type="button" role="tab" data-type="sequence" data-en="Sequence" data-zh="时序图">Sequence</button>
-                <button class="type-tab" type="button" role="tab" data-type="dataflow" data-en="Data flow" data-zh="数据流">Data flow</button>
-                <button class="type-tab" type="button" role="tab" data-type="lifecycle" data-en="Lifecycle" data-zh="生命周期">Lifecycle</button>
+                <button class="type-tab" type="button" role="tab" data-type="architecture" data-en="Architecture">Architecture</button>
+                <button class="type-tab" type="button" role="tab" data-type="workflow" data-en="Workflow">Workflow</button>
+                <button class="type-tab" type="button" role="tab" data-type="sequence" data-en="Sequence">Sequence</button>
+                <button class="type-tab" type="button" role="tab" data-type="dataflow" data-en="Data flow">Data flow</button>
+                <button class="type-tab" type="button" role="tab" data-type="lifecycle" data-en="Lifecycle">Lifecycle</button>
               </div>
             </div>
-            <p class="secondary-note" data-en="The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded." data-zh="Start 链接只携带 Agent、语言、图表类型和粗粒度来源标签。转化步骤只保存在当前浏览器会话中，Mosofin 不会发送这些数据，也不会记录仓库路径、标题、节点、关系或源 JSON。">The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded.</p>
+            <p class="secondary-note" data-en="The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded.">The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded.</p>
           </article>
 
           <article class="slide" data-slide="3" aria-live="polite">
-            <span class="slide-kicker" data-en="Step 3" data-zh="第 3 步">Step 3</span>
-            <h2 data-en="Ask one question" data-zh="提出一个问题">Ask one question</h2>
-            <p class="slide-intro" data-en="Copy the prompt, then let your coding agent inspect the real repository before it draws." data-zh="复制提示词，再让编码智能体先检查真实仓库，然后作图。">Copy the prompt, then let your coding agent inspect the real repository before it draws.</p>
+            <span class="slide-kicker" data-en="Step 3">Step 3</span>
+            <h2 data-en="Ask one question">Ask one question</h2>
+            <p class="slide-intro" data-en="Copy the prompt, then let your coding agent inspect the real repository before it draws.">Copy the prompt, then let your coding agent inspect the real repository before it draws.</p>
             <p class="question" id="recipe-title">System overview</p>
             <p class="question" id="recipe-question"></p>
             <ul class="include-list" id="include-list" aria-label="Required evidence"></ul>
             <p class="prompt-box" id="recipe-prompt"></p>
             <div class="actions">
-              <button class="action action-primary" id="copy-starter" type="button" data-en="Copy install + prompt" data-zh="复制安装命令 + 提示词">Copy install + prompt</button>
-              <button class="action" id="copy-prompt" type="button" data-en="Prompt only" data-zh="仅复制提示词">Prompt only</button>
+              <button class="action action-primary" id="copy-starter" type="button" data-en="Copy install + prompt">Copy install + prompt</button>
+              <button class="action" id="copy-prompt" type="button" data-en="Prompt only">Prompt only</button>
             </div>
           </article>
 
           <article class="slide" data-slide="4">
-            <span class="slide-kicker" data-en="Step 4" data-zh="第 4 步">Step 4</span>
-            <h2 data-en="Share the map" data-zh="分享这张图">Share the map</h2>
-            <p class="slide-intro" data-en="Forward the HTML, export a share card, or walk a guided view. The file is self-contained — no account, no server, no invented numbers." data-zh="转发 HTML、导出分享卡，或走一遍引导视图。文件是独立的——无需账号、无需服务器、不编造数字。">Forward the HTML, export a share card, or walk a guided view. The file is self-contained — no account, no server, no invented numbers.</p>
+            <span class="slide-kicker" data-en="Step 4">Step 4</span>
+            <h2 data-en="Share the map">Share the map</h2>
+            <p class="slide-intro" data-en="Forward the HTML, export a share card, or walk a guided view. The file is self-contained — no account, no server, no invented numbers.">Forward the HTML, export a share card, or walk a guided view. The file is self-contained — no account, no server, no invented numbers.</p>
             <div class="actions">
-              <a class="action action-primary" id="proof-link" href="gallery.html" data-en="See the example →" data-zh="查看示例 →">See the example →</a>
-              <a class="action" href="guide.html" data-en="How it works" data-zh="工作原理">How it works</a>
+              <a class="action action-primary" id="proof-link" href="gallery.html" data-en="See the example →">See the example →</a>
+              <a class="action" href="guide.html" data-en="How it works">How it works</a>
             </div>
             <p class="proof-meta" id="proof-meta"></p>
           </article>
@@ -304,13 +303,13 @@
     </section>
 
     <footer class="page-footer">
-      <span data-en="Mosofin v1.0.0-dev.0 · development · self-contained HTML · typed JSON source" data-zh="Mosofin v1.0.0-dev.0 · 开发版 · 独立 HTML · 类型化 JSON 源">Mosofin v1.0.0-dev.0 · development · self-contained HTML · typed JSON source</span>
+      <span data-en="Mosofin v1.0.0-dev.0 · development · self-contained HTML · typed JSON source">Mosofin v1.0.0-dev.0 · development · self-contained HTML · typed JSON source</span>
       <span id="copy-status" role="status" aria-live="polite"></span>
-      <a href="https://github.com/MosoFin/mosofin-diagram" data-en="View source on GitHub ↗" data-zh="在 GitHub 查看源码 ↗">View source on GitHub ↗</a>
+      <a href="https://github.com/MosoFin/mosofin-diagram" data-en="View source on GitHub ↗">View source on GitHub ↗</a>
     </footer>
   </main>
 
-  <script id="start-data" type="application/json">{"architecture":{"id":"system-overview","type":"architecture","proof":"money-map","presentation":{"preset":"classic","motion":"static","views":"optional"},"en":{"title":"System overview","question":"What exists, who owns it, and how is it connected?","summary":"A bounded map of core components, external dependencies, primary paths, and trust boundaries.","useWhen":"Onboarding, design reviews, repository orientation, or explaining a service landscape.","avoidWhen":"The audience needs exact call order, state transitions, or row-level data lineage.","include":["8–12 core components","one primary path","external dependencies","trust boundaries"],"prompt":"Analyze this repository, then use Mosofin to create a high-level architecture diagram. Show 8–12 core runtime components, one primary request or data path, external dependencies, ownership or trust boundaries, and put supporting detail in cards instead of adding more edges."},"zh":{"title":"系统总览","question":"系统里有什么、归谁负责、彼此如何连接？","summary":"用一张有边界的图展示核心组件、外部依赖、主路径和信任边界。","useWhen":"适合新人上手、方案评审、仓库梳理和服务全景说明。","avoidWhen":"如果重点是精确调用顺序、状态流转或字段级血缘，请换其他配方。","include":["8–12 个核心组件","一条主路径","外部依赖","归属或信任边界"],"prompt":"分析这个仓库，然后用 Mosofin 生成高层系统架构图。展示 8–12 个核心运行时组件、一条主要请求或数据路径、外部依赖、归属或信任边界；支持性细节放进卡片，不要继续堆连线。"}},"workflow":{"id":"agent-tool-call","type":"workflow","proof":"close","presentation":{"preset":"signal-flow","motion":"trace","views":"recommended"},"en":{"title":"Agent tool-call loop","question":"How does an agent plan, get permission, act, recover, and report?","summary":"A lane-based agent loop with policy gates, tool execution, exception recovery, evidence, and final response.","useWhen":"Explaining agent runtimes, MCP/tool orchestration, approvals, retries, or observability.","avoidWhen":"The goal is only to show static agent components or exact API message timing.","include":["request and planning","policy or approval gate","tool execution","exception and evidence paths"],"prompt":"Use Mosofin workflow mode to explain this agent tool-call loop. Separate user surface, agent runtime, policy boundary, exception handling, tool execution, and observability into lanes. Make the successful path primary and show approval, retry, blocked, and evidence paths explicitly."},"zh":{"title":"智能体工具调用","question":"智能体如何规划、获批、执行、恢复并汇报？","summary":"用泳道表达策略门、工具执行、异常恢复、证据和最终回复。","useWhen":"适合解释 Agent Runtime、MCP/工具编排、审批、重试和可观测性。","avoidWhen":"如果只想看静态组件，或重点是精确 API 消息时序，请换其他配方。","include":["请求与规划","策略或审批门","工具执行","异常与证据路径"],"prompt":"用 Mosofin 工作流模式解释这段智能体工具调用。把用户界面、Agent Runtime、策略边界、异常处理、工具执行和可观测性分成泳道；突出成功主路径，并明确展示审批、重试、阻塞和证据路径。"}},"sequence":{"id":"api-request","type":"sequence","proof":"order-path","presentation":{"preset":"classic","motion":"trace","views":"optional"},"en":{"title":"API request chain","question":"Who calls whom, in what order, and what returns?","summary":"A time-ordered request path with authentication, cache fallback, persistence, return traffic, and async trace.","useWhen":"API documentation, debugging request latency, auth reviews, or explaining cache fallback.","avoidWhen":"Order is unimportant and the audience only needs the stable service topology.","include":["callers and callees","request and return messages","fallback or error path","async side effects"],"prompt":"Use Mosofin sequence mode to show this request from caller to final response. Include authentication, cache hit or miss, persistence fallback, return messages, and asynchronous trace or event emission. Keep message labels short and order unambiguous."},"zh":{"title":"API 请求链","question":"谁调用谁、顺序如何、最终返回什么？","summary":"按时间展示鉴权、缓存回退、持久化、返回流量和异步追踪。","useWhen":"适合 API 文档、请求耗时排查、鉴权评审和缓存回退说明。","avoidWhen":"如果顺序不重要，受众只需要稳定的服务拓扑，请用架构图。","include":["调用方与被调用方","请求与返回消息","回退或错误路径","异步副作用"],"prompt":"用 Mosofin 时序模式展示从调用方到最终响应的完整请求。包含鉴权、缓存命中或未命中、持久化回退、返回消息，以及异步 Trace 或事件上报；消息标签保持简短，顺序必须明确。"}},"dataflow":{"id":"event-stream","type":"dataflow","proof":"payout-rec","presentation":{"preset":"signal-flow","motion":"trace","views":"recommended"},"en":{"title":"Event-stream topology","question":"Which events move through which topics, processors, groups, and failure paths?","summary":"A stream map of producers, topics, ordered processors, consumer groups, state, replay, and DLQ.","useWhen":"Kafka/event-platform design, stream processing reviews, ownership, replay, and failure handling.","avoidWhen":"Topic names, consumer groups, and delivery semantics are not known—use a generic workflow instead.","include":["producers and event names","topics and ordering","processors and consumer groups","state, replay, and DLQ"],"prompt":"Use Mosofin dataflow mode to draw this event-stream topology. Name producers, events, topics, ordered processors, consumer groups, state stores, replay paths, and the DLQ. Show ownership and delivery semantics only when supported by evidence."},"zh":{"title":"事件流拓扑","question":"哪些事件经过哪些 Topic、处理器、消费者组和失败路径？","summary":"展示生产者、Topic、有序处理器、消费者组、状态、重放和 DLQ。","useWhen":"适合 Kafka/事件平台设计、流处理评审、归属、重放和失败处理。","avoidWhen":"如果 Topic、消费者组和投递语义都不清楚，请先用通用工作流，不要编造事件拓扑。","include":["生产者与事件名","Topic 与顺序","处理器与消费者组","状态、重放与 DLQ"],"prompt":"用 Mosofin 数据流模式绘制这段事件流拓扑。命名生产者、事件、Topic、有序处理器、消费者组、状态存储、重放路径和 DLQ；只有在证据充分时才标注归属和投递语义。"}},"lifecycle":{"id":"object-lifecycle","type":"lifecycle","proof":"dispute","presentation":{"preset":"classic","motion":"trace","views":"optional"},"en":{"title":"Object lifecycle","question":"Which states exist, what events move between them, and how does it end?","summary":"A state model with active work, waits, retries, cancellation, failure, and explicit terminal outcomes.","useWhen":"Tasks, orders, tickets, subscriptions, jobs, agent runs, or any durable object with status.","avoidWhen":"The object has no durable state and the real question is participant interaction over time.","include":["start and active states","event-labelled transitions","wait and retry states","all terminal outcomes"],"prompt":"Use Mosofin lifecycle mode to model this object. Separate main progress, waiting or interruption states, and terminal outcomes. Label transitions with events, include retry, cancellation, timeout, success, and failure where real, and never hide an ending."},"zh":{"title":"对象生命周期","question":"有哪些状态、什么事件触发流转、最终如何结束？","summary":"展示执行、等待、重试、取消、失败以及明确终态的状态模型。","useWhen":"适合任务、订单、工单、订阅、作业、Agent Run 等带持久状态的对象。","avoidWhen":"对象没有持久状态，真正问题是参与者随时间的交互时，请使用时序图。","include":["开始与执行态","带事件的转换","等待与重试态","所有终态"],"prompt":"用 Mosofin 生命周期模式建模这个对象。分开主进度、等待或中断状态和终态；用事件标注转换，并在真实存在时展示重试、取消、超时、成功和失败，不能隐藏任何结束方式。"}}}</script>
+  <script id="start-data" type="application/json">{"architecture":{"id":"system-overview","type":"architecture","proof":"money-map","presentation":{"preset":"classic","motion":"static","views":"optional"},"en":{"title":"System overview","question":"What exists, who owns it, and how is it connected?","summary":"A bounded map of core components, external dependencies, primary paths, and trust boundaries.","useWhen":"Onboarding, design reviews, repository orientation, or explaining a service landscape.","avoidWhen":"The audience needs exact call order, state transitions, or row-level data lineage.","include":["8–12 core components","one primary path","external dependencies","trust boundaries"],"prompt":"Analyze this repository, then use Mosofin to create a high-level architecture diagram. Show 8–12 core runtime components, one primary request or data path, external dependencies, ownership or trust boundaries, and put supporting detail in cards instead of adding more edges."}},"workflow":{"id":"agent-tool-call","type":"workflow","proof":"close","presentation":{"preset":"signal-flow","motion":"trace","views":"recommended"},"en":{"title":"Agent tool-call loop","question":"How does an agent plan, get permission, act, recover, and report?","summary":"A lane-based agent loop with policy gates, tool execution, exception recovery, evidence, and final response.","useWhen":"Explaining agent runtimes, MCP/tool orchestration, approvals, retries, or observability.","avoidWhen":"The goal is only to show static agent components or exact API message timing.","include":["request and planning","policy or approval gate","tool execution","exception and evidence paths"],"prompt":"Use Mosofin workflow mode to explain this agent tool-call loop. Separate user surface, agent runtime, policy boundary, exception handling, tool execution, and observability into lanes. Make the successful path primary and show approval, retry, blocked, and evidence paths explicitly."}},"sequence":{"id":"api-request","type":"sequence","proof":"order-path","presentation":{"preset":"classic","motion":"trace","views":"optional"},"en":{"title":"API request chain","question":"Who calls whom, in what order, and what returns?","summary":"A time-ordered request path with authentication, cache fallback, persistence, return traffic, and async trace.","useWhen":"API documentation, debugging request latency, auth reviews, or explaining cache fallback.","avoidWhen":"Order is unimportant and the audience only needs the stable service topology.","include":["callers and callees","request and return messages","fallback or error path","async side effects"],"prompt":"Use Mosofin sequence mode to show this request from caller to final response. Include authentication, cache hit or miss, persistence fallback, return messages, and asynchronous trace or event emission. Keep message labels short and order unambiguous."}},"dataflow":{"id":"event-stream","type":"dataflow","proof":"payout-rec","presentation":{"preset":"signal-flow","motion":"trace","views":"recommended"},"en":{"title":"Event-stream topology","question":"Which events move through which topics, processors, groups, and failure paths?","summary":"A stream map of producers, topics, ordered processors, consumer groups, state, replay, and DLQ.","useWhen":"Kafka/event-platform design, stream processing reviews, ownership, replay, and failure handling.","avoidWhen":"Topic names, consumer groups, and delivery semantics are not known—use a generic workflow instead.","include":["producers and event names","topics and ordering","processors and consumer groups","state, replay, and DLQ"],"prompt":"Use Mosofin dataflow mode to draw this event-stream topology. Name producers, events, topics, ordered processors, consumer groups, state stores, replay paths, and the DLQ. Show ownership and delivery semantics only when supported by evidence."}},"lifecycle":{"id":"object-lifecycle","type":"lifecycle","proof":"dispute","presentation":{"preset":"classic","motion":"trace","views":"optional"},"en":{"title":"Object lifecycle","question":"Which states exist, what events move between them, and how does it end?","summary":"A state model with active work, waits, retries, cancellation, failure, and explicit terminal outcomes.","useWhen":"Tasks, orders, tickets, subscriptions, jobs, agent runs, or any durable object with status.","avoidWhen":"The object has no durable state and the real question is participant interaction over time.","include":["start and active states","event-labelled transitions","wait and retry states","all terminal outcomes"],"prompt":"Use Mosofin lifecycle mode to model this object. Separate main progress, waiting or interruption states, and terminal outcomes. Label transitions with events, include retry, cancellation, timeout, success, and failure where real, and never hide an ending."}}}</script>
   <script>
     (function () {
       'use strict';
@@ -328,9 +327,7 @@
       var type = KNOWN_TYPES.has(requestedType) ? requestedType : 'architecture';
       var agent = KNOWN_AGENTS.has(requestedAgent) ? requestedAgent : 'codex';
       var source = KNOWN_SOURCES.has(requestedSource) ? requestedSource : 'direct';
-      var language = requestedLanguage === 'zh' || requestedLanguage === 'en'
-        ? requestedLanguage
-        : ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+      var language = 'en';
 
       var title = document.getElementById('recipe-title');
       var question = document.getElementById('recipe-question');
@@ -343,15 +340,8 @@
       var installCommand = document.getElementById('install-command');
       var projectCommand = document.getElementById('project-command');
 
-      function copyForElement(element) {
-        return language === 'zh' ? element.dataset.zh : element.dataset.en;
-      }
-
       function updateStaticCopy() {
-        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
-        document.querySelectorAll('[data-en][data-zh]').forEach(function (element) {
-          element.textContent = copyForElement(element);
-        });
+        document.documentElement.lang = 'en';
         if (window.__mosofinStartSlides) window.__mosofinStartSlides.refresh();
       }
 
@@ -393,7 +383,7 @@
 
       function render() {
         var recipe = DATA[type];
-        var copy = recipe[language];
+        var copy = recipe.en;
         updateStaticCopy();
         document.querySelectorAll('[data-type]').forEach(function (button) {
           var active = button.dataset.type === type;
@@ -406,7 +396,7 @@
           button.tabIndex = active ? 0 : -1;
         });
         var agentName = document.querySelector('[data-agent="' + agent + '"]').textContent;
-        agentState.textContent = agentName + (language === 'zh' ? ' · 同一份 Skill' : ' · same Skill');
+        agentState.textContent = agentName + ' · same Skill';
         installCommand.textContent = 'npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent ' + agent + ' --global --copy --yes';
         projectCommand.textContent = 'npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent ' + agent + ' --copy --yes';
         title.textContent = copy.title;
@@ -418,9 +408,7 @@
           return entry;
         }));
         proofLink.href = 'gallery.html#proof-' + encodeURIComponent(recipe.proof);
-        proofMeta.textContent = language === 'zh'
-          ? '验证成品 · ' + recipe.presentation.preset + ' · ' + recipe.presentation.motion
-          : 'Verified proof · ' + recipe.presentation.preset + ' · ' + recipe.presentation.motion;
+        proofMeta.textContent = 'Verified proof · ' + recipe.presentation.preset + ' · ' + recipe.presentation.motion;
         copyStatus.textContent = '';
         updateUrl();
       }
@@ -440,12 +428,8 @@
 
       function starterText() {
         var agentName = document.querySelector('[data-agent="' + agent + '"]').textContent;
-        if (language === 'zh') {
-          return '为 ' + agentName + ' 安装 Mosofin：\n' + installCommand.textContent.trim()
-            + '\n\n然后在目标仓库中让 ' + agentName + ' 执行：\n' + DATA[type][language].prompt;
-        }
         return 'Install Mosofin for ' + agentName + ':\n' + installCommand.textContent.trim()
-          + '\n\nThen, in your target repository, ask ' + agentName + ':\n' + DATA[type][language].prompt;
+          + '\n\nThen, in your target repository, ask ' + agentName + ':\n' + DATA[type].en.prompt;
       }
 
       async function copyText(text, step) {
@@ -453,9 +437,9 @@
           if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
           else fallbackCopy(text);
           if (step) recordStep(step);
-          copyStatus.textContent = language === 'zh' ? '已复制到剪贴板。' : 'Copied to clipboard.';
+          copyStatus.textContent = 'Copied to clipboard.';
         } catch (_) {
-          copyStatus.textContent = language === 'zh' ? '复制失败，请手动选择文本。' : 'Copy failed. Select the text manually.';
+          copyStatus.textContent = 'Copy failed. Select the text manually.';
         }
       }
 
@@ -504,7 +488,7 @@
         });
       });
       document.getElementById('copy-prompt').addEventListener('click', function () {
-        copyText(DATA[type][language].prompt, 'prompt_copy');
+        copyText(DATA[type].en.prompt, 'prompt_copy');
       });
       document.getElementById('copy-starter').addEventListener('click', function () {
         copyText(starterText(), 'starter_copy');
@@ -528,9 +512,7 @@
             if (i === index) dot.setAttribute('aria-current', 'true');
             else dot.removeAttribute('aria-current');
           });
-          status.textContent = language === 'zh'
-            ? ('第 ' + (index + 1) + ' 步，共 4 步')
-            : ('Step ' + (index + 1) + ' of 4');
+          status.textContent = 'Step ' + (index + 1) + ' of 4';
         }
         root.querySelector('[data-slides-prev]').addEventListener('click', function () { go(index - 1); });
         root.querySelector('[data-slides-next]').addEventListener('click', function () { go(index + 1); });

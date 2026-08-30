@@ -30,7 +30,6 @@ const startData = Object.fromEntries(Object.entries(START_RECIPE_IDS).map(([type
     proof: recipe.proof,
     presentation: recipe.presentation,
     en: recipe.en,
-    zh: recipe.zh,
   }];
 }));
 

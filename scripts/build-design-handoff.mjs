@@ -2,7 +2,7 @@
 // Completes and verifies docs/design-handoff/ against the repository.
 //
 // The package was first assembled from a docs/ snapshot without repo access or Chrome. This script
-// fills every gap it self-reported: verbatim source docs, source-copied layout constants, en+zh
+// fills every gap it self-reported: verbatim source docs, source-copied layout constants, English
 // i18n, the full brand-mark catalogue, the missing messagebus sigil, default renderer legends,
 // icon verification, and every headless-Chrome capture (asset sheet, viewer chrome states, real
 // share cards, site pages, raster previews). It never overwrites the hand-written markdown or the
@@ -66,7 +66,7 @@ const SOURCE_DOCS = [
   ['mosofin/brand-marks/README.md', 'source-docs/brand-marks-catalogue-README.md', 'brand-mark catalogue README'],
   ['mosofin/brand-marks/catalog.json', 'source-docs/brand-marks-catalog.json', 'the 107-mark catalogue source'],
   ['mosofin/schemas/README.md', 'source-docs/schemas-README.md', 'schema reference (legend contract, brand field, kinds)'],
-  ['mosofin/recipes/scenarios.mjs', 'source-docs/scenarios.mjs', 'all 19 recipes: questions, prompts, presentation hints (en + zh)'],
+  ['mosofin/recipes/scenarios.mjs', 'source-docs/scenarios.mjs', 'all 19 recipes: questions, prompts, presentation hints (English)'],
   ['docs/USE-CASE.md', 'source-docs/USE-CASE.md', 'end-to-end Northline walkthrough'],
   ['docs/authoring-cookbook.md', 'source-docs/authoring-cookbook.md', 'agent cookbook'],
   ['docs/gallery/manifest.json', 'source-docs/gallery-manifest.json', 'gallery manifest with receipts'],
@@ -79,7 +79,7 @@ const SOURCE_DOCS = [
   ['docs/guide.html', 'pages/guide.html', 'built guide'],
   ['docs/start.html', 'pages/start.html', 'built start page'],
   ['mosofin/renderers/shared/utils.mjs', 'source-docs/renderers/shared-utils.mjs', 'SIGIL_SHAPE / SIGIL_TONE / renderSemanticSigil'],
-  ['mosofin/renderers/shared/i18n.mjs', 'source-docs/renderers/shared-i18n.mjs', 'MESSAGE_PAIRS — every string en + zh'],
+  ['mosofin/renderers/shared/i18n.mjs', 'source-docs/renderers/shared-i18n.mjs', 'MESSAGE_PAIRS — every English catalog string'],
   ['mosofin/renderers/shared/legend.mjs', 'source-docs/renderers/shared-legend.mjs', 'legend layout engine'],
   ['mosofin/renderers/shared/brand-marks.mjs', 'source-docs/renderers/shared-brand-marks.mjs', 'brand-mark plate rendering and capture rules'],
   ['mosofin/renderers/shared/text-fit.mjs', 'source-docs/renderers/shared-text-fit.mjs', 'node text-fit floor'],
@@ -189,27 +189,33 @@ const layoutConstants = {
 write('tokens/layout-constants.json', `${JSON.stringify(layoutConstants, null, 2)}\n`);
 note('tokens/layout-constants.json');
 
-// i18n — every key, both locales
+// i18n — every key, English catalog
 const keys = i18n.catalogKeys();
 const groups = {};
 for (const key of keys) {
   const group = key.startsWith('legend.') ? key.split('.').slice(0, 2).join('.')
     : key.startsWith('viewer.') ? key.split('.').slice(0, 2).join('.') : key.split('.')[0];
-  (groups[group] ||= {})[key] = { en: i18n.translateMessage('en', key), zh: i18n.translateMessage('zh-CN', key) };
+  (groups[group] ||= {})[key] = { en: i18n.translateMessage('en', key) };
 }
-const previousI18n = path.join(handoff, 'tokens/i18n-labels.json');
-if (fs.existsSync(previousI18n) && !fs.existsSync(path.join(handoff, 'tokens/i18n-labels.artifact-extract.json'))) {
-  fs.renameSync(previousI18n, path.join(handoff, 'tokens/i18n-labels.artifact-extract.json'));
-}
-note('tokens/i18n-labels.artifact-extract.json');
+const staleI18nExtract = path.join(handoff, 'tokens/i18n-labels.artifact-extract.json');
+if (fs.existsSync(staleI18nExtract)) fs.rmSync(staleI18nExtract);
 write('tokens/i18n-labels.json', `${JSON.stringify({
-  _source: 'mosofin/renderers/shared/i18n.mjs MESSAGE_PAIRS via catalogKeys()/translateMessage — every key, en and zh-CN',
+  _source: 'mosofin/renderers/shared/i18n.mjs MESSAGE_PAIRS via catalogKeys()/translateMessage — every key, English',
   _count: keys.length,
-  _rule: 'Every key must carry both locales; the module throws at load if one is missing. A relabel must ship en + zh together.',
+  _rule: 'The catalog is English-only. Authored diagram copy is never translated.',
   _legendDefaults: 'legend.<renderer>.<kind> are the default legend labels; authors override per artifact via meta.legend.entries[kind].label',
   groups,
 }, null, 2)}\n`);
 note('tokens/i18n-labels.json');
+const landing = read('docs/index.html');
+const langsMatch = landing.match(/const LANGS = \{[\s\S]*?\n  \};/);
+if (!langsMatch) throw new Error('docs/index.html: LANGS copy deck not found');
+write('tokens/site-i18n-labels.json', `${JSON.stringify({
+  _source: 'docs/index.html LANGS.en — the landing-page copy deck',
+  _note: 'The public site is English-only.',
+  raw: langsMatch[0],
+}, null, 2)}\n`);
+note('tokens/site-i18n-labels.json');
 
 // presets — from template.html, the source of truth
 const template = read('mosofin/assets/template.html');
@@ -370,7 +376,7 @@ ${byCategory[category].map((m) => `| \`${m.id}\` | ${m.title} | \`#${m.hex}\` | 
 note('assets/brand-marks/catalog-index.md');
 
 // ---------------------------------------------------------------------------
-// 5. Default renderer legends (catalogue order, default labels, en + zh)
+// 5. Default renderer legends (catalogue order, default English labels)
 // ---------------------------------------------------------------------------
 const LEGEND_CATALOGS = {
   architecture: { kinds: ['frontend', 'backend', 'database', 'cloud', 'security', 'messagebus', 'external'], style: 'box', file: 'render-architecture.mjs:82-90' },
@@ -389,29 +395,27 @@ const LINE_STYLE = {
 const LIFECYCLE_TONE = { start: 'frontend', active: 'backend', waiting: 'cloud', decision: 'security', success: 'database', failure: 'security', neutral: 'external', external: 'external' };
 for (const [renderer, cat] of Object.entries(LEGEND_CATALOGS)) {
   const width = 120 * cat.kinds.length + 40;
-  const rows = ['en', 'zh-CN'].map((locale, row) => {
-    const y = 26 + row * 30;
-    return cat.kinds.map((kind, i) => {
-      const x = 20 + i * 120;
-      const label = i18n.translateMessage(locale, `legend.${renderer}.${kind}`);
-      let swatch;
-      if (cat.style === 'line' && kind !== 'database') {
-        const s = LINE_STYLE[kind];
-        swatch = `<line x1="${x}" y1="${y}" x2="${x + 34}" y2="${y}" stroke="${s.stroke}" stroke-width="${s.width}"${s.dash ? ` stroke-dasharray="${s.dash}"` : ''}/><polygon points="${x + 34},${y - 3.5} ${x + 42},${y} ${x + 34},${y + 3.5}" fill="${s.stroke}"/>`;
-      } else {
-        const tone = renderer === 'lifecycle' ? LIFECYCLE_TONE[kind] : kind;
-        swatch = `<rect x="${x}" y="${y - 6}" width="16" height="10" rx="2.5" fill="${lightStroke[`--${tone}-fill`]}" stroke="${lightStroke[`--${tone}-stroke`]}" stroke-width="1"/>`;
-      }
-      const tx = cat.style === 'line' && kind !== 'database' ? x + 50 : x + 24;
-      return `<g data-legend-kind="${kind}" data-locale="${locale}">${swatch}<text x="${tx}" y="${y + 3.5}" font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="10" font-weight="500" fill="#64748b">${esc(label)}</text></g>`;
-    }).join('\n    ');
-  });
-  write(`assets/legend-blocks-default/${renderer}.svg`, `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="76" viewBox="0 0 ${width} 76">
-  <title>Default ${renderer} legend catalogue (en row, zh-CN row)</title>
-  <desc>Every entry the ${renderer} renderer can show (mode "all"), in catalogue order from ${cat.file}, with the default labels from i18n.mjs legend.${renderer}.*. Authors override per artifact via meta.legend.entries[kind].label. Swatch colours are the classic light tokens.</desc>
-  <rect width="${width}" height="76" fill="#ffffff"/>
+  const y = 36;
+  const row = cat.kinds.map((kind, i) => {
+    const x = 20 + i * 120;
+    const label = i18n.translateMessage('en', `legend.${renderer}.${kind}`);
+    let swatch;
+    if (cat.style === 'line' && kind !== 'database') {
+      const s = LINE_STYLE[kind];
+      swatch = `<line x1="${x}" y1="${y}" x2="${x + 34}" y2="${y}" stroke="${s.stroke}" stroke-width="${s.width}"${s.dash ? ` stroke-dasharray="${s.dash}"` : ''}/><polygon points="${x + 34},${y - 3.5} ${x + 42},${y} ${x + 34},${y + 3.5}" fill="${s.stroke}"/>`;
+    } else {
+      const tone = renderer === 'lifecycle' ? LIFECYCLE_TONE[kind] : kind;
+      swatch = `<rect x="${x}" y="${y - 6}" width="16" height="10" rx="2.5" fill="${lightStroke[`--${tone}-fill`]}" stroke="${lightStroke[`--${tone}-stroke`]}" stroke-width="1"/>`;
+    }
+    const tx = cat.style === 'line' && kind !== 'database' ? x + 50 : x + 24;
+    return `<g data-legend-kind="${kind}" data-locale="en">${swatch}<text x="${tx}" y="${y + 3.5}" font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="10" font-weight="500" fill="#64748b">${esc(label)}</text></g>`;
+  }).join('\n    ');
+  write(`assets/legend-blocks-default/${renderer}.svg`, `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="56" viewBox="0 0 ${width} 56">
+  <title>Default ${renderer} legend catalogue</title>
+  <desc>Every entry the ${renderer} renderer can show (mode "all"), in catalogue order from ${cat.file}, with the default English labels from i18n.mjs legend.${renderer}.*. Authors override per artifact via meta.legend.entries[kind].label. Swatch colours are the classic light tokens.</desc>
+  <rect width="${width}" height="56" fill="#ffffff"/>
   <text x="20" y="12" font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="9" font-weight="650" fill="#0f172a">${i18n.translateMessage('en', 'legend.title')} · ${renderer} · ${cat.file}</text>
-    ${rows.join('\n    ')}
+    ${row}
 </svg>
 `);
   note(`assets/legend-blocks-default/${renderer}.svg`);
@@ -419,15 +423,14 @@ for (const [renderer, cat] of Object.entries(LEGEND_CATALOGS)) {
 write('assets/legend-blocks-default/README.md', `# Default legend catalogues — one per renderer
 
 What each renderer *can* show (\`meta.legend.mode: "all"\`), in catalogue order, with the default
-label in **en** (top row) and **zh-CN** (bottom row). The \`../legend-blocks/\` folder shows what the
-eight Northline artifacts *actually* rendered (\`mode: auto\` — only kinds present); this folder is the
-full vocabulary a relabel must cover.
+English labels. The \`../legend-blocks/\` folder shows what the eight Northline artifacts *actually*
+rendered (\`mode: auto\` — only kinds present); this folder is the full vocabulary a relabel must cover.
 
 | renderer | catalogue | kinds |
 |---|---|---|
 ${Object.entries(LEGEND_CATALOGS).map(([r, c]) => `| ${r} | \`${c.file}\` | ${c.kinds.join(' · ')} |`).join('\n')}
 
-Labels live in \`mosofin/renderers/shared/i18n.mjs:30–61\` as \`legend.<renderer>.<kind>\` [en, zh] pairs
+Labels live in \`mosofin/renderers/shared/i18n.mjs:30–61\` as \`legend.<renderer>.<kind>\` English strings
 (\`tokens/i18n-labels.json\` → \`groups["legend.<renderer>"]\`).
 `);
 note('assets/legend-blocks-default/README.md');
@@ -488,8 +491,8 @@ ${Object.keys(SIGIL_SHAPE).map((kind) => `    <figure class="cell tight"><div cl
   </div>
 </section>
 <section>
-  <h2>Default legend catalogues <small>assets/legend-blocks-default · en + zh-CN rows</small></h2>
-  <p class="note">Every entry each renderer can show, in catalogue order with the default labels from <code>i18n.mjs</code>. This is the full vocabulary a relabel must cover, in both languages.</p>
+  <h2>Default legend catalogues <small>assets/legend-blocks-default · English labels</small></h2>
+  <p class="note">Every entry each renderer can show, in catalogue order with the default English labels from <code>i18n.mjs</code>. This is the full vocabulary a relabel must cover.</p>
 ${Object.keys(LEGEND_CATALOGS).map((r) => `  <div class="legend-row" style="overflow:auto">${fs.readFileSync(path.join(handoff, `assets/legend-blocks-default/${r}.svg`), 'utf8')}</div>`).join('\n')}
 </section>
 <section>
@@ -706,7 +709,7 @@ Layers in the package:
 - **Extracted record** — verbatim source docs and renderer files (\`source-docs/\`), the viewer template
   and site templates (\`pages/\`), tokens parsed from source (\`tokens/\`), all 13 shipped sigils from
   \`SIGIL_SHAPE\`, the full ${BRAND_MARKS.length}-mark brand catalogue plated as the viewer plates it, the 14 viewer
-  icons verified against the template, default legend catalogues in en + zh.
+  icons verified against the template, default legend catalogues in English.
 - **Proposed finance redesign** — \`assets/sigils-finance/\` (14 glyphs, closes the \`decision\` gap),
   \`assets/legend-blocks-finance/\` (5 proposed legends), three favicon candidates in \`assets/favicon/\`,
   16 candidate brand marks in \`assets/brand-marks/samples/\` (open-logos, MIT; originals in \`raw/\`).

@@ -21,7 +21,7 @@ not copy in `MISSING-SOURCES.md`. Every one of those gaps is now filled from the
 | `source-docs/brand-marks-catalogue-README.md` | `mosofin/brand-marks/README.md` | brand-mark catalogue README |
 | `source-docs/brand-marks-catalog.json` | `mosofin/brand-marks/catalog.json` | the 107-mark catalogue source |
 | `source-docs/schemas-README.md` | `mosofin/schemas/README.md` | schema reference (legend contract, brand field, kinds) |
-| `source-docs/scenarios.mjs` | `mosofin/recipes/scenarios.mjs` | all 19 recipes: questions, prompts, presentation hints (en + zh) |
+| `source-docs/scenarios.mjs` | `mosofin/recipes/scenarios.mjs` | all 19 recipes: questions, prompts, presentation hints (English) |
 | `source-docs/USE-CASE.md` | `docs/USE-CASE.md` | end-to-end Northline walkthrough |
 | `source-docs/authoring-cookbook.md` | `docs/authoring-cookbook.md` | agent cookbook |
 | `source-docs/gallery-manifest.json` | `docs/gallery/manifest.json` | gallery manifest with receipts |
@@ -34,7 +34,7 @@ not copy in `MISSING-SOURCES.md`. Every one of those gaps is now filled from the
 | `pages/guide.html` | `docs/guide.html` | built guide |
 | `pages/start.html` | `docs/start.html` | built start page |
 | `source-docs/renderers/shared-utils.mjs` | `mosofin/renderers/shared/utils.mjs` | SIGIL_SHAPE / SIGIL_TONE / renderSemanticSigil |
-| `source-docs/renderers/shared-i18n.mjs` | `mosofin/renderers/shared/i18n.mjs` | MESSAGE_PAIRS — every string en + zh |
+| `source-docs/renderers/shared-i18n.mjs` | `mosofin/renderers/shared/i18n.mjs` | MESSAGE_PAIRS — every English catalog string |
 | `source-docs/renderers/shared-legend.mjs` | `mosofin/renderers/shared/legend.mjs` | legend layout engine |
 | `source-docs/renderers/shared-brand-marks.mjs` | `mosofin/renderers/shared/brand-marks.mjs` | brand-mark plate rendering and capture rules |
 | `source-docs/renderers/shared-text-fit.mjs` | `mosofin/renderers/shared/text-fit.mjs` | node text-fit floor |
