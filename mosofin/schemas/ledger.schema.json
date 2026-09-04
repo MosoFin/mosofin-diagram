@@ -5,54 +5,143 @@
   "description": "An account map replayed from a general-ledger journal. Accounts are the nodes, flows are authored credit-to-debit relationships, and the ledger block carries dated, sourced events that may only travel authored flows.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "diagram_type", "meta", "stages", "accounts", "flows", "ledger"],
+  "required": [
+    "schema_version",
+    "diagram_type",
+    "meta",
+    "stages",
+    "accounts",
+    "flows",
+    "ledger"
+  ],
   "properties": {
-    "schema_version": { "const": 1 },
-    "diagram_type": { "const": "ledger" },
+    "schema_version": {
+      "const": 1
+    },
+    "diagram_type": {
+      "const": "ledger"
+    },
     "meta": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["title"],
+      "required": [
+        "title"
+      ],
       "properties": {
-        "title": { "type": "string", "minLength": 1 },
-        "locale": { "$ref": "common.schema.json#/$defs/locale" },
-        "subtitle": { "type": "string" },
-        "output": { "type": "string" },
-        "animation": { "enum": ["trace", "none"] },
-        "visual_preset": { "enum": ["classic", "signal-flow", "blueprint", "editorial"] },
-        "node_style": { "enum": ["box", "logo"] },
-        "quality_profile": { "enum": ["standard", "showcase"] },
-        "view": { "enum": ["map", "city"] },
-        "views": { "$ref": "common.schema.json#/$defs/guidedViews" },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locale": {
+          "$ref": "common.schema.json#/$defs/locale"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "animation": {
+          "enum": [
+            "trace",
+            "none"
+          ]
+        },
+        "visual_preset": {
+          "enum": [
+            "classic",
+            "signal-flow",
+            "blueprint",
+            "editorial"
+          ]
+        },
+        "node_style": {
+          "enum": [
+            "box",
+            "logo"
+          ]
+        },
+        "quality_profile": {
+          "enum": [
+            "standard",
+            "showcase"
+          ]
+        },
+        "view": {
+          "enum": [
+            "map",
+            "city"
+          ]
+        },
+        "views": {
+          "$ref": "common.schema.json#/$defs/guidedViews"
+        },
         "legend": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "mode": { "$ref": "common.schema.json#/$defs/legendMode" },
+            "mode": {
+              "$ref": "common.schema.json#/$defs/legendMode"
+            },
             "entries": {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "asset": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "liability": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "equity": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "revenue": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "contra": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "expense": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "default": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "emphasis": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "security": { "$ref": "common.schema.json#/$defs/legendEntry" },
-                "dashed": { "$ref": "common.schema.json#/$defs/legendEntry" }
+                "asset": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "liability": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "equity": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "revenue": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "contra": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "expense": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "default": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "emphasis": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "security": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "dashed": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                }
               }
             }
           }
         },
         "viewBox": {
           "type": "array",
-          "prefixItems": [{ "type": "number", "minimum": 360 }, { "type": "number", "minimum": 360 }],
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 360
+            },
+            {
+              "type": "number",
+              "minimum": 360
+            }
+          ],
           "items": false,
           "minItems": 2,
           "maxItems": 2
+        },
+        "sibling": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Relative URL or path of the sibling Map/City artifact for the viewer toggle."
         }
       }
     },
@@ -63,8 +152,15 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["label"],
-        "properties": { "label": { "type": "string", "minLength": 1 } }
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "accounts": {
@@ -74,20 +170,62 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "label", "class", "stage", "row"],
+        "required": [
+          "id",
+          "label",
+          "class",
+          "stage",
+          "row"
+        ],
         "properties": {
-          "id": { "$ref": "common.schema.json#/$defs/id" },
-          "label": { "type": "string", "minLength": 1 },
-          "sublabel": { "type": "string" },
-          "tag": { "type": "string" },
-          "brand": { "$ref": "common.schema.json#/$defs/brandMark" },
-          "class": { "enum": ["asset", "liability", "equity", "revenue", "contra", "expense"] },
-          "cash": { "type": "boolean" },
-          "stage": { "type": "integer", "minimum": 0 },
-          "row": { "type": "integer", "minimum": 0 },
-          "width": { "type": "number", "minimum": 48 },
-          "height": { "type": "number", "minimum": 36 },
-          "yOffset": { "type": "number" }
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sublabel": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "brand": {
+            "$ref": "common.schema.json#/$defs/brandMark"
+          },
+          "class": {
+            "enum": [
+              "asset",
+              "liability",
+              "equity",
+              "revenue",
+              "contra",
+              "expense"
+            ]
+          },
+          "cash": {
+            "type": "boolean"
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "row": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "number",
+            "minimum": 48
+          },
+          "height": {
+            "type": "number",
+            "minimum": 36
+          },
+          "yOffset": {
+            "type": "number"
+          }
         }
       }
     },
@@ -96,13 +234,41 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "label", "class"],
+        "required": [
+          "id",
+          "label",
+          "class"
+        ],
         "properties": {
-          "id": { "$ref": "common.schema.json#/$defs/id" },
-          "label": { "type": "string", "minLength": 1, "maxLength": 80 },
-          "sublabel": { "type": "string", "maxLength": 120 },
-          "class": { "enum": ["customer", "vendor", "bank", "lender", "government", "employee", "owner", "processor", "other"] },
-          "grouped": { "type": "integer", "minimum": 1 }
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "sublabel": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "class": {
+            "enum": [
+              "customer",
+              "vendor",
+              "bank",
+              "lender",
+              "government",
+              "employee",
+              "owner",
+              "processor",
+              "other"
+            ]
+          },
+          "grouped": {
+            "type": "integer",
+            "minimum": 1
+          }
         }
       }
     },
@@ -112,66 +278,177 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "from", "to", "label"],
+        "required": [
+          "id",
+          "from",
+          "to",
+          "label"
+        ],
         "properties": {
-          "id": { "$ref": "common.schema.json#/$defs/id" },
-          "from": { "$ref": "common.schema.json#/$defs/id" },
-          "to": { "$ref": "common.schema.json#/$defs/id" },
-          "label": { "type": "string", "minLength": 1 },
-          "classification": { "type": "string" },
-          "variant": { "$ref": "common.schema.json#/$defs/variant" },
-          "route": { "enum": ["auto", "straight", "vertical-channel", "bottom-channel", "top-channel"] },
-          "fromSide": { "enum": ["left", "right", "top", "bottom"] },
-          "toSide": { "enum": ["left", "right", "top", "bottom"] },
-          "channelX": { "type": "number" },
-          "channelY": { "type": "number" },
-          "labelAt": { "$ref": "common.schema.json#/$defs/point" },
-          "labelDx": { "type": "number" },
-          "labelDy": { "type": "number" },
-          "labelSegment": { "type": "integer", "minimum": 0 },
-          "via": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/point" } },
-          "width": { "type": "number", "minimum": 0.5 }
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "from": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "to": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "type": "string"
+          },
+          "variant": {
+            "$ref": "common.schema.json#/$defs/variant"
+          },
+          "route": {
+            "enum": [
+              "auto",
+              "straight",
+              "vertical-channel",
+              "bottom-channel",
+              "top-channel"
+            ]
+          },
+          "fromSide": {
+            "enum": [
+              "left",
+              "right",
+              "top",
+              "bottom"
+            ]
+          },
+          "toSide": {
+            "enum": [
+              "left",
+              "right",
+              "top",
+              "bottom"
+            ]
+          },
+          "channelX": {
+            "type": "number"
+          },
+          "channelY": {
+            "type": "number"
+          },
+          "labelAt": {
+            "$ref": "common.schema.json#/$defs/point"
+          },
+          "labelDx": {
+            "type": "number"
+          },
+          "labelDy": {
+            "type": "number"
+          },
+          "labelSegment": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "via": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/point"
+            }
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.5
+          }
         }
       }
     },
     "ledger": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["period", "currency", "proof", "events"],
+      "required": [
+        "period",
+        "currency",
+        "proof",
+        "events"
+      ],
       "properties": {
         "period": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["start", "end"],
+          "required": [
+            "start",
+            "end"
+          ],
           "properties": {
-            "start": { "$ref": "#/$defs/isoDate" },
-            "end": { "$ref": "#/$defs/isoDate" }
+            "start": {
+              "$ref": "#/$defs/isoDate"
+            },
+            "end": {
+              "$ref": "#/$defs/isoDate"
+            }
           }
         },
-        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
-        "proof": { "enum": ["authored", "csv"] },
-        "amounts": { "type": "boolean" },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "proof": {
+          "enum": [
+            "authored",
+            "csv"
+          ]
+        },
+        "amounts": {
+          "type": "boolean"
+        },
         "source": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "kind": { "enum": ["gl", "bank", "processor"] },
-            "system": { "type": "string", "maxLength": 80 },
-            "file": { "type": "string", "minLength": 1, "maxLength": 200 },
-            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-            "rows": { "type": "integer", "minimum": 1 },
-            "mapping": { "type": "string", "maxLength": 200 }
+            "kind": {
+              "enum": [
+                "gl",
+                "bank",
+                "processor"
+              ]
+            },
+            "system": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "file": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "rows": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "mapping": {
+              "type": "string",
+              "maxLength": 200
+            }
           }
         },
         "opening": {
           "type": "object",
-          "additionalProperties": { "type": "number" }
+          "additionalProperties": {
+            "type": "number"
+          }
         },
         "playback": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "daysPerSecond": { "type": "number", "minimum": 0.5, "maximum": 10 }
+            "daysPerSecond": {
+              "type": "number",
+              "minimum": 0.5,
+              "maximum": 10
+            }
           }
         },
         "tieouts": {
@@ -180,15 +457,35 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "label"],
+            "required": [
+              "id",
+              "label"
+            ],
             "properties": {
-              "id": { "$ref": "common.schema.json#/$defs/id" },
-              "label": { "type": "string", "minLength": 1, "maxLength": 120 },
-              "left": { "$ref": "common.schema.json#/$defs/id" },
-              "right": { "$ref": "common.schema.json#/$defs/id" },
-              "node": { "$ref": "common.schema.json#/$defs/id" },
-              "expected": { "type": "number" },
-              "tolerance": { "type": "number", "minimum": 0 }
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "left": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "right": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "node": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "expected": {
+                "type": "number"
+              },
+              "tolerance": {
+                "type": "number",
+                "minimum": 0
+              }
             }
           }
         },
@@ -198,19 +495,53 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "date", "kind"],
+            "required": [
+              "id",
+              "date",
+              "kind"
+            ],
             "properties": {
-              "id": { "$ref": "common.schema.json#/$defs/id" },
-              "date": { "$ref": "#/$defs/isoDate" },
-              "edge": { "$ref": "common.schema.json#/$defs/id" },
-              "from": { "$ref": "common.schema.json#/$defs/id" },
-              "to": { "$ref": "common.schema.json#/$defs/id" },
-              "kind": { "enum": ["journal", "refund", "transfer"] },
-              "amount": { "type": "number", "minimum": 0 },
-              "entity": { "$ref": "common.schema.json#/$defs/id" },
-              "ref": { "type": "string", "maxLength": 60 },
-              "memo": { "type": "string", "maxLength": 140 },
-              "row": { "type": "integer", "minimum": 1 }
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "date": {
+                "$ref": "#/$defs/isoDate"
+              },
+              "edge": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "from": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "to": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "kind": {
+                "enum": [
+                  "journal",
+                  "refund",
+                  "transfer"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "entity": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "ref": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "memo": {
+                "type": "string",
+                "maxLength": 140
+              },
+              "row": {
+                "type": "integer",
+                "minimum": 1
+              }
             }
           }
         },
@@ -220,23 +551,56 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["date", "reason"],
+            "required": [
+              "date",
+              "reason"
+            ],
             "properties": {
-              "date": { "$ref": "#/$defs/isoDate" },
-              "ref": { "type": "string", "maxLength": 60 },
-              "amount": { "type": "number", "minimum": 0 },
-              "memo": { "type": "string", "maxLength": 140 },
-              "entity": { "$ref": "common.schema.json#/$defs/id" },
-              "row": { "type": "integer", "minimum": 1 },
-              "reason": { "enum": ["no-rule", "unknown-edge", "ambiguous-edge", "split-entry", "out-of-period", "unparsed"] }
+              "date": {
+                "$ref": "#/$defs/isoDate"
+              },
+              "ref": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "memo": {
+                "type": "string",
+                "maxLength": 140
+              },
+              "entity": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "row": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "reason": {
+                "enum": [
+                  "no-rule",
+                  "unknown-edge",
+                  "ambiguous-edge",
+                  "split-entry",
+                  "out-of-period",
+                  "unparsed"
+                ]
+              }
             }
           }
         }
       }
     },
-    "cards": { "$ref": "common.schema.json#/$defs/cards" }
+    "cards": {
+      "$ref": "common.schema.json#/$defs/cards"
+    }
   },
   "$defs": {
-    "isoDate": { "type": "string", "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$" }
+    "isoDate": {
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+    }
   }
 }

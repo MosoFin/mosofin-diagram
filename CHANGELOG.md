@@ -8,6 +8,10 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ledger **City view** (`meta.view: "city"`): same accounts, flows, entities and schedule as Map,
+  drawn as an isometric district (account buildings, entity-class ring, `city-road` markers). One
+  SVG per render; `meta.sibling` links the Map|City toggle. Ships `northline-gl-2026-07.city.ledger.json`
+  → `ledger-northline-gl-city.html`.
 - New `ledger` diagram type: an account map replayed from a general-ledger journal. Accounts are
   the nodes, authored credit-to-debit flows are the only paths money may travel, and `ledger.events`
   are dated, sourced rows that ride them (a reversal runs the same flow backwards). Split entries

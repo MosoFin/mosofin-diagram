@@ -19,3 +19,11 @@
 Proof is `authored` or `csv`; `connected` is not representable. A `csv` badge must name the file,
 its SHA-256 and row count. `scripts/build-ledger-fixture.mjs` regenerates the shipped fixture
 from one journal definition so the CSV and the events cannot disagree.
+
+## Views
+
+Set `meta.view` to `"map"` (default) or `"city"`. Each render emits **one** SVG. City draws an
+isometric district: account buildings, an entity-class ring, roads for authored `flows`, and the
+same `schedule()` tokens as Map. City roads use class `city-road` / marker `marker-city` so
+orthogonal arrow checks ignore them. Author `meta.sibling` to the other view's HTML path so the
+viewer Map|City toggle can link without breaking the single-SVG export gate.

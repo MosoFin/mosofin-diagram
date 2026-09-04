@@ -16,6 +16,7 @@ const TARGETS = [
   ['lifecycle', 'agent-run.lifecycle.json', 'lifecycle-agent-run.html'],
   ['architecture', 'web-app.architecture.json', 'web-app-rendered.html'],
   ['ledger', 'northline-gl-2026-07.ledger.json', 'ledger-northline-gl.html'],
+  ['ledger', 'northline-gl-2026-07.city.ledger.json', 'ledger-northline-gl-city.html'],
 ];
 
 for (const [mode, input, output] of TARGETS) {

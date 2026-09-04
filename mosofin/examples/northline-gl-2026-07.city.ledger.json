@@ -2,14 +2,14 @@
   "schema_version": 1,
   "diagram_type": "ledger",
   "meta": {
-    "title": "Northline Coffee \u2014 July in the books (GL replay, 2026-07)",
-    "output": "northline-gl-2026-07.html",
+    "title": "Northline Coffee \u2014 July in the books (City view, 2026-07)",
+    "output": "northline-gl-2026-07-city.html",
     "viewBox": [
-      1080,
-      760
+      1200,
+      860
     ],
     "animation": "trace",
-    "quality_profile": "showcase",
+    "quality_profile": "standard",
     "node_style": "logo",
     "views": [
       {
@@ -42,8 +42,9 @@
         "note": "Payroll is a three-line split (net pay plus withholdings) and is listed as unmapped rather than allocated."
       }
     ],
-    "sibling": "ledger-northline-gl-city.html",
-    "view": "map"
+    "sibling": "ledger-northline-gl.html",
+    "view": "city",
+    "subtitle": "Watch the business run: account buildings, counterparties on the ring, roads for authored flows."
   },
   "stages": [
     {

@@ -68,3 +68,11 @@ test('entities are bounded and the account cap holds', () => {
   schemaRejects((doc) => { doc.ledger.events[0].surprise = true; }, /additional/i);
   schemaRejects((doc) => { doc.entities[0].class = 'alien'; }, /class/);
 });
+
+test('meta.view accepts only map or city and sibling is a path string', () => {
+  schemaRejects((doc) => { doc.meta.view = 'isometric'; }, /view/);
+  const doc = clone();
+  doc.meta.view = 'city';
+  doc.meta.sibling = 'ledger-northline-gl.html';
+  assert.doesNotThrow(() => validateSchema('ledger', doc));
+});

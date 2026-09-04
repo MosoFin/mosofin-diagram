@@ -9,6 +9,7 @@ import { brandLabelFitWidth, brandMetadataFor, brandTopRailProblem, renderBrandM
 import { renderLogoNode, renderLogolessBox } from '../shared/node-style.mjs';
 import { translateMessage as i18nText } from '../shared/i18n.mjs';
 import { renderLedgerPanel, summarize, validateLedger, viewerPayload } from '../shared/ledger.mjs';
+import { renderCityScene } from './city.mjs';
 import {
   asArray,
   isFinitePoint,
@@ -419,7 +420,7 @@ function renderLegend() {
 }
 
 function renderSvg() {
-  return `      <svg viewBox="0 0 ${viewBox[0]} ${viewBox[1]}" ${svgRootAttrs(ledgerDoc.meta, 'ledger')}>
+  return `      <svg viewBox="0 0 ${viewBox[0]} ${viewBox[1]}" ${svgRootAttrs(ledgerDoc.meta, 'ledger')} data-ledger-view="map">
 ${svgAccessibleText(ledgerDoc.meta, 'ledger')}
 ${renderDefinitions()}
 
@@ -444,14 +445,21 @@ ${renderLegend()}
 }
 
 validateLedger(ledgerDoc);
-validateLayout();
+const ledgerView = ledgerDoc.meta?.view === 'city' ? 'city' : 'map';
+let svg;
+if (ledgerView === 'city') {
+  svg = renderCityScene(ledgerDoc);
+} else {
+  validateLayout();
+  svg = renderSvg();
+}
 const summary = summarize(ledgerDoc);
 writeDiagram({
   outPath,
   template,
   diagramType: 'ledger',
   meta: ledgerDoc.meta,
-  svg: renderSvg(),
+  svg,
   cards: ledgerDoc.cards,
   ledger: viewerPayload(ledgerDoc, summary),
   ledgerSlot: renderLedgerPanel(ledgerDoc, summary),

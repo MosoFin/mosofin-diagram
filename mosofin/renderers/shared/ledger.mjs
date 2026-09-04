@@ -390,6 +390,8 @@ export function viewerPayload(diagram, summary) {
     playback: summary.playback,
     p90: summary.p90,
     cashAccounts: summary.cashAccounts,
+    view: diagram.meta?.view === 'city' ? 'city' : 'map',
+    sibling: diagram.meta?.sibling || null,
     accounts: (diagram.accounts || []).map((account) => ({ id: account.id, label: account.label, class: account.class, cash: account.cash === true })),
     flows: (diagram.flows || []).map((flow) => ({ id: flow.id, from: flow.from, to: flow.to, label: flow.label })),
     entities: (diagram.entities || []).map((entity) => ({ id: entity.id, label: entity.label, class: entity.class, grouped: entity.grouped || null })),
@@ -480,9 +482,19 @@ export function renderLedgerPanel(diagram, summary) {
 ${list.map((entity) => `        <button type="button" class="ledger-entity" data-entity-id="${esc(entity.id)}" aria-pressed="false"><span>${esc(entity.label)}</span><small>${signed(summary, summary.entities[entity.id].net)}</small></button>`).join('\n')}
       </div>`).join('\n');
 
+  const view = diagram.meta?.view === 'city' ? 'city' : 'map';
+  const sibling = diagram.meta?.sibling || '';
+  const viewToggle = sibling
+    ? `      <nav class="ledger-view-toggle" aria-label="${esc(t(locale, 'ledger.view.toggle'))}">
+        <a class="ledger-view-link" href="${view === 'map' ? '#' : esc(sibling)}" data-ledger-view-target="map"${view === 'map' ? ' aria-current="page"' : ''}>${esc(t(locale, 'ledger.view.map'))}</a>
+        <a class="ledger-view-link" href="${view === 'city' ? '#' : esc(sibling)}" data-ledger-view-target="city"${view === 'city' ? ' aria-current="page"' : ''}>${esc(t(locale, 'ledger.view.city'))}</a>
+      </nav>`
+    : '';
+
   return `    <!-- MOSOFIN:LEDGER_SLOT_START -->
     <div class="ledger-strip no-print" id="ledger-strip" role="group" aria-label="${esc(t(locale, 'ledger.strip.label'))}">
-      <button id="ledger-play" type="button" aria-pressed="false" title="${esc(t(locale, 'ledger.strip.play.title'))}">${esc(t(locale, 'viewer.ledger.play'))}</button>
+${viewToggle ? `${viewToggle}
+` : ''}      <button id="ledger-play" type="button" aria-pressed="false" title="${esc(t(locale, 'ledger.strip.play.title'))}">${esc(t(locale, 'viewer.ledger.play'))}</button>
       <span class="ledger-day" id="ledger-day" aria-live="polite">${esc(summary.period.start)}</span>
       <input id="ledger-range" type="range" min="0" max="${Math.max(0, summary.period.days.length - 1)}" value="0" step="1" aria-label="${esc(t(locale, 'ledger.strip.day'))}">
       <label class="ledger-tempo"><span>${esc(t(locale, 'ledger.strip.tempo'))}</span>

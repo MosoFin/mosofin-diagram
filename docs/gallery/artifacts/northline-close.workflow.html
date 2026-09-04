@@ -4691,6 +4691,34 @@
     html[data-motion="still"] .ledger-token-overlay { display: none !important; }
     html[data-embed="true"] .ledger-strip, html[data-embed="true"] .ledger-entities, html[data-embed="true"] .ledger-panel { display: none !important; }
     html[data-present="true"] .ledger-panel { display: none; }
+
+    /* Ledger City view */
+    .city-road { stroke: var(--arrow); fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+    .m-city { fill: var(--arrow); }
+    .city-ground { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-width: 1; opacity: 0.55; }
+    .city-building .city-face-top { fill: color-mix(in srgb, var(--panel) 55%, transparent); stroke: var(--panel-border); }
+    .city-building .city-face-left { fill: color-mix(in srgb, currentColor 18%, var(--panel)); stroke: var(--panel-border); color: var(--arrow); }
+    .city-building .city-face-right { fill: color-mix(in srgb, currentColor 28%, var(--panel)); stroke: var(--panel-border); color: var(--arrow); }
+    .city-building.c-frontend .city-face-left, .city-building.c-frontend .city-face-right { color: var(--frontend-stroke); }
+    .city-building.c-backend .city-face-left, .city-building.c-backend .city-face-right { color: var(--backend-stroke); }
+    .city-building.c-database .city-face-left, .city-building.c-database .city-face-right { color: var(--database-stroke); }
+    .city-building.c-security .city-face-left, .city-building.c-security .city-face-right { color: var(--security-stroke); }
+    .city-building.c-external .city-face-left, .city-building.c-external .city-face-right { color: var(--external-stroke); }
+    .city-roof-left { fill: color-mix(in srgb, var(--security-stroke) 22%, var(--panel)); stroke: var(--panel-border); }
+    .city-roof-right { fill: color-mix(in srgb, var(--security-stroke) 34%, var(--panel)); stroke: var(--panel-border); }
+    .city-awning { stroke: var(--frontend-stroke); }
+    .city-vault-door { fill: none; stroke: var(--database-stroke); }
+    .city-antenna { stroke: var(--external-stroke); }
+    .city-antenna-tip { fill: var(--external-stroke); }
+    .city-column { stroke: var(--external-stroke); }
+    .ledger-view-toggle { display: inline-flex; gap: 0.15rem; padding: 0.12rem; border: 1px solid var(--panel-border); border-radius: 999px; background: color-mix(in srgb, var(--panel) 80%, transparent); }
+    .ledger-view-link { font: inherit; font-size: 0.72rem; padding: 0.22rem 0.65rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; }
+    .ledger-view-link[aria-current="page"] { background: var(--ledger-in); color: #06120a; font-weight: 600; }
+    svg[data-ledger-view="city"][data-ledger-entity-filter] .city-building { opacity: 0.22; transition: opacity 160ms ease; }
+    svg[data-ledger-view="city"][data-ledger-entity-filter] .city-road { opacity: 0.12; transition: opacity 160ms ease; }
+    svg[data-ledger-view="city"][data-ledger-entity-filter] .city-building[data-ledger-filter-match],
+    svg[data-ledger-view="city"][data-ledger-entity-filter] .city-road[data-ledger-filter-match] { opacity: 1; }
+
     @media print { .ledger-token-overlay { display: none !important; } .ledger-panel { break-inside: avoid; } }
     svg[data-preset="blueprint"] .story-trail-flow {
       stroke-linecap: square;
@@ -11436,6 +11464,49 @@
         tempo = next;
         return tempo;
       }
+      function relatedForEntity(id) {
+        var accounts = {};
+        var flows = {};
+        if (!id || !data.schedule) return { accounts: accounts, flows: flows };
+        for (var i = 0; i < data.schedule.length; i += 1) {
+          var item = data.schedule[i];
+          if ((item.entities || []).indexOf(id) === -1) continue;
+          flows[item.edgeId] = true;
+          accounts[item.from] = true;
+          accounts[item.to] = true;
+        }
+        return { accounts: accounts, flows: flows };
+      }
+      function syncCityFilter() {
+        if (!svg || svg.getAttribute('data-ledger-view') !== 'city') return;
+        var buildings = svg.querySelectorAll('[data-ledger-building]');
+        var roads = svg.querySelectorAll('.city-road');
+        var i;
+        if (!entityFilter) {
+          svg.removeAttribute('data-ledger-entity-filter');
+          for (i = 0; i < buildings.length; i += 1) buildings[i].removeAttribute('data-ledger-filter-match');
+          for (i = 0; i < roads.length; i += 1) roads[i].removeAttribute('data-ledger-filter-match');
+          return;
+        }
+        svg.setAttribute('data-ledger-entity-filter', entityFilter);
+        var related = relatedForEntity(entityFilter);
+        for (i = 0; i < buildings.length; i += 1) {
+          var building = buildings[i];
+          var match = false;
+          if (building.getAttribute('data-ledger-building') === 'entity') {
+            match = building.getAttribute('data-entity-id') === entityFilter;
+          } else {
+            match = !!related.accounts[building.getAttribute('data-node-id')];
+          }
+          if (match) building.setAttribute('data-ledger-filter-match', '');
+          else building.removeAttribute('data-ledger-filter-match');
+        }
+        for (i = 0; i < roads.length; i += 1) {
+          var road = roads[i];
+          if (related.flows[road.getAttribute('data-edge-id')]) road.setAttribute('data-ledger-filter-match', '');
+          else road.removeAttribute('data-ledger-filter-match');
+        }
+      }
       function setEntityFilter(id) {
         entityFilter = entityFilter === id ? '' : (id || '');
         if (entityStrip) {
@@ -11444,6 +11515,7 @@
             chips[i].setAttribute('aria-pressed', chips[i].getAttribute('data-entity-id') === entityFilter ? 'true' : 'false');
           }
         }
+        syncCityFilter();
         if (!playing) showDay(dayIndex, true);
       }
       function clearForExport() {

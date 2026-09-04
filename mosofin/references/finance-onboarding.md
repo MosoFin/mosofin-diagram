@@ -137,7 +137,7 @@ close workflow).
 | Who is allowed to say they owe us? | `architecture` | DTC sales receipt vs wholesale AR |
 | Can we make payroll / cash to a date? | `dataflow` | opening must be tied; no invented next-week sales |
 | Why did revenue or cash move vs last period? | `dataflow` | authored drivers plus unexplained residual |
-| Show me the month moving through the books, entry by entry | `ledger` | at most 12 accounts, authored credit-to-debit flows, the GL rows as events, split entries unmapped, tie-outs only for supplied figures |
+| Show me the month moving through the books, entry by entry | `ledger` | at most 12 accounts, authored credit-to-debit flows, the GL rows as events, split entries unmapped, tie-outs only for supplied figures; `meta.view: "city"` for the isometric district (same data) |
 
 If the sentence is still ambiguous after this table, run:
 
