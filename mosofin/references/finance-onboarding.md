@@ -109,9 +109,12 @@ State these rules out loud:
   - Revenue is recognized in QuickBooks, not the Shopify dashboard
 
 A `describe-only` stack is valid. Record `Evidence: describe` and continue.
-`CSV` or `connected` is a future pin; v1 still authors IR from the interview
-and user-supplied numbers. Do not start OAuth. Do not treat `connected` as
-proof that numbers are tied.
+`CSV` evidence enters through the `ledger` diagram type: the user supplies a
+general-ledger export, its rows become `ledger.events` on authored flows, and the
+artifact carries the file name, SHA-256 and row count as `Proof: CSV`. Split
+entries and off-map accounts are listed as `unmapped`, never allocated.
+`connected` remains a future pin. Do not start OAuth. Do not treat `connected`
+as proof that numbers are tied.
 
 ### C. Visualization intent
 
@@ -134,6 +137,7 @@ close workflow).
 | Who is allowed to say they owe us? | `architecture` | DTC sales receipt vs wholesale AR |
 | Can we make payroll / cash to a date? | `dataflow` | opening must be tied; no invented next-week sales |
 | Why did revenue or cash move vs last period? | `dataflow` | authored drivers plus unexplained residual |
+| Show me the month moving through the books, entry by entry | `ledger` | at most 12 accounts, authored credit-to-debit flows, the GL rows as events, split entries unmapped, tie-outs only for supplied figures |
 
 If the sentence is still ambiguous after this table, run:
 
@@ -202,4 +206,5 @@ connector exists.
 - Enable a fail-closed profile silently
 - Treat `connected` as a tie-out
 - Guess Shopify, Stripe, or QuickBooks totals
+- Allocate a split journal entry across flows; list it as unmapped instead
 - Skip the brief when systems and period were never named

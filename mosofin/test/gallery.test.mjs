@@ -27,23 +27,23 @@ test('generated proof gallery matches its sources, receipts, and checked-in arti
     path.join(repoRoot, 'scripts', 'build-gallery.mjs'),
     generatedRoot,
   ], { encoding: 'utf8' });
-  assert.match(output, /gallery 9 artifacts \/ 81 checks/);
+  assert.match(output, /gallery 10 artifacts \/ 90 checks/);
 
   const manifestPath = path.join(generatedRoot, 'gallery', 'manifest.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   assert.equal(manifest.schemaVersion, 1);
   assert.equal(manifest.mosofinVersion, JSON.parse(fs.readFileSync(path.join(skillRoot, 'package.json'))).version);
-  assert.equal(manifest.entryCount, 9);
-  assert.equal(manifest.checkCount, 81);
+  assert.equal(manifest.entryCount, 10);
+  assert.equal(manifest.checkCount, 90);
   assert.deepEqual(new Set(manifest.entries.map((entry) => entry.type)), new Set([
-    'architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle',
+    'architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger',
   ]));
   assert.deepEqual(
-    Object.fromEntries(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle'].map((type) => [
+    Object.fromEntries(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger'].map((type) => [
       type,
       manifest.entries.filter((entry) => entry.type === type).length,
     ])),
-    { architecture: 3, workflow: 1, sequence: 1, dataflow: 3, lifecycle: 1 },
+    { architecture: 3, workflow: 1, sequence: 1, dataflow: 3, lifecycle: 1, ledger: 1 },
   );
   assert.deepEqual(
     new Set(manifest.entries.map((entry) => entry.id)),
@@ -82,7 +82,7 @@ test('generated proof gallery matches its sources, receipts, and checked-in arti
   }
 
   const html = fs.readFileSync(path.join(generatedRoot, 'gallery.html'), 'utf8');
-  assert.equal((html.match(/class="showcase-card/g) || []).length, 9);
+  assert.equal((html.match(/class="showcase-card/g) || []).length, 10);
   assert.match(html, /id="gallery-manifest" type="application\/json"/);
   assert.match(html, /data-src-base="gallery\/artifacts\/northline-close\.workflow\.html"/);
   assert.match(html, /northline-close\.workflow\.html\?present=1&amp;play=1#view=reconcile-and-review/);
@@ -100,14 +100,14 @@ test('generated proof gallery matches its sources, receipts, and checked-in arti
   assert.match(html, /data-en="Share the map"/);
   assert.match(html, /Step 1 of 4/);
   assert.doesNotMatch(html, /Read versioned JSON IR|Run the typed renderer/);
-  assert.match(html, /Five lenses\. Nine business stories\./);
+  assert.match(html, /Six lenses\. Ten business stories\./);
   assert.match(html, /Composition<\/span><span class="receipt-value ok" title="0 crossings · 0 border runs · 0 micro segments · 0 cramped turns">SHOWCASE · PASS/);
   assert.doesNotMatch(html, /DEPLOYMENT OWNERSHIP · PASS/);
   assert.match(html, /\.nav-brand-wrapper \{[^}]*min-height: 44px;/);
   assert.match(html, /\.filter-button \{\s+min-height: 44px;/);
   assert.match(html, /\.card-link \{ min-height: 44px;/);
-  assert.equal((html.match(/class="card-link create-link"/g) || []).length, 9);
-  for (const type of ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']) {
+  assert.equal((html.match(/class="card-link create-link"/g) || []).length, 10);
+  for (const type of ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger']) {
     assert.match(html, new RegExp(`start\\.html\\?type=${type}&amp;source=gallery`), `${type}: gallery-to-start link missing`);
   }
   assert.match(html, /class="community-callout"/);

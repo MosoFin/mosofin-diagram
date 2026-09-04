@@ -34,7 +34,7 @@ test('guide page: ships English recipes and syntactically valid interaction code
   const dataMatch = html.match(/<script id="guide-data" type="application\/json">([\s\S]*?)<\/script>/);
   assert.ok(dataMatch);
   const data = JSON.parse(dataMatch[1]);
-  assert.equal(data.length, 22);
+  assert.equal(data.length, 23);
   assert.equal(data.filter((recipe) => recipe.type === 'workflow').length, 5);
   assert.ok(data.every((recipe) => recipe.en.prompt && recipe.proof));
   assert.match(html, /gallery\.html#proof-/);

@@ -8,6 +8,19 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- New `ledger` diagram type: an account map replayed from a general-ledger journal. Accounts are
+  the nodes, authored credit-to-debit flows are the only paths money may travel, and `ledger.events`
+  are dated, sourced rows that ride them (a reversal runs the same flow backwards). Split entries
+  and off-map accounts land in an always-visible unmapped bucket and are never allocated. The
+  artifact carries a static tie-out panel (accounts, flows, entities by class, tie-outs with
+  residuals, unmapped rows) computed in integer cents, a day-by-day playback strip
+  (`Mosofin.ledger`, key `G`) on the shared flow-token engine, volume badges for still and
+  reduced-motion readers, and `#ledger=day:` deep links. `proof` is `authored` or `csv`;
+  `connected` is unrepresentable, and a CSV badge names the file, SHA-256 and row count. Ships
+  with a Northline GL fixture whose CSV and events come from one journal definition
+  (`scripts/build-ledger-fixture.mjs`). The five existing diagram types are unchanged; their goldens
+  re-render only because the shared viewer grew.
+
 - Dropped Chinese from the public site, recipe guide, viewer catalog, and
   identity gates. The skill is English-only: `meta.locale` accepts `en`.
 - How it works is now four named steps in a left-to-right slider: Add the skill,

@@ -48,5 +48,5 @@ test('landing keeps its interactive controls reachable', () => {
   // Switchers are real buttons, not click-handlers on inert elements.
   assert.doesNotMatch(landing, /<div[^>]*onclick=/i);
   assert.match(landing, /:focus-visible/, 'focus styling must survive the redesign');
-  assert.equal((landing.match(/type="button"/g) || []).length, 12);
+  assert.equal((landing.match(/type="button"/g) || []).length, 13);
 });

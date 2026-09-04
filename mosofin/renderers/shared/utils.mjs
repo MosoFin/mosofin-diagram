@@ -108,6 +108,8 @@ const SUBTITLE_SLOT_RE = /^([ \t]*)<p class="subtitle">\[Subtitle description\]<
 const GUIDED_VIEWS_PLACEHOLDER = '<!-- MOSOFIN:GUIDED_VIEWS_DATA -->';
 const SOURCE_EVIDENCE_PLACEHOLDER = '    <!-- MOSOFIN:SOURCE_EVIDENCE_DATA -->';
 const I18N_PLACEHOLDER = '    <!-- MOSOFIN:I18N_DATA -->';
+const LEDGER_DATA_PLACEHOLDER = '    <!-- MOSOFIN:LEDGER_DATA -->';
+const LEDGER_SLOT_RE = /    <!-- MOSOFIN:LEDGER_SLOT_START -->[\s\S]*?    <!-- MOSOFIN:LEDGER_SLOT_END -->/;
 
 function serializeScriptJson(value) {
   return JSON.stringify(value)
@@ -133,6 +135,8 @@ export function applyTemplate(template, {
   nodeStyle = 'box',
   guidedViews = [],
   sourceEvidence = null,
+  ledger = null,
+  ledgerSlot = '',
 }) {
   if (!SVG_SLOT_RE.test(template)) {
     throw new Error('applyTemplate: template missing MOSOFIN:SVG_SLOT sentinel');
@@ -154,7 +158,13 @@ export function applyTemplate(template, {
   if (sourceEvidence && !template.includes(SOURCE_EVIDENCE_PLACEHOLDER)) {
     throw new Error(`applyTemplate: repository evidence requires placeholder ${JSON.stringify(SOURCE_EVIDENCE_PLACEHOLDER)}`);
   }
-  // Function replacers: a literal `$&`, `$'`, `$\`` or `$$` in titles, labels,
+  // The ledger slot is mandatory only when a ledger is actually delivered,
+  // mirroring the repository-evidence rule above.
+  if (ledger && (!template.includes(LEDGER_DATA_PLACEHOLDER) || !LEDGER_SLOT_RE.test(template))) {
+    throw new Error('applyTemplate: ledger playback requires the MOSOFIN:LEDGER_DATA and MOSOFIN:LEDGER_SLOT sentinels');
+  }
+  const ledgerJson = serializeScriptJson(ledger);
+  // Function replacers: a literal `  // Function replacers: a literal `$&``, `$'`, `$\`` or `$$` in titles, labels,
   // or rendered SVG must not be interpreted as a replacement pattern.
   const guidedViewsJson = serializeScriptJson(guidedViews);
   const sourceEvidenceJson = serializeScriptJson(sourceEvidence);
@@ -180,7 +190,11 @@ export function applyTemplate(template, {
     .replace(GUIDED_VIEWS_PLACEHOLDER, () => `<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`)
     .replace(SOURCE_EVIDENCE_PLACEHOLDER, () => sourceEvidence
       ? `    <script id="mosofin-source-evidence-data" type="application/json">${sourceEvidenceJson}</script>`
-      : '');
+      : '')
+    .replace(LEDGER_DATA_PLACEHOLDER, () => ledger
+      ? `    <script id="mosofin-ledger-data" type="application/json">${ledgerJson}</script>`
+      : '')
+    .replace(LEDGER_SLOT_RE, () => (ledger && ledgerSlot ? ledgerSlot : ''));
 }
 
 // CJK and other wide/fullwidth glyphs render at roughly twice the advance

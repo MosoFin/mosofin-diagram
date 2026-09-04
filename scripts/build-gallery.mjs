@@ -117,6 +117,17 @@ const CASES = [
     titleEn: 'Cash to Payroll Date',
     descriptionEn: 'A tied Chase opening balance, only named inflows, dated outflows to 15 August, and an answer that is unknown rather than guessed.',
   },
+  {
+    id: 'gl-replay',
+    type: 'ledger',
+    input: 'northline-gl-2026-07.ledger.json',
+    output: 'northline-gl-2026-07.ledger.html',
+    focus: 'cash-1002',
+    view: 'order-to-cash',
+    accent: '#5eead4',
+    titleEn: 'July in the Books, GL Replay',
+    descriptionEn: 'The general-ledger export replayed day by day across an account map: sales receipts landing in cash, bills paid, COGS relieved, with tie-outs and the payroll splits listed as unmapped rather than allocated.',
+  },
 ];
 
 const SHAPES = {
@@ -125,6 +136,7 @@ const SHAPES = {
   sequence: ['participants', 'messages'],
   dataflow: ['nodes', 'flows'],
   lifecycle: ['states', 'transitions'],
+  ledger: ['accounts', 'flows'],
 };
 
 const TYPE_LABELS = {
@@ -133,6 +145,7 @@ const TYPE_LABELS = {
   sequence: 'Sequence',
   dataflow: 'Data flow',
   lifecycle: 'Lifecycle',
+  ledger: 'Ledger',
 };
 
 // Print-depth type hues shared with the site palette (guide page uses the same map).
@@ -142,6 +155,7 @@ const TYPE_ACCENTS = {
   sequence: '#6d28d9',
   dataflow: '#b45309',
   lifecycle: '#be123c',
+  ledger: '#0f766e',
 };
 
 function digest(buffer) {

@@ -28,4 +28,6 @@ docs, generators, and CI gates.
   `examples/*.html`, `mosofin/examples/*-rendered.html`, `docs/samples/*.html`) — regenerate.
 - Finance diagrams follow `mosofin/references/finance-onboarding.md`: one source of truth per fact,
   no invented amounts, `connected` is not a tie-out, ≤12 primary nodes.
+- A `ledger` diagram may only place events on authored flows; unmapped rows are listed, never dropped
+  or allocated. Regenerate its fixture with `node scripts/build-ledger-fixture.mjs` (inside `mosofin/`).
 - The sample use case is `docs/USE-CASE.md`; its spec is `mosofin/examples/northline-money-map.architecture.json`.
