@@ -4638,6 +4638,60 @@
       opacity: 0.92;
       animation: mosofin-story-flow 0.78s linear 1 both;
     }
+
+    /* Ledger playback (only rendered by the ledger diagram type) */
+    :root { --ledger-in: var(--backend-stroke); --ledger-out: var(--security-stroke); --ledger-transfer: var(--frontend-stroke); }
+    .ledger-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.9rem; margin: 0.9rem 0 0; padding: 0.6rem 0.85rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); font-size: 0.8rem; color: var(--text); }
+    .ledger-strip button, .ledger-strip select { font: inherit; font-size: 0.78rem; padding: 0.32rem 0.7rem; border-radius: 8px; border: 1px solid var(--panel-border); background: transparent; color: var(--text); cursor: pointer; }
+    .ledger-strip button[aria-pressed="true"] { background: var(--ledger-in); color: #06120a; border-color: var(--ledger-in); }
+    .ledger-strip input[type="range"] { flex: 1 1 220px; min-width: 160px; accent-color: var(--ledger-in); }
+    .ledger-day { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; min-width: 6.4em; }
+    .ledger-tempo { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .ledger-proof { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; opacity: 0.8; }
+    .ledger-status-line { font-size: 0.72rem; opacity: 0.8; }
+    .ledger-entities { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0.6rem 0 0; font-size: 0.74rem; }
+    .ledger-entity-class { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+    .ledger-entity-class-name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; margin-right: 0.2rem; }
+    .ledger-entity { display: inline-flex; align-items: baseline; gap: 0.4rem; font: inherit; padding: 0.22rem 0.55rem; border-radius: 999px; border: 1px solid var(--panel-border); background: var(--panel); color: var(--text); cursor: pointer; }
+    .ledger-entity small { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; opacity: 0.75; }
+    .ledger-entity[aria-pressed="true"] { border-color: var(--ledger-in); box-shadow: 0 0 0 2px var(--ledger-in); }
+    .ledger-panel { margin: 0.9rem 0 0; padding: 0.2rem 0.9rem 0.9rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); font-size: 0.8rem; color: var(--text); }
+    .ledger-panel > summary { cursor: pointer; padding: 0.6rem 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: baseline; }
+    .ledger-panel > summary::-webkit-details-marker { display: none; }
+    .ledger-panel-summary { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; opacity: 0.8; }
+    .ledger-panel section { margin-top: 0.8rem; overflow-x: auto; }
+    .ledger-panel h4 { margin: 0 0 0.35rem; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; }
+    .ledger-panel table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .ledger-panel th, .ledger-panel td { padding: 0.32rem 0.5rem; border-top: 1px solid var(--panel-border); text-align: right; vertical-align: top; font-weight: 400; }
+    .ledger-panel thead th { font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.7; border-top: 0; }
+    .ledger-panel th[scope="row"], .ledger-panel td:first-child, .ledger-panel thead th:first-child { text-align: left; }
+    .ledger-panel th[scope="row"] small { display: block; font-size: 0.68rem; opacity: 0.65; }
+    .ledger-panel .ledger-class-row th { text-align: left; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; padding-top: 0.6rem; }
+    .ledger-panel .ledger-net { font-weight: 600; }
+    .ledger-status { display: inline-block; padding: 0.12rem 0.5rem; border-radius: 999px; font-size: 0.68rem; font-weight: 600; border: 1px solid currentColor; }
+    .ledger-status-tied { color: var(--ledger-in); }
+    .ledger-status-break { color: var(--ledger-out); }
+    tr[data-ledger-tieout="break"] th, tr[data-ledger-tieout="break"] td { color: var(--ledger-out); }
+    .ledger-panel-scope { margin: 0.9rem 0 0; font-size: 0.7rem; opacity: 0.7; }
+    .ledger-flow-token .semantic-flow-token-halo { fill: var(--ledger-transfer); fill-opacity: 0.18; stroke: none; }
+    .ledger-flow-token .relationship-flow-token-shape { fill: var(--panel); stroke: var(--ledger-transfer); stroke-width: 1.2; }
+    .ledger-flow-token .relationship-flow-token-dot { fill: var(--ledger-transfer); }
+    .ledger-flow-token .relationship-flow-token-ink { stroke: var(--ledger-transfer); stroke-width: 1; fill: none; }
+    .ledger-flow-token[data-ledger-kind="in"] .semantic-flow-token-halo, .ledger-flow-token[data-ledger-kind="in"] .relationship-flow-token-dot { fill: var(--ledger-in); }
+    .ledger-flow-token[data-ledger-kind="in"] .relationship-flow-token-shape, .ledger-flow-token[data-ledger-kind="in"] .relationship-flow-token-ink { stroke: var(--ledger-in); }
+    .ledger-flow-token[data-ledger-kind="out"] .semantic-flow-token-halo, .ledger-flow-token[data-ledger-kind="out"] .relationship-flow-token-dot, .ledger-flow-token[data-ledger-kind="refund"] .semantic-flow-token-halo, .ledger-flow-token[data-ledger-kind="refund"] .relationship-flow-token-dot { fill: var(--ledger-out); }
+    .ledger-flow-token[data-ledger-kind="out"] .relationship-flow-token-shape, .ledger-flow-token[data-ledger-kind="out"] .relationship-flow-token-ink, .ledger-flow-token[data-ledger-kind="refund"] .relationship-flow-token-shape, .ledger-flow-token[data-ledger-kind="refund"] .relationship-flow-token-ink { stroke: var(--ledger-out); }
+    .ledger-token-label text { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.5px; font-weight: 600; font-variant-numeric: tabular-nums; fill: var(--text); paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
+    .ledger-token-label[data-ledger-kind="in"] text { fill: var(--ledger-in); }
+    .ledger-token-label[data-ledger-kind="out"] text, .ledger-token-label[data-ledger-kind="refund"] text { fill: var(--ledger-out); }
+    .ledger-volume text { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 7.5px; font-weight: 600; font-variant-numeric: tabular-nums; fill: var(--text); }
+    .ledger-volume rect { fill: var(--panel); stroke: var(--panel-border); stroke-width: 0.8; }
+    [data-node-id][data-ledger-arrive] > rect:nth-of-type(2) { animation: mosofin-ledger-arrive 320ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+    @keyframes mosofin-ledger-arrive { 0% { stroke-width: 1.5; } 40% { stroke-width: 3; filter: drop-shadow(0 0 6px var(--ledger-in)); } 100% { stroke-width: 1.5; } }
+    html[data-motion="still"] .ledger-token-overlay { display: none !important; }
+    html[data-embed="true"] .ledger-strip, html[data-embed="true"] .ledger-entities, html[data-embed="true"] .ledger-panel { display: none !important; }
+    html[data-present="true"] .ledger-panel { display: none; }
+    @media print { .ledger-token-overlay { display: none !important; } .ledger-panel { break-inside: avoid; } }
     svg[data-preset="blueprint"] .story-trail-flow {
       stroke-linecap: square;
       filter: none;
@@ -4986,7 +5040,8 @@
 
     <script id="mosofin-guided-views-data" type="application/json">[{"id":"request-path","label":"Primary request path","focus":["users","cdn","lb","api","db"],"note":"Follow the primary customer request from the edge to durable state."},{"id":"identity-and-cache","label":"Identity and cache","focus":["auth","api","cache"],"note":"Isolate authentication and the read-through cache beside the request path."},{"id":"async-work","label":"Static and async work","focus":["cdn","s3","api","queue","worker"],"note":"See the two secondary paths without adding noise to the main request."}]</script>
 
-    <script id="mosofin-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Commerce","viewer.kind.backend":"Payments","viewer.kind.database":"Ledger","viewer.kind.cloud":"Bank","viewer.kind.security":"Control","viewer.kind.messagebus":"Sync","viewer.kind.external":"Counterparty","viewer.kind.neutral":"Note","viewer.kind.node":"System","viewer.kind.start":"Opened","viewer.kind.active":"In flight","viewer.kind.waiting":"Awaiting","viewer.kind.decision":"Tie-out","viewer.kind.success":"Booked","viewer.kind.failure":"Break","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.nodestyle.title":"Switch node style (box or logo)","viewer.nodestyle.box":"Box","viewer.nodestyle.logo":"Logo","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"S cycles","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"MOSOFIN / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.story":"the guided story","viewer.owner.chapter":"the active chapter","viewer.owner.chapterPreview":"the chapter delta preview","viewer.owner.handoff":"the chapter handoff","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyShareCard":"Copy Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.period":"Clipboard image write not supported by this browser.","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.copiedShare":"Copied Share Card","viewer.export.downloadedShare":"Downloaded Share Card","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Route: {source} → {target} · {count} directed hop","viewer.export.card.routeSummary.other":"Route: {source} → {target} · {count} directed hops","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"MOSOFIN · ROUTE · {hops}","viewer.export.card.reachBadge":"MOSOFIN · {direction} REACH","viewer.export.card.defaultBadge":"MOSOFIN · {preset} · {theme}","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guided.region":"Guided diagram views","viewer.guided.previous":"Previous guided view","viewer.guided.previous.title":"Previous guided view ([)","viewer.guided.next":"Next guided view","viewer.guided.next.title":"Next guided view (])","viewer.guided.views":"Guided views","viewer.guided.explore":"Explore this system","viewer.guided.intro":"Step through curated paths without changing the source diagram.","viewer.guided.trail":"Story trail","viewer.guided.beat":"Beat","viewer.guided.nextBeat":"Next","viewer.guided.play":"Play guided story","viewer.guided.play.title":"Play guided story (P)","viewer.guided.pause":"Pause guided story","viewer.guided.pause.title":"Pause guided story (P)","viewer.guided.replay":"Replay guided story","viewer.guided.replay.title":"Replay guided story (P)","viewer.guided.playStory":"Play story","viewer.guided.pauseStory":"Pause","viewer.guided.replayStory":"Replay story","viewer.guided.motionUnavailable":"Story playback unavailable while motion is Still","viewer.guided.enableMotion":"Switch motion to Live to play the guided story","viewer.guided.selectBeatLink":"Select a Story Beat to copy its exact link","viewer.guided.copyMoment":"Copy moment","viewer.guided.momentCopied":"Moment link copied","viewer.guided.momentCopyFailed":"Could not copy story moment link","viewer.guided.copied":"Copied","viewer.guided.copyFailed":"Copy failed","viewer.guided.showAll":"Show all","viewer.guided.showAll.aria":"Show entire diagram","viewer.guided.chapters":"Story chapters","viewer.guided.storyTrail":"Story trail for {label}: {count} beats","viewer.guided.chapter.open":"Open chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.current":"Current chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.selectedNodes":"{count} selected nodes","viewer.guided.chapter.stops":"{count} stops","viewer.guided.chapter.stop.one":"{count} stop","viewer.guided.chapter.stop.other":"{count} stops","viewer.guided.chapter.current.title":"{label} — current chapter, {count} stops","viewer.guided.chapter.delta.expanded":"{stay} stay, {enter} enter, {leave} leave","viewer.guided.chapter.delta.aria":"Open chapter {index} of {total}: {label}. Chapter focus delta: {delta}","viewer.guided.chapter.delta.title":"{label} — {delta} chapter focus","viewer.guided.handoff":"{from} → {to} · via {label}","viewer.guided.share.chapter":"Chapter {index} / {total}","viewer.guided.share.initial":"Chapter 01 / 01","viewer.guided.share.default":"Guided chapter","viewer.guided.state.ready":"Ready","viewer.guided.state.playing":"Playing","viewer.guided.state.settled":"Settled","viewer.guided.state.paused":"Paused","viewer.guided.state.pinned":"Pinned","viewer.guided.state.still":"Still","viewer.guided.share.step":"Step {index} / {total} · {label}","viewer.guided.share.staticMoment":"{step} · Static moment","viewer.guided.share.complete":"{count} steps complete · {note}","viewer.guided.share.settled":"Path settled for reading.","viewer.guided.share.staticPath":"{count} steps · Static path","viewer.guided.share.ready":"{count} steps · Ready","viewer.guided.share.aria":"{state} chapter {index} of {total}: {label}. {beat}. {route}","viewer.guided.beat.start":"Beat {index} / {total} · {label} · starting point","viewer.guided.beat.forward":"Beat {index} / {total} · {from} → {to}","viewer.guided.beat.reverse":"Beat {index} / {total} · {from} → {to} · reverse authored link","viewer.guided.beat.multiple":"Beat {index} / {total} · {from} ⇄ {to} · {count} authored links","viewer.guided.beat.group":"Beat {index} / {total} · {from} · {to} · grouped · no direct link","viewer.guided.beat.aria.prefix":"Story beat {index} of {total}: {label}. ","viewer.guided.beat.aria.start":"Starting point.","viewer.guided.beat.aria.forward":"From {from} through one authored forward relationship.","viewer.guided.beat.aria.reverse":"From {from}; the authored relationship points from {to} to {from}.","viewer.guided.beat.aria.multiple":"From {from} through {count} authored relationships; shown without arbitrary motion.","viewer.guided.beat.aria.group":"Grouped from {from} with no direct authored relationship.","viewer.guided.caption.start":"Starting point","viewer.guided.caption.grouped":"Grouped transition · no direct authored link","viewer.guided.caption.more":" +{count} more","viewer.guided.caption.reverse":"Reverse authored relationship","viewer.guided.caption.relationships":"{count} authored relationships","viewer.guided.caption.relationship":"Authored relationship","viewer.guided.caption.direction":"authored direction: {from} → {to}","viewer.guided.caption.starting":"Authored starting point","viewer.guided.beatLink":"Copy link to current story moment: Beat {index} of {total}: {label}","viewer.guided.noStory":"This diagram has no authored guided story.","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.story":"Play the guided story","viewer.guide.story.hint":"Walk the authored chapters and real relationships.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships} · {views}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.fact.view.one":"{count} guided view","viewer.guide.fact.view.other":"{count} guided views","viewer.guide.story.available.one":"Walk {count} authored chapter and its real relationships.","viewer.guide.story.available.other":"Walk {count} authored chapters and their real relationships.","viewer.guide.story.unavailable":"No authored guided story in this diagram.","viewer.guide.open":"Open diagram guide","viewer.guide.noStory":"This diagram has no authored guided story.","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Route probe","viewer.route.start":"Choose a start node","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Traced route","viewer.route.pickTwo":"Pick two semantic nodes on the diagram","viewer.route.pickOne":"Pick a semantic node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Choose the source, then the destination. Direction matters.","viewer.route.destination":"Choose a destination from {label}","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"A route needs two distinct semantic nodes.","viewer.route.unreachable":"No directed route to {label}","viewer.route.unreachable.detail":"{target} is not reachable from {source}. Pick a highlighted destination.","viewer.route.start.instructions":"Select the source. The next step will reveal only directed destinations.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest authored route","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} directed hop","viewer.route.overview.hop.other":"{count} directed hops","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} directed destination available. Pick a highlighted node.","viewer.route.destination.count.other":"{count} directed destinations available. Pick a highlighted node.","viewer.route.noOutgoing":"No outgoing route starts here. Clear and choose another source.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare business roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two roles. One reveals everything it touches; two compare only the direct links between them.","viewer.lens.kinds":"Business roles","viewer.lens.choose":"Choose a role to inspect its systems and everything they touch.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
+
+    <script id="mosofin-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Commerce","viewer.kind.backend":"Payments","viewer.kind.database":"Ledger","viewer.kind.cloud":"Bank","viewer.kind.security":"Control","viewer.kind.messagebus":"Sync","viewer.kind.external":"Counterparty","viewer.kind.neutral":"Note","viewer.kind.node":"System","viewer.kind.start":"Opened","viewer.kind.active":"In flight","viewer.kind.waiting":"Awaiting","viewer.kind.decision":"Tie-out","viewer.kind.success":"Booked","viewer.kind.failure":"Break","viewer.kind.asset":"Asset","viewer.kind.liability":"Liability","viewer.kind.equity":"Equity","viewer.kind.revenue":"Revenue","viewer.kind.contra":"Contra","viewer.kind.expense":"Expense","viewer.ledger.play":"Play the month","viewer.ledger.pause":"Pause","viewer.ledger.copied":"Day link copied","viewer.ledger.still":"Motion is still; the volume badges carry the same totals","viewer.ledger.complete":"Period replayed","viewer.ledger.token.aria":"{count} rows, {sum}, {from} to {to}","viewer.ledger.volume.aria":"{count} rows totalling {sum} on {flow}","viewer.ledger.countsOnly":"×{count}","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.nodestyle.title":"Switch node style (box or logo)","viewer.nodestyle.box":"Box","viewer.nodestyle.logo":"Logo","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"S cycles","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"MOSOFIN / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.story":"the guided story","viewer.owner.chapter":"the active chapter","viewer.owner.chapterPreview":"the chapter delta preview","viewer.owner.handoff":"the chapter handoff","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.ledger":"ledger playback","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyShareCard":"Copy Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.period":"Clipboard image write not supported by this browser.","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.copiedShare":"Copied Share Card","viewer.export.downloadedShare":"Downloaded Share Card","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Route: {source} → {target} · {count} directed hop","viewer.export.card.routeSummary.other":"Route: {source} → {target} · {count} directed hops","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"MOSOFIN · ROUTE · {hops}","viewer.export.card.reachBadge":"MOSOFIN · {direction} REACH","viewer.export.card.defaultBadge":"MOSOFIN · {preset} · {theme}","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guided.region":"Guided diagram views","viewer.guided.previous":"Previous guided view","viewer.guided.previous.title":"Previous guided view ([)","viewer.guided.next":"Next guided view","viewer.guided.next.title":"Next guided view (])","viewer.guided.views":"Guided views","viewer.guided.explore":"Explore this system","viewer.guided.intro":"Step through curated paths without changing the source diagram.","viewer.guided.trail":"Story trail","viewer.guided.beat":"Beat","viewer.guided.nextBeat":"Next","viewer.guided.play":"Play guided story","viewer.guided.play.title":"Play guided story (P)","viewer.guided.pause":"Pause guided story","viewer.guided.pause.title":"Pause guided story (P)","viewer.guided.replay":"Replay guided story","viewer.guided.replay.title":"Replay guided story (P)","viewer.guided.playStory":"Play story","viewer.guided.pauseStory":"Pause","viewer.guided.replayStory":"Replay story","viewer.guided.motionUnavailable":"Story playback unavailable while motion is Still","viewer.guided.enableMotion":"Switch motion to Live to play the guided story","viewer.guided.selectBeatLink":"Select a Story Beat to copy its exact link","viewer.guided.copyMoment":"Copy moment","viewer.guided.momentCopied":"Moment link copied","viewer.guided.momentCopyFailed":"Could not copy story moment link","viewer.guided.copied":"Copied","viewer.guided.copyFailed":"Copy failed","viewer.guided.showAll":"Show all","viewer.guided.showAll.aria":"Show entire diagram","viewer.guided.chapters":"Story chapters","viewer.guided.storyTrail":"Story trail for {label}: {count} beats","viewer.guided.chapter.open":"Open chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.current":"Current chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.selectedNodes":"{count} selected nodes","viewer.guided.chapter.stops":"{count} stops","viewer.guided.chapter.stop.one":"{count} stop","viewer.guided.chapter.stop.other":"{count} stops","viewer.guided.chapter.current.title":"{label} — current chapter, {count} stops","viewer.guided.chapter.delta.expanded":"{stay} stay, {enter} enter, {leave} leave","viewer.guided.chapter.delta.aria":"Open chapter {index} of {total}: {label}. Chapter focus delta: {delta}","viewer.guided.chapter.delta.title":"{label} — {delta} chapter focus","viewer.guided.handoff":"{from} → {to} · via {label}","viewer.guided.share.chapter":"Chapter {index} / {total}","viewer.guided.share.initial":"Chapter 01 / 01","viewer.guided.share.default":"Guided chapter","viewer.guided.state.ready":"Ready","viewer.guided.state.playing":"Playing","viewer.guided.state.settled":"Settled","viewer.guided.state.paused":"Paused","viewer.guided.state.pinned":"Pinned","viewer.guided.state.still":"Still","viewer.guided.share.step":"Step {index} / {total} · {label}","viewer.guided.share.staticMoment":"{step} · Static moment","viewer.guided.share.complete":"{count} steps complete · {note}","viewer.guided.share.settled":"Path settled for reading.","viewer.guided.share.staticPath":"{count} steps · Static path","viewer.guided.share.ready":"{count} steps · Ready","viewer.guided.share.aria":"{state} chapter {index} of {total}: {label}. {beat}. {route}","viewer.guided.beat.start":"Beat {index} / {total} · {label} · starting point","viewer.guided.beat.forward":"Beat {index} / {total} · {from} → {to}","viewer.guided.beat.reverse":"Beat {index} / {total} · {from} → {to} · reverse authored link","viewer.guided.beat.multiple":"Beat {index} / {total} · {from} ⇄ {to} · {count} authored links","viewer.guided.beat.group":"Beat {index} / {total} · {from} · {to} · grouped · no direct link","viewer.guided.beat.aria.prefix":"Story beat {index} of {total}: {label}. ","viewer.guided.beat.aria.start":"Starting point.","viewer.guided.beat.aria.forward":"From {from} through one authored forward relationship.","viewer.guided.beat.aria.reverse":"From {from}; the authored relationship points from {to} to {from}.","viewer.guided.beat.aria.multiple":"From {from} through {count} authored relationships; shown without arbitrary motion.","viewer.guided.beat.aria.group":"Grouped from {from} with no direct authored relationship.","viewer.guided.caption.start":"Starting point","viewer.guided.caption.grouped":"Grouped transition · no direct authored link","viewer.guided.caption.more":" +{count} more","viewer.guided.caption.reverse":"Reverse authored relationship","viewer.guided.caption.relationships":"{count} authored relationships","viewer.guided.caption.relationship":"Authored relationship","viewer.guided.caption.direction":"authored direction: {from} → {to}","viewer.guided.caption.starting":"Authored starting point","viewer.guided.beatLink":"Copy link to current story moment: Beat {index} of {total}: {label}","viewer.guided.noStory":"This diagram has no authored guided story.","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.story":"Play the guided story","viewer.guide.story.hint":"Walk the authored chapters and real relationships.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships} · {views}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.fact.view.one":"{count} guided view","viewer.guide.fact.view.other":"{count} guided views","viewer.guide.story.available.one":"Walk {count} authored chapter and its real relationships.","viewer.guide.story.available.other":"Walk {count} authored chapters and their real relationships.","viewer.guide.story.unavailable":"No authored guided story in this diagram.","viewer.guide.open":"Open diagram guide","viewer.guide.noStory":"This diagram has no authored guided story.","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Route probe","viewer.route.start":"Choose a start node","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Traced route","viewer.route.pickTwo":"Pick two semantic nodes on the diagram","viewer.route.pickOne":"Pick a semantic node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Choose the source, then the destination. Direction matters.","viewer.route.destination":"Choose a destination from {label}","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"A route needs two distinct semantic nodes.","viewer.route.unreachable":"No directed route to {label}","viewer.route.unreachable.detail":"{target} is not reachable from {source}. Pick a highlighted destination.","viewer.route.start.instructions":"Select the source. The next step will reveal only directed destinations.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest authored route","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} directed hop","viewer.route.overview.hop.other":"{count} directed hops","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} directed destination available. Pick a highlighted node.","viewer.route.destination.count.other":"{count} directed destinations available. Pick a highlighted node.","viewer.route.noOutgoing":"No outgoing route starts here. Clear and choose another source.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare business roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two roles. One reveals everything it touches; two compare only the direct links between them.","viewer.lens.kinds":"Business roles","viewer.lens.choose":"Choose a role to inspect its systems and everything they touch.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
     <div class="guided-views no-print" id="guided-views" hidden aria-label="Guided diagram views">
       <button id="guided-view-prev" type="button" aria-label="Previous guided view" title="Previous guided view ([)">&#8592;</button>
       <div class="guided-view-copy">
@@ -5538,6 +5593,8 @@
         <button data-view="in" type="button" aria-label="Zoom in" title="Zoom in (+)"><span class="diagram-nav-icon plus" aria-hidden="true"></span></button>
       </div>
     </div>
+
+
 
     <!-- Info Cards -->
     <div class="cards">
@@ -6125,6 +6182,12 @@
         Array.prototype.forEach.call(clone.querySelectorAll('[data-story-overlay], [data-story-carrier-overlay]'), function (el) {
           el.remove();
         });
+        Array.prototype.forEach.call(clone.querySelectorAll('[data-ledger-overlay], [data-ledger-volume]'), function (el) {
+          el.remove();
+        });
+        Array.prototype.forEach.call(clone.querySelectorAll('[data-ledger-arrive]'), function (el) {
+          el.removeAttribute('data-ledger-arrive');
+        });
         Array.prototype.forEach.call(clone.querySelectorAll('[data-intent-trace-overlay]'), function (el) {
           el.remove();
         });
@@ -6254,6 +6317,7 @@
           !clone.hasAttribute('data-route-journey') &&
           !clone.hasAttribute('data-share-route') &&
           !clone.hasAttribute('data-share-reach') &&
+          !clone.hasAttribute('data-ledger-playing') &&
           !clone.hasAttribute('data-story-active') &&
           !clone.hasAttribute('data-story-playing') &&
           !clone.hasAttribute('data-story-beat') &&
@@ -6263,7 +6327,7 @@
           !clone.hasAttribute('data-chapter-anchor') &&
           !clone.hasAttribute('data-chapter-preview') &&
           !clone.style.getPropertyValue('transform') &&
-          clone.querySelectorAll('[data-story-overlay], [data-story-carrier-overlay], [data-story-carrier-token], [data-story-step], [data-story-beat-state], [data-story-beat-step], [data-chapter-handoff-overlay], [data-chapter-role], [data-chapter-preview-role], [data-focus-match], [data-focus-selected], [data-reach-match], [data-reach-origin], [data-reach-depth], [data-semantic-lens-overlay], [data-lens-match], [data-lens-selected], [data-lens-peer], [data-legend-bridge], [data-legend-kind], [data-legend-bridge-runtime], [data-legend-count], [data-legend-zero], [data-legend-selected], [data-legend-preview-match], [data-legend-preview-selected], [data-legend-preview-peer], [data-relationship-hit-overlay], [data-relationship-pulse-overlay], [data-relationship-preview], [data-relationship-preview-node], [data-relationship-preview-source], [data-relationship-preview-target], [data-intent-trace-overlay], [data-intent-trace-match], [data-intent-trace-selected], [data-route-probe-overlay], [data-route-journey-overlay], [data-route-match], [data-route-start], [data-route-end], [data-route-step], [data-route-candidate], [data-route-journey-state], [data-route-journey-current], [data-share-route-match], [data-share-route-step], [data-share-route-start], [data-share-route-end], [data-share-route-middle], [data-share-reach-match], [data-share-reach-origin], [data-share-reach-depth], [data-source-evidence-beacon], [data-source-evidence-count], [data-source-evidence-original-label], [data-detail], [data-detail-anchor]').length === 0;
+          clone.querySelectorAll('[data-ledger-overlay], [data-ledger-volume], [data-ledger-arrive], [data-story-overlay], [data-story-carrier-overlay], [data-story-carrier-token], [data-story-step], [data-story-beat-state], [data-story-beat-step], [data-chapter-handoff-overlay], [data-chapter-role], [data-chapter-preview-role], [data-focus-match], [data-focus-selected], [data-reach-match], [data-reach-origin], [data-reach-depth], [data-semantic-lens-overlay], [data-lens-match], [data-lens-selected], [data-lens-peer], [data-legend-bridge], [data-legend-kind], [data-legend-bridge-runtime], [data-legend-count], [data-legend-zero], [data-legend-selected], [data-legend-preview-match], [data-legend-preview-selected], [data-legend-preview-peer], [data-relationship-hit-overlay], [data-relationship-pulse-overlay], [data-relationship-preview], [data-relationship-preview-node], [data-relationship-preview-source], [data-relationship-preview-target], [data-intent-trace-overlay], [data-intent-trace-match], [data-intent-trace-selected], [data-route-probe-overlay], [data-route-journey-overlay], [data-route-match], [data-route-start], [data-route-end], [data-route-step], [data-route-candidate], [data-route-journey-state], [data-route-journey-current], [data-share-route-match], [data-share-route-step], [data-share-route-start], [data-share-route-end], [data-share-route-middle], [data-share-reach-match], [data-share-reach-origin], [data-share-reach-depth], [data-source-evidence-beacon], [data-source-evidence-count], [data-source-evidence-original-label], [data-detail], [data-detail-anchor]').length === 0;
 
         var vb = svg.viewBox.baseVal;
         var finiteSvgDimensions = Number.isFinite(vb.x) && Number.isFinite(vb.y) &&
@@ -7390,6 +7454,7 @@
         if (value === 'intent') return viewerText('viewer.owner.intent');
         if (value === 'focus') return viewerText('viewer.owner.focus');
         if (value === 'legend') return viewerText('viewer.owner.legend');
+        if (value === 'ledger') return viewerText('viewer.owner.ledger');
         return viewerText('viewer.owner.reader');
       }
       function render() {
@@ -7407,6 +7472,9 @@
         label.textContent = viewerText(paused ? 'viewer.motion.still' : 'viewer.motion.live');
         if (paused && lastEffectivePaused !== true && Mosofin.guidedViews && Mosofin.guidedViews.isPlaying()) {
           Mosofin.guidedViews.pause();
+        }
+        if (paused && lastEffectivePaused !== true && Mosofin.ledger && Mosofin.ledger.isPlaying && Mosofin.ledger.isPlaying()) {
+          Mosofin.ledger.pause({ reason: systemPaused ? 'reduced-motion' : (hasSuspension() ? 'hidden' : 'still') });
         }
         if (paused && lastEffectivePaused !== true && Mosofin.guidedViews && Mosofin.guidedViews.settleHandoff) {
           Mosofin.guidedViews.settleHandoff(systemPaused ? 'reduced-motion' : (hasSuspension() ? 'hidden' : 'still'));
@@ -7449,6 +7517,7 @@
       }
       function deriveOwner() {
         if (!svg) return '';
+        if (svg.hasAttribute('data-ledger-playing')) return 'ledger';
         if (svg.hasAttribute('data-story-playing') || svg.hasAttribute('data-story-follow')) return 'story';
         if (svg.hasAttribute('data-story-active')) return 'chapter';
         if (svg.hasAttribute('data-route-picking') || svg.hasAttribute('data-route-active')) return 'route';
@@ -7544,7 +7613,7 @@
         ownerObserver.observe(svg, {
           attributes: true,
           attributeFilter: [
-            'data-story-playing', 'data-story-follow', 'data-story-active', 'data-route-picking', 'data-route-active',
+            'data-ledger-playing', 'data-story-playing', 'data-story-follow', 'data-story-active', 'data-route-picking', 'data-route-active',
             'data-lens-active', 'data-relationship-preview-active', 'data-intent-trace-active',
             'data-focus-active', 'data-legend-preview-active'
           ]
@@ -8229,6 +8298,7 @@
       }
       function relationshipTokenGeometry(shape, kind, key, options) {
         options = options || {};
+        if (options.kind) kind = options.kind;
         var pathData = relationshipTokenPath(shape);
         if (!pathData) return null;
         var token = document.createElementNS(svgNamespace, 'g');
@@ -8250,6 +8320,10 @@
         } else if (kind === 'state') {
           token.appendChild(relationshipTokenPart('circle', 'relationship-flow-token-shape', { cx: '0', cy: '0', r: '5' }));
           token.appendChild(relationshipTokenPart('circle', 'relationship-flow-token-dot', { cx: '0', cy: '0', r: '1.35' }));
+        } else if (kind === 'money') {
+          token.appendChild(relationshipTokenPart('rect', 'relationship-flow-token-shape', { x: '-6.5', y: '-4', width: '13', height: '8', rx: '1.4' }));
+          token.appendChild(relationshipTokenPart('circle', 'relationship-flow-token-dot', { cx: '0', cy: '0', r: '1.7' }));
+          token.appendChild(relationshipTokenPart('path', 'relationship-flow-token-ink', { d: 'M -4.6 -2 v 4 M 4.6 -2 v 4' }));
         } else {
           token.appendChild(relationshipTokenPart('path', 'relationship-flow-token-ink', { d: 'M -5 -3 L -1 0 L -5 3 M 0 -3 L 4 0 L 0 3' }));
         }
@@ -11054,6 +11128,457 @@
         });
       });
     };
+
+
+    Mosofin.ledger = (function () {
+      var svgNamespace = 'http://www.w3.org/2000/svg';
+      var html = document.documentElement;
+      var diagram = document.querySelector('.diagram-container');
+      var svg = diagram && diagram.querySelector(':scope > svg');
+      var dataNode = document.getElementById('mosofin-ledger-data');
+      var data = null;
+      try { data = dataNode ? JSON.parse(dataNode.textContent || 'null') : null; } catch (_) { data = null; }
+      var ready = !!(svg && data && svg.getAttribute('data-diagram-kind') === 'ledger' && data.period && data.period.days && data.period.days.length);
+      var days = ready ? data.period.days : [];
+      var playBtn = document.getElementById('ledger-play');
+      var dayLabel = document.getElementById('ledger-day');
+      var range = document.getElementById('ledger-range');
+      var tempoSelect = document.getElementById('ledger-tempo');
+      var copyBtn = document.getElementById('ledger-copy-day');
+      var statusLine = document.getElementById('ledger-status');
+      var entityStrip = document.getElementById('ledger-entities');
+      var overlay = null;
+      var volume = null;
+      var dayIndex = 0;
+      var playing = false;
+      var generation = 0;
+      var timer = 0;
+      var lease = 0;
+      var entityFilter = '';
+      var tempo = (ready && data.playback && data.playback.daysPerSecond) || 2;
+      var cash = {};
+      var accountsById = {};
+      var symbols = { USD: '$', EUR: '€', GBP: '£', CAD: 'CA$', AUD: 'A$', JPY: '¥' };
+      if (ready) {
+        (data.cashAccounts || []).forEach(function (id) { cash[id] = true; });
+        (data.accounts || []).forEach(function (account) { accountsById[account.id] = account; });
+      }
+      function text(key, values) {
+        return viewerText(key, values);
+      }
+      function money(cents) {
+        if (!data.amounts) return '';
+        var negative = cents < 0;
+        var absolute = Math.abs(cents);
+        var whole = Math.floor(absolute / 100);
+        var fraction = String(absolute % 100);
+        if (fraction.length < 2) fraction = '0' + fraction;
+        var grouped = String(whole).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        var symbol = symbols[data.currency];
+        var body = symbol ? symbol + grouped + '.' + fraction : data.currency + ' ' + grouped + '.' + fraction;
+        return negative ? '−' + body : body;
+      }
+      function itemLabel(item) {
+        if (!data.amounts) return text('viewer.ledger.countsOnly', { count: item.count });
+        return item.count > 1 ? item.count + ' · ' + money(item.sum) : money(item.sum);
+      }
+      function tokenKind(item) {
+        if (item.direction === 'reverse') return 'refund';
+        if (cash[item.to]) return 'in';
+        if (cash[item.from]) return 'out';
+        return 'transfer';
+      }
+      function haloRadius(cents) {
+        if (!data.amounts || !data.p90) return 7;
+        return Math.round((6 + 6 * Math.sqrt(Math.min(1, cents / data.p90))) * 10) / 10;
+      }
+      function edgePath(id) {
+        var candidates = svg.querySelectorAll('[data-edge-id]');
+        for (var i = 0; i < candidates.length; i += 1) {
+          var element = candidates[i];
+          if (element.getAttribute('data-edge-id') !== id) continue;
+          var tag = String(element.tagName || '').toLowerCase();
+          if (tag === 'path' || tag === 'line' || tag === 'polyline') return element;
+        }
+        return null;
+      }
+      function accountLabel(id) {
+        return accountsById[id] ? accountsById[id].label : id;
+      }
+      function insertOverlay(group) {
+        var firstNode = svg.querySelector('[data-node-id]');
+        while (firstNode && firstNode.parentNode !== svg) firstNode = firstNode.parentNode;
+        if (firstNode) svg.insertBefore(group, firstNode);
+        else svg.appendChild(group);
+      }
+      function ensureOverlay() {
+        if (overlay && overlay.parentNode) return overlay;
+        overlay = document.createElementNS(svgNamespace, 'g');
+        overlay.setAttribute('class', 'ledger-token-overlay');
+        overlay.setAttribute('data-ledger-overlay', '');
+        overlay.setAttribute('aria-hidden', 'true');
+        insertOverlay(overlay);
+        return overlay;
+      }
+      function clearOverlay() {
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        overlay = null;
+        var arrived = svg.querySelectorAll('[data-ledger-arrive]');
+        for (var i = 0; i < arrived.length; i += 1) arrived[i].removeAttribute('data-ledger-arrive');
+      }
+      function clearVolume() {
+        if (volume && volume.parentNode) volume.parentNode.removeChild(volume);
+        volume = null;
+      }
+      function renderVolume() {
+        clearVolume();
+        if (!ready || !data.flowTotals) return;
+        volume = document.createElementNS(svgNamespace, 'g');
+        volume.setAttribute('class', 'ledger-volume');
+        volume.setAttribute('data-ledger-volume', '');
+        volume.setAttribute('aria-hidden', 'true');
+        // Authored label masks, in SVG user units; a badge must never sit on one.
+        var masks = [];
+        var maskRects = svg.querySelectorAll('g[data-detail="context"][data-edge-id] rect');
+        for (var mi = 0; mi < maskRects.length; mi += 1) {
+          var mr = maskRects[mi];
+          masks.push({ x: Number(mr.getAttribute('x')), y: Number(mr.getAttribute('y')), w: Number(mr.getAttribute('width')), h: Number(mr.getAttribute('height')) });
+        }
+        var nodeRects = svg.querySelectorAll('[data-node-id] > rect.c-mask');
+        for (var ni = 0; ni < nodeRects.length; ni += 1) {
+          var nr = nodeRects[ni];
+          masks.push({ x: Number(nr.getAttribute('x')), y: Number(nr.getAttribute('y')), w: Number(nr.getAttribute('width')), h: Number(nr.getAttribute('height')) });
+        }
+        var placed = [];
+        function clearOf(x, y, w, h) {
+          var all = masks.concat(placed);
+          for (var i = 0; i < all.length; i += 1) {
+            var r = all[i];
+            if (x < r.x + r.w + 2 && x + w > r.x - 2 && y < r.y + r.h + 2 && y + h > r.y - 2) return false;
+          }
+          return true;
+        }
+        (data.flows || []).forEach(function (flow) {
+          var totals = data.flowTotals[flow.id];
+          if (!totals || !totals.count) return;
+          var edge = edgePath(flow.id);
+          if (!edge || typeof edge.getTotalLength !== 'function') return;
+          var label = data.amounts ? totals.count + ' · ' + money(totals.net) : text('viewer.ledger.countsOnly', { count: totals.count });
+          var width = label.length * 4.6 + 8;
+          var total;
+          try { total = edge.getTotalLength(); } catch (_) { return; }
+          var point = null;
+          var lift = 0;
+          var shift = 0;
+          // Along the flow first; then lifted above or dropped below it, because a
+          // straight flow shares its label's axis at every point along the path.
+          var candidates = [[0.3, 0, 0], [0.7, 0, 0], [0.2, 0, 0], [0.8, 0, 0], [0.12, 0, 0], [0.88, 0, 0], [0.5, -16, 0], [0.3, -16, 0], [0.7, -16, 0], [0.5, 22, 0], [0.3, 22, 0], [0.7, 22, 0], [0.5, 0, -40], [0.5, 0, 40], [0.3, 0, -40], [0.3, 0, 40], [0.7, 0, -40], [0.7, 0, 40], [0.5, 0, 0]];
+          for (var ci = 0; ci < candidates.length; ci += 1) {
+            var candidate;
+            try { candidate = edge.getPointAtLength(total * candidates[ci][0]); } catch (_) { return; }
+            if (clearOf(candidate.x - width / 2 + candidates[ci][2], candidate.y - 16 + candidates[ci][1], width, 11)) { point = candidate; lift = candidates[ci][1]; shift = candidates[ci][2]; break; }
+          }
+          if (!point) {
+            // A short flow whose label covers the path: sit beside that label instead.
+            var own = svg.querySelector('g[data-detail="context"][data-edge-id="' + flow.id.replace(/"/g, '') + '"] rect');
+            if (own) {
+              var ox = Number(own.getAttribute('x')), oy = Number(own.getAttribute('y')), ow = Number(own.getAttribute('width')), oh = Number(own.getAttribute('height'));
+              var beside = [
+                [ox + ow + 4 + width / 2, oy + oh / 2],
+                [ox - 4 - width / 2, oy + oh / 2],
+                [ox + ow / 2, oy - 4 - 5.5],
+                [ox + ow / 2, oy + oh + 4 + 5.5]
+              ];
+              for (var bi = 0; bi < beside.length; bi += 1) {
+                if (clearOf(beside[bi][0] - width / 2, beside[bi][1] - 5.5, width, 11)) {
+                  point = { x: beside[bi][0], y: beside[bi][1] + 16 - 9 };
+                  lift = 0; shift = 0;
+                  break;
+                }
+              }
+            }
+          }
+          if (!point) { try { point = edge.getPointAtLength(total * 0.3); } catch (_) { return; } }
+          placed.push({ x: point.x - width / 2 + shift, y: point.y - 16 + lift, w: width, h: 11 });
+          var group = document.createElementNS(svgNamespace, 'g');
+          group.setAttribute('transform', 'translate(' + (point.x + shift) + ' ' + (point.y - 9 + lift) + ')');
+          var box = document.createElementNS(svgNamespace, 'rect');
+          box.setAttribute('x', String(-width / 2));
+          box.setAttribute('y', '-7');
+          box.setAttribute('width', String(width));
+          box.setAttribute('height', '11');
+          box.setAttribute('rx', '3');
+          var textNode = document.createElementNS(svgNamespace, 'text');
+          textNode.setAttribute('text-anchor', 'middle');
+          textNode.setAttribute('y', '1.5');
+          textNode.textContent = label;
+          group.appendChild(box);
+          group.appendChild(textNode);
+          group.setAttribute('role', 'img');
+          group.setAttribute('aria-label', text('viewer.ledger.volume.aria', { count: totals.count, sum: money(totals.net), flow: flow.label }));
+          volume.appendChild(group);
+        });
+        svg.appendChild(volume);
+      }
+      function passesFilter(item) {
+        if (!entityFilter) return true;
+        return (item.entities || []).indexOf(entityFilter) !== -1;
+      }
+      function launch(item, durationMs, frozen) {
+        var edge = edgePath(item.edgeId);
+        if (!edge || !Mosofin.flowTokens || typeof Mosofin.flowTokens.create !== 'function') return;
+        var kind = tokenKind(item);
+        var token = Mosofin.flowTokens.create(edge, edge, {
+          className: 'ledger-flow-token',
+          kind: 'money',
+          duration: (frozen ? 0.01 : durationMs / 1000) + 's'
+        });
+        if (!token) return;
+        token.setAttribute('data-ledger-kind', kind);
+        token.setAttribute('role', 'img');
+        token.setAttribute('aria-label', text('viewer.ledger.token.aria', { count: item.count, sum: money(item.sum), from: accountLabel(item.from), to: accountLabel(item.to) }));
+        var halo = token.querySelector('.semantic-flow-token-halo');
+        if (halo) halo.setAttribute('r', String(haloRadius(item.sum)));
+        var motion = token.querySelector('animateMotion');
+        if (motion) {
+          motion.setAttribute('begin', 'indefinite');
+          if (item.direction === 'reverse') {
+            motion.setAttribute('keyPoints', '1;0');
+            motion.setAttribute('keyTimes', '0;1');
+          }
+        }
+        var label = document.createElementNS(svgNamespace, 'g');
+        label.setAttribute('class', 'ledger-token-label');
+        label.setAttribute('data-ledger-kind', kind);
+        label.setAttribute('aria-hidden', 'true');
+        var textNode = document.createElementNS(svgNamespace, 'text');
+        textNode.setAttribute('y', '-11');
+        textNode.setAttribute('text-anchor', 'middle');
+        textNode.textContent = itemLabel(item);
+        label.appendChild(textNode);
+        var labelMotion = motion ? motion.cloneNode(false) : null;
+        if (labelMotion) {
+          labelMotion.removeAttribute('rotate');
+          label.appendChild(labelMotion);
+        }
+        var host = ensureOverlay();
+        host.appendChild(token);
+        host.appendChild(label);
+        if (motion && typeof motion.beginElement === 'function') {
+          try { motion.beginElement(); } catch (_) {}
+        }
+        if (labelMotion && typeof labelMotion.beginElement === 'function') {
+          try { labelMotion.beginElement(); } catch (_) {}
+        }
+        if (!frozen) {
+          var gen = generation;
+          setTimeout(function () {
+            if (gen !== generation) return;
+            var target = svg.querySelector('[data-node-id="' + item.to.replace(/"/g, '') + '"]');
+            if (target) {
+              target.setAttribute('data-ledger-arrive', '');
+              setTimeout(function () { target.removeAttribute('data-ledger-arrive'); }, 360);
+            }
+          }, durationMs);
+        }
+      }
+      function showDay(index, frozen) {
+        clearOverlay();
+        if (!ready) return;
+        var tickMs = 1000 / tempo;
+        var durationMs = Math.max(250, Math.min(tickMs, 900));
+        for (var i = 0; i < data.schedule.length; i += 1) {
+          var item = data.schedule[i];
+          if (item.day !== index || !passesFilter(item)) continue;
+          launch(item, durationMs, frozen);
+        }
+      }
+      function syncControls() {
+        if (dayLabel) dayLabel.textContent = days[dayIndex] || '';
+        if (range && String(range.value) !== String(dayIndex)) range.value = String(dayIndex);
+        if (playBtn) {
+          playBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+          playBtn.textContent = text(playing ? 'viewer.ledger.pause' : 'viewer.ledger.play');
+        }
+        if (svg) {
+          if (playing) svg.setAttribute('data-ledger-playing', 'true');
+          else svg.removeAttribute('data-ledger-playing');
+        }
+      }
+      function setStatus(message) {
+        if (statusLine) statusLine.textContent = message || '';
+      }
+      function storyPlaying() {
+        return !!(Mosofin.guidedViews && typeof Mosofin.guidedViews.isPlaying === 'function' && Mosofin.guidedViews.isPlaying());
+      }
+      function motionStill() {
+        return html.getAttribute('data-motion') === 'still';
+      }
+      function release() {
+        if (lease && Mosofin.motionGovernor && typeof Mosofin.motionGovernor.release === 'function') {
+          try { Mosofin.motionGovernor.release(lease); } catch (_) {}
+        }
+        lease = 0;
+      }
+      function tick() {
+        if (!playing) return;
+        if (storyPlaying()) {
+          pause({ reason: 'preempted' });
+          return;
+        }
+        var gen = generation;
+        showDay(dayIndex, false);
+        syncControls();
+        timer = setTimeout(function () {
+          if (gen !== generation || !playing) return;
+          if (dayIndex >= days.length - 1) {
+            complete();
+            return;
+          }
+          dayIndex += 1;
+          tick();
+        }, 1000 / tempo);
+      }
+      function complete() {
+        playing = false;
+        generation += 1;
+        clearTimeout(timer);
+        release();
+        syncControls();
+        setStatus(text('viewer.ledger.complete'));
+        renderVolume();
+      }
+      function play() {
+        if (!ready || playing) return false;
+        if (motionStill()) {
+          setStatus(text('viewer.ledger.still'));
+          renderVolume();
+          return false;
+        }
+        if (Mosofin.motionGovernor && typeof Mosofin.motionGovernor.claim === 'function') {
+          lease = Mosofin.motionGovernor.claim('ledger', function () { pause({ reason: 'preempted' }); });
+        }
+        if (storyPlaying() && typeof Mosofin.guidedViews.pause === 'function') Mosofin.guidedViews.pause();
+        if (dayIndex >= days.length - 1) dayIndex = 0;
+        playing = true;
+        generation += 1;
+        clearVolume();
+        setStatus('');
+        tick();
+        return true;
+      }
+      function pause(options) {
+        options = options || {};
+        if (!playing) return false;
+        playing = false;
+        generation += 1;
+        clearTimeout(timer);
+        if (options.reason !== 'preempted') release();
+        else lease = 0;
+        syncControls();
+        showDay(dayIndex, true);
+        renderVolume();
+        if (options.reason === 'still' || options.reason === 'reduced-motion') setStatus(text('viewer.ledger.still'));
+        return true;
+      }
+      function seek(index, options) {
+        options = options || {};
+        if (!ready) return;
+        var next = Math.max(0, Math.min(days.length - 1, Number(index) || 0));
+        var wasPlaying = playing;
+        if (wasPlaying) pause({ reason: 'seek' });
+        dayIndex = next;
+        syncControls();
+        showDay(dayIndex, true);
+        if (!wasPlaying) renderVolume();
+        if (options.updateUrl) writeHash();
+      }
+      function writeHash() {
+        try {
+          var params = new URLSearchParams(location.hash.replace(/^#/, ''));
+          params.set('ledger', 'day:' + days[dayIndex]);
+          history.replaceState(null, '', '#' + params.toString());
+        } catch (_) {}
+      }
+      function readHash() {
+        try {
+          var params = new URLSearchParams(location.hash.replace(/^#/, ''));
+          var value = params.get('ledger') || '';
+          var match = /^day:(\d{4}-\d{2}-\d{2})$/.exec(value);
+          if (!match) return false;
+          var index = days.indexOf(match[1]);
+          if (index === -1) return false;
+          seek(index);
+          return true;
+        } catch (_) { return false; }
+      }
+      function setTempo(value) {
+        var next = Number(value);
+        if (!isFinite(next) || next < 0.5 || next > 10) return tempo;
+        tempo = next;
+        return tempo;
+      }
+      function setEntityFilter(id) {
+        entityFilter = entityFilter === id ? '' : (id || '');
+        if (entityStrip) {
+          var chips = entityStrip.querySelectorAll('.ledger-entity');
+          for (var i = 0; i < chips.length; i += 1) {
+            chips[i].setAttribute('aria-pressed', chips[i].getAttribute('data-entity-id') === entityFilter ? 'true' : 'false');
+          }
+        }
+        if (!playing) showDay(dayIndex, true);
+      }
+      function clearForExport() {
+        clearOverlay();
+        clearVolume();
+      }
+      function restoreAfterExport() {
+        if (!ready || playing) return;
+        showDay(dayIndex, true);
+        renderVolume();
+      }
+      if (ready) {
+        if (playBtn) playBtn.addEventListener('click', function () { if (playing) pause({ reason: 'reader' }); else play(); });
+        if (range) range.addEventListener('input', function () { seek(range.value, { updateUrl: false }); });
+        if (range) range.addEventListener('change', function () { seek(range.value, { updateUrl: true }); });
+        if (tempoSelect) tempoSelect.addEventListener('change', function () { setTempo(tempoSelect.value); });
+        if (copyBtn) copyBtn.addEventListener('click', function () {
+          writeHash();
+          var href = location.href;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(href).then(function () { setStatus(text('viewer.ledger.copied')); }, function () { setStatus(href); });
+          } else {
+            setStatus(href);
+          }
+        });
+        if (entityStrip) entityStrip.addEventListener('click', function (event) {
+          var chip = event.target.closest ? event.target.closest('.ledger-entity') : null;
+          if (!chip) return;
+          setEntityFilter(chip.getAttribute('data-entity-id'));
+        });
+        document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause({ reason: 'hidden' }); });
+        window.addEventListener('beforeprint', function () { if (playing) pause({ reason: 'print' }); });
+        window.addEventListener('hashchange', function () { readHash(); });
+        if (!readHash()) {
+          syncControls();
+          renderVolume();
+        }
+      }
+      return {
+        available: function () { return ready; },
+        isPlaying: function () { return playing; },
+        play: play,
+        pause: pause,
+        toggle: function () { return playing ? pause({ reason: 'reader' }) : play(); },
+        seek: seek,
+        day: function () { return days[dayIndex] || null; },
+        tempo: setTempo,
+        filterEntity: setEntityFilter,
+        schedule: function () { return ready ? data.schedule.slice() : []; },
+        clearForExport: clearForExport,
+        restoreAfterExport: restoreAfterExport
+      };
+    })();
 
     Mosofin.readerLayout = (function () {
       var html = document.documentElement;
@@ -14832,6 +15357,9 @@
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
         Mosofin.radar.toggle();
+      } else if ((e.key === 'g' || e.key === 'G') && Mosofin.ledger && Mosofin.ledger.available()) {
+        e.preventDefault();
+        Mosofin.ledger.toggle();
       } else if (e.key === 'l' || e.key === 'L') {
         e.preventDefault();
         Mosofin.semanticLens.toggle();

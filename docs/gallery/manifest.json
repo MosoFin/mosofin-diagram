@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "generator": "scripts/build-gallery.mjs",
   "mosofinVersion": "1.0.0-dev.0",
-  "entryCount": 9,
-  "checkCount": 81,
+  "entryCount": 10,
+  "checkCount": 90,
   "entries": [
     {
       "id": "business-map",
@@ -27,8 +27,8 @@
       "engineeringProfile": null,
       "nodeCount": 13,
       "edgeCount": 14,
-      "artifactBytes": 792219,
-      "artifactSha256": "26c37e47e9650787dddcdd9c65ac726afed4e9c6c10cef3862689cced514259a",
+      "artifactBytes": 822189,
+      "artifactSha256": "67335e7ad318f0ebdac26a3458f184e7bd2ffca883407f11aeaef45a16e60492",
       "sourceBytes": 10394,
       "sourceSha256": "d16648089bc36f51f9b79b016f20ecedf9aaaaacdbdaef8eb750f4cc6d0ac28f",
       "checks": [
@@ -127,8 +127,8 @@
       "engineeringProfile": null,
       "nodeCount": 6,
       "edgeCount": 8,
-      "artifactBytes": 720371,
-      "artifactSha256": "fa4f5270e1238a8088ea31a05f77b52c31ae9d34457e4cc26d6aa06b19212475",
+      "artifactBytes": 750341,
+      "artifactSha256": "261f6d1481c3c0da0a473261f1ec63b0b460d32ff3b13e3136c64bdd0f5db1a3",
       "sourceBytes": 5181,
       "sourceSha256": "58c8231f8459b2cb620d8d9c69f93a2bb3fa5a6a4823843f607aaad62047bed3",
       "checks": [
@@ -227,8 +227,8 @@
       "engineeringProfile": null,
       "nodeCount": 5,
       "edgeCount": 10,
-      "artifactBytes": 713732,
-      "artifactSha256": "56c6d786cd77a9c147c034361cbc406b1ce7fc539662f501179d7db21991eb0e",
+      "artifactBytes": 743702,
+      "artifactSha256": "e5d6b47bb75e654bc038ddb1c0fe32a3eeb30d41c262ff49611154431060a0c1",
       "sourceBytes": 5311,
       "sourceSha256": "5251a487ab4c18364d51b93437274ccde0409de61215543f80590b5377dcb87c",
       "checks": [
@@ -327,8 +327,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 717742,
-      "artifactSha256": "1a5483b449e9cc38bd9427b78435945b149cef34e6dfbe737e93736e9b76a99d",
+      "artifactBytes": 747712,
+      "artifactSha256": "726c1c96cd93f0bf65e04e4dcbf93d20b8ce4d391118da76cf947bccef88e603",
       "sourceBytes": 4839,
       "sourceSha256": "86f8b4b8772c1b2b04919897e1636640103700b4abc074142b1d61257cbd8899",
       "checks": [
@@ -427,8 +427,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 9,
-      "artifactBytes": 717680,
-      "artifactSha256": "352b2c603ffbf05f5f834cb15fcfe397f1a5e58c1eb8960828310bbff9da3bf7",
+      "artifactBytes": 747650,
+      "artifactSha256": "1a35ba5603763920df46a2e3a2b1986979a20146c4ade3e56399cfbc5f280c0d",
       "sourceBytes": 6566,
       "sourceSha256": "7afb0c25d51afb7ad370a4254a775efa5e09576072e74d689be968beb897e05d",
       "checks": [
@@ -527,8 +527,8 @@
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 6,
-      "artifactBytes": 712839,
-      "artifactSha256": "ddce5b946c8d113dadf9f2a539daa0128e76cccfdd81af8256e4c04e808aeeb1",
+      "artifactBytes": 742809,
+      "artifactSha256": "998035ce66a683783c23a4eae9f4112ee2b627962c8f9b2a55c423e93f1e4b47",
       "sourceBytes": 6221,
       "sourceSha256": "4220d1005b770c3c70488263ebd8ff174a26ecc4dce88ca7e270cea6e318a4de",
       "checks": [
@@ -627,8 +627,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 716380,
-      "artifactSha256": "155caa5c1dfaefc01d458ce970b7a9441f8ed6b488d8f3aa80298aa1a58b6441",
+      "artifactBytes": 746350,
+      "artifactSha256": "b930354526ee3fb88f3d79f59c87026ed8c59b561bbac39d964366b9220081c1",
       "sourceBytes": 6837,
       "sourceSha256": "aba3a2aa6ebdbb82aabdac81e087ce8371812779b3ab652794896359da4a76ad",
       "checks": [
@@ -727,8 +727,8 @@
       "engineeringProfile": null,
       "nodeCount": 8,
       "edgeCount": 7,
-      "artifactBytes": 724391,
-      "artifactSha256": "7e78f85b73b063441f591201b77d38fa2a8cc6cdfcb4fc9ebfe42fa1cc63927a",
+      "artifactBytes": 754361,
+      "artifactSha256": "2aec9c605a46c47f537b6a24f89d012729bec79ba7f71cde459430a5f05a1969",
       "sourceBytes": 5842,
       "sourceSha256": "e5661ecb639b8a69c69acae419c658035f122572b1ad4de8b119cc06f6d812cb",
       "checks": [
@@ -827,8 +827,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 716152,
-      "artifactSha256": "da822c3db4e175c57e74a7f593661ce594271a37c5eabebdb1df0ba828509bde",
+      "artifactBytes": 746122,
+      "artifactSha256": "d31a2190ce7842adcf4c7800df50287728d8f4f7a000e66398c6912a16f9c583",
       "sourceBytes": 6892,
       "sourceSha256": "999cc77ee74eafbd2e782b7c9263be59dc5bb74c2208fc9d9f1909385ed56249",
       "checks": [
@@ -890,6 +890,106 @@
           "maxStretch": 1,
           "routesOverSuggestedStretch": 0,
           "minSegmentPx": 49,
+          "minInteriorSegmentPx": 114,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "gl-replay",
+      "type": "ledger",
+      "title": "Northline Coffee — July in the books (GL replay, 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-gl-2026-07.ledger.json",
+      "artifact": "gallery/artifacts/northline-gl-2026-07.ledger.html",
+      "focus": "cash-1002",
+      "view": "order-to-cash",
+      "viewCount": 3,
+      "viewIds": [
+        "order-to-cash",
+        "cost-side",
+        "what-did-not-map"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "trace",
+      "engineeringProfile": null,
+      "nodeCount": 11,
+      "edgeCount": 10,
+      "artifactBytes": 782865,
+      "artifactSha256": "fab5b119054a30051cd6dacdf58218d7d820276ed1f534ab7cf7d1b5eb055991",
+      "sourceBytes": 18586,
+      "sourceSha256": "62805f570cfbeb40959ddaa206ece7bc49af9048db4d8ecede2b6b28936ec7e3",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": 5,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 44,
           "minInteriorSegmentPx": 114,
           "shortSegmentCount": 0,
           "shortEndpointSegmentCount": 0,

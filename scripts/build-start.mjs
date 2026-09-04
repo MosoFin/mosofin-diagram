@@ -18,6 +18,7 @@ const START_RECIPE_IDS = Object.freeze({
   sequence: 'api-request',
   dataflow: 'event-stream',
   lifecycle: 'object-lifecycle',
+  ledger: 'gl-replay',
 });
 
 const startData = Object.fromEntries(Object.entries(START_RECIPE_IDS).map(([type, id]) => {

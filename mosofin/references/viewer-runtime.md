@@ -24,6 +24,18 @@ Story transitions classify only the exact relationship between adjacent authored
 
 `meta.animation: "trace"` enables a finite reader-controlled Live/Still trace. Static is the default. Still, reduced motion, page hiding, print, and canonical export preserve complete static meaning. Presentation Stage changes viewer chrome and framing, never authored geometry. This is not a mobile product feature; narrow layouts get containment only.
 
+## Ledger playback
+
+Only a `ledger` artifact carries this surface (`data-diagram-kind="ledger"` on the SVG and an
+embedded `mosofin-ledger-data` block). The strip under the diagram replays the period day by day:
+one aggregated money token per flow per day rides the authored path (`count · sum`; a reversal runs
+the same path backwards), the tempo is 0.5 to 10 days per second, and `G` toggles play. Playback
+claims the motion governor as owner `ledger`; Still, reduced motion, a hidden tab, print, or a
+running story pause it. Whenever tokens are not moving, volume badges at each flow midpoint carry
+the same totals, and the static tie-out panel below always shows accounts, flows, entities,
+tie-outs and the unmapped rows. `#ledger=day:YYYY-MM-DD` restores a still day. Overlays never enter
+canonical exports.
+
 ## Canonical exports
 
 The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record a trace-enabled WebM. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.

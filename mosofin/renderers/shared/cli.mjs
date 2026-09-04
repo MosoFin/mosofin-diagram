@@ -49,10 +49,10 @@ export async function loadDiagramWithBrandMarks(options) {
   return loaded;
 }
 
-const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger']);
 
 // Common CLI tail: fill the template and write the standalone HTML file.
-export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null }) {
+export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null, ledger = null, ledgerSlot = '' }) {
   if (!START_TYPES.has(diagramType)) throw new Error(`writeDiagram: unknown diagram type ${JSON.stringify(diagramType)}`);
   const outputGuard = outputPathGuards.get(outPath);
   if (outputGuard) resolveOutputPath(outputGuard);
@@ -67,6 +67,8 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
     nodeStyle: meta.node_style || 'box',
     guidedViews: meta.views || [],
     sourceEvidence,
+    ledger,
+    ledgerSlot,
   }));
   outputPathGuards.delete(outPath);
   console.log(outPath);
@@ -78,6 +80,7 @@ const SEMANTIC_COLLECTIONS = {
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  ledger: 'accounts',
 };
 
 const RELATIONSHIP_COLLECTIONS = {
@@ -86,6 +89,7 @@ const RELATIONSHIP_COLLECTIONS = {
   sequence: 'messages',
   dataflow: 'flows',
   lifecycle: 'transitions',
+  ledger: 'flows',
 };
 
 // Relationship IDs are optional for backwards compatibility, but once an
@@ -158,7 +162,10 @@ export function svgRootAttrs(meta, kind) {
   const requestedProfile = process.env.MOSOFIN_QUALITY_PROFILE || meta.quality_profile;
   const qualityProfile = requestedProfile === 'showcase' ? 'showcase' : 'standard';
   const advisory = requestedProfile ? '' : ' data-quality-gates="advisory"';
-  return `role="img" lang="${esc(resolveLocale(meta.locale))}" aria-labelledby="mosofin-diagram-title mosofin-diagram-description"${animation}${preset}${engineeringProfile} data-quality-profile="${esc(qualityProfile)}"${advisory}`;
+  // Emitted only by the ledger renderer so the viewer can gate its playback
+  // module on the artifact rather than on a runtime guess.
+  const diagramKind = kind === 'ledger' ? ' data-diagram-kind="ledger"' : '';
+  return `role="img" lang="${esc(resolveLocale(meta.locale))}" aria-labelledby="mosofin-diagram-title mosofin-diagram-description"${animation}${preset}${engineeringProfile}${diagramKind} data-quality-profile="${esc(qualityProfile)}"${advisory}`;
 }
 
 // Keep the accessible name inside the SVG so it survives standalone SVG

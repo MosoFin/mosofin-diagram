@@ -1,6 +1,6 @@
 ---
 name: mosofin
-description: Turn how a business actually runs into a validated, explorable diagram — the whole operating stack (supply chain, CRM, commerce, inventory, fulfilment, payments, spend, payroll, bank, books, data), which system owns each part, and where work changes hands. Creates architecture, workflow, sequence, data-flow, and lifecycle diagrams as standalone HTML with inline SVG, dark/light themes, optional trace motion, and PNG/JPEG/WebP/SVG/WebM export; also converts pasted Mermaid. Use when the user asks to map, outline, or understand their business or its software stack; for finance questions (ledger, close, revenue walk, payout rec, AR, cash, QuickBooks, Stripe, Shopify); or for software systems (infrastructure, cloud topology, API call chains, data pipelines, ETL, state machines).
+description: Turn how a business actually runs into a validated, explorable diagram — the whole operating stack (supply chain, CRM, commerce, inventory, fulfilment, payments, spend, payroll, bank, books, data), which system owns each part, and where work changes hands. Creates architecture, workflow, sequence, data-flow, lifecycle, and ledger diagrams (a general-ledger journal replayed as money moving between accounts) as standalone HTML with inline SVG, dark/light themes, optional trace motion, and PNG/JPEG/WebP/SVG/WebM export; also converts pasted Mermaid. Use when the user asks to map, outline, or understand their business or its software stack; for finance questions (ledger, close, revenue walk, payout rec, AR, cash, QuickBooks, Stripe, Shopify); or for software systems (infrastructure, cloud topology, API call chains, data pipelines, ETL, state machines).
 license: MIT
 metadata:
   version: "1.0"
@@ -17,7 +17,7 @@ Create a self-contained, interactive HTML diagram from a small typed JSON specif
 Use this bounded path for ordinary generation. Do not read the optional Viewer Runtime reference unless the user asks about those features.
 
 0. Business or finance mapping: if the user is mapping **how a business runs** (its software stack, supply chain, CRM, fulfilment, teams, handoffs, or several of these together), read `references/business-onboarding.md` and load or create workspace `BUSINESS-BRIEF.md`. If the question is specifically financial and must tie out (ledger, close, revenue walk, payout rec, AR, cash to a date, tax), read `references/finance-onboarding.md` and use `FINANCE-BRIEF.md` instead — that contract is stricter and stays authoritative for numbers. A whole-business map that merely contains a ledger uses the business contract. Then continue at step 1 with the routed diagram type. Diagrams of a purely software system skip this step. The example briefs in `examples/business-brief.md` and `examples/finance-brief.md` are field shape only, not facts and not renderer input.
-1. Choose `architecture`, `workflow`, `sequence`, `dataflow`, or `lifecycle` from the question. For a business or finance brief, use that contract's intent table; when the sentence is still ambiguous, run `node bin/mosofin.mjs guide "<scenario>" --json`.
+1. Choose `architecture`, `workflow`, `sequence`, `dataflow`, `lifecycle`, or `ledger` from the question. For a business or finance brief, use that contract's intent table; when the sentence is still ambiguous, run `node bin/mosofin.mjs guide "<scenario>" --json`.
 2. Read one matching schema in `schemas/`, `schemas/common.schema.json`, and one matching JSON example in `examples/`. Read only those files. Fresh authorship means new stable IDs, domain wording, and layout; use the example for field shape, not facts. When real product identity matters, query `node bin/mosofin.mjs brands "<name>" --json`; read `references/brand-marks.md` only for an unknown brand with a user-provided URL.
 3. Artifact first: the next tool action must write the candidate. Write the candidate before inspecting renderer internals. Do not plan exact coordinates in prose. Start with one clear main path, short side branches, sparse labels, and at most 12 primary nodes. Set `meta.quality_profile` to `"showcase"` unless the user explicitly requests a dense `standard` map. Start with automatic routes and labels. Do not add `via`, `channelX`, `channelY`, or `labelAt` before a diagnostic calls for one; apply at most one diagnosed geometry control per repair.
 4. Validate after every candidate edit and immediately before handoff:
@@ -37,6 +37,8 @@ Use this bounded path for ordinary generation. Do not read the optional Viewer R
 
 Do not read `renderers/shared/geometry.mjs`, renderer source, validator source, tests, or benchmarks before the first candidate. Inspect implementation only for an unsupported internal diagnostic or after two focused repairs fail.
 
+Ledger note: `accounts` (at most 12; mark the operating cash account `cash: true`) are the nodes and `flows` are the only paths money may travel; every `ledger.events` row must reference one authored flow or be listed in `ledger.unmapped`. `proof` is `authored` or `csv`; a `csv` badge must carry the file, SHA-256 and row count. Add a `tieouts` row only for a figure the user supplied.
+
 Lifecycle note: phase columns `0..4` occupy the main rail; event/outcome columns `0..2` align beneath later phases. A recoverable state uses `type: "failure"` plus a real transition back to the active state.
 
 ## Type router
@@ -48,6 +50,7 @@ Lifecycle note: phase columns `0..4` occupy the main rail; event/outcome columns
 | `sequence` | API call chains, request lifecycles, async traces, returns |
 | `dataflow` | Pipelines, ETL/ELT, lineage, governance, consumers |
 | `lifecycle` | State/status transitions, retries, waiting and terminal states |
+| `ledger` | A GL journal replayed across an account map: dated events on authored credit-to-debit flows, tie-outs, unmapped rows listed, never allocated |
 
 When ambiguous, run `node bin/mosofin.mjs guide "<scenario>" --json`. Scenario proof examples are structural references, not facts to copy. Finance mapping chooses the type from `references/finance-onboarding.md` first; `guide` is the fallback when the business question still does not match that table.
 
