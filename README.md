@@ -27,6 +27,8 @@ For the finance-first walkthrough — the exact prompt, command trail and receip
 [docs/USE-CASE.md](docs/USE-CASE.md) and its [money map](docs/samples/northline-money-map.html)
 ([spec](mosofin/examples/northline-money-map.architecture.json)).
 
+How the **three financial statements** lock: [docs/three-statements.md](docs/three-statements.md) and the rendered sample [docs/samples/northline-three-statements.html](docs/samples/northline-three-statements.html) (NI → equity, NI → cash from ops, ending cash → BS cash).
+
 ## See it
 
 Every image below is a real delivered artifact — no mockups. Each one validated at **9/9 checks,
@@ -79,6 +81,7 @@ Click any screenshot for the full-size capture; dark-theme versions sit beside t
 | `finance-payout-rec` | dataflow | [![Stripe payout reconciliation](docs/samples/images/northline-payout-rec.light.png)](docs/samples/images/northline-payout-rec.light.png) | [HTML](docs/samples/northline-payout-rec.html) · [spec](mosofin/examples/northline-payout-rec.dataflow.json) |
 | `finance-customer-ar` | architecture | [![Who can say a customer owes us](docs/samples/images/northline-customer-ar.light.png)](docs/samples/images/northline-customer-ar.light.png) | [HTML](docs/samples/northline-customer-ar.html) · [spec](mosofin/examples/northline-customer-ar.architecture.json) |
 | `finance-cash-runway` | dataflow | [![Cash to payroll date](docs/samples/images/northline-cash-runway.light.png)](docs/samples/images/northline-cash-runway.light.png) | [HTML](docs/samples/northline-cash-runway.html) · [spec](mosofin/examples/northline-cash-runway.dataflow.json) |
+| three statements | architecture | — | [HTML](docs/samples/northline-three-statements.html) · [spec](mosofin/examples/northline-three-statements.architecture.json) · [how to read](docs/three-statements.md) |
 
 Reproduce any of them from the skill directory:
 
