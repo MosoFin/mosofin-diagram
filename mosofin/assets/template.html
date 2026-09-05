@@ -4730,6 +4730,36 @@
     .city-antenna { stroke: var(--external-stroke); }
     .city-antenna-tip { fill: var(--external-stroke); }
     .city-column { stroke: var(--external-stroke); }
+
+    .ledger-scenario-select { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .ledger-scenario-banner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem 0.85rem; margin: 0.55rem 0 0; padding: 0.45rem 0.85rem; border: 1.5px dashed color-mix(in srgb, var(--ledger-transfer) 70%, var(--panel-border)); border-radius: 10px; background: color-mix(in srgb, var(--ledger-transfer) 10%, var(--panel)); font-size: 0.74rem; color: var(--text); }
+    .ledger-scenario-banner[hidden] { display: none !important; }
+    .ledger-scenario-banner-mark { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ledger-transfer); border: 1px solid currentColor; border-radius: 4px; padding: 0.08rem 0.4rem; }
+    .ledger-scenario-banner-label { font-weight: 600; }
+    .ledger-scenario-banner-assumptions { opacity: 0.8; }
+    .ledger-scenario-banner-note { font-size: 0.68rem; opacity: 0.7; margin-left: auto; }
+    .ledger-projected { font-style: italic; }
+    .ledger-projected::after { content: " projected"; font-size: 0.65em; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.7; font-style: normal; margin-left: 0.25em; }
+    .ledger-scenario-projected[hidden] { display: none !important; }
+    .ledger-scenario-assumptions, .ledger-scenario-currency { font-size: 0.72rem; opacity: 0.8; margin: 0 0 0.45rem; }
+    .ledger-flow-token[data-ledger-series="scenario"] .relationship-flow-token-shape { fill: transparent; stroke-width: 1.6; stroke-dasharray: 2.5 1.8; }
+    .ledger-flow-token[data-ledger-series="scenario"] .relationship-flow-token-dot { fill: transparent; stroke-width: 1.4; stroke-dasharray: 2 1.5; }
+    .ledger-flow-token[data-ledger-series="scenario"] .semantic-flow-token-halo { fill-opacity: 0; stroke-width: 1.2; stroke-dasharray: 3 2; stroke: var(--ledger-transfer); }
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="in"] .semantic-flow-token-halo,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="in"] .relationship-flow-token-shape,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="in"] .relationship-flow-token-dot,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="in"] .relationship-flow-token-ink { stroke: var(--ledger-in); }
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="out"] .semantic-flow-token-halo,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="out"] .relationship-flow-token-shape,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="out"] .relationship-flow-token-dot,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="out"] .relationship-flow-token-ink,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="refund"] .semantic-flow-token-halo,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="refund"] .relationship-flow-token-shape,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="refund"] .relationship-flow-token-dot,
+    .ledger-flow-token[data-ledger-series="scenario"][data-ledger-kind="refund"] .relationship-flow-token-ink { stroke: var(--ledger-out); }
+    .ledger-token-label[data-ledger-series="scenario"] text { font-style: italic; opacity: 0.92; }
+    html[data-embed="true"] .ledger-scenario-banner { display: none !important; }
+
     .ledger-view-toggle { display: inline-flex; gap: 0.15rem; padding: 0.12rem; border: 1px solid var(--panel-border); border-radius: 999px; background: color-mix(in srgb, var(--panel) 80%, transparent); }
     .ledger-view-link { font: inherit; font-size: 0.72rem; padding: 0.22rem 0.65rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; }
     .ledger-view-link[aria-current="page"] { background: var(--ledger-in); color: #06120a; font-weight: 600; }
@@ -6786,6 +6816,7 @@
           var tokenDuration = Math.max(0.25, Math.min(dayDuration, 0.9));
           var vehicles = [];
           (data.schedule || []).forEach(function (item) {
+            // Baseline schedule only — scenario hollow tokens stay out of WebM by design.
             // Unmapped rows never enter schedule(); missing roads stay silent — never invent a path.
             var points = pathsById[item.edgeId];
             if (!points) return;
@@ -11251,6 +11282,11 @@
       var timer = 0;
       var lease = 0;
       var entityFilter = '';
+      var scenarioId = '';
+      var scenarioSelect = document.getElementById('ledger-scenario');
+      var scenarioBanner = document.getElementById('ledger-scenario-banner');
+      var scenarioBannerLabel = document.getElementById('ledger-scenario-banner-label');
+      var scenarioBannerAssumptions = document.getElementById('ledger-scenario-banner-assumptions');
       var tempo = (ready && data.playback && data.playback.daysPerSecond) || 2;
       var cash = {};
       var accountsById = {};
@@ -11431,8 +11467,10 @@
         });
         if (!token) return;
         token.setAttribute('data-ledger-kind', kind);
+        var series = item.series === 'scenario' ? 'scenario' : 'baseline';
+        token.setAttribute('data-ledger-series', series);
         token.setAttribute('role', 'img');
-        token.setAttribute('aria-label', text('viewer.ledger.token.aria', { count: item.count, sum: money(item.sum), from: accountLabel(item.from), to: accountLabel(item.to) }));
+        token.setAttribute('aria-label', text(series === 'scenario' ? 'viewer.ledger.scenario.token.aria' : 'viewer.ledger.token.aria', { count: item.count, sum: money(item.sum), from: accountLabel(item.from), to: accountLabel(item.to) }));
         var halo = token.querySelector('.semantic-flow-token-halo');
         if (halo) halo.setAttribute('r', String(haloRadius(item.sum)));
         var motion = token.querySelector('animateMotion');
@@ -11446,6 +11484,7 @@
         var label = document.createElementNS(svgNamespace, 'g');
         label.setAttribute('class', 'ledger-token-label');
         label.setAttribute('data-ledger-kind', kind);
+        label.setAttribute('data-ledger-series', series);
         label.setAttribute('aria-hidden', 'true');
         var textNode = document.createElementNS(svgNamespace, 'text');
         textNode.setAttribute('y', '-11');
@@ -11478,6 +11517,35 @@
           }, durationMs);
         }
       }
+      function activeScenario() {
+        if (!scenarioId || !Array.isArray(data.scenarios)) return null;
+        for (var i = 0; i < data.scenarios.length; i += 1) {
+          if (data.scenarios[i].id === scenarioId) return data.scenarios[i];
+        }
+        return null;
+      }
+      function syncScenarioUi() {
+        var scenario = activeScenario();
+        var sections = document.querySelectorAll('.ledger-scenario-projected');
+        for (var i = 0; i < sections.length; i += 1) {
+          sections[i].hidden = !scenario || sections[i].getAttribute('data-scenario-id') !== scenario.id;
+        }
+        if (scenarioBanner) {
+          if (scenario) {
+            scenarioBanner.hidden = false;
+            if (scenarioBannerLabel) scenarioBannerLabel.textContent = scenario.label || '';
+            if (scenarioBannerAssumptions) scenarioBannerAssumptions.textContent = (scenario.assumptions || []).join(' · ');
+          } else {
+            scenarioBanner.hidden = true;
+            if (scenarioBannerLabel) scenarioBannerLabel.textContent = '';
+            if (scenarioBannerAssumptions) scenarioBannerAssumptions.textContent = '';
+          }
+        }
+        if (svg) {
+          if (scenario) svg.setAttribute('data-ledger-scenario', scenario.id);
+          else svg.removeAttribute('data-ledger-scenario');
+        }
+      }
       function showDay(index, frozen) {
         clearOverlay();
         if (!ready) return;
@@ -11487,6 +11555,14 @@
           var item = data.schedule[i];
           if (item.day !== index || !passesFilter(item)) continue;
           launch(item, durationMs, frozen);
+        }
+        var scenario = activeScenario();
+        if (scenario && Array.isArray(scenario.schedule)) {
+          for (var si = 0; si < scenario.schedule.length; si += 1) {
+            var projected = scenario.schedule[si];
+            if (projected.day !== index || !passesFilter(projected)) continue;
+            launch(projected, durationMs, frozen);
+          }
         }
       }
       function syncControls() {
@@ -11710,6 +11786,20 @@
           if (!bar) return;
           seek(bar.getAttribute('data-day-index'), { updateUrl: true });
         });
+        function setScenario(id) {
+          scenarioId = id || '';
+          if (scenarioSelect && scenarioSelect.value !== scenarioId) scenarioSelect.value = scenarioId;
+          syncScenarioUi();
+          if (!playing) {
+            showDay(dayIndex, true);
+            renderVolume();
+          }
+          setStatus(scenarioId ? text('viewer.ledger.scenario.active') : text('viewer.ledger.scenario.off'));
+        }
+        if (scenarioSelect) scenarioSelect.addEventListener('change', function () {
+          setScenario(scenarioSelect.value);
+        });
+        syncScenarioUi();
         document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause({ reason: 'hidden' }); });
         window.addEventListener('beforeprint', function () { if (playing) pause({ reason: 'print' }); });
         window.addEventListener('hashchange', function () { readHash(); });
@@ -11728,6 +11818,16 @@
         day: function () { return days[dayIndex] || null; },
         tempo: setTempo,
         filterEntity: setEntityFilter,
+        setScenario: function (id) {
+          scenarioId = id || '';
+          if (scenarioSelect && scenarioSelect.value !== scenarioId) scenarioSelect.value = scenarioId;
+          syncScenarioUi();
+          if (!playing) {
+            showDay(dayIndex, true);
+            renderVolume();
+          }
+        },
+        scenario: function () { return scenarioId || null; },
         schedule: function () { return ready ? data.schedule.slice() : []; },
         clearForExport: clearForExport,
         restoreAfterExport: restoreAfterExport

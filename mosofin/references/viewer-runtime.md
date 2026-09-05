@@ -36,6 +36,11 @@ the same totals, and the static tie-out panel below always shows accounts, flows
 tie-outs and the unmapped rows. `#ledger=day:YYYY-MM-DD` restores a still day. Overlays never enter
 canonical exports.
 
+When `ledger.scenarios[]` is present, the strip offers a scenario selector. Choosing one keeps a
+persistent **SCENARIO** banner, plays hollow projected tokens beside the baseline series on the same
+authored paths, and reveals a projected totals block in the panel. Tie-outs and the proof line never
+include scenario money. Export → WebM still records the baseline schedule only.
+
 ## Canonical exports
 
 The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record WebM. Trace diagrams still use the ambient edge/node pulse scene. A `ledger` artifact records the GL month from the same `schedule()` the live strip plays: vehicles ride authored Map edges or City `city-road` paths, refunds reverse, and unmapped rows never become fake vehicles. Capture length is `days/daysPerSecond + 1s` (cap 20s). WebM is optional; Still and reduced-motion keep full static meaning without it. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.

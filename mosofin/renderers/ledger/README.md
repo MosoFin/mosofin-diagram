@@ -45,3 +45,15 @@ node bin/mosofin.mjs ledger import path/to/export.csv --map mapping.json --out o
 ```
 
 `mapping.json` names a base ledger diagram (`base`), maps CSV account cells / names onto account and entity ids, and sets `splits` to `unmapped` (allocation is refused). Unmapped journal entries are listed; `--strict` exits non-zero when any remain. See `examples/northline-gl-2026-07.mapping.json`.
+
+
+## What-if scenarios
+
+Optional `ledger.scenarios[]` entries name a what-if overlay: `label`, `assumptions[]`, and projected
+`events` (same shape as the baseline journal; unmapped listed, never allocated). The viewer selects a
+scenario from the playback strip, shows a persistent **SCENARIO** banner, and draws projected tokens
+as **hollow** markers on the same Map edges / City roads. Panel sections that show scenario totals are
+labelled **projected**. Tie-outs and the proof line stay baseline-only (`authored` | `csv`). If a
+scenario sets a `currency` different from `ledger.currency`, amounts are never converted and residuals
+read **not comparable**. Export → WebM records the baseline `schedule` only — turn the overlay on in
+the live viewer when you want hollow tokens in the replay.

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "ledger",
   "meta": {
-    "title": "Northline Coffee \u2014 July in the books (City view, 2026-07)",
+    "title": "Northline Coffee — July in the books (City view, 2026-07)",
     "output": "northline-gl-2026-07-city.html",
     "viewBox": [
       1200,
@@ -63,8 +63,8 @@
   "accounts": [
     {
       "id": "dtc-sales-4000",
-      "label": "Sales \u2014 DTC",
-      "sublabel": "4000 \u00b7 Shopify receipts",
+      "label": "Sales — DTC",
+      "sublabel": "4000 · Shopify receipts",
       "class": "revenue",
       "stage": 0,
       "row": 1,
@@ -73,8 +73,8 @@
     },
     {
       "id": "wholesale-4100",
-      "label": "Sales \u2014 Wholesale",
-      "sublabel": "4100 \u00b7 invoiced",
+      "label": "Sales — Wholesale",
+      "sublabel": "4100 · invoiced",
       "class": "revenue",
       "stage": 0,
       "row": 2
@@ -82,7 +82,7 @@
     {
       "id": "ar-1200",
       "label": "A/R",
-      "sublabel": "1200 \u00b7 wholesale only",
+      "sublabel": "1200 · wholesale only",
       "class": "asset",
       "stage": 0,
       "row": 4
@@ -103,7 +103,7 @@
     {
       "id": "refunds-4900",
       "label": "Refunds & allowances",
-      "sublabel": "4900 \u00b7 contra revenue",
+      "sublabel": "4900 · contra revenue",
       "class": "contra",
       "stage": 1,
       "row": 3
@@ -111,7 +111,7 @@
     {
       "id": "inventory-1300",
       "label": "Inventory",
-      "sublabel": "1300 \u00b7 green coffee",
+      "sublabel": "1300 · green coffee",
       "class": "asset",
       "stage": 2,
       "row": 0
@@ -119,7 +119,7 @@
     {
       "id": "ap-2000",
       "label": "A/P",
-      "sublabel": "2000 \u00b7 bills",
+      "sublabel": "2000 · bills",
       "class": "liability",
       "stage": 2,
       "row": 1
@@ -135,7 +135,7 @@
     {
       "id": "fees-6050",
       "label": "Merchant fees",
-      "sublabel": "6050 \u00b7 Stripe",
+      "sublabel": "6050 · Stripe",
       "class": "expense",
       "stage": 3,
       "row": 2,
@@ -562,7 +562,7 @@
         "amount": 2400,
         "entity": "ent-bluebottle",
         "ref": "JE-430",
-        "memo": "Invoice 1041 \u2014 60 lb roasted",
+        "memo": "Invoice 1041 — 60 lb roasted",
         "row": 38
       },
       {
@@ -573,7 +573,7 @@
         "amount": 960,
         "entity": "ent-harbor",
         "ref": "JE-431",
-        "memo": "Invoice 1042 \u2014 24 lb roasted",
+        "memo": "Invoice 1042 — 24 lb roasted",
         "row": 40
       },
       {
@@ -584,7 +584,7 @@
         "amount": 3200,
         "entity": "ent-bluebottle",
         "ref": "JE-432",
-        "memo": "Invoice 1043 \u2014 80 lb roasted",
+        "memo": "Invoice 1043 — 80 lb roasted",
         "row": 42
       },
       {
@@ -595,7 +595,7 @@
         "amount": 2400,
         "entity": "ent-bluebottle",
         "ref": "JE-433",
-        "memo": "ACH 88213 \u2014 pays invoice 1041",
+        "memo": "ACH 88213 — pays invoice 1041",
         "row": 44
       },
       {
@@ -606,7 +606,7 @@
         "amount": 960,
         "entity": "ent-harbor",
         "ref": "JE-434",
-        "memo": "ACH 88377 \u2014 pays invoice 1042",
+        "memo": "ACH 88377 — pays invoice 1042",
         "row": 46
       },
       {
@@ -617,7 +617,7 @@
         "amount": 4380,
         "entity": "ent-importadora",
         "ref": "JE-435",
-        "memo": "Bill IMP-2207 \u2014 3 bags Huila",
+        "memo": "Bill IMP-2207 — 3 bags Huila",
         "row": 48
       },
       {
@@ -628,7 +628,7 @@
         "amount": 3120,
         "entity": "ent-importadora",
         "ref": "JE-436",
-        "memo": "Bill IMP-2231 \u2014 2 bags Sidamo",
+        "memo": "Bill IMP-2231 — 2 bags Sidamo",
         "row": 50
       },
       {
@@ -661,7 +661,7 @@
         "amount": 2910,
         "entity": "ent-dtc-customers",
         "ref": "JE-439",
-        "memo": "COGS relief \u2014 first half July",
+        "memo": "COGS relief — first half July",
         "row": 56
       },
       {
@@ -672,7 +672,7 @@
         "amount": 3245,
         "entity": "ent-dtc-customers",
         "ref": "JE-440",
-        "memo": "COGS relief \u2014 second half July",
+        "memo": "COGS relief — second half July",
         "row": 58
       },
       {
@@ -714,7 +714,7 @@
         "date": "2026-07-15",
         "ref": "JE-444",
         "amount": 6120,
-        "memo": "Payroll 07/15 \u2014 net pay + withholdings",
+        "memo": "Payroll 07/15 — net pay + withholdings",
         "entity": "ent-employees",
         "row": 66,
         "reason": "split-entry"
@@ -723,7 +723,7 @@
         "date": "2026-07-31",
         "ref": "JE-445",
         "amount": 6120,
-        "memo": "Payroll 07/31 \u2014 net pay + withholdings",
+        "memo": "Payroll 07/31 — net pay + withholdings",
         "entity": "ent-employees",
         "row": 69,
         "reason": "split-entry"
@@ -737,6 +737,109 @@
         "row": 72,
         "reason": "unknown-edge"
       }
+    ],
+    "scenarios": [
+      {
+        "id": "dtc-plus-10",
+        "label": "+10% DTC sales (what-if)",
+        "assumptions": [
+          "WHAT-IF only — not from the QuickBooks export",
+          "Each DTC sales-receipt batch runs 10% higher",
+          "No other drivers change"
+        ],
+        "events": [
+          {
+            "id": "sc-je-412",
+            "date": "2026-07-01",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 184.21,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-413",
+            "date": "2026-07-03",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 121.06,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-414",
+            "date": "2026-07-06",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 204.4,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-415",
+            "date": "2026-07-09",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 156.83,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-416",
+            "date": "2026-07-13",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 193.08,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-417",
+            "date": "2026-07-16",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 140.22,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-418",
+            "date": "2026-07-20",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 221.54,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-419",
+            "date": "2026-07-23",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 168.79,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-420",
+            "date": "2026-07-27",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 177.46,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          },
+          {
+            "id": "sc-je-421",
+            "date": "2026-07-30",
+            "edge": "dtc-sale",
+            "kind": "journal",
+            "amount": 199.82,
+            "entity": "ent-dtc-customers",
+            "memo": "Projected +10% DTC sales (what-if — not in CSV)"
+          }
+        ]
+      }
     ]
   },
   "cards": [
@@ -745,8 +848,8 @@
       "title": "Source of truth",
       "items": [
         "Every row: the QuickBooks GL export for 2026-07 (Proof: CSV, digest in the panel)",
-        "Cash: Chase 1002 \u00b7 Revenue: QuickBooks P&L",
-        "Flows run credit \u2192 debit; a token is one or more journal lines"
+        "Cash: Chase 1002 · Revenue: QuickBooks P&L",
+        "Flows run credit → debit; a token is one or more journal lines"
       ]
     },
     {
@@ -755,16 +858,16 @@
       "items": [
         "Split entries (payroll) are listed as unmapped, never allocated",
         "Sales tax accounts are off this map; their rows are shown as unmapped",
-        "\u201cTied for rows in file\u201d is not a bank reconciliation"
+        "“Tied for rows in file” is not a bank reconciliation"
       ]
     },
     {
       "dot": "cyan",
       "title": "Brief",
       "items": [
-        "Entity: Northline Coffee LLC \u00b7 accrual",
+        "Entity: Northline Coffee LLC · accrual",
         "Audience: controller first",
-        "Period: 2026-07 \u00b7 replay at 2 days/s"
+        "Period: 2026-07 · replay at 2 days/s"
       ]
     }
   ]

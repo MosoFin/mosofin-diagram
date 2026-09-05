@@ -8,6 +8,13 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ledger **Phase 3 what-if scenarios** (`ledger.scenarios[]`): named driver assumptions and projected
+  events ride the same authored flows as a second `schedule()` series. The viewer draws hollow tokens
+  plus a persistent **SCENARIO** banner; projected money is labelled in the panel overlay and never
+  enters tie-outs or the proof line. Cross-currency scenarios stay unconverted and show
+  "not comparable". Export → WebM records the **baseline** schedule only (safer shareable clip).
+  Northline ships a clearly labelled `+10% DTC sales (what-if)` fixture on Map and City.
+
 - Ledger **City/Map WebM**: Export → WebM records the GL month from `schedule()` as vehicles on
   authored roads/edges (refunds reverse; unmapped never invent paths). Duration is
   `days/daysPerSecond + 1s`, capped at 20s. Shared `Mosofin.motionGeometry` samples paths for both
