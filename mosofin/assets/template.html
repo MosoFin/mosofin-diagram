@@ -4711,10 +4711,11 @@
     html[data-motion="still"] .ledger-day-bar-fill { transition: none; }
     html[data-embed="true"] .ledger-day-bars, html[data-embed="true"] .ledger-meters { display: none !important; }
 
-    /* Ledger City view */
-    .city-road { stroke: var(--arrow); fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+    /* Ledger City view — SimCity-style readable district */
+    .city-road { stroke: var(--arrow); fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.95; }
+    .city-road-bed { stroke: color-mix(in srgb, var(--arrow) 28%, var(--panel-border)); opacity: 0.55; }
     .m-city { fill: var(--arrow); }
-    .city-ground { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-width: 1; opacity: 0.55; }
+    .city-ground { fill: var(--lane-fill); stroke: var(--lane-stroke); stroke-width: 1.2; opacity: 0.62; }
     .city-building .city-face-top { fill: color-mix(in srgb, var(--panel) 55%, transparent); stroke: var(--panel-border); }
     .city-building .city-face-left { fill: color-mix(in srgb, currentColor 18%, var(--panel)); stroke: var(--panel-border); color: var(--arrow); }
     .city-building .city-face-right { fill: color-mix(in srgb, currentColor 28%, var(--panel)); stroke: var(--panel-border); color: var(--arrow); }
@@ -4723,6 +4724,15 @@
     .city-building.c-database .city-face-left, .city-building.c-database .city-face-right { color: var(--database-stroke); }
     .city-building.c-security .city-face-left, .city-building.c-security .city-face-right { color: var(--security-stroke); }
     .city-building.c-external .city-face-left, .city-building.c-external .city-face-right { color: var(--external-stroke); }
+    /* Authored health tint (red→green). Unknown stays role-neutral — never pretend green. */
+    .city-building[data-city-health]:not([data-city-health="unknown"]) .city-face-left,
+    .city-building[data-city-health]:not([data-city-health="unknown"]) .city-face-right {
+      color: var(--city-health-color);
+      fill: color-mix(in srgb, var(--city-health-color) 32%, var(--panel));
+    }
+    .city-building[data-city-health]:not([data-city-health="unknown"]) .city-face-top {
+      fill: color-mix(in srgb, var(--city-health-color) 18%, var(--panel));
+    }
     .city-roof-left { fill: color-mix(in srgb, var(--security-stroke) 22%, var(--panel)); stroke: var(--panel-border); }
     .city-roof-right { fill: color-mix(in srgb, var(--security-stroke) 34%, var(--panel)); stroke: var(--panel-border); }
     .city-awning { stroke: var(--frontend-stroke); }
@@ -4730,6 +4740,70 @@
     .city-antenna { stroke: var(--external-stroke); }
     .city-antenna-tip { fill: var(--external-stroke); }
     .city-column { stroke: var(--external-stroke); }
+    /* Labels below buildings; secondary hide until zoomed or focused. */
+    svg[data-ledger-view="city"] .city-building-label { paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
+    svg[data-ledger-view="city"] .city-building[data-city-label="secondary"] .city-building-label { opacity: 0; pointer-events: none; }
+    .diagram-container[data-detail-level="full"] svg[data-ledger-view="city"] .city-building[data-city-label="secondary"] .city-building-label,
+    svg[data-ledger-view="city"] .city-building:focus-within .city-building-label,
+    svg[data-ledger-view="city"] .city-building[data-ledger-active] .city-building-label,
+    svg[data-ledger-view="city"] .city-building[data-focus-selected] .city-building-label { opacity: 1; pointer-events: auto; }
+    /* Flow labels hidden by default in City; show on hover/focus/active route. */
+    svg[data-ledger-view="city"] [data-city-flow-label] { opacity: 0; pointer-events: none; transition: opacity 140ms ease; }
+    svg[data-ledger-view="city"] [data-city-flow-label]:hover,
+    svg[data-ledger-view="city"] [data-city-flow-label]:focus-within,
+    svg[data-ledger-view="city"] .city-road-group:hover + [data-city-flow-label],
+    svg[data-ledger-view="city"] [data-city-flow-label][data-ledger-active],
+    svg[data-ledger-view="city"][data-ledger-playing] [data-city-flow-label][data-ledger-active] { opacity: 1; pointer-events: auto; }
+    /* Playback dimming — active corridor stays bright. */
+    svg[data-ledger-view="city"][data-ledger-playing] .city-building { opacity: 0.28; transition: opacity 160ms ease, filter 160ms ease; }
+    svg[data-ledger-view="city"][data-ledger-playing] .city-road { opacity: 0.18; transition: opacity 160ms ease, stroke-width 160ms ease; }
+    svg[data-ledger-view="city"][data-ledger-playing] .city-building[data-ledger-active],
+    svg[data-ledger-view="city"][data-ledger-playing] .city-road[data-ledger-active],
+    svg[data-ledger-view="city"][data-ledger-playing] .city-road-group[data-ledger-active] .city-road { opacity: 1; filter: drop-shadow(0 0 5px color-mix(in srgb, var(--ledger-in) 45%, transparent)); }
+    svg[data-ledger-view="city"][data-ledger-playing] .city-road[data-ledger-active] { stroke-width: 4.2; }
+    html[data-motion="still"] svg[data-ledger-view="city"][data-ledger-playing] .city-building,
+    html[data-motion="still"] svg[data-ledger-view="city"][data-ledger-playing] .city-road { opacity: 1; filter: none; }
+    /* Arrival pulse on isometric faces (map nodes still use rect rule above). */
+    svg[data-ledger-view="city"] .city-building[data-ledger-arrive] .city-face-top,
+    svg[data-ledger-view="city"] .city-building[data-ledger-arrive] .city-face-left,
+    svg[data-ledger-view="city"] .city-building[data-ledger-arrive] .city-face-right {
+      animation: mosofin-city-arrive 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes mosofin-city-arrive {
+      0% { stroke-width: 1; filter: none; }
+      40% { stroke-width: 2.4; filter: drop-shadow(0 0 8px var(--ledger-in)); }
+      100% { stroke-width: 1; filter: none; }
+    }
+    /* City vehicles — larger money tokens with optional amount label. */
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle { transform-box: fill-box; }
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle .semantic-flow-token-halo { r: 11; fill-opacity: 0.28; }
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle .relationship-flow-token-shape { stroke-width: 1.6; }
+    svg[data-ledger-view="city"] .ledger-token-label.city-vehicle-label text { font-size: 9.5px; }
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle[data-ledger-kind="in"] .relationship-flow-token-shape {
+      fill: color-mix(in srgb, var(--ledger-in) 22%, var(--panel));
+    }
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle[data-ledger-kind="out"] .relationship-flow-token-shape,
+    svg[data-ledger-view="city"] .ledger-flow-token.city-vehicle[data-ledger-kind="refund"] .relationship-flow-token-shape {
+      fill: color-mix(in srgb, var(--ledger-out) 22%, var(--panel));
+    }
+    /* City-only camera chrome */
+    .diagram-nav [data-city-camera] { display: none; }
+    html[data-ledger-city="true"] .diagram-nav [data-city-camera] { display: inline-flex; }
+    .diagram-nav [data-view="rotate-left"]::before,
+    .diagram-nav [data-view="rotate-right"]::before {
+      content: "";
+      width: 0.95rem; height: 0.95rem; display: block;
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' d='M4 10a6 6 0 0110.4-4M15.5 4.5V7h-2.5M16 10a6 6 0 01-10.4 4M4.5 15.5V13H7'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' d='M4 10a6 6 0 0110.4-4M15.5 4.5V7h-2.5M16 10a6 6 0 01-10.4 4M4.5 15.5V13H7'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+    .diagram-nav [data-view="rotate-right"]::before { transform: scaleX(-1); }
+    .diagram-nav [data-view="follow"][aria-pressed="true"] {
+      background: color-mix(in srgb, var(--ledger-in) 22%, var(--panel));
+      color: var(--ledger-in);
+    }
+    [data-city-stage] { transform-box: fill-box; transform-origin: center; transition: transform 180ms ease; }
+    .diagram-container.is-city-rotating [data-city-stage] { transition: none; }
 
     .ledger-scenario-select { display: inline-flex; align-items: center; gap: 0.35rem; }
     .ledger-scenario-banner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem 0.85rem; margin: 0.55rem 0 0; padding: 0.45rem 0.85rem; border: 1.5px dashed color-mix(in srgb, var(--ledger-transfer) 70%, var(--panel-border)); border-radius: 10px; background: color-mix(in srgb, var(--ledger-transfer) 10%, var(--panel)); font-size: 0.74rem; color: var(--text); }
@@ -5490,6 +5564,9 @@
         <button data-view="out" type="button" aria-label="{{i18n:viewer.nav.zoomOut}}" title="{{i18n:viewer.nav.zoomOut.title}}"><span class="diagram-nav-icon minus" aria-hidden="true"></span></button>
         <button data-view="reset" type="button" aria-label="{{i18n:viewer.nav.reset}}" title="{{i18n:viewer.nav.reset.title}}"><span class="diagram-nav-detail" data-view-detail hidden>{{i18n:viewer.nav.read}}</span><span class="diagram-nav-percent" data-view-percent>100%</span></button>
         <button data-view="in" type="button" aria-label="{{i18n:viewer.nav.zoomIn}}" title="{{i18n:viewer.nav.zoomIn.title}}"><span class="diagram-nav-icon plus" aria-hidden="true"></span></button>
+        <button data-view="rotate-left" data-city-camera type="button" aria-label="{{i18n:viewer.nav.rotateLeft}}" title="{{i18n:viewer.nav.rotateLeft.title}}"></button>
+        <button data-view="rotate-right" data-city-camera type="button" aria-label="{{i18n:viewer.nav.rotateRight}}" title="{{i18n:viewer.nav.rotateRight.title}}"></button>
+        <button data-view="follow" data-city-camera type="button" aria-pressed="false" aria-label="{{i18n:viewer.nav.followToken}}" title="{{i18n:viewer.nav.followToken.title}}">FOLLOW</button>
       </div>
     </div>
 
@@ -11352,11 +11429,33 @@
         insertOverlay(overlay);
         return overlay;
       }
+      function clearCityActive() {
+        if (!svg) return;
+        var active = svg.querySelectorAll('[data-ledger-active]');
+        for (var i = 0; i < active.length; i += 1) active[i].removeAttribute('data-ledger-active');
+      }
+      function markCityActive(item) {
+        if (!svg || svg.getAttribute('data-ledger-view') !== 'city' || !item) return;
+        clearCityActive();
+        var edge = edgePath(item.edgeId);
+        if (edge) {
+          edge.setAttribute('data-ledger-active', '');
+          var group = edge.closest('[data-city-road]');
+          if (group) group.setAttribute('data-ledger-active', '');
+          var label = svg.querySelector('[data-city-flow-label][data-edge-id="' + String(item.edgeId).replace(/"/g, '') + '"]');
+          if (label) label.setAttribute('data-ledger-active', '');
+        }
+        var from = svg.querySelector('[data-node-id="' + String(item.from).replace(/"/g, '') + '"]');
+        var to = svg.querySelector('[data-node-id="' + String(item.to).replace(/"/g, '') + '"]');
+        if (from) from.setAttribute('data-ledger-active', '');
+        if (to) to.setAttribute('data-ledger-active', '');
+      }
       function clearOverlay() {
         if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
         overlay = null;
         var arrived = svg.querySelectorAll('[data-ledger-arrive]');
         for (var i = 0; i < arrived.length; i += 1) arrived[i].removeAttribute('data-ledger-arrive');
+        clearCityActive();
       }
       function clearVolume() {
         if (volume && volume.parentNode) volume.parentNode.removeChild(volume);
@@ -11469,10 +11568,25 @@
         token.setAttribute('data-ledger-kind', kind);
         var series = item.series === 'scenario' ? 'scenario' : 'baseline';
         token.setAttribute('data-ledger-series', series);
+        var city = svg.getAttribute('data-ledger-view') === 'city';
+        if (city) {
+          token.classList.add('city-vehicle');
+          markCityActive(item);
+        }
         token.setAttribute('role', 'img');
         token.setAttribute('aria-label', text(series === 'scenario' ? 'viewer.ledger.scenario.token.aria' : 'viewer.ledger.token.aria', { count: item.count, sum: money(item.sum), from: accountLabel(item.from), to: accountLabel(item.to) }));
         var halo = token.querySelector('.semantic-flow-token-halo');
-        if (halo) halo.setAttribute('r', String(haloRadius(item.sum)));
+        if (halo) halo.setAttribute('r', String(city ? Math.max(10, haloRadius(item.sum) + 3) : haloRadius(item.sum)));
+        if (city) {
+          var body = token.querySelector('.relationship-flow-token-shape');
+          if (body && body.tagName.toLowerCase() === 'rect') {
+            body.setAttribute('x', '-9');
+            body.setAttribute('y', '-5.5');
+            body.setAttribute('width', '18');
+            body.setAttribute('height', '11');
+            body.setAttribute('rx', '2.2');
+          }
+        }
         var motion = token.querySelector('animateMotion');
         if (motion) {
           motion.setAttribute('begin', 'indefinite');
@@ -11482,12 +11596,12 @@
           }
         }
         var label = document.createElementNS(svgNamespace, 'g');
-        label.setAttribute('class', 'ledger-token-label');
+        label.setAttribute('class', 'ledger-token-label' + (city ? ' city-vehicle-label' : ''));
         label.setAttribute('data-ledger-kind', kind);
         label.setAttribute('data-ledger-series', series);
         label.setAttribute('aria-hidden', 'true');
         var textNode = document.createElementNS(svgNamespace, 'text');
-        textNode.setAttribute('y', '-11');
+        textNode.setAttribute('y', city ? '-14' : '-11');
         textNode.setAttribute('text-anchor', 'middle');
         textNode.textContent = itemLabel(item);
         label.appendChild(textNode);
@@ -11505,11 +11619,19 @@
         if (labelMotion && typeof labelMotion.beginElement === 'function') {
           try { labelMotion.beginElement(); } catch (_) {}
         }
+        if (city && !frozen && Mosofin.view && typeof Mosofin.view.followTokenEnabled === 'function' && Mosofin.view.followTokenEnabled()) {
+          try {
+            var mid = edge.getPointAtLength(edge.getTotalLength() * 0.5);
+            if (Mosofin.view.followPoint) Mosofin.view.followPoint(mid.x, mid.y, { scale: Math.max(1.75, (Mosofin.view.state() || {}).scale || 1.75) });
+            else if (Mosofin.view.reveal) Mosofin.view.reveal([item.from, item.to], { maxScale: 2.1, duration: 280, reason: 'ledger-follow' });
+          } catch (_) {}
+        }
         if (!frozen) {
           var gen = generation;
           setTimeout(function () {
             if (gen !== generation) return;
-            var target = svg.querySelector('[data-node-id="' + item.to.replace(/"/g, '') + '"]');
+            var targetId = item.direction === 'reverse' ? item.from : item.to;
+            var target = svg.querySelector('[data-node-id="' + targetId.replace(/"/g, '') + '"]');
             if (target) {
               target.setAttribute('data-ledger-arrive', '');
               setTimeout(function () { target.removeAttribute('data-ledger-arrive'); }, 360);
@@ -11626,6 +11748,7 @@
         clearTimeout(timer);
         release();
         syncControls();
+        clearCityActive();
         setStatus(text('viewer.ledger.complete'));
         renderVolume();
       }
@@ -12214,17 +12337,73 @@
       var resetDetailLabel = resetBtn.querySelector('[data-view-detail]');
       var resetPercentLabel = resetBtn.querySelector('[data-view-percent]');
       var inBtn = container.querySelector('[data-view="in"]');
+      var rotateLeftBtn = container.querySelector('[data-view="rotate-left"]');
+      var rotateRightBtn = container.querySelector('[data-view="rotate-right"]');
+      var followBtn = container.querySelector('[data-view="follow"]');
       var state = { scale: 1, x: 0, y: 0, mode: 'overview' };
       var drag = null;
+      var rotateDrag = null;
       var cameraTimer = null;
       var cameraFrame = null;
       var cameraGeneration = 0;
       var cameraTransaction = null;
       var resizeFrame = 0;
       var autoScrollUntil = 0;
+      var cityRotate = 0;
+      var followToken = false;
+      var isCityView = !!(svg && svg.getAttribute('data-ledger-view') === 'city');
+      if (isCityView) document.documentElement.setAttribute('data-ledger-city', 'true');
+      else document.documentElement.removeAttribute('data-ledger-city');
 
       var viewBox = svg.viewBox && svg.viewBox.baseVal;
 
+      function cityStage() {
+        return isCityView ? svg.querySelector('[data-city-stage]') : null;
+      }
+      function cityPivot() {
+        var cx = Number(svg.getAttribute('data-city-stage-cx'));
+        var cy = Number(svg.getAttribute('data-city-stage-cy'));
+        if (!Number.isFinite(cx) || !Number.isFinite(cy)) {
+          var vb = viewBox;
+          return { x: vb ? vb.width / 2 : 0, y: vb ? vb.height / 2 : 0 };
+        }
+        return { x: cx, y: cy };
+      }
+      function applyCityRotate() {
+        var stage = cityStage();
+        if (!stage) return;
+        var pivot = cityPivot();
+        var deg = ((cityRotate % 360) + 360) % 360;
+        if (deg > 180) deg -= 360;
+        cityRotate = deg;
+        stage.setAttribute('transform', 'rotate(' + cityRotate + ' ' + pivot.x + ' ' + pivot.y + ')');
+        stage.setAttribute('data-city-rotate', String(Math.round(cityRotate * 10) / 10));
+        svg.setAttribute('data-city-rotate', String(Math.round(cityRotate * 10) / 10));
+      }
+      function rotateCity(delta, options) {
+        options = options || {};
+        if (!isCityView) return cityRotate;
+        if (options.manual !== false) interruptCamera();
+        cityRotate += delta;
+        applyCityRotate();
+        return cityRotate;
+      }
+      function setFollowToken(next) {
+        if (!isCityView) return false;
+        followToken = next === true;
+        if (followBtn) followBtn.setAttribute('aria-pressed', followToken ? 'true' : 'false');
+        svg.setAttribute('data-city-follow', followToken ? 'true' : 'false');
+        return followToken;
+      }
+      function followPoint(logicalX, logicalY, options) {
+        if (!isCityView || !followToken) return false;
+        options = options || {};
+        return centerAt(logicalX, logicalY, {
+          scale: options.scale || Math.max(state.scale, 1.75),
+          minimumScale: options.minimumScale || 1.5,
+          instant: options.instant === true
+        });
+      }
       function clamp() {
         var width = svg.clientWidth || 1;
         var height = svg.clientHeight || 1;
@@ -12428,6 +12607,10 @@
         if (options.automatic !== true) interruptCamera();
         else stopCameraMotion('reset', false);
         state = { scale: 1, x: 0, y: 0, mode: 'overview' };
+        if (isCityView) {
+          cityRotate = 0;
+          applyCityRotate();
+        }
         apply();
         if (Mosofin.viewerChromeLayout && typeof Mosofin.viewerChromeLayout.reprobe === 'function') {
           Mosofin.viewerChromeLayout.reprobe();
@@ -12643,6 +12826,17 @@
         }
       }
       function onPointerEnd(event) {
+        if (rotateDrag) {
+          var rotated = rotateDrag.moved;
+          rotateDrag = null;
+          container.classList.remove('is-city-rotating');
+          try { container.releasePointerCapture(event.pointerId); } catch (_) {}
+          if (rotated) {
+            container.setAttribute('data-just-panned', 'true');
+            setTimeout(function () { container.removeAttribute('data-just-panned'); }, 80);
+          }
+          return;
+        }
         if (!drag) return;
         var moved = drag.moved;
         drag = null;
@@ -12657,14 +12851,43 @@
       inBtn.addEventListener('click', function () { zoom(state.scale + 0.25); });
       outBtn.addEventListener('click', function () { zoom(state.scale - 0.25); });
       resetBtn.addEventListener('click', reset);
+      if (rotateLeftBtn) rotateLeftBtn.addEventListener('click', function () { rotateCity(-15); });
+      if (rotateRightBtn) rotateRightBtn.addEventListener('click', function () { rotateCity(15); });
+      if (followBtn) followBtn.addEventListener('click', function () { setFollowToken(!followToken); });
+      if (isCityView) {
+        applyCityRotate();
+        container.addEventListener('wheel', function (event) {
+          if (event.target.closest('.diagram-nav, .focus-chip, .node-finder, .diagram-guide, .overview-map, .route-probe, .semantic-lens, .ledger-strip, .ledger-panel')) return;
+          event.preventDefault();
+          var direction = event.deltaY > 0 ? -0.25 : 0.25;
+          zoom(state.scale + direction);
+        }, { passive: false });
+      }
       container.addEventListener('pointerdown', function (event) {
-        if (state.scale <= 1 || event.button !== 0 || event.target.closest('.diagram-nav, .focus-chip, .node-finder, .diagram-guide, .overview-map, .route-probe, .semantic-lens') || event.target.closest('[data-node-id]') || event.target.closest('[data-relationship-hit-key]')) return;
+        if (event.target.closest('.diagram-nav, .focus-chip, .node-finder, .diagram-guide, .overview-map, .route-probe, .semantic-lens')) return;
+        // City rotate: right-drag or Alt+left-drag orbits the district without breaking Map pan.
+        if (isCityView && (event.button === 2 || (event.button === 0 && event.altKey))) {
+          interruptCamera();
+          rotateDrag = { startX: event.clientX, angle: cityRotate, moved: false };
+          container.classList.add('is-city-rotating');
+          try { container.setPointerCapture(event.pointerId); } catch (_) {}
+          event.preventDefault();
+          return;
+        }
+        if (state.scale <= 1 || event.button !== 0 || event.target.closest('[data-node-id]') || event.target.closest('[data-relationship-hit-key]')) return;
         interruptCamera();
         drag = { startX: event.clientX, startY: event.clientY, x: state.x, y: state.y, moved: false };
         container.classList.add('is-panning');
         try { container.setPointerCapture(event.pointerId); } catch (_) {}
       });
       container.addEventListener('pointermove', function (event) {
+        if (rotateDrag) {
+          var rdx = event.clientX - rotateDrag.startX;
+          if (Math.abs(rdx) > 2) rotateDrag.moved = true;
+          cityRotate = rotateDrag.angle + rdx * 0.35;
+          applyCityRotate();
+          return;
+        }
         if (!drag) return;
         var dx = event.clientX - drag.startX;
         var dy = event.clientY - drag.startY;
@@ -12675,6 +12898,9 @@
       });
       container.addEventListener('pointerup', onPointerEnd);
       container.addEventListener('pointercancel', onPointerEnd);
+      container.addEventListener('contextmenu', function (event) {
+        if (isCityView) event.preventDefault();
+      });
       container.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () {
         if (resizeFrame) cancelAnimationFrame(resizeFrame);
@@ -12697,7 +12923,13 @@
         centerAt: centerAt,
         logicalViewport: logicalViewport,
         sync: syncSemantic,
-        state: function () { return { scale: state.scale, x: state.x, y: state.y, mode: state.mode }; }
+        rotateCity: rotateCity,
+        setFollowToken: setFollowToken,
+        followTokenEnabled: function () { return followToken; },
+        followPoint: followPoint,
+        cityRotate: function () { return cityRotate; },
+        isCity: function () { return isCityView; },
+        state: function () { return { scale: state.scale, x: state.x, y: state.y, mode: state.mode, rotate: cityRotate, follow: followToken }; }
       };
     })();
 

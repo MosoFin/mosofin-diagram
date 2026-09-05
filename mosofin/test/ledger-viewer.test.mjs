@@ -80,3 +80,18 @@ test('the ledger artifact carries its data, strip and panel outside the canonica
   assert.ok(payload.schedule.every((item) => payload.flows.some((flow) => flow.id === item.edgeId)), 'every scheduled token rides an authored flow');
   assert.ok(!('memo' in payload.schedule[0]), 'the viewer payload does not carry memos');
 });
+
+test('city camera chrome ships zoom, pan hooks, rotate and follow controls', () => {
+  assert.match(template, /data-view="rotate-left"/);
+  assert.match(template, /data-view="rotate-right"/);
+  assert.match(template, /data-view="follow"/);
+  assert.match(template, /data-city-camera/);
+  assert.match(template, /rotateCity:/);
+  assert.match(template, /followPoint:/);
+  assert.match(template, /setFollowToken:/);
+  assert.match(template, /getAttribute\('data-ledger-view'\) === 'city'/);
+  assert.match(template, /addEventListener\('wheel'/);
+  assert.match(template, /city-vehicle/);
+  assert.match(template, /markCityActive/);
+  assert.match(template, /data-ledger-city/);
+});

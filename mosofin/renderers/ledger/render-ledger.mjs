@@ -445,15 +445,15 @@ ${renderLegend()}
 }
 
 validateLedger(ledgerDoc);
+const summary = summarize(ledgerDoc);
 const ledgerView = ledgerDoc.meta?.view === 'city' ? 'city' : 'map';
 let svg;
 if (ledgerView === 'city') {
-  svg = renderCityScene(ledgerDoc);
+  svg = renderCityScene(ledgerDoc, summary);
 } else {
   validateLayout();
   svg = renderSvg();
 }
-const summary = summarize(ledgerDoc);
 writeDiagram({
   outPath,
   template,

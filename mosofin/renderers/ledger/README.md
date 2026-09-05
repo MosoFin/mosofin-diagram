@@ -31,6 +31,12 @@ that schedule on the roads (or Map edges): refunds reverse, duration is `days/da
 (cap 20s), and unmapped rows never invent vehicles. Recording is optional; the static panel and
 volume badges remain complete under Still / reduced motion.
 
+City Sim controls (viewer, City only): mouse wheel or +/- zoom, drag to pan when zoomed, **rotate**
+buttons (or Alt/right-drag) to orbit the district, **FOLLOW** to keep the camera on the active
+vehicle while Play runs, and Reset to restore overview + default angle. Building **health** tint
+comes from authored node tie-out residuals (tied → green, break magnitude → red); accounts without
+a tie-out stay neutral grey. Entity buildings only tint when they carry authored unmapped rows.
+
 ## Daily bars and account meters
 
 HTML only (outside the canonical SVG):
