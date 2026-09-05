@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import { applyTemplate, renderCards, esc } from './utils.mjs';
@@ -57,6 +58,16 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
   const outputGuard = outputPathGuards.get(outPath);
   if (outputGuard) resolveOutputPath(outputGuard);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  let city3dVendor = '';
+  if (ledger && ledger.view === 'city') {
+    const bundlePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../assets/vendor/city3d.bundle.min.js');
+    if (fs.existsSync(bundlePath)) {
+      const bundle = fs.readFileSync(bundlePath, 'utf8');
+      city3dVendor = `    <script id="mosofin-city3d-vendor">
+${bundle}
+    </script>`;
+    }
+  }
   fs.writeFileSync(outPath, applyTemplate(template, {
     title: meta.title,
     subtitle: meta.subtitle,
@@ -69,6 +80,7 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
     sourceEvidence,
     ledger,
     ledgerSlot,
+    city3dVendor,
   }));
   outputPathGuards.delete(outPath);
   console.log(outPath);

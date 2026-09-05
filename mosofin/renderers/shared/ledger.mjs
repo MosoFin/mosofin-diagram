@@ -9,6 +9,7 @@
 import { esc } from './utils.mjs';
 import { throwDiagnosticProblems } from './diagnostics.mjs';
 import { translateMessage } from './i18n.mjs';
+import { cityViewerExtras } from '../ledger/city.mjs';
 
 export const ACCOUNT_CLASSES = Object.freeze(['asset', 'liability', 'equity', 'revenue', 'contra', 'expense']);
 export const ENTITY_CLASSES = Object.freeze(['customer', 'vendor', 'bank', 'lender', 'government', 'employee', 'owner', 'processor', 'other']);
@@ -562,6 +563,8 @@ export function viewerPayload(diagram, summary) {
   const source = summary.source
     ? { file: summary.source.file || null, rows: summary.source.rows || null, sha256: summary.source.sha256 || null, system: summary.source.system || null }
     : null;
+  const view = diagram.meta?.view === 'city' ? 'city' : 'map';
+  const city = view === 'city' ? cityViewerExtras(diagram, summary) : null;
   return {
     currency: summary.currency,
     amounts: summary.amounts,
@@ -571,9 +574,10 @@ export function viewerPayload(diagram, summary) {
     playback: summary.playback,
     p90: summary.p90,
     cashAccounts: summary.cashAccounts,
-    view: diagram.meta?.view === 'city' ? 'city' : 'map',
+    view,
     sibling: diagram.meta?.sibling || null,
-    accounts: (diagram.accounts || []).map((account) => ({ id: account.id, label: account.label, class: account.class, cash: account.cash === true })),
+    city,
+    accounts: (diagram.accounts || []).map((account) => ({ id: account.id, label: account.label, class: account.class, cash: account.cash === true, stage: account.stage || 0, row: account.row || 0 })),
     flows: (diagram.flows || []).map((flow) => ({ id: flow.id, from: flow.from, to: flow.to, label: flow.label })),
     entities: (diagram.entities || []).map((entity) => ({ id: entity.id, label: entity.label, class: entity.class, grouped: entity.grouped || null })),
     flowTotals: Object.fromEntries(Object.entries(summary.flows).map(([id, flow]) => [id, { count: flow.count + flow.refundCount, net: flow.net, sum: flow.sum, refundSum: flow.refundSum }])),
@@ -738,6 +742,12 @@ ${list.map((entity) => `        <button type="button" class="ledger-entity" data
         <a class="ledger-view-link" href="${view === 'city' ? '#' : esc(sibling)}" data-ledger-view-target="city"${view === 'city' ? ' aria-current="page"' : ''}>${esc(t(locale, 'ledger.view.city'))}</a>
       </nav>`
     : '';
+  const cityModeToggle = view === 'city'
+    ? `      <nav class="ledger-city-mode-toggle" data-ledger-city-mode-toggle="" aria-label="${esc(t(locale, 'ledger.city.mode.toggle'))}">
+        <button type="button" class="ledger-city-mode-btn" data-ledger-city-mode="iso" aria-pressed="true">${esc(t(locale, 'ledger.city.mode.iso'))}</button>
+        <button type="button" class="ledger-city-mode-btn" data-ledger-city-mode="3d" aria-pressed="false">${esc(t(locale, 'ledger.city.mode.3d'))}</button>
+      </nav>`
+    : '';
 
   const scenarios = summary.scenarios || [];
   const scenarioOptions = [
@@ -800,6 +810,7 @@ ${flowRowsProjected}
   return `    <!-- MOSOFIN:LEDGER_SLOT_START -->
     <div class="ledger-strip no-print" id="ledger-strip" role="group" aria-label="${esc(t(locale, 'ledger.strip.label'))}">
 ${viewToggle ? `${viewToggle}
+` : ''}${cityModeToggle ? `${cityModeToggle}
 ` : ''}      <button id="ledger-play" type="button" aria-pressed="false" title="${esc(t(locale, 'ledger.strip.play.title'))}">${esc(t(locale, 'viewer.ledger.play'))}</button>
       <span class="ledger-day" id="ledger-day" aria-live="polite">${esc(summary.period.start)}</span>
       <input id="ledger-range" type="range" min="0" max="${Math.max(0, summary.period.days.length - 1)}" value="0" step="1" aria-label="${esc(t(locale, 'ledger.strip.day'))}">
