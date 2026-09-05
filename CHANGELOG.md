@@ -8,6 +8,13 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ledger **City 3D** (`Mosofin.city3d`): optional Three.js layer on `data-ledger-view="city"` with
+  OrbitControls (orbit/zoom/pan), health-colored account/entity meshes from authored tie-outs only,
+  roads as tubes, and playback-synced vehicles from `schedule()`. **Iso | 3D** toggle defaults to
+  Iso (SVG City stays the portable/check/export surface; PNG/WebM still from SVG). Vendored pinned
+  `three@0.170.0` + OrbitControls under `mosofin/assets/vendor/` (IIFE bundle injected only into City
+  HTML). WebGL mount is skipped in CI without a browser.
+
 - Ledger **City Sim** upgrade: zoom/pan/wheel camera gated for `data-ledger-view="city"`, optional
   **follow active token** while Play runs, and **orbit/rotate** of the isometric stage (buttons,
   Alt/right-drag; Reset restores angle). Layout uses larger buildings, more district spacing, labels

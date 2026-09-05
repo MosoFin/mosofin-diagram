@@ -109,6 +109,7 @@ const GUIDED_VIEWS_PLACEHOLDER = '<!-- MOSOFIN:GUIDED_VIEWS_DATA -->';
 const SOURCE_EVIDENCE_PLACEHOLDER = '    <!-- MOSOFIN:SOURCE_EVIDENCE_DATA -->';
 const I18N_PLACEHOLDER = '    <!-- MOSOFIN:I18N_DATA -->';
 const LEDGER_DATA_PLACEHOLDER = '    <!-- MOSOFIN:LEDGER_DATA -->';
+const CITY3D_VENDOR_PLACEHOLDER = '    <!-- MOSOFIN:CITY3D_VENDOR -->';
 const LEDGER_SLOT_RE = /    <!-- MOSOFIN:LEDGER_SLOT_START -->[\s\S]*?    <!-- MOSOFIN:LEDGER_SLOT_END -->/;
 
 function serializeScriptJson(value) {
@@ -137,6 +138,7 @@ export function applyTemplate(template, {
   sourceEvidence = null,
   ledger = null,
   ledgerSlot = '',
+  city3dVendor = '',
 }) {
   if (!SVG_SLOT_RE.test(template)) {
     throw new Error('applyTemplate: template missing MOSOFIN:SVG_SLOT sentinel');
@@ -162,6 +164,10 @@ export function applyTemplate(template, {
   // mirroring the repository-evidence rule above.
   if (ledger && (!template.includes(LEDGER_DATA_PLACEHOLDER) || !LEDGER_SLOT_RE.test(template))) {
     throw new Error('applyTemplate: ledger playback requires the MOSOFIN:LEDGER_DATA and MOSOFIN:LEDGER_SLOT sentinels');
+  }
+  // City 3D vendor is optional for legacy/minimal templates; required only when injecting.
+  if (city3dVendor && !template.includes(CITY3D_VENDOR_PLACEHOLDER)) {
+    throw new Error('applyTemplate: City 3D vendor requires the MOSOFIN:CITY3D_VENDOR sentinel');
   }
   const ledgerJson = serializeScriptJson(ledger);
   // Function replacers: a literal `  // Function replacers: a literal `$&``, `$'`, `$\`` or `$$` in titles, labels,
@@ -194,7 +200,8 @@ export function applyTemplate(template, {
     .replace(LEDGER_DATA_PLACEHOLDER, () => ledger
       ? `    <script id="mosofin-ledger-data" type="application/json">${ledgerJson}</script>`
       : '')
-    .replace(LEDGER_SLOT_RE, () => (ledger && ledgerSlot ? ledgerSlot : ''));
+    .replace(LEDGER_SLOT_RE, () => (ledger && ledgerSlot ? ledgerSlot : ''))
+    .replace(CITY3D_VENDOR_PLACEHOLDER, () => (city3dVendor || ''));
 }
 
 // CJK and other wide/fullwidth glyphs render at roughly twice the advance

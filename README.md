@@ -306,3 +306,11 @@ Mosofin is a finance-specialised fork of [Archify](https://github.com/tt-a1i/arc
 ## Contributing
 
 Issues, pull requests, and real-world business or finance diagrams are welcome. Start with the [contribution guide](CONTRIBUTING.md), use the reproducible bug form for failures, or submit a validated diagram through the [community showcase form](https://github.com/MosoFin/mosofin-diagram/issues/new?template=showcase.yml).
+
+### City 3D (ledger)
+
+Open `mosofin/examples/ledger-northline-gl-city.html` in a desktop browser → **Iso | 3D** on the
+ledger strip (Iso default) → orbit Cash/Sales → **Play** for vehicles on health-colored buildings.
+PNG/WebM still export from SVG City. See `mosofin/references/viewer-runtime.md` and
+`mosofin/assets/vendor/README.md`.
+

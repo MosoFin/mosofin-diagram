@@ -56,7 +56,7 @@ const FILL = {
   messagebus: 'c-messagebus',
 };
 
-function silhouetteForAccount(account) {
+export function silhouetteForAccount(account) {
   if (account.cash) return 'vault';
   if (account.class === 'asset' && /inventor/i.test(`${account.label} ${account.id}`)) return 'warehouse';
   if (account.class === 'asset' && /\ba\/?r\b|receivable/i.test(`${account.label} ${account.id}`)) return 'office';
@@ -244,14 +244,22 @@ function healthAttrs(health) {
   return ` data-city-health="${bucket}" data-city-health-source="${esc(health.source)}"`;
 }
 
-function healthCssVars(health) {
-  if (!health || health.score === null || health.score === undefined) return '';
-  const t = Math.max(0, Math.min(1, health.score));
+export function cityHealthColor(score) {
+  if (score === null || score === undefined || Number.isNaN(Number(score))) {
+    return { r: 148, g: 163, b: 184, css: "rgb(148, 163, 184)", unknown: true };
+  }
+  const t = Math.max(0, Math.min(1, Number(score)));
   // red (#dc2626) → amber (#eab308) → green (#16a34a)
   const r = t < 0.5 ? 220 : Math.round(220 + (22 - 220) * ((t - 0.5) * 2));
   const g = t < 0.5 ? Math.round(38 + (179 - 38) * (t * 2)) : Math.round(179 + (163 - 179) * ((t - 0.5) * 2));
   const b = t < 0.5 ? Math.round(38 + (8 - 38) * (t * 2)) : Math.round(8 + (74 - 8) * ((t - 0.5) * 2));
-  return `--city-health: ${t}; --city-health-color: rgb(${r}, ${g}, ${b})`;
+  return { r, g, b, css: `rgb(${r}, ${g}, ${b})`, unknown: false, score: t };
+}
+
+function healthCssVars(health) {
+  if (!health || health.score === null || health.score === undefined) return '';
+  const tint = cityHealthColor(health.score);
+  return `--city-health: ${tint.score}; --city-health-color: ${tint.css}`;
 }
 
 function cityNodeStyle(health, animateMarkup) {
@@ -572,6 +580,29 @@ function renderCityLegend(ledgerDoc, viewBox, accountBuildings) {
       return `<path d="M ${entry.x} ${entry.baseline - 3} L ${entry.x + 34} ${entry.baseline - 3}" class="city-road" stroke-width="2.4" marker-end="url(#marker-city)"/>`;
     },
   });
+}
+
+
+/** Layout + health facts for City 3D (no invented amounts). */
+export function cityViewerExtras(diagram, summary) {
+  const health = {};
+  const kinds = {};
+  const stages = {};
+  const rows = {};
+  for (const account of asArray(diagram.accounts)) {
+    const h = cityAccountHealth(account.id, summary);
+    health[account.id] = h.score;
+    kinds[account.id] = silhouetteForAccount(account);
+    stages[account.id] = account.stage || 0;
+    rows[account.id] = account.row || 0;
+  }
+  for (const entity of asArray(diagram.entities)) {
+    const h = cityEntityHealth(entity.id, summary);
+    health[entity.id] = h.score;
+    const grouped = entity.grouped && entity.grouped > 1;
+    kinds[entity.id] = grouped ? 'block' : (ENTITY_SILHOUETTE[entity.class] || 'block');
+  }
+  return { health, kinds, stages, rows };
 }
 
 export function renderCityScene(ledgerDoc, summary = null) {

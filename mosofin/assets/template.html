@@ -4834,6 +4834,26 @@
     .ledger-token-label[data-ledger-series="scenario"] text { font-style: italic; opacity: 0.92; }
     html[data-embed="true"] .ledger-scenario-banner { display: none !important; }
 
+
+    .ledger-city-mode-toggle { display: none; }
+    html[data-ledger-city="true"] .ledger-city-mode-toggle {
+      display: inline-flex; gap: 0.15rem; padding: 0.12rem; border: 1px solid var(--panel-border);
+      border-radius: 999px; background: color-mix(in srgb, var(--panel) 80%, transparent);
+    }
+    .ledger-city-mode-btn {
+      font: inherit; font-size: 0.72rem; padding: 0.22rem 0.65rem; border-radius: 999px;
+      border: 0; background: transparent; color: var(--text-muted); cursor: pointer;
+    }
+    .ledger-city-mode-btn[aria-pressed="true"] { background: var(--ledger-in); color: #06120a; font-weight: 600; }
+    .ledger-city-mode-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .diagram-container { position: relative; }
+    .ledger-city3d-host {
+      position: absolute; inset: 0; z-index: 2; border-radius: inherit; overflow: hidden;
+      background: #0b1220;
+    }
+    .diagram-container[data-ledger-city3d="true"] .diagram-nav { z-index: 3; }
+    html[data-ledger-city3d="true"] .diagram-container > svg[data-ledger-city3d-hidden] { pointer-events: none; }
+
     .ledger-view-toggle { display: inline-flex; gap: 0.15rem; padding: 0.12rem; border: 1px solid var(--panel-border); border-radius: 999px; background: color-mix(in srgb, var(--panel) 80%, transparent); }
     .ledger-view-link { font: inherit; font-size: 0.72rem; padding: 0.22rem 0.65rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; }
     .ledger-view-link[aria-current="page"] { background: var(--ledger-in); color: #06120a; font-weight: 600; }
@@ -5193,6 +5213,7 @@
     <!-- MOSOFIN:GUIDED_VIEWS_DATA -->
     <!-- MOSOFIN:SOURCE_EVIDENCE_DATA -->
     <!-- MOSOFIN:LEDGER_DATA -->
+    <!-- MOSOFIN:CITY3D_VENDOR -->
     <!-- MOSOFIN:I18N_DATA -->
     <div class="guided-views no-print" id="guided-views" hidden aria-label="{{i18n:viewer.guided.region}}">
       <button id="guided-view-prev" type="button" aria-label="{{i18n:viewer.guided.previous}}" title="{{i18n:viewer.guided.previous.title}}">&#8592;</button>
@@ -11711,6 +11732,11 @@
       function setStatus(message) {
         if (statusLine) statusLine.textContent = message || '';
       }
+      function emitLedger(type, detail) {
+        try {
+          document.dispatchEvent(new CustomEvent(type, { detail: detail || {} }));
+        } catch (_) {}
+      }
       function storyPlaying() {
         return !!(Mosofin.guidedViews && typeof Mosofin.guidedViews.isPlaying === 'function' && Mosofin.guidedViews.isPlaying());
       }
@@ -11732,6 +11758,8 @@
         var gen = generation;
         showDay(dayIndex, false);
         syncControls();
+        emitLedger('mosofin:ledger-day', { dayIndex: dayIndex, frozen: false, scenarioId: scenarioId || null, playing: true });
+        emitLedger('mosofin:ledger-play', { playing: true, dayIndex: dayIndex, scenarioId: scenarioId || null });
         timer = setTimeout(function () {
           if (gen !== generation || !playing) return;
           if (dayIndex >= days.length - 1) {
@@ -11768,6 +11796,7 @@
         generation += 1;
         clearVolume();
         setStatus('');
+        emitLedger('mosofin:ledger-play', { playing: true, dayIndex: dayIndex, scenarioId: scenarioId || null });
         tick();
         return true;
       }
@@ -11782,6 +11811,8 @@
         syncControls();
         showDay(dayIndex, true);
         renderVolume();
+        emitLedger('mosofin:ledger-play', { playing: false, dayIndex: dayIndex, scenarioId: scenarioId || null });
+        emitLedger('mosofin:ledger-day', { dayIndex: dayIndex, frozen: true, scenarioId: scenarioId || null, playing: false });
         if (options.reason === 'still' || options.reason === 'reduced-motion') setStatus(text('viewer.ledger.still'));
         return true;
       }
@@ -11795,6 +11826,7 @@
         syncControls();
         showDay(dayIndex, true);
         if (!wasPlaying) renderVolume();
+        emitLedger('mosofin:ledger-day', { dayIndex: dayIndex, frozen: true, scenarioId: scenarioId || null, playing: false });
         if (options.updateUrl) writeHash();
       }
       function writeHash() {
@@ -11879,6 +11911,7 @@
       function clearForExport() {
         clearOverlay();
         clearVolume();
+        if (Mosofin.city3d && typeof Mosofin.city3d.clearForExport === 'function') Mosofin.city3d.clearForExport();
       }
       function restoreAfterExport() {
         if (!ready || playing) return;
@@ -11939,6 +11972,7 @@
         toggle: function () { return playing ? pause({ reason: 'reader' }) : play(); },
         seek: seek,
         day: function () { return days[dayIndex] || null; },
+        dayIndex: function () { return dayIndex; },
         tempo: setTempo,
         filterEntity: setEntityFilter,
         setScenario: function (id) {
@@ -15814,6 +15848,197 @@
          Escape -> clear temporary trace/focus/view first, then exit presentation
        Ignored when focus is inside an input/textarea/contenteditable.
        ============================================================ */
+
+    /* ============================================================
+       City 3D — interactive Three.js layer for ledger City view.
+       SVG City remains the portable/export surface; Iso is default.
+       ============================================================ */
+    Mosofin.city3d = (function () {
+      var container = document.querySelector('.diagram-container');
+      var svg = container && container.querySelector(':scope > svg');
+      var html = document.documentElement;
+      var host = null;
+      var sceneApi = null;
+      var mode = 'iso';
+      var ready = false;
+      var data = null;
+      var toggle = document.querySelector('[data-ledger-city-mode-toggle]');
+
+      function isCity() {
+        return !!(svg && svg.getAttribute('data-ledger-view') === 'city');
+      }
+      function webglOk() {
+        if (window.MosofinCity3D && typeof (window.MosofinCity3D.webglAvailable || (window.MosofinCity3D.default && window.MosofinCity3D.default.webglAvailable)) === 'function') {
+          var fn = window.MosofinCity3D.webglAvailable || window.MosofinCity3D.default.webglAvailable;
+          return fn();
+        }
+        try {
+          var c = document.createElement('canvas');
+          return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
+        } catch (_) {
+          return false;
+        }
+      }
+      function api() {
+        if (!window.MosofinCity3D) return null;
+        if (typeof window.MosofinCity3D.createCity3D === 'function') return window.MosofinCity3D;
+        if (window.MosofinCity3D.default && typeof window.MosofinCity3D.default.createCity3D === 'function') return window.MosofinCity3D.default;
+        return null;
+      }
+      function loadData() {
+        var node = document.getElementById('mosofin-ledger-data');
+        if (!node) return null;
+        try { return JSON.parse(node.textContent || '{}'); } catch (_) { return null; }
+      }
+      function ensureHost() {
+        if (host) return host;
+        host = document.createElement('div');
+        host.className = 'ledger-city3d-host';
+        host.setAttribute('data-ledger-city3d-host', '');
+        host.hidden = true;
+        container.appendChild(host);
+        return host;
+      }
+      function syncToggle() {
+        if (!toggle) return;
+        var buttons = toggle.querySelectorAll('[data-ledger-city-mode]');
+        for (var i = 0; i < buttons.length; i += 1) {
+          var btn = buttons[i];
+          var on = btn.getAttribute('data-ledger-city-mode') === mode;
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
+      }
+      function setSvgVisible(visible) {
+        if (!svg) return;
+        if (visible) {
+          svg.style.visibility = '';
+          svg.removeAttribute('data-ledger-city3d-hidden');
+        } else {
+          svg.style.visibility = 'hidden';
+          svg.setAttribute('data-ledger-city3d-hidden', 'true');
+        }
+      }
+      function mountScene() {
+        var bundle = api();
+        if (!bundle) return false;
+        if (!webglOk()) return false;
+        data = data || loadData();
+        if (!data) return false;
+        ensureHost();
+        host.hidden = false;
+        if (sceneApi) {
+          sceneApi.dispose();
+          sceneApi = null;
+        }
+        sceneApi = bundle.createCity3D(host, {
+          data: data,
+          follow: !!(Mosofin.view && Mosofin.view.followTokenEnabled && Mosofin.view.followTokenEnabled())
+        });
+        if (Mosofin.ledger && typeof Mosofin.ledger.dayIndex === 'function') {
+          sceneApi.syncDay(Mosofin.ledger.dayIndex(), {
+            frozen: !Mosofin.ledger.isPlaying(),
+            scenarioId: Mosofin.ledger.scenario && Mosofin.ledger.scenario()
+          });
+          sceneApi.setPlaying(!!Mosofin.ledger.isPlaying());
+        }
+        return true;
+      }
+      function setMode(next) {
+        if (!isCity()) return 'iso';
+        next = next === '3d' ? '3d' : 'iso';
+        if (next === '3d') {
+          if (!api() || !webglOk()) {
+            mode = 'iso';
+            syncToggle();
+            return mode;
+          }
+          if (!mountScene()) {
+            mode = 'iso';
+            syncToggle();
+            return mode;
+          }
+          mode = '3d';
+          setSvgVisible(false);
+          host.hidden = false;
+          html.setAttribute('data-ledger-city3d', 'true');
+          container.setAttribute('data-ledger-city3d', 'true');
+        } else {
+          mode = 'iso';
+          setSvgVisible(true);
+          if (host) host.hidden = true;
+          html.removeAttribute('data-ledger-city3d');
+          container.removeAttribute('data-ledger-city3d');
+          if (sceneApi) {
+            sceneApi.dispose();
+            sceneApi = null;
+          }
+        }
+        syncToggle();
+        return mode;
+      }
+      function onLedgerEvent(event) {
+        if (!sceneApi || mode !== '3d') return;
+        var detail = event.detail || {};
+        if (event.type === 'mosofin:ledger-day') {
+          sceneApi.syncDay(detail.dayIndex, {
+            frozen: detail.frozen === true,
+            scenarioId: detail.scenarioId || null
+          });
+        } else if (event.type === 'mosofin:ledger-play') {
+          sceneApi.setPlaying(detail.playing === true);
+          if (detail.playing && typeof detail.dayIndex === 'number') {
+            sceneApi.syncDay(detail.dayIndex, { frozen: false, scenarioId: detail.scenarioId || null });
+          }
+        }
+      }
+      function bind() {
+        if (!isCity() || !toggle) return;
+        toggle.hidden = false;
+        toggle.addEventListener('click', function (event) {
+          var btn = event.target && event.target.closest ? event.target.closest('[data-ledger-city-mode]') : null;
+          if (!btn) return;
+          setMode(btn.getAttribute('data-ledger-city-mode'));
+        });
+        document.addEventListener('mosofin:ledger-day', onLedgerEvent);
+        document.addEventListener('mosofin:ledger-play', onLedgerEvent);
+        if (Mosofin.view && typeof Mosofin.view.followTokenEnabled === 'function') {
+          var followBtn = container.querySelector('[data-view="follow"]');
+          if (followBtn) {
+            followBtn.addEventListener('click', function () {
+              if (sceneApi && mode === '3d') sceneApi.setFollow(Mosofin.view.followTokenEnabled());
+            });
+          }
+        }
+        // Offer 3D when WebGL + vendor present, but keep Iso default for export/check safety.
+        if (api() && webglOk()) {
+          toggle.setAttribute('data-ledger-city3d-ready', 'true');
+        } else {
+          var threeBtn = toggle.querySelector('[data-ledger-city-mode="3d"]');
+          if (threeBtn) {
+            threeBtn.disabled = true;
+            threeBtn.title = '3D needs WebGL';
+          }
+        }
+        syncToggle();
+        ready = true;
+      }
+      function clearForExport() {
+        if (mode === '3d') setMode('iso');
+      }
+      if (isCity()) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+        else bind();
+      } else if (toggle) {
+        toggle.hidden = true;
+      }
+      return {
+        available: function () { return ready && isCity() && !!api() && webglOk(); },
+        mode: function () { return mode; },
+        setMode: setMode,
+        clearForExport: clearForExport
+      };
+    })();
+
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.defaultPrevented) return;
