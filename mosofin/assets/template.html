@@ -6616,12 +6616,82 @@
         return '';
       }
 
+      // Shared path sampling for trace WebM and ledger City/Map WebM.
+      Mosofin.motionGeometry = (function () {
+        function pointInRoot(root, element, point) {
+          var rootMatrix = root.getCTM ? root.getCTM() : null;
+          if (!rootMatrix || !element.getCTM || !point.matrixTransform) return { x: point.x, y: point.y };
+          try {
+            var elementMatrix = element.getCTM();
+            if (!elementMatrix) return { x: point.x, y: point.y };
+            var mapped = point.matrixTransform(rootMatrix.inverse().multiply(elementMatrix));
+            return { x: mapped.x, y: mapped.y };
+          } catch (_) {
+            return { x: point.x, y: point.y };
+          }
+        }
+
+        function samplesFor(root, element) {
+          if (typeof element.getTotalLength !== 'function' || typeof element.getPointAtLength !== 'function') return [];
+          var length;
+          try { length = element.getTotalLength(); } catch (_) { return []; }
+          if (!Number.isFinite(length) || length <= 0) return [];
+          var count = Math.max(12, Math.min(72, Math.ceil(length / 12)));
+          var points = [];
+          for (var i = 0; i <= count; i++) {
+            points.push(pointInRoot(root, element, element.getPointAtLength(length * i / count)));
+          }
+          return points;
+        }
+
+        function pointAlong(points, progress) {
+          if (!points || points.length < 2) return null;
+          var scaled = Math.max(0, Math.min(1, progress)) * (points.length - 1);
+          var index = Math.min(points.length - 2, Math.floor(scaled));
+          var mix = scaled - index;
+          return {
+            x: points[index].x + (points[index + 1].x - points[index].x) * mix,
+            y: points[index].y + (points[index + 1].y - points[index].y) * mix
+          };
+        }
+
+        return { pointInRoot: pointInRoot, samplesFor: samplesFor, pointAlong: pointAlong };
+      })();
+
+      function ledgerMotionPayload() {
+        var dataNode = document.getElementById('mosofin-ledger-data');
+        if (!dataNode) return null;
+        try {
+          var data = JSON.parse(dataNode.textContent || 'null');
+          if (!data || !data.period || !Array.isArray(data.period.days) || !data.period.days.length) return null;
+          if (!Array.isArray(data.schedule)) return null;
+          return data;
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function ledgerMotionDurationMs(data) {
+        var days = data && data.period && Array.isArray(data.period.days) ? data.period.days.length : 0;
+        var dps = data && data.playback && Number(data.playback.daysPerSecond) > 0
+          ? Number(data.playback.daysPerSecond)
+          : 2;
+        if (!days) return 1000;
+        return Math.min(20000, Math.round((days / dps + 1) * 1000));
+      }
+
+      function canRecordLedgerMotion(svg) {
+        return !!(svg && svg.getAttribute('data-diagram-kind') === 'ledger' && ledgerMotionPayload());
+      }
+
       function canRecordMotion() {
         var svg = document.querySelector('.diagram-container svg');
-        return !!(svg && svg.getAttribute('data-animation') === 'trace' &&
-          typeof MediaRecorder !== 'undefined' && motionMimeType() &&
+        var recorderReady = typeof MediaRecorder !== 'undefined' && motionMimeType() &&
           typeof HTMLCanvasElement !== 'undefined' &&
-          typeof HTMLCanvasElement.prototype.captureStream === 'function');
+          typeof HTMLCanvasElement.prototype.captureStream === 'function';
+        if (!svg || !recorderReady) return false;
+        if (canRecordLedgerMotion(svg)) return true;
+        return svg.getAttribute('data-animation') === 'trace';
       }
 
       // Record the live CSS animation without Puppeteer, ffmpeg, or a network
@@ -6643,44 +6713,18 @@
         var data = serializeSvg(scale);
         var sourceUrl = URL.createObjectURL(new Blob([data.svgString], { type: 'image/svg+xml;charset=utf-8' }));
 
-        function createMotionScene(root) {
-          var rootMatrix = root.getCTM ? root.getCTM() : null;
+        function authoredStep(element, fallback) {
+          var raw = element.style.getPropertyValue('--step') || getComputedStyle(element).getPropertyValue('--step');
+          var value = Number(raw);
+          return Number.isFinite(value) ? value : fallback;
+        }
 
-          function pointInRoot(element, point) {
-            if (!rootMatrix || !element.getCTM || !point.matrixTransform) return { x: point.x, y: point.y };
-            try {
-              var elementMatrix = element.getCTM();
-              if (!elementMatrix) return { x: point.x, y: point.y };
-              var mapped = point.matrixTransform(rootMatrix.inverse().multiply(elementMatrix));
-              return { x: mapped.x, y: mapped.y };
-            } catch (_) {
-              return { x: point.x, y: point.y };
-            }
-          }
-
-          function samplesFor(element) {
-            if (typeof element.getTotalLength !== 'function' || typeof element.getPointAtLength !== 'function') return [];
-            var length;
-            try { length = element.getTotalLength(); } catch (_) { return []; }
-            if (!Number.isFinite(length) || length <= 0) return [];
-            var count = Math.max(12, Math.min(72, Math.ceil(length / 12)));
-            var points = [];
-            for (var i = 0; i <= count; i++) {
-              points.push(pointInRoot(element, element.getPointAtLength(length * i / count)));
-            }
-            return points;
-          }
-
-          function authoredStep(element, fallback) {
-            var raw = element.style.getPropertyValue('--step') || getComputedStyle(element).getPropertyValue('--step');
-            var value = Number(raw);
-            return Number.isFinite(value) ? value : fallback;
-          }
-
+        function createTraceMotionScene(root) {
+          var geom = Mosofin.motionGeometry;
           var edges = Array.prototype.slice.call(root.querySelectorAll('[data-animate="edge"]')).map(function (element, index) {
             var computed = getComputedStyle(element);
             return {
-              points: samplesFor(element),
+              points: geom.samplesFor(root, element),
               color: computed.stroke && computed.stroke !== 'none' ? computed.stroke : '#22d3ee',
               width: Math.max(1.5, parseFloat(computed.strokeWidth) || 1.5),
               delay: Math.min(12, authoredStep(element, index)) * 0.16
@@ -6702,16 +6746,75 @@
             };
           }).filter(Boolean);
 
-          return { edges: edges, nodes: nodes, x: vb.x, y: vb.y, width: vb.width, height: vb.height };
+          return { kind: 'trace', edges: edges, nodes: nodes, vehicles: [], x: vb.x, y: vb.y, width: vb.width, height: vb.height };
         }
 
-        function pointAlong(points, progress) {
-          var scaled = Math.max(0, Math.min(1, progress)) * (points.length - 1);
-          var index = Math.min(points.length - 2, Math.floor(scaled));
-          var mix = scaled - index;
+        function createLedgerMotionScene(root, data) {
+          var geom = Mosofin.motionGeometry;
+          var pathsById = {};
+          Array.prototype.forEach.call(root.querySelectorAll('[data-edge-id]'), function (element) {
+            var id = element.getAttribute('data-edge-id');
+            if (!id || pathsById[id]) return;
+            var tag = String(element.tagName || '').toLowerCase();
+            if (tag !== 'path' && tag !== 'line' && tag !== 'polyline') return;
+            var points = geom.samplesFor(root, element);
+            if (points.length > 1) pathsById[id] = points;
+          });
+
+          var cash = {};
+          (data.cashAccounts || []).forEach(function (id) { cash[id] = true; });
+          function resolvedLedgerColor(cssVar, fallback) {
+            var probe = document.createElement('span');
+            probe.style.color = 'var(' + cssVar + ')';
+            probe.style.position = 'absolute';
+            probe.style.visibility = 'hidden';
+            document.body.appendChild(probe);
+            var color = getComputedStyle(probe).color;
+            document.body.removeChild(probe);
+            return color && color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent' ? color : fallback;
+          }
+          var colors = {
+            in: resolvedLedgerColor('--ledger-in', '#34d399'),
+            out: resolvedLedgerColor('--ledger-out', '#fb7185'),
+            transfer: resolvedLedgerColor('--ledger-transfer', '#22d3ee'),
+            refund: resolvedLedgerColor('--ledger-out', '#fb7185')
+          };
+          var dps = data.playback && Number(data.playback.daysPerSecond) > 0
+            ? Number(data.playback.daysPerSecond)
+            : 2;
+          var dayDuration = 1 / dps;
+          var tokenDuration = Math.max(0.25, Math.min(dayDuration, 0.9));
+          var vehicles = [];
+          (data.schedule || []).forEach(function (item) {
+            // Unmapped rows never enter schedule(); missing roads stay silent — never invent a path.
+            var points = pathsById[item.edgeId];
+            if (!points) return;
+            var kind = item.direction === 'reverse' ? 'refund'
+              : cash[item.to] ? 'in'
+              : cash[item.from] ? 'out'
+              : 'transfer';
+            vehicles.push({
+              points: points,
+              reverse: item.direction === 'reverse',
+              start: item.day * dayDuration,
+              duration: tokenDuration,
+              kind: kind,
+              color: colors[kind] || colors.transfer,
+              count: item.count || 0,
+              sum: item.sum || 0
+            });
+          });
+
           return {
-            x: points[index].x + (points[index + 1].x - points[index].x) * mix,
-            y: points[index].y + (points[index + 1].y - points[index].y) * mix
+            kind: 'ledger',
+            edges: [],
+            nodes: [],
+            vehicles: vehicles,
+            x: vb.x,
+            y: vb.y,
+            width: vb.width,
+            height: vb.height,
+            durationMs: ledgerMotionDurationMs(data)
           };
         }
 
@@ -6730,7 +6833,8 @@
           ctx.closePath();
         }
 
-        function drawMotionFrame(ctx, backgroundImage, motionScene, elapsed) {
+        function drawTraceMotionFrame(ctx, backgroundImage, motionScene, elapsed) {
+          var geom = Mosofin.motionGeometry;
           ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
           ctx.drawImage(backgroundImage, 0, 0, ctx.canvas.width, ctx.canvas.height);
           ctx.save();
@@ -6756,17 +6860,20 @@
             ctx.shadowBlur = 10;
             ctx.beginPath();
             for (var i = 0; i <= 14; i++) {
-              var trailPoint = pointAlong(edge.points, tail + (head - tail) * i / 14);
+              var trailPoint = geom.pointAlong(edge.points, tail + (head - tail) * i / 14);
+              if (!trailPoint) continue;
               if (i === 0) ctx.moveTo(trailPoint.x, trailPoint.y);
               else ctx.lineTo(trailPoint.x, trailPoint.y);
             }
             ctx.stroke();
 
-            var point = pointAlong(edge.points, head);
-            ctx.globalAlpha = 0.95;
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 4.8, 0, Math.PI * 2);
-            ctx.fill();
+            var point = geom.pointAlong(edge.points, head);
+            if (point) {
+              ctx.globalAlpha = 0.95;
+              ctx.beginPath();
+              ctx.arc(point.x, point.y, 4.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
             ctx.restore();
           });
 
@@ -6790,7 +6897,92 @@
           ctx.restore();
         }
 
-        var motionScene = createMotionScene(svg);
+        function drawLedgerMotionFrame(ctx, backgroundImage, motionScene, elapsed) {
+          var geom = Mosofin.motionGeometry;
+          ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+          ctx.drawImage(backgroundImage, 0, 0, ctx.canvas.width, ctx.canvas.height);
+          ctx.save();
+          ctx.scale(ctx.canvas.width / motionScene.width, ctx.canvas.height / motionScene.height);
+          ctx.translate(-motionScene.x, -motionScene.y);
+
+          motionScene.vehicles.forEach(function (vehicle) {
+            var progress = (elapsed - vehicle.start) / vehicle.duration;
+            if (progress < 0 || progress > 1) return;
+            var head = Math.max(0, Math.min(1, progress));
+            if (vehicle.reverse) head = 1 - head;
+            var tailProgress = vehicle.reverse
+              ? Math.min(1, head + 0.22)
+              : Math.max(0, head - 0.22);
+            var opacity = Math.sin(Math.PI * Math.min(1, progress));
+
+            ctx.save();
+            ctx.strokeStyle = vehicle.color;
+            ctx.fillStyle = vehicle.color;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 3.4;
+            ctx.globalAlpha = 0.38 + opacity * 0.5;
+            ctx.shadowColor = vehicle.color;
+            ctx.shadowBlur = 9;
+            ctx.beginPath();
+            var started = false;
+            for (var i = 0; i <= 12; i++) {
+              var t = vehicle.reverse
+                ? head + (tailProgress - head) * i / 12
+                : tailProgress + (head - tailProgress) * i / 12;
+              var trailPoint = geom.pointAlong(vehicle.points, t);
+              if (!trailPoint) continue;
+              if (!started) { ctx.moveTo(trailPoint.x, trailPoint.y); started = true; }
+              else ctx.lineTo(trailPoint.x, trailPoint.y);
+            }
+            if (started) ctx.stroke();
+
+            var point = geom.pointAlong(vehicle.points, head);
+            if (point) {
+              ctx.globalAlpha = 0.96;
+              ctx.beginPath();
+              ctx.arc(point.x, point.y, vehicle.kind === 'refund' ? 4.2 : 5.1, 0, Math.PI * 2);
+              ctx.fill();
+              if (vehicle.kind === 'refund') {
+                ctx.globalAlpha = 0.9;
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                ctx.moveTo(point.x - 3.2, point.y);
+                ctx.lineTo(point.x + 3.2, point.y);
+                ctx.stroke();
+              }
+            }
+            ctx.restore();
+          });
+
+          ctx.restore();
+        }
+
+        function resolveMotionScene(root) {
+          var ledgerData = canRecordLedgerMotion(root) ? ledgerMotionPayload() : null;
+          if (ledgerData) {
+            return {
+              kind: 'ledger',
+              scene: createLedgerMotionScene(root, ledgerData),
+              durationMs: ledgerMotionDurationMs(ledgerData),
+              draw: drawLedgerMotionFrame
+            };
+          }
+          return {
+            kind: 'trace',
+            scene: createTraceMotionScene(root),
+            durationMs: MOTION_DURATION,
+            draw: drawTraceMotionFrame
+          };
+        }
+
+        var resolved = resolveMotionScene(svg);
+        var motionScene = resolved.scene;
+        var drawMotionFrame = resolved.draw;
+        if (!options.duration) {
+          duration = Math.max(250, resolved.durationMs || MOTION_DURATION);
+        }
+        document.documentElement.setAttribute('data-last-motion-scene', resolved.kind);
 
         return new Promise(function (resolve, reject) {
           var backgroundImage = new Image();
@@ -6922,6 +7114,18 @@
           it.title = viewerText('viewer.export.clipboardUnsupported');
         }
       });
+      (function syncLedgerWebmHint() {
+        var motionItem = menu.querySelector('button[data-format="webm"]');
+        if (!motionItem || motionItem.disabled) return;
+        var payload = ledgerMotionPayload();
+        var hint = motionItem.querySelector('small.hint');
+        if (!hint) return;
+        if (payload) {
+          hint.textContent = viewerText('viewer.export.motionLedger', {
+            seconds: String(Math.round(ledgerMotionDurationMs(payload) / 1000))
+          });
+        }
+      })();
 
       // ---- Toast ----------------------------------------------------------
       // A live region only announces CHANGES to an existing node, so the toast
@@ -7010,7 +7214,16 @@
         var base = diagramFilename();
         close(true);
         clearExportReceipt();
-        if (format === 'webm') toast(viewerText('viewer.export.recording'));
+        if (format === 'webm') {
+          var ledgerPayload = ledgerMotionPayload();
+          if (ledgerPayload) {
+            toast(viewerText('viewer.export.recordingLedger', {
+              seconds: String(Math.round(ledgerMotionDurationMs(ledgerPayload) / 1000))
+            }));
+          } else {
+            toast(viewerText('viewer.export.recording'));
+          }
+        }
         return (format === 'share-card'
           ? rasterizeShareCard().then(function (blob) {
               recordExportReceipt('share-card', blob, true, { width: SHARE_CARD_WIDTH, height: SHARE_CARD_HEIGHT });
@@ -7215,7 +7428,13 @@
         if (formatBtn && !formatBtn.disabled) { runExport(formatBtn.dataset.format); }
       });
 
-      Mosofin.motion = { canRecord: canRecordMotion, recordWebm: recordWebm };
+      Mosofin.motionScenes = {
+        kinds: ['trace', 'ledger'],
+        ledgerDurationMs: ledgerMotionDurationMs,
+        payload: ledgerMotionPayload,
+        canRecordLedger: canRecordLedgerMotion
+      };
+      Mosofin.motion = { canRecord: canRecordMotion, recordWebm: recordWebm, scenes: Mosofin.motionScenes };
       Mosofin.exportMenu = {
         open: open,
         close: close,

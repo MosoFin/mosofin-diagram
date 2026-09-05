@@ -26,7 +26,10 @@ Set `meta.view` to `"map"` (default) or `"city"`. Each render emits **one** SVG.
 isometric district: account buildings, an entity-class ring, roads for authored `flows`, and the
 same `schedule()` tokens as Map. City roads use class `city-road` / marker `marker-city` so
 orthogonal arrow checks ignore them. Author `meta.sibling` to the other view's HTML path so the
-viewer Map|City toggle can link without breaking the single-SVG export gate.
+viewer Map|City toggle can link without breaking the single-SVG export gate. Export → WebM records
+that schedule on the roads (or Map edges): refunds reverse, duration is `days/daysPerSecond + 1s`
+(cap 20s), and unmapped rows never invent vehicles. Recording is optional; the static panel and
+volume badges remain complete under Still / reduced motion.
 
 ## Daily bars and account meters
 
