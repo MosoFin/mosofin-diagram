@@ -5,8 +5,8 @@
     "title": "Northline Coffee \u2014 Three Statements, One Story (2026-07)",
     "output": "northline-three-statements.html",
     "viewBox": [
-      1280,
-      720
+      1320,
+      740
     ],
     "animation": "trace",
     "quality_profile": "showcase",
@@ -27,12 +27,14 @@
         "label": "Indirect cash bridge",
         "focus": [
           "net_income",
+          "wc_bridge",
+          "begin_cash",
           "operating",
           "investing",
           "financing",
           "ending_cash"
         ],
-        "note": "Indirect cash from operations starts at net income, then adjusts non-cash items and working capital."
+        "note": "Indirect CFO starts at NI, then the WC bridge (\u0394A/R \u00b7 \u0394Inv \u00b7 \u0394A/P) before investing and financing."
       },
       {
         "id": "cash-tie-out",
@@ -40,11 +42,22 @@
         "focus": [
           "ending_cash",
           "cash",
-          "assets",
           "liabilities",
           "equity"
         ],
         "note": "Ending CFS cash must equal cash on the balance sheet. Assets = Liabilities + Equity still holds."
+      },
+      {
+        "id": "earnings-quality",
+        "label": "Earnings quality",
+        "focus": [
+          "net_income",
+          "wc_bridge",
+          "operating",
+          "ending_cash",
+          "cash"
+        ],
+        "note": "NI is not cash. Watch the WC bridge: accrual profit and CFO diverge when A/R, inventory, or A/P move."
       }
     ]
   },
@@ -53,10 +66,10 @@
       "id": "revenue",
       "type": "frontend",
       "label": "Revenue",
-      "sublabel": "DTC + wholesale \u00b7 period",
+      "sublabel": "DTC + wholesale",
       "pos": [
-        100,
-        80
+        90,
+        70
       ],
       "size": [
         160,
@@ -70,8 +83,8 @@
       "label": "Expenses",
       "sublabel": "COGS \u00b7 fees \u00b7 opex",
       "pos": [
-        360,
-        80
+        330,
+        70
       ],
       "size": [
         160,
@@ -85,8 +98,8 @@
       "label": "Net Income",
       "sublabel": "Revenue \u2212 Expenses",
       "pos": [
-        700,
-        80
+        580,
+        70
       ],
       "size": [
         170,
@@ -95,35 +108,35 @@
       "tag": "profitable \u00b7 sample"
     },
     {
-      "id": "cash",
-      "type": "database",
-      "label": "Cash",
-      "sublabel": "Chase 1002 on BS",
+      "id": "wc_bridge",
+      "type": "cloud",
+      "label": "WC bridge",
+      "sublabel": "\u0394A/R \u00b7 \u0394Inv \u00b7 \u0394A/P",
       "pos": [
-        100,
-        320
+        850,
+        70
       ],
       "size": [
-        150,
+        180,
+        64
+      ],
+      "tag": "earnings quality \u00b7 sample"
+    },
+    {
+      "id": "cash",
+      "type": "database",
+      "label": "Cash + assets",
+      "sublabel": "Chase \u00b7 A/R \u00b7 inventory",
+      "pos": [
+        90,
+        310
+      ],
+      "size": [
+        190,
         64
       ],
       "tag": "tied ~$12k net",
       "brand": "chase"
-    },
-    {
-      "id": "assets",
-      "type": "cloud",
-      "label": "Other assets",
-      "sublabel": "A/R \u00b7 inventory",
-      "pos": [
-        300,
-        320
-      ],
-      "size": [
-        150,
-        64
-      ],
-      "tag": "point in time"
     },
     {
       "id": "liabilities",
@@ -131,8 +144,8 @@
       "label": "Liabilities",
       "sublabel": "A/P \u00b7 tax payable",
       "pos": [
-        500,
-        320
+        360,
+        310
       ],
       "size": [
         150,
@@ -145,8 +158,8 @@
       "label": "Equity",
       "sublabel": "incl. retained earnings",
       "pos": [
-        700,
-        320
+        580,
+        310
       ],
       "size": [
         170,
@@ -155,16 +168,31 @@
       "tag": "RE \u2191 from NI"
     },
     {
-      "id": "operating",
-      "type": "backend",
-      "label": "Operating",
-      "sublabel": "starts at NI (indirect)",
+      "id": "begin_cash",
+      "type": "database",
+      "label": "Beginning Cash",
+      "sublabel": "CFS open",
       "pos": [
-        100,
+        60,
         540
       ],
       "size": [
-        160,
+        170,
+        64
+      ],
+      "tag": "prior close"
+    },
+    {
+      "id": "operating",
+      "type": "backend",
+      "label": "Operating",
+      "sublabel": "NI + WC (indirect)",
+      "pos": [
+        270,
+        540
+      ],
+      "size": [
+        170,
         64
       ],
       "tag": "cash from ops"
@@ -175,7 +203,7 @@
       "label": "Investing",
       "sublabel": "capex \u00b7 equipment",
       "pos": [
-        340,
+        490,
         540
       ],
       "size": [
@@ -190,7 +218,7 @@
       "label": "Financing",
       "sublabel": "debt \u00b7 dividends",
       "pos": [
-        580,
+        700,
         540
       ],
       "size": [
@@ -203,9 +231,9 @@
       "id": "ending_cash",
       "type": "database",
       "label": "Ending Cash",
-      "sublabel": "CFS close \u00b7 period",
+      "sublabel": "CFS close",
       "pos": [
-        840,
+        920,
         540
       ],
       "size": [
@@ -231,7 +259,6 @@
       "label": "Balance Sheet \u2014 Assets = Liabilities + Equity",
       "wraps": [
         "cash",
-        "assets",
         "liabilities",
         "equity"
       ],
@@ -241,6 +268,7 @@
       "kind": "region",
       "label": "Cash Flow Statement (period)",
       "wraps": [
+        "begin_cash",
         "operating",
         "investing",
         "financing",
@@ -255,35 +283,85 @@
       "from": "revenue",
       "to": "expenses",
       "label": "less costs",
-      "variant": "emphasis"
+      "variant": "default",
+      "labelDy": -26
     },
     {
       "id": "exp-to-ni",
       "from": "expenses",
       "to": "net_income",
       "label": "= net income",
-      "variant": "emphasis"
+      "variant": "default",
+      "labelDy": -26
+    },
+    {
+      "id": "ni-to-wc",
+      "from": "net_income",
+      "to": "wc_bridge",
+      "label": "start indirect",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelDy": -26
+    },
+    {
+      "id": "wc-to-operating",
+      "from": "wc_bridge",
+      "to": "operating",
+      "label": "Net Income \u2192 WC \u2192 Cash from ops",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "bottom",
+      "via": [
+        [
+          1200,
+          102
+        ],
+        [
+          1200,
+          680
+        ],
+        [
+          355,
+          680
+        ]
+      ],
+      "labelAt": [
+        1218,
+        380
+      ]
+    },
+    {
+      "id": "begin-to-op",
+      "from": "begin_cash",
+      "to": "operating",
+      "label": "open period",
+      "variant": "default",
+      "labelDy": -26
     },
     {
       "id": "op-to-inv",
       "from": "operating",
       "to": "investing",
       "label": "then invest",
-      "variant": "emphasis"
+      "variant": "default",
+      "labelDy": -26
     },
     {
       "id": "inv-to-fin",
       "from": "investing",
       "to": "financing",
       "label": "then finance",
-      "variant": "emphasis"
+      "variant": "default",
+      "labelDy": -26
     },
     {
       "id": "fin-to-end",
       "from": "financing",
       "to": "ending_cash",
       "label": "= ending cash",
-      "variant": "emphasis"
+      "variant": "default",
+      "labelDy": -26
     },
     {
       "id": "ni-to-equity",
@@ -297,33 +375,6 @@
       "labelDx": 120
     },
     {
-      "id": "ni-to-operating",
-      "from": "net_income",
-      "to": "operating",
-      "label": "Net Income \u2192 Cash from operations (indirect)",
-      "variant": "emphasis",
-      "fromSide": "right",
-      "toSide": "bottom",
-      "via": [
-        [
-          1040,
-          112
-        ],
-        [
-          1040,
-          660
-        ],
-        [
-          180,
-          660
-        ]
-      ],
-      "labelAt": [
-        1055,
-        380
-      ]
-    },
-    {
       "id": "end-to-bs-cash",
       "from": "ending_cash",
       "to": "cash",
@@ -333,17 +384,40 @@
       "toSide": "bottom",
       "via": [
         [
-          925,
-          440
+          1005,
+          460
         ],
         [
-          175,
-          440
+          185,
+          460
         ]
       ],
       "labelAt": [
         520,
-        426
+        446
+      ]
+    },
+    {
+      "id": "assets-equals-le",
+      "from": "cash",
+      "to": "equity",
+      "label": "A = L + E",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "via": [
+        [
+          185,
+          400
+        ],
+        [
+          665,
+          400
+        ]
+      ],
+      "labelAt": [
+        420,
+        388
       ]
     }
   ],
@@ -353,8 +427,17 @@
       "title": "The three joints",
       "items": [
         "Net Income \u2192 Equity / Retained earnings (period profit closes into BS)",
-        "Net Income \u2192 Cash from operations (indirect method bridge)",
+        "Net Income \u2192 WC bridge \u2192 Cash from operations (indirect method)",
         "Ending cash (CFS) \u2192 Cash on Balance Sheet (tie-out must hold)"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Earnings quality",
+      "items": [
+        "NI \u2260 CFO: the WC bridge (\u0394A/R \u00b7 \u0394Inventory \u00b7 \u0394A/P) is why accrual profit and operating cash diverge",
+        "Beginning cash opens the CFS; ending cash must still equal BS cash",
+        "Sibling maps: ledger-northline-gl-city.html \u00b7 northline-money-map.html"
       ]
     },
     {
@@ -364,15 +447,6 @@
         "Round sample tags from the July GL fixture: sales ~$24k (DTC+WS), cash net tied ~$12k",
         "No invented Net Income dollar \u2014 payroll splits stay unmapped on the GL map",
         "BS identity is structural (A = L + E), not a claimed reconciliation green"
-      ]
-    },
-    {
-      "dot": "cyan",
-      "title": "Health read (sample story)",
-      "items": [
-        "Entity: Northline Coffee LLC \u00b7 accrual \u00b7 period 2026-07",
-        "Profitable ops on mapped lines \u00b7 cash moved and tied at Chase 1002",
-        "Audience: accountant / controller \u2014 see whether the three statements agree"
       ]
     }
   ]
