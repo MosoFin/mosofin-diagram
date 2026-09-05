@@ -165,6 +165,8 @@ const diagram = {
     animation: 'trace',
     quality_profile: 'showcase',
     node_style: 'logo',
+    view: 'map',
+    sibling: 'ledger-northline-gl-city.html',
     views: [
       { id: 'order-to-cash', label: 'Sales to cash', focus: ['dtc-sales-4000', 'cash-1002', 'fees-6050'], note: 'DTC sales receipts land in cash; Stripe fees leave it as an expense. Wholesale goes through A/R first.' },
       { id: 'cost-side', label: 'Cost side', focus: ['ap-2000', 'inventory-1300', 'cogs-5000'], note: 'Green coffee is billed to A/P, held as inventory, and relieved to COGS as it sells.' },
@@ -230,6 +232,27 @@ const diagram = {
     ],
     events,
     unmapped,
+    // What-if overlay: clearly labelled projected DTC uplift. Never enters proof or tie-outs.
+    scenarios: [{
+      id: 'dtc-plus-10',
+      label: '+10% DTC sales (what-if)',
+      assumptions: [
+        'WHAT-IF only — not from the QuickBooks export',
+        'Each DTC sales-receipt batch runs 10% higher',
+        'No other drivers change',
+      ],
+      events: events
+        .filter((event) => event.edge === 'dtc-sale' && event.kind === 'journal')
+        .map((event) => ({
+          id: `sc-${event.id}`,
+          date: event.date,
+          edge: 'dtc-sale',
+          kind: 'journal',
+          amount: Number((event.amount * 0.1).toFixed(2)),
+          entity: event.entity,
+          memo: 'Projected +10% DTC sales (what-if — not in CSV)',
+        })),
+    }],
   },
   cards: [
     { dot: 'emerald', title: 'Source of truth', items: ['Every row: the QuickBooks GL export for 2026-07 (Proof: CSV, digest in the panel)', 'Cash: Chase 1002 · Revenue: QuickBooks P&L', 'Flows run credit → debit; a token is one or more journal lines'] },
@@ -238,4 +261,8 @@ const diagram = {
   ],
 };
 fs.writeFileSync(jsonPath, `${JSON.stringify(diagram, null, 2)}\n`);
-console.log(`csv rows ${dataRows} sha256 ${sha256.slice(0, 12)}… | events ${events.length} unmapped ${unmapped.length} | cash net ${(cashNet / 100).toFixed(2)} | ar net ${(arNet / 100).toFixed(2)}`);
+const cityPath = path.join(skillRoot, 'examples', 'northline-gl-2026-07.city.ledger.json');
+const city = JSON.parse(fs.readFileSync(cityPath, 'utf8'));
+city.ledger.scenarios = diagram.ledger.scenarios;
+fs.writeFileSync(cityPath, `${JSON.stringify(city, null, 2)}\n`);
+console.log(`csv rows ${dataRows} sha256 ${sha256.slice(0, 12)}… | events ${events.length} unmapped ${unmapped.length} | scenarios ${diagram.ledger.scenarios[0].events.length} | cash net ${(cashNet / 100).toFixed(2)} | ar net ${(arNet / 100).toFixed(2)}`);

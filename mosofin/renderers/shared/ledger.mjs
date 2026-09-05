@@ -181,6 +181,41 @@ export function validateLedger(diagram) {
     }
   });
 
+  const scenarioIds = new Set();
+  (ledger.scenarios || []).forEach((scenario, sIndex) => {
+    const sat = `/ledger/scenarios/${sIndex}`;
+    if (scenarioIds.has(scenario.id)) problems.push(`${sat}/id duplicates scenario id ${JSON.stringify(scenario.id)}`);
+    scenarioIds.add(scenario.id);
+    if (!Array.isArray(scenario.assumptions) || scenario.assumptions.length === 0) {
+      problems.push(`${sat}/assumptions must name at least one driver assumption`);
+    }
+    const seenScenario = new Set();
+    (scenario.events || []).forEach((event, index) => {
+      const at = `${sat}/events/${index}`;
+      if (seenScenario.has(event.id)) problems.push(`${at}/id duplicates event id ${JSON.stringify(event.id)}`);
+      seenScenario.add(event.id);
+      if (!inPeriod(event.date)) problems.push(`${at}/date ${JSON.stringify(event.date)} is outside the ledger period`);
+      const resolved = resolveEventFlow(event, flowsById, flowsByPair);
+      if (resolved.problem) problems.push(`${at} ${resolved.problem}`);
+      if (!EVENT_KINDS.includes(event.kind)) problems.push(`${at}/kind ${JSON.stringify(event.kind)} is not one of ${EVENT_KINDS.join(', ')}`);
+      if (event.amount !== undefined) {
+        if (!amounts) problems.push(`${at}/amount is present but ledger.amounts is false; remove the amount or set amounts to true`);
+        if (hasMoreThanTwoDecimals(event.amount)) problems.push(`${at}/amount ${event.amount} has more than two decimal places`);
+      } else if (amounts) {
+        problems.push(`${at}/amount is missing; set ledger.amounts to false for a counts-only ledger`);
+      }
+      if (event.entity !== undefined && !entities.has(event.entity)) problems.push(`${at}/entity references unknown entity ${JSON.stringify(event.entity)}`);
+    });
+    (scenario.unmapped || []).forEach((row, index) => {
+      const at = `${sat}/unmapped/${index}`;
+      if (row.reason !== 'out-of-period' && !inPeriod(row.date)) {
+        problems.push(`${at}/date ${JSON.stringify(row.date)} is outside the ledger period; use reason "out-of-period" for such rows`);
+      }
+      if (row.amount !== undefined && hasMoreThanTwoDecimals(row.amount)) problems.push(`${at}/amount has more than two decimal places`);
+      if (row.entity !== undefined && !entities.has(row.entity)) problems.push(`${at}/entity references unknown entity ${JSON.stringify(row.entity)}`);
+    });
+  });
+
   if (problems.length) {
     throwDiagnosticProblems('Ledger validation failed', problems, {
       code: 'ledger/invalid',
@@ -193,53 +228,20 @@ function bucket() {
   return { count: 0, sum: 0, refundCount: 0, refundSum: 0 };
 }
 
-export function summarize(diagram) {
-  const ledger = diagram.ledger;
-  const accountsList = Array.isArray(diagram.accounts) ? diagram.accounts : [];
-  const entitiesList = Array.isArray(diagram.entities) ? diagram.entities : [];
-  const flowsList = Array.isArray(diagram.flows) ? diagram.flows : [];
-  const flowsById = indexById(flowsList);
-  const flowsByPair = pairIndex(flowsList);
-  const amounts = ledger.amounts !== false;
-  const days = periodDays(ledger.period);
-  const dayIndex = new Map(days.map((day, index) => [day, index]));
-
-  const flows = Object.fromEntries(flowsList.map((flow) => [flow.id, { ...bucket(), from: flow.from, to: flow.to, label: flow.label }]));
-  const accounts = Object.fromEntries(accountsList.map((account) => [account.id, {
-    label: account.label,
-    class: account.class,
-    cash: account.cash === true,
-    in: 0,
-    out: 0,
-    count: 0,
-    opening: ledger.opening && ledger.opening[account.id] !== undefined ? toCents(ledger.opening[account.id]) : null,
-  }]));
-  const entities = Object.fromEntries(entitiesList.map((entity) => [entity.id, {
-    label: entity.label,
-    class: entity.class,
-    grouped: entity.grouped || null,
-    in: 0,
-    out: 0,
-    count: 0,
-    unmappedCount: 0,
-    unmappedSum: 0,
-  }]));
-  const classes = {};
-  for (const entity of entitiesList) {
-    if (!classes[entity.class]) classes[entity.class] = { in: 0, out: 0, count: 0, entities: 0 };
-    classes[entity.class].entities += 1;
-  }
-  const perDay = days.map((date) => ({ date, flows: {} }));
-  const cashIds = new Set(accountsList.filter((account) => account.cash === true).map((account) => account.id));
-  const amountsSeen = [];
+// Fold events onto authored flows. Used for the baseline journal and for each
+// what-if scenario series. Never invents edges; unresolved rows are skipped
+// (validateLedger already refused them).
+function accumulateEvents(events, { amounts, flowsById, flowsByPair, accounts, entities, classes, cashIds, perDay, dayIndex }) {
   let totalIn = 0;
   let totalOut = 0;
   let eventCount = 0;
-
-  for (const event of ledger.events || []) {
+  const amountsSeen = [];
+  const flows = {};
+  for (const event of events || []) {
     const resolved = resolveEventFlow(event, flowsById, flowsByPair);
-    if (!resolved.flow) continue; // validateLedger already refused these
+    if (!resolved.flow) continue;
     const flow = resolved.flow;
+    if (!flows[flow.id]) flows[flow.id] = bucket();
     const cents = amounts && event.amount !== undefined ? toCents(event.amount) : 0;
     const reverse = event.kind === 'refund';
     const source = reverse ? flow.to : flow.from;
@@ -281,6 +283,154 @@ export function summarize(diagram) {
     if (amounts) amountsSeen.push(cents);
     eventCount += 1;
   }
+  return { flows, totalIn, totalOut, eventCount, amountsSeen };
+}
+
+function emptyAccountRow(account, openingCents) {
+  return {
+    label: account.label,
+    class: account.class,
+    cash: account.cash === true,
+    in: 0,
+    out: 0,
+    count: 0,
+    opening: openingCents,
+  };
+}
+
+function emptyEntityRow(entity) {
+  return {
+    label: entity.label,
+    class: entity.class,
+    grouped: entity.grouped || null,
+    in: 0,
+    out: 0,
+    count: 0,
+    unmappedCount: 0,
+    unmappedSum: 0,
+  };
+}
+
+function summarizeScenario(scenario, ctx) {
+  const { amounts, flowsById, flowsByPair, accountsList, entitiesList, flowsList, days, dayIndex, cashIds, ledgerCurrency } = ctx;
+  const accounts = Object.fromEntries(accountsList.map((account) => [account.id, emptyAccountRow(account, null)]));
+  const entities = Object.fromEntries(entitiesList.map((entity) => [entity.id, emptyEntityRow(entity)]));
+  const classes = {};
+  for (const entity of entitiesList) {
+    if (!classes[entity.class]) classes[entity.class] = { in: 0, out: 0, count: 0, entities: 0 };
+    classes[entity.class].entities += 1;
+  }
+  const perDay = days.map((date) => ({ date, flows: {} }));
+  const flowShell = Object.fromEntries(flowsList.map((flow) => [flow.id, { ...bucket(), from: flow.from, to: flow.to, label: flow.label }]));
+  const acc = accumulateEvents(scenario.events, {
+    amounts, flowsById, flowsByPair, accounts, entities, classes, cashIds, perDay, dayIndex,
+  });
+  for (const [id, partial] of Object.entries(acc.flows)) {
+    Object.assign(flowShell[id], partial);
+  }
+  const unmappedRows = (scenario.unmapped || []).map((row) => ({
+    date: row.date,
+    ref: row.ref || '',
+    memo: row.memo || '',
+    row: row.row ?? null,
+    reason: row.reason,
+    entity: row.entity || null,
+    cents: row.amount !== undefined ? toCents(row.amount) : null,
+  }));
+  for (const row of unmappedRows) {
+    if (row.entity && entities[row.entity]) {
+      entities[row.entity].unmappedCount += 1;
+      entities[row.entity].unmappedSum += row.cents || 0;
+    }
+  }
+  for (const account of Object.values(accounts)) {
+    account.net = account.in - account.out;
+    account.closing = null;
+  }
+  for (const flow of Object.values(flowShell)) flow.net = flow.sum - flow.refundSum;
+  for (const entity of Object.values(entities)) entity.net = entity.in - entity.out;
+  for (const cls of Object.values(classes)) cls.net = cls.in - cls.out;
+  const dayTotals = perDay.map((day) => {
+    let count = 0;
+    let sum = 0;
+    for (const slot of Object.values(day.flows)) {
+      count += slot.count;
+      sum += slot.sum;
+    }
+    return { date: day.date, count, sum };
+  });
+  const currency = scenario.currency || ledgerCurrency;
+  const comparable = currency === ledgerCurrency;
+  return {
+    id: scenario.id,
+    label: scenario.label,
+    assumptions: [...(scenario.assumptions || [])],
+    currency,
+    comparable,
+    amounts,
+    days: perDay,
+    dayTotals,
+    flows: flowShell,
+    accounts,
+    entities,
+    classes,
+    unmapped: {
+      count: unmappedRows.length,
+      sum: unmappedRows.reduce((total, row) => total + (row.cents || 0), 0),
+      rows: unmappedRows,
+    },
+    totals: { in: acc.totalIn, out: acc.totalOut, events: acc.eventCount },
+  };
+}
+
+export function summarize(diagram) {
+  const ledger = diagram.ledger;
+  const accountsList = Array.isArray(diagram.accounts) ? diagram.accounts : [];
+  const entitiesList = Array.isArray(diagram.entities) ? diagram.entities : [];
+  const flowsList = Array.isArray(diagram.flows) ? diagram.flows : [];
+  const flowsById = indexById(flowsList);
+  const flowsByPair = pairIndex(flowsList);
+  const amounts = ledger.amounts !== false;
+  const days = periodDays(ledger.period);
+  const dayIndex = new Map(days.map((day, index) => [day, index]));
+
+  const flows = Object.fromEntries(flowsList.map((flow) => [flow.id, { ...bucket(), from: flow.from, to: flow.to, label: flow.label }]));
+  const accounts = Object.fromEntries(accountsList.map((account) => [account.id, {
+    label: account.label,
+    class: account.class,
+    cash: account.cash === true,
+    in: 0,
+    out: 0,
+    count: 0,
+    opening: ledger.opening && ledger.opening[account.id] !== undefined ? toCents(ledger.opening[account.id]) : null,
+  }]));
+  const entities = Object.fromEntries(entitiesList.map((entity) => [entity.id, {
+    label: entity.label,
+    class: entity.class,
+    grouped: entity.grouped || null,
+    in: 0,
+    out: 0,
+    count: 0,
+    unmappedCount: 0,
+    unmappedSum: 0,
+  }]));
+  const classes = {};
+  for (const entity of entitiesList) {
+    if (!classes[entity.class]) classes[entity.class] = { in: 0, out: 0, count: 0, entities: 0 };
+    classes[entity.class].entities += 1;
+  }
+  const perDay = days.map((date) => ({ date, flows: {} }));
+  const cashIds = new Set(accountsList.filter((account) => account.cash === true).map((account) => account.id));
+  const acc = accumulateEvents(ledger.events, {
+    amounts, flowsById, flowsByPair, accounts, entities, classes, cashIds, perDay, dayIndex,
+  });
+  for (const [id, partial] of Object.entries(acc.flows)) {
+    Object.assign(flows[id], partial);
+  }
+  const amountsSeen = acc.amountsSeen;
+  const totalIn = acc.totalIn;
+  const totalOut = acc.totalOut;
+  const eventCount = acc.eventCount;
 
   const unmappedRows = (ledger.unmapped || []).map((row) => ({
     date: row.date,
@@ -354,6 +504,12 @@ export function summarize(diagram) {
     return { date: day.date, count, sum };
   });
 
+  const scenarioCtx = {
+    amounts, flowsById, flowsByPair, accountsList, entitiesList, flowsList, days, dayIndex, cashIds,
+    ledgerCurrency: ledger.currency,
+  };
+  const scenarios = (ledger.scenarios || []).map((scenario) => summarizeScenario(scenario, scenarioCtx));
+
   return {
     currency: ledger.currency,
     amounts,
@@ -373,15 +529,20 @@ export function summarize(diagram) {
     tieouts,
     unmapped,
     breaks: tieouts.filter((tieout) => tieout.status === 'break').length,
+    scenarios,
   };
 }
 
-// The single timing source. The viewer plays this list; a recorded scene can too.
-export function schedule(summary) {
+// The single timing source. Pass a summary (or scenario summary) with `.days`,
+// or a bare days array. `series` marks baseline vs projected what-if tokens.
+// WebM records the baseline series only (`viewerPayload.schedule`).
+export function schedule(summaryOrDays, options = {}) {
+  const days = Array.isArray(summaryOrDays) ? summaryOrDays : (summaryOrDays?.days || []);
+  const series = options.series === 'scenario' ? 'scenario' : 'baseline';
   const items = [];
-  summary.days.forEach((day, index) => {
-    Object.keys(day.flows).forEach((key) => {
-      items.push({ day: index, date: day.date, ...day.flows[key] });
+  days.forEach((day, index) => {
+    Object.keys(day.flows || {}).forEach((key) => {
+      items.push({ day: index, date: day.date, series, ...day.flows[key] });
     });
   });
   return items;
@@ -416,7 +577,7 @@ export function viewerPayload(diagram, summary) {
     flows: (diagram.flows || []).map((flow) => ({ id: flow.id, from: flow.from, to: flow.to, label: flow.label })),
     entities: (diagram.entities || []).map((entity) => ({ id: entity.id, label: entity.label, class: entity.class, grouped: entity.grouped || null })),
     flowTotals: Object.fromEntries(Object.entries(summary.flows).map(([id, flow]) => [id, { count: flow.count + flow.refundCount, net: flow.net, sum: flow.sum, refundSum: flow.refundSum }])),
-    schedule: schedule(summary),
+    schedule: schedule(summary), // baseline only — Export → WebM records this series
     dayTotals: summary.dayTotals,
     accountMeters: Object.fromEntries(Object.entries(summary.accounts).map(([id, account]) => [id, {
       in: account.in,
@@ -426,6 +587,30 @@ export function viewerPayload(diagram, summary) {
     }])),
     breaks: summary.breaks,
     unmappedCount: summary.unmapped.count,
+    scenarios: (summary.scenarios || []).map((scenario) => ({
+      id: scenario.id,
+      label: scenario.label,
+      assumptions: scenario.assumptions,
+      currency: scenario.currency,
+      comparable: scenario.comparable,
+      amounts: scenario.amounts,
+      totals: scenario.totals,
+      dayTotals: scenario.dayTotals,
+      flowTotals: Object.fromEntries(Object.entries(scenario.flows).map(([id, flow]) => [id, {
+        count: flow.count + flow.refundCount,
+        net: flow.net,
+        sum: flow.sum,
+        refundSum: flow.refundSum,
+      }])),
+      accountMeters: Object.fromEntries(Object.entries(scenario.accounts).map(([id, account]) => [id, {
+        in: account.in,
+        out: account.out,
+        net: account.net,
+        count: account.count,
+      }])),
+      schedule: schedule(scenario, { series: 'scenario' }),
+      unmappedCount: scenario.unmapped.count,
+    })),
   };
 }
 
@@ -554,6 +739,64 @@ ${list.map((entity) => `        <button type="button" class="ledger-entity" data
       </nav>`
     : '';
 
+  const scenarios = summary.scenarios || [];
+  const scenarioOptions = [
+    `          <option value="">${esc(t(locale, 'ledger.scenario.none'))}</option>`,
+    ...scenarios.map((scenario) => `          <option value="${esc(scenario.id)}">${esc(scenario.label)}</option>`),
+  ].join('\n');
+  const scenarioSelect = scenarios.length
+    ? `      <label class="ledger-scenario-select"><span>${esc(t(locale, 'ledger.scenario.label'))}</span>
+        <select id="ledger-scenario" aria-label="${esc(t(locale, 'ledger.scenario.label'))}">
+${scenarioOptions}
+        </select>
+      </label>`
+    : '';
+  const scenarioBanner = scenarios.length
+    ? `    <div class="ledger-scenario-banner no-print" id="ledger-scenario-banner" hidden role="status" aria-live="polite">
+      <strong class="ledger-scenario-banner-mark">${esc(t(locale, 'ledger.scenario.banner'))}</strong>
+      <span class="ledger-scenario-banner-label" id="ledger-scenario-banner-label"></span>
+      <span class="ledger-scenario-banner-assumptions" id="ledger-scenario-banner-assumptions"></span>
+      <span class="ledger-scenario-banner-note">${esc(t(locale, 'ledger.scenario.banner.note'))}</span>
+    </div>`
+    : '';
+
+  const projectedSections = scenarios.map((scenario) => {
+    const moneyOrNc = (cents) => {
+      if (!scenario.comparable) return esc(t(locale, 'ledger.scenario.notComparable'));
+      return esc(money(scenario, cents));
+    };
+    const signedOrNc = (cents) => {
+      if (!scenario.comparable) return esc(t(locale, 'ledger.scenario.notComparable'));
+      return esc(signed(scenario, cents));
+    };
+    const flowRowsProjected = flowsList.map((flow) => {
+      const row = scenario.flows[flow.id];
+      const refunds = row.refundCount ? `${row.refundCount} · ${moneyOrNc(row.refundSum)}` : '—';
+      return `<tr><th scope="row">${esc(flow.label)}<small>${esc(flow.from)} ${ARROW} ${esc(flow.to)}</small></th><td>${row.count}</td><td><span class="ledger-projected">${moneyOrNc(row.sum)}</span></td><td>${refunds}</td><td class="ledger-net"><span class="ledger-projected">${moneyOrNc(row.net)}</span></td></tr>`;
+    }).join('\n');
+    const accountRowsProjected = accountsList.filter((account) => {
+      const row = scenario.accounts[account.id];
+      return row && (row.count > 0 || row.in || row.out);
+    }).map((account) => {
+      const row = scenario.accounts[account.id];
+      return `<tr><th scope="row">${esc(account.label)}<small>${esc(t(locale, `ledger.class.${account.class}`))}</small></th><td><span class="ledger-projected">${moneyOrNc(row.in)}</span></td><td><span class="ledger-projected">${moneyOrNc(row.out)}</span></td><td class="ledger-net"><span class="ledger-projected">${signedOrNc(row.net)}</span></td><td>${row.count}</td></tr>`;
+    }).join('\n');
+    const currencyNote = scenario.comparable
+      ? ''
+      : `<p class="ledger-scenario-currency">${esc(t(locale, 'ledger.scenario.currencyNote', { scenario: scenario.currency, baseline: summary.currency }))}</p>`;
+    return `      <section class="ledger-scenario-projected" data-scenario-id="${esc(scenario.id)}" hidden>
+        <h4>${esc(t(locale, 'ledger.scenario.projected'))} · ${esc(scenario.label)}</h4>
+        <p class="ledger-scenario-assumptions">${esc(scenario.assumptions.join(' · '))}</p>
+${currencyNote}
+        <table><thead><tr><th>${esc(t(locale, 'ledger.panel.account'))}</th><th>${esc(t(locale, 'ledger.panel.in'))}</th><th>${esc(t(locale, 'ledger.panel.out'))}</th><th>${esc(t(locale, 'ledger.panel.net'))}</th><th>${esc(t(locale, 'ledger.panel.count'))}</th></tr></thead><tbody>
+${accountRowsProjected || `<tr><td colspan="5">${esc(t(locale, 'ledger.scenario.projected.empty'))}</td></tr>`}
+        </tbody></table>
+        <table><thead><tr><th>${esc(t(locale, 'ledger.panel.flow'))}</th><th>${esc(t(locale, 'ledger.panel.count'))}</th><th>${esc(t(locale, 'ledger.panel.sum'))}</th><th>${esc(t(locale, 'ledger.panel.refunds'))}</th><th>${esc(t(locale, 'ledger.panel.net'))}</th></tr></thead><tbody>
+${flowRowsProjected}
+        </tbody></table>
+      </section>`;
+  }).join('\n');
+
   return `    <!-- MOSOFIN:LEDGER_SLOT_START -->
     <div class="ledger-strip no-print" id="ledger-strip" role="group" aria-label="${esc(t(locale, 'ledger.strip.label'))}">
 ${viewToggle ? `${viewToggle}
@@ -565,11 +808,13 @@ ${viewToggle ? `${viewToggle}
 ${tempoOptions}
         </select>
       </label>
-      <span class="ledger-proof" id="ledger-proof">${esc(proofLine)}</span>
+${scenarioSelect ? `${scenarioSelect}
+` : ''}      <span class="ledger-proof" id="ledger-proof">${esc(proofLine)}</span>
       <button id="ledger-copy-day" type="button" title="${esc(t(locale, 'ledger.strip.copyDay.title'))}">${esc(t(locale, 'ledger.strip.copyDay'))}</button>
       <span class="ledger-status-line" id="ledger-status" role="status" aria-live="polite"></span>
     </div>
-    <div class="ledger-day-bars no-print" id="ledger-day-bars" role="group" aria-label="${esc(t(locale, 'ledger.bars.label'))}">
+${scenarioBanner ? `${scenarioBanner}
+` : ''}    <div class="ledger-day-bars no-print" id="ledger-day-bars" role="group" aria-label="${esc(t(locale, 'ledger.bars.label'))}">
 ${dayBars}
     </div>
     <div class="ledger-meters no-print" id="ledger-meters" role="group" aria-label="${esc(t(locale, 'ledger.meters.label'))}">
@@ -598,7 +843,8 @@ ${flowRows}
 ${entityRows || `<tr><td colspan="5">${esc(t(locale, 'ledger.panel.entities.none'))}</td></tr>`}
         </tbody></table>
       </section>
-      <section>
+${projectedSections ? `${projectedSections}
+` : ''}      <section>
         <h4>${esc(t(locale, 'ledger.panel.tieouts'))}</h4>
         <table><thead><tr><th>${esc(t(locale, 'ledger.panel.tieout'))}</th><th>${esc(t(locale, 'ledger.panel.compare'))}</th><th>${esc(t(locale, 'ledger.panel.residual'))}</th><th>${esc(t(locale, 'ledger.panel.status'))}</th></tr></thead><tbody>
 ${tieoutRows || `<tr><td colspan="4">${esc(t(locale, 'ledger.panel.tieouts.none'))}</td></tr>`}

@@ -151,6 +151,15 @@ const MESSAGE_PAIRS = {
   'ledger.meters.label': ['Account net movement'],
   'ledger.meters.empty': ['No account movement in this period'],
   'ledger.meters.aria': ['{account}: in {inn}, out {out}, net {net}'],
+  'ledger.scenario.label': ['Scenario'],
+  'ledger.scenario.none': ['Baseline only'],
+  'ledger.scenario.banner': ['SCENARIO'],
+  'ledger.scenario.banner.note': ['What-if overlay — not in the proof or tie-outs'],
+  'ledger.scenario.projected': ['Projected'],
+  'ledger.scenario.projected.empty': ['No projected account movement'],
+  'ledger.scenario.notComparable': ['not comparable'],
+  'ledger.scenario.currencyNote': ['Scenario currency {scenario} differs from baseline {baseline}; amounts are never converted.'],
+
 
   'viewer.kind.frontend': ['Commerce'],
   'viewer.kind.backend': ['Payments'],
@@ -181,6 +190,10 @@ const MESSAGE_PAIRS = {
   'viewer.ledger.token.aria': ['{count} rows, {sum}, {from} to {to}'],
   'viewer.ledger.volume.aria': ['{count} rows totalling {sum} on {flow}'],
   'viewer.ledger.countsOnly': ['×{count}'],
+  'viewer.ledger.scenario.token.aria': ['Projected what-if: {count} rows, {sum}, {from} to {to}'],
+  'viewer.ledger.scenario.active': ['Scenario overlay on'],
+  'viewer.ledger.scenario.off': ['Scenario overlay off'],
+
 
   'viewer.toolbar.actions': ['Diagram actions'],
   'viewer.theme.toggle.title': ['Toggle theme (T)'],
