@@ -73,3 +73,33 @@ test('viewer payload advertises view without inventing amounts', () => {
   assert.equal(payload.proof, cityFixture.ledger.proof);
   assert.ok(payload.schedule.every((item) => payload.flows.some((flow) => flow.id === item.edgeId)));
 });
+
+test('city render spaces buildings, hides flow labels by default, and paints authored health', () => {
+  const html = render('northline-gl-2026-07.city.ledger.json', 'city-sim.html');
+  assert.match(html, /data-city-stage=/);
+  assert.match(html, /data-city-stage-cx=/);
+  assert.match(html, /class="city-road city-road-bed"/);
+  assert.match(html, /data-city-flow-label=/);
+  assert.match(html, /data-city-health="1"/); // Cash tie-out tied → green
+  assert.match(html, /data-city-health="unknown"/); // accounts without a signal stay neutral
+  assert.match(html, /Health \(red/);
+  assert.match(html, /data-city-label="secondary"/);
+  assert.doesNotMatch(html, /\bclass="[^"]*\ba-(?:default|emphasis|security|dashed)\b/);
+});
+
+test('cityAccountHealth prefers node tie-out residual and never invents green', async () => {
+  const { cityAccountHealth } = await import('../renderers/ledger/city.mjs');
+  const summary = {
+    tieouts: [
+      { mode: 'node', node: 'cash', residual: 0, tolerance: 0, status: 'tied', expected: 100, computed: 100 },
+      { mode: 'node', node: 'ar', residual: 500, tolerance: 0, status: 'break', expected: 1000, computed: 1500 },
+    ],
+    accounts: { cash: { net: 100, opening: null }, quiet: { net: 0, opening: null } },
+    flows: {},
+  };
+  assert.equal(cityAccountHealth('cash', summary).score, 1);
+  assert.equal(cityAccountHealth('cash', summary).source, 'tieout');
+  assert.ok(cityAccountHealth('ar', summary).score < 1);
+  assert.equal(cityAccountHealth('quiet', summary).score, null);
+  assert.equal(cityAccountHealth('quiet', summary).source, 'unknown');
+});

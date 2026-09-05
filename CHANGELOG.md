@@ -8,6 +8,14 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ledger **City Sim** upgrade: zoom/pan/wheel camera gated for `data-ledger-view="city"`, optional
+  **follow active token** while Play runs, and **orbit/rotate** of the isometric stage (buttons,
+  Alt/right-drag; Reset restores angle). Layout uses larger buildings, more district spacing, labels
+  below buildings with collision tiers, thicker lane-style `city-road`s, and clearer vehicles.
+  Playback dims the rest of the city and pulses the destination building. **Health colors**
+  (red→green) tint account buildings from authored tie-out residuals only — unknown stays neutral
+  grey (never invented green); legend explains Health. Map view and proof rules unchanged.
+
 - Ledger **Phase 3 what-if scenarios** (`ledger.scenarios[]`): named driver assumptions and projected
   events ride the same authored flows as a second `schedule()` series. The viewer draws hollow tokens
   plus a persistent **SCENARIO** banner; projected money is labelled in the panel overlay and never
