@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Northline Coffee \u2014 Three Statements, One Story (2026-07)",
+    "output": "northline-three-statements.html",
+    "viewBox": [
+      1280,
+      720
+    ],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "income-to-equity",
+        "label": "Profit lands in equity",
+        "focus": [
+          "revenue",
+          "expenses",
+          "net_income",
+          "equity"
+        ],
+        "note": "Income statement closes into retained earnings. Net income bridges period profit to balance-sheet equity."
+      },
+      {
+        "id": "indirect-bridge",
+        "label": "Indirect cash bridge",
+        "focus": [
+          "net_income",
+          "operating",
+          "investing",
+          "financing",
+          "ending_cash"
+        ],
+        "note": "Indirect cash from operations starts at net income, then adjusts non-cash items and working capital."
+      },
+      {
+        "id": "cash-tie-out",
+        "label": "Cash tie-out",
+        "focus": [
+          "ending_cash",
+          "cash",
+          "assets",
+          "liabilities",
+          "equity"
+        ],
+        "note": "Ending CFS cash must equal cash on the balance sheet. Assets = Liabilities + Equity still holds."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "revenue",
+      "type": "frontend",
+      "label": "Revenue",
+      "sublabel": "DTC + wholesale \u00b7 period",
+      "pos": [
+        100,
+        80
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "~$24k sample \u00b7 GL"
+    },
+    {
+      "id": "expenses",
+      "type": "backend",
+      "label": "Expenses",
+      "sublabel": "COGS \u00b7 fees \u00b7 opex",
+      "pos": [
+        360,
+        80
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "mapped lines"
+    },
+    {
+      "id": "net_income",
+      "type": "database",
+      "label": "Net Income",
+      "sublabel": "Revenue \u2212 Expenses",
+      "pos": [
+        700,
+        80
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "profitable \u00b7 sample"
+    },
+    {
+      "id": "cash",
+      "type": "database",
+      "label": "Cash",
+      "sublabel": "Chase 1002 on BS",
+      "pos": [
+        100,
+        320
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "tied ~$12k net",
+      "brand": "chase"
+    },
+    {
+      "id": "assets",
+      "type": "cloud",
+      "label": "Other assets",
+      "sublabel": "A/R \u00b7 inventory",
+      "pos": [
+        300,
+        320
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "tag": "point in time"
+    },
+    {
+      "id": "liabilities",
+      "type": "security",
+      "label": "Liabilities",
+      "sublabel": "A/P \u00b7 tax payable",
+      "pos": [
+        500,
+        320
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "equity",
+      "type": "database",
+      "label": "Equity",
+      "sublabel": "incl. retained earnings",
+      "pos": [
+        700,
+        320
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "RE \u2191 from NI"
+    },
+    {
+      "id": "operating",
+      "type": "backend",
+      "label": "Operating",
+      "sublabel": "starts at NI (indirect)",
+      "pos": [
+        100,
+        540
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "cash from ops"
+    },
+    {
+      "id": "investing",
+      "type": "backend",
+      "label": "Investing",
+      "sublabel": "capex \u00b7 equipment",
+      "pos": [
+        340,
+        540
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "light \u00b7 sample"
+    },
+    {
+      "id": "financing",
+      "type": "backend",
+      "label": "Financing",
+      "sublabel": "debt \u00b7 dividends",
+      "pos": [
+        580,
+        540
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "none drawn"
+    },
+    {
+      "id": "ending_cash",
+      "type": "database",
+      "label": "Ending Cash",
+      "sublabel": "CFS close \u00b7 period",
+      "pos": [
+        840,
+        540
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "must = BS cash"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Income Statement (period)",
+      "wraps": [
+        "revenue",
+        "expenses",
+        "net_income"
+      ],
+      "pad": 28
+    },
+    {
+      "kind": "region",
+      "label": "Balance Sheet \u2014 Assets = Liabilities + Equity",
+      "wraps": [
+        "cash",
+        "assets",
+        "liabilities",
+        "equity"
+      ],
+      "pad": 28
+    },
+    {
+      "kind": "region",
+      "label": "Cash Flow Statement (period)",
+      "wraps": [
+        "operating",
+        "investing",
+        "financing",
+        "ending_cash"
+      ],
+      "pad": 28
+    }
+  ],
+  "connections": [
+    {
+      "id": "rev-to-exp",
+      "from": "revenue",
+      "to": "expenses",
+      "label": "less costs",
+      "variant": "emphasis"
+    },
+    {
+      "id": "exp-to-ni",
+      "from": "expenses",
+      "to": "net_income",
+      "label": "= net income",
+      "variant": "emphasis"
+    },
+    {
+      "id": "op-to-inv",
+      "from": "operating",
+      "to": "investing",
+      "label": "then invest",
+      "variant": "emphasis"
+    },
+    {
+      "id": "inv-to-fin",
+      "from": "investing",
+      "to": "financing",
+      "label": "then finance",
+      "variant": "emphasis"
+    },
+    {
+      "id": "fin-to-end",
+      "from": "financing",
+      "to": "ending_cash",
+      "label": "= ending cash",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ni-to-equity",
+      "from": "net_income",
+      "to": "equity",
+      "label": "Net Income \u2192 Equity / Retained earnings",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "orthogonal-v",
+      "labelDx": 120
+    },
+    {
+      "id": "ni-to-operating",
+      "from": "net_income",
+      "to": "operating",
+      "label": "Net Income \u2192 Cash from operations (indirect)",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "bottom",
+      "via": [
+        [
+          1040,
+          112
+        ],
+        [
+          1040,
+          660
+        ],
+        [
+          180,
+          660
+        ]
+      ],
+      "labelAt": [
+        1055,
+        380
+      ]
+    },
+    {
+      "id": "end-to-bs-cash",
+      "from": "ending_cash",
+      "to": "cash",
+      "label": "Ending cash (CFS) \u2192 Cash on Balance Sheet",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "via": [
+        [
+          925,
+          440
+        ],
+        [
+          175,
+          440
+        ]
+      ],
+      "labelAt": [
+        520,
+        426
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "The three joints",
+      "items": [
+        "Net Income \u2192 Equity / Retained earnings (period profit closes into BS)",
+        "Net Income \u2192 Cash from operations (indirect method bridge)",
+        "Ending cash (CFS) \u2192 Cash on Balance Sheet (tie-out must hold)"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails \u00b7 Proof: authored",
+      "items": [
+        "Round sample tags from the July GL fixture: sales ~$24k (DTC+WS), cash net tied ~$12k",
+        "No invented Net Income dollar \u2014 payroll splits stay unmapped on the GL map",
+        "BS identity is structural (A = L + E), not a claimed reconciliation green"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Health read (sample story)",
+      "items": [
+        "Entity: Northline Coffee LLC \u00b7 accrual \u00b7 period 2026-07",
+        "Profitable ops on mapped lines \u00b7 cash moved and tied at Chase 1002",
+        "Audience: accountant / controller \u2014 see whether the three statements agree"
+      ]
+    }
+  ]
+}
