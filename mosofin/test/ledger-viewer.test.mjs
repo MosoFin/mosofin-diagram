@@ -53,7 +53,7 @@ test('the five existing diagram types render without any ledger surface', () => 
     const html = render(mode, example);
     assert.doesNotMatch(html, /data-diagram-kind=/, mode);
     assert.doesNotMatch(html, /id="mosofin-ledger-data"/, mode);
-    assert.doesNotMatch(html, /id="ledger-strip"|id="ledger-panel"|class="ledger-entities/, mode);
+    assert.doesNotMatch(html, /id="ledger-strip"|id="ledger-day-bars"|id="ledger-meters"|id="ledger-panel"|class="ledger-entities/, mode);
     assert.doesNotMatch(html, /MOSOFIN:LEDGER_/, `${mode}: sentinels must be consumed, never shipped`);
     assert.match(html, /Mosofin\.ledger = \(function/, `${mode}: the shared viewer still carries the inert module`);
   }
@@ -64,6 +64,10 @@ test('the ledger artifact carries its data, strip and panel outside the canonica
   assert.match(html, /<svg[^>]*data-diagram-kind="ledger"/);
   assert.match(html, /<script id="mosofin-ledger-data" type="application\/json">/);
   assert.match(html, /id="ledger-strip"/);
+  assert.match(html, /id="ledger-day-bars"/);
+  assert.match(html, /class="ledger-day-bar" data-day-index="0"/);
+  assert.match(html, /id="ledger-meters"/);
+  assert.match(html, /class="ledger-meter" data-account-id="cash-1002"/);
   assert.match(html, /id="ledger-panel"/);
   assert.match(html, /class="ledger-entity" data-entity-id="ent-state-dor"/, 'every entity class present in the journal is drawn, including government');
   assert.doesNotMatch(html, /MOSOFIN:LEDGER_DATA/);

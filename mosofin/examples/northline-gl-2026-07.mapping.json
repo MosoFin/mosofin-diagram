@@ -1,0 +1,46 @@
+{
+  "base": "northline-gl-2026-07.ledger.json",
+  "splits": "unmapped",
+  "source": {
+    "system": "QuickBooks"
+  },
+  "accounts": {
+    "1002 Cash - Chase 1002": "cash-1002",
+    "1200 Accounts Receivable": "ar-1200",
+    "1300 Inventory - Green Coffee": "inventory-1300",
+    "2000 Accounts Payable": "ap-2000",
+    "2200 Payroll Taxes Payable": "taxpayable-2200",
+    "4000 Sales - DTC": "dtc-sales-4000",
+    "4100 Sales - Wholesale": "wholesale-4100",
+    "4900 Refunds & Allowances": "refunds-4900",
+    "5000 Cost of Goods Sold": "cogs-5000",
+    "6050 Merchant Fees": "fees-6050",
+    "6100 Shipping & Supplies": "shipping-6100",
+    "6200 Payroll": "payroll-6200",
+    "1002": "cash-1002",
+    "1200": "ar-1200",
+    "1300": "inventory-1300",
+    "2000": "ap-2000",
+    "2200": "taxpayable-2200",
+    "4000": "dtc-sales-4000",
+    "4100": "wholesale-4100",
+    "4900": "refunds-4900",
+    "5000": "cogs-5000",
+    "6050": "fees-6050",
+    "6100": "shipping-6100",
+    "6200": "payroll-6200"
+  },
+  "entities": {
+    "Shopify DTC customers": "ent-dtc-customers",
+    "Blue Bottle Wholesale": "ent-bluebottle",
+    "Harbor Grocery Co-op": "ent-harbor",
+    "Stripe": "ent-stripe",
+    "Chase Bank": "ent-chase",
+    "Cafe Importadora SA": "ent-importadora",
+    "Uline": "ent-other-vendors",
+    "Pacific Roasting Supply": "ent-other-vendors",
+    "Bay Freight LLC": "ent-other-vendors",
+    "Payroll (7 employees)": "ent-employees",
+    "State Dept. of Revenue": "ent-state-dor"
+  }
+}

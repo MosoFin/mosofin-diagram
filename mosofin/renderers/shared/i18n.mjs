@@ -145,6 +145,12 @@ const MESSAGE_PAIRS = {
   'ledger.panel.proof.authored': ['Proof: authored'],
   'ledger.panel.scope': ['Rows in {file} for {period} only. Debits equal credits by construction for mapped rows. This is not a bank reconciliation.'],
   'ledger.panel.scope.authored': ['the authored ledger'],
+  'ledger.bars.label': ['Mapped volume by day'],
+  'ledger.bars.aria.amount': ['{date}: {count} mapped rows totalling {sum}'],
+  'ledger.bars.aria.count': ['{date}: {count} mapped rows'],
+  'ledger.meters.label': ['Account net movement'],
+  'ledger.meters.empty': ['No account movement in this period'],
+  'ledger.meters.aria': ['{account}: in {inn}, out {out}, net {net}'],
 
   'viewer.kind.frontend': ['Commerce'],
   'viewer.kind.backend': ['Payments'],

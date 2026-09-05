@@ -27,3 +27,18 @@ isometric district: account buildings, an entity-class ring, roads for authored 
 same `schedule()` tokens as Map. City roads use class `city-road` / marker `marker-city` so
 orthogonal arrow checks ignore them. Author `meta.sibling` to the other view's HTML path so the
 viewer Map|City toggle can link without breaking the single-SVG export gate.
+
+## Daily bars and account meters
+
+HTML only (outside the canonical SVG):
+
+- `#ledger-day-bars` — one bar per period day for mapped schedule volume (count and $sum). Scrubbing or playing highlights the active day; bars stay readable when motion is still.
+- `#ledger-meters` — compact per-account in/out/net meters from `summarize()` (never invented). Cleared from print/embed via `no-print`.
+
+## CSV import
+
+```bash
+node bin/mosofin.mjs ledger import path/to/export.csv --map mapping.json --out out.ledger.json
+```
+
+`mapping.json` names a base ledger diagram (`base`), maps CSV account cells / names onto account and entity ids, and sets `splits` to `unmapped` (allocation is refused). Unmapped journal entries are listed; `--strict` exits non-zero when any remain. See `examples/northline-gl-2026-07.mapping.json`.

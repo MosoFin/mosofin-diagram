@@ -4689,8 +4689,27 @@
     [data-node-id][data-ledger-arrive] > rect:nth-of-type(2) { animation: mosofin-ledger-arrive 320ms cubic-bezier(0.22, 1, 0.36, 1) both; }
     @keyframes mosofin-ledger-arrive { 0% { stroke-width: 1.5; } 40% { stroke-width: 3; filter: drop-shadow(0 0 6px var(--ledger-in)); } 100% { stroke-width: 1.5; } }
     html[data-motion="still"] .ledger-token-overlay { display: none !important; }
-    html[data-embed="true"] .ledger-strip, html[data-embed="true"] .ledger-entities, html[data-embed="true"] .ledger-panel { display: none !important; }
+    html[data-embed="true"] .ledger-strip, html[data-embed="true"] .ledger-day-bars, html[data-embed="true"] .ledger-meters, html[data-embed="true"] .ledger-entities, html[data-embed="true"] .ledger-panel { display: none !important; }
     html[data-present="true"] .ledger-panel { display: none; }
+
+    .ledger-day-bars { display: flex; align-items: flex-end; gap: 2px; height: 44px; margin: 0.45rem 0 0; padding: 0.35rem 0.5rem 0.2rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); overflow-x: auto; }
+    .ledger-day-bar { flex: 1 1 0; min-width: 6px; max-width: 18px; height: var(--ledger-bar-height, 2px); padding: 0; border: 0; border-radius: 3px 3px 0 0; background: transparent; cursor: pointer; display: flex; align-items: flex-end; }
+    .ledger-day-bar-fill { display: block; width: 100%; height: 100%; border-radius: 3px 3px 0 0; background: color-mix(in srgb, var(--ledger-in) 55%, var(--panel-border)); }
+    .ledger-day-bar[aria-pressed="true"] .ledger-day-bar-fill,
+    .ledger-day-bar[data-ledger-day-active] .ledger-day-bar-fill { background: var(--ledger-in); box-shadow: 0 0 0 1px color-mix(in srgb, var(--ledger-in) 40%, transparent); }
+    .ledger-day-bar:focus-visible { outline: 2px solid var(--ledger-in); outline-offset: 1px; }
+    .ledger-meters { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.45rem 0.75rem; margin: 0.55rem 0 0; padding: 0.55rem 0.75rem; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); font-size: 0.72rem; }
+    .ledger-meter-label { display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.2rem; }
+    .ledger-meter-label span { opacity: 0.85; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ledger-meter-tracks { display: flex; flex-direction: column; gap: 3px; }
+    .ledger-meter-track { display: block; height: 5px; width: var(--ledger-meter-pct, 0%); max-width: 100%; border-radius: 999px; background: var(--panel-border); }
+    .ledger-meter-in { background: var(--ledger-in); }
+    .ledger-meter-out { background: var(--ledger-out); }
+    .ledger-meter-net-positive { color: var(--ledger-in); }
+    .ledger-meter-net-negative { color: var(--ledger-out); }
+    .ledger-meters-empty { margin: 0; opacity: 0.7; }
+    html[data-motion="still"] .ledger-day-bar-fill { transition: none; }
+    html[data-embed="true"] .ledger-day-bars, html[data-embed="true"] .ledger-meters { display: none !important; }
 
     /* Ledger City view */
     .city-road { stroke: var(--arrow); fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
@@ -11141,6 +11160,7 @@
       var copyBtn = document.getElementById('ledger-copy-day');
       var statusLine = document.getElementById('ledger-status');
       var entityStrip = document.getElementById('ledger-entities');
+      var dayBars = document.getElementById('ledger-day-bars');
       var overlay = null;
       var volume = null;
       var dayIndex = 0;
@@ -11394,6 +11414,15 @@
           playBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
           playBtn.textContent = text(playing ? 'viewer.ledger.pause' : 'viewer.ledger.play');
         }
+        if (dayBars) {
+          var bars = dayBars.querySelectorAll('.ledger-day-bar');
+          for (var bi = 0; bi < bars.length; bi += 1) {
+            var active = String(bars[bi].getAttribute('data-day-index')) === String(dayIndex);
+            if (active) bars[bi].setAttribute('data-ledger-day-active', '');
+            else bars[bi].removeAttribute('data-ledger-day-active');
+            bars[bi].setAttribute('aria-pressed', active ? 'true' : 'false');
+          }
+        }
         if (svg) {
           if (playing) svg.setAttribute('data-ledger-playing', 'true');
           else svg.removeAttribute('data-ledger-playing');
@@ -11593,6 +11622,11 @@
           var chip = event.target.closest ? event.target.closest('.ledger-entity') : null;
           if (!chip) return;
           setEntityFilter(chip.getAttribute('data-entity-id'));
+        });
+        if (dayBars) dayBars.addEventListener('click', function (event) {
+          var bar = event.target.closest ? event.target.closest('.ledger-day-bar') : null;
+          if (!bar) return;
+          seek(bar.getAttribute('data-day-index'), { updateUrl: true });
         });
         document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause({ reason: 'hidden' }); });
         window.addEventListener('beforeprint', function () { if (playing) pause({ reason: 'print' }); });

@@ -56,6 +56,11 @@ test('sums, reversals and per-account nets are computed in integer cents', () =>
   assert.equal(summary.accounts.cash.closing, 9650);
   assert.equal(summary.accounts.sales.closing, null, 'no opening means no closing balance is ever shown');
   assert.equal(summary.totals.events, 4);
+  assert.deepEqual(summary.dayTotals.map((d) => ({ date: d.date, count: d.count, sum: d.sum })), [
+    { date: "2026-07-01", count: 2, sum: 1010 },
+    { date: "2026-07-02", count: 1, sum: 400 },
+    { date: "2026-07-03", count: 1, sum: 960 },
+  ]);
 });
 
 test('tie-outs compare an account against a supplied figure or two flows, and report breaks', () => {

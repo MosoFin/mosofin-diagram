@@ -344,6 +344,16 @@ export function summarize(diagram) {
   const sorted = amountsSeen.slice().sort((a, b) => a - b);
   const p90 = sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.9))] : 0;
 
+  const dayTotals = perDay.map((day) => {
+    let count = 0;
+    let sum = 0;
+    for (const slot of Object.values(day.flows)) {
+      count += slot.count;
+      sum += slot.sum;
+    }
+    return { date: day.date, count, sum };
+  });
+
   return {
     currency: ledger.currency,
     amounts,
@@ -355,6 +365,7 @@ export function summarize(diagram) {
     p90,
     cashAccounts: [...cashIds],
     days: perDay,
+    dayTotals,
     flows,
     accounts,
     entities,
@@ -397,6 +408,13 @@ export function viewerPayload(diagram, summary) {
     entities: (diagram.entities || []).map((entity) => ({ id: entity.id, label: entity.label, class: entity.class, grouped: entity.grouped || null })),
     flowTotals: Object.fromEntries(Object.entries(summary.flows).map(([id, flow]) => [id, { count: flow.count + flow.refundCount, net: flow.net, sum: flow.sum, refundSum: flow.refundSum }])),
     schedule: schedule(summary),
+    dayTotals: summary.dayTotals,
+    accountMeters: Object.fromEntries(Object.entries(summary.accounts).map(([id, account]) => [id, {
+      in: account.in,
+      out: account.out,
+      net: account.net,
+      count: account.count,
+    }])),
     breaks: summary.breaks,
     unmappedCount: summary.unmapped.count,
   };
@@ -482,6 +500,42 @@ export function renderLedgerPanel(diagram, summary) {
 ${list.map((entity) => `        <button type="button" class="ledger-entity" data-entity-id="${esc(entity.id)}" aria-pressed="false"><span>${esc(entity.label)}</span><small>${signed(summary, summary.entities[entity.id].net)}</small></button>`).join('\n')}
       </div>`).join('\n');
 
+  const dayTotals = summary.dayTotals || [];
+  const maxDay = Math.max(1, ...dayTotals.map((day) => (summary.amounts ? day.sum : day.count)));
+  const dayBars = dayTotals.map((day, index) => {
+    const value = summary.amounts ? day.sum : day.count;
+    const height = Math.max(day.count || day.sum ? 12 : 2, Math.round((value / maxDay) * 36));
+    const label = summary.amounts
+      ? t(locale, 'ledger.bars.aria.amount', { date: day.date, count: String(day.count), sum: money(summary, day.sum) })
+      : t(locale, 'ledger.bars.aria.count', { date: day.date, count: String(day.count) });
+    const title = summary.amounts
+      ? `${day.date}: ${day.count} · ${money(summary, day.sum)}`
+      : `${day.date}: ${day.count}`;
+    return `        <button type="button" class="ledger-day-bar" data-day-index="${index}" data-day="${esc(day.date)}" style="--ledger-bar-height: ${height}px" title="${esc(title)}" aria-label="${esc(label)}" aria-pressed="false"><span class="ledger-day-bar-fill"></span></button>`;
+  }).join('\n');
+
+  const meterAccounts = accountsList.filter((account) => {
+    const row = summary.accounts[account.id];
+    return row && (row.count > 0 || row.in || row.out);
+  });
+  const maxMeter = Math.max(1, ...meterAccounts.map((account) => {
+    const row = summary.accounts[account.id];
+    return Math.max(row.in, row.out, Math.abs(row.net));
+  }));
+  const accountMeters = meterAccounts.map((account) => {
+    const row = summary.accounts[account.id];
+    const inPct = Math.round((row.in / maxMeter) * 100);
+    const outPct = Math.round((row.out / maxMeter) * 100);
+    const netClass = row.net > 0 ? 'positive' : row.net < 0 ? 'negative' : 'zero';
+    return `      <div class="ledger-meter" data-account-id="${esc(account.id)}">
+        <div class="ledger-meter-label"><span>${esc(account.label)}</span><strong class="ledger-net ledger-meter-net-${netClass}">${esc(signed(summary, row.net))}</strong></div>
+        <div class="ledger-meter-tracks" role="img" aria-label="${esc(t(locale, 'ledger.meters.aria', { account: account.label, inn: money(summary, row.in), out: money(summary, row.out), net: signed(summary, row.net) }))}">
+          <span class="ledger-meter-track ledger-meter-in" style="--ledger-meter-pct: ${inPct}%"></span>
+          <span class="ledger-meter-track ledger-meter-out" style="--ledger-meter-pct: ${outPct}%"></span>
+        </div>
+      </div>`;
+  }).join('\n');
+
   const view = diagram.meta?.view === 'city' ? 'city' : 'map';
   const sibling = diagram.meta?.sibling || '';
   const viewToggle = sibling
@@ -505,6 +559,12 @@ ${tempoOptions}
       <span class="ledger-proof" id="ledger-proof">${esc(proofLine)}</span>
       <button id="ledger-copy-day" type="button" title="${esc(t(locale, 'ledger.strip.copyDay.title'))}">${esc(t(locale, 'ledger.strip.copyDay'))}</button>
       <span class="ledger-status-line" id="ledger-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="ledger-day-bars no-print" id="ledger-day-bars" role="group" aria-label="${esc(t(locale, 'ledger.bars.label'))}">
+${dayBars}
+    </div>
+    <div class="ledger-meters no-print" id="ledger-meters" role="group" aria-label="${esc(t(locale, 'ledger.meters.label'))}">
+${accountMeters || `      <p class="ledger-meters-empty">${esc(t(locale, 'ledger.meters.empty'))}</p>`}
     </div>
     <div class="ledger-entities no-print" id="ledger-entities" role="group" aria-label="${esc(t(locale, 'ledger.entities.label'))}">
 ${entityStrip}

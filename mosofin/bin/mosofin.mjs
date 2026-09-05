@@ -22,6 +22,7 @@ function usage() {
   mosofin inspect <type> <input.json>
   mosofin check <output.html>
   mosofin visual-check <output.html> [--json]
+  mosofin ledger import <csv> --map mapping.json [--out path] [--strict] [--json]
   mosofin guide [scenario or question] [--json] [--lang en]
   mosofin brands [name, alias, domain, or category] [--json]
   mosofin brands capture <url> [--json]
@@ -1596,6 +1597,122 @@ function commandValidate(args) {
   if (exitCode !== 0) process.exitCode = exitCode;
 }
 
+
+async function commandLedger(args) {
+  const sub = args[0];
+  if (sub !== 'import') {
+    fail(`Unknown ledger subcommand ${sub ? JSON.stringify(sub) : '(none)'}. Expected: import\n\n${usage()}`);
+  }
+  const rest = args.slice(1);
+  let csvPath;
+  let mapPath;
+  let outPath;
+  let strict = false;
+  let asJson = false;
+  const positional = [];
+  for (let index = 0; index < rest.length; index += 1) {
+    const arg = rest[index];
+    if (arg === '--map') {
+      mapPath = rest[index + 1];
+      if (!mapPath || mapPath.startsWith('--')) fail('ledger import --map requires a mapping.json path.');
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith('--map=')) {
+      mapPath = arg.slice('--map='.length);
+      if (!mapPath) fail('ledger import --map requires a mapping.json path.');
+      continue;
+    }
+    if (arg === '--out' || arg === '-o') {
+      outPath = rest[index + 1];
+      if (!outPath || outPath.startsWith('--')) fail('ledger import --out requires a write path.');
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith('--out=')) {
+      outPath = arg.slice('--out='.length);
+      if (!outPath) fail('ledger import --out requires a write path.');
+      continue;
+    }
+    if (arg === '--strict') { strict = true; continue; }
+    if (arg === '--json') { asJson = true; continue; }
+    if (arg.startsWith('-')) fail(`Unknown ledger import option ${JSON.stringify(arg)}.\n\n${usage()}`);
+    positional.push(arg);
+  }
+  csvPath = positional[0];
+  if (!csvPath) fail('ledger import requires a CSV path.\n\n' + usage());
+  if (!mapPath) fail('ledger import requires --map mapping.json.\n\n' + usage());
+  if (positional.length > 1) fail('ledger import accepts one CSV path.');
+
+  const resolvedCsv = path.resolve(csvPath);
+  const resolvedMap = path.resolve(mapPath);
+  if (!fs.existsSync(resolvedCsv)) fail(`CSV not found: ${resolvedCsv}`);
+  if (!fs.existsSync(resolvedMap)) fail(`mapping.json not found: ${resolvedMap}`);
+
+  const { importLedgerFromCsv, readMappingFile } = await import(pathToFileURL(path.join(skillRoot, 'renderers/shared/ledger-import.mjs')).href);
+  const csvText = fs.readFileSync(resolvedCsv, 'utf8');
+  const mapping = readMappingFile(resolvedMap);
+  let result;
+  try {
+    result = importLedgerFromCsv({
+      csvText,
+      csvFileName: path.basename(resolvedCsv),
+      mapping,
+      mappingPath: resolvedMap,
+      strict,
+    });
+  } catch (error) {
+    if (error?.code === 'ledger/import-strict' && error.diagram) {
+      if (outPath) {
+        fs.writeFileSync(path.resolve(outPath), `${JSON.stringify(error.diagram, null, 2)}\n`);
+      }
+      const payload = {
+        ok: false,
+        code: error.code,
+        message: error.message,
+        report: error.report,
+        out: outPath ? path.resolve(outPath) : null,
+      };
+      if (asJson) console.log(JSON.stringify(payload, null, 2));
+      else {
+        console.error(error.message);
+        console.error(`mapped ${error.report.mapped}; unmapped ${error.report.unmapped} of ${error.report.rows} CSV rows`);
+        for (const row of error.report.unmappedRows.slice(0, 20)) {
+          console.error(`  ${row.date || '?'} ${row.ref || ''} ${row.reason}${row.amount !== undefined ? ` ${row.amount}` : ''}`);
+        }
+      }
+      process.exit(1);
+    }
+    fail(error?.message || String(error));
+  }
+
+  const resolvedOut = outPath ? path.resolve(outPath) : null;
+  if (resolvedOut) {
+    fs.writeFileSync(resolvedOut, `${JSON.stringify(result.diagram, null, 2)}\n`);
+  } else {
+    process.stdout.write(`${JSON.stringify(result.diagram, null, 2)}\n`);
+  }
+
+  const summary = {
+    ok: true,
+    mapped: result.report.mapped,
+    unmapped: result.report.unmapped,
+    rows: result.report.rows,
+    out: resolvedOut,
+  };
+  if (asJson) {
+    if (resolvedOut) console.error(JSON.stringify(summary, null, 2));
+    // when writing to stdout the diagram is the primary payload; skip duplicate
+  } else if (resolvedOut) {
+    console.error(`ledger import: mapped ${summary.mapped}; unmapped ${summary.unmapped} of ${summary.rows} CSV rows → ${resolvedOut}`);
+    if (summary.unmapped) {
+      for (const row of result.report.unmappedRows.slice(0, 20)) {
+        console.error(`  ${row.date || '?'} ${row.ref || ''} ${row.reason}${row.amount !== undefined ? ` ${row.amount}` : ''}`);
+      }
+    }
+  }
+}
+
 const [command, ...args] = process.argv.slice(2);
 
 switch (command) {
@@ -1643,6 +1760,9 @@ switch (command) {
     break;
   case 'demo':
     commandDemo(args);
+    break;
+  case 'ledger':
+    await commandLedger(args);
     break;
   default:
     fail(`Unknown command "${command}".\n\n${usage()}`);
