@@ -387,6 +387,15 @@ export function schedule(summary) {
   return items;
 }
 
+// WebM capture length for ledger motion: one day tick per daysPerSecond, plus a
+// one-second settle, hard-capped at 20s so long months stay shareable.
+export function motionDurationMs(payload) {
+  const days = Array.isArray(payload?.period?.days) ? payload.period.days.length : 0;
+  const dps = Number(payload?.playback?.daysPerSecond) || DEFAULT_DAYS_PER_SECOND;
+  if (!days || !(dps > 0)) return 1000;
+  return Math.min(20000, Math.round((days / dps + 1) * 1000));
+}
+
 // What the standalone viewer needs: no memos, no per-row detail beyond the panel.
 export function viewerPayload(diagram, summary) {
   const source = summary.source

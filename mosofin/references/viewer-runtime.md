@@ -38,7 +38,7 @@ canonical exports.
 
 ## Canonical exports
 
-The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record a trace-enabled WebM. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.
+The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record WebM. Trace diagrams still use the ambient edge/node pulse scene. A `ledger` artifact records the GL month from the same `schedule()` the live strip plays: vehicles ride authored Map edges or City `city-road` paths, refunds reverse, and unmapped rows never become fake vehicles. Capture length is `days/daysPerSecond + 1s` (cap 20s). WebM is optional; Still and reduced-motion keep full static meaning without it. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.
 
 ### Share Card
 

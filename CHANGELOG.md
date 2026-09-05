@@ -8,6 +8,11 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ledger **City/Map WebM**: Export → WebM records the GL month from `schedule()` as vehicles on
+  authored roads/edges (refunds reverse; unmapped never invent paths). Duration is
+  `days/daysPerSecond + 1s`, capped at 20s. Shared `Mosofin.motionGeometry` samples paths for both
+  the existing trace scene and the ledger scene registry (`Mosofin.motionScenes`). Still/reduced-motion
+  readers keep complete static meaning without recording.
 - Ledger **City view** (`meta.view: "city"`): same accounts, flows, entities and schedule as Map,
   drawn as an isometric district (account buildings, entity-class ring, `city-road` markers). One
   SVG per render; `meta.sibling` links the Map|City toggle. Ships `northline-gl-2026-07.city.ledger.json`

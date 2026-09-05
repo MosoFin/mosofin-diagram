@@ -66,7 +66,7 @@ test('signal-flow preset reaches the page, SVG, and motion export surface', () =
   assert.match(html, /data-preset-badge-signal-flow="SIGNAL FLOW"/);
   assert.match(html, /data-format="webm"/);
   assert.match(html, /data-last-motion-bytes/);
-  assert.match(html, /Mosofin\.motion = \{ canRecord: canRecordMotion, recordWebm: recordWebm \}/);
+  assert.match(html, /Mosofin\.motion = \{ canRecord: canRecordMotion, recordWebm: recordWebm, scenes: Mosofin\.motionScenes \}/);
   assert.match(html, /recorder\.requestData\(\)/);
   assert.match(html, /aria-label="Diagram view controls"/);
   assert.match(html, /Mosofin\.focus = \(function \(\)/);
@@ -86,9 +86,14 @@ test('webm renders an explicit time-varying canvas scene instead of replaying on
   const html = render('architecture', CASES.architecture, 'trace', 'signal-flow');
   const recordBlock = html.match(/function recordWebm\(options\) \{[\s\S]*?\n      var menu =/)?.[0] || '';
 
-  assert.match(recordBlock, /var motionScene = createMotionScene\(svg\)/);
+  assert.match(recordBlock, /var resolved = resolveMotionScene\(svg\)/);
+  assert.match(recordBlock, /var motionScene = resolved\.scene/);
+  assert.match(recordBlock, /var drawMotionFrame = resolved\.draw/);
   assert.match(recordBlock, /drawMotionFrame\(ctx, backgroundImage, motionScene, elapsed\)/);
-  assert.match(recordBlock, /getPointAtLength/);
+  assert.match(recordBlock, /createTraceMotionScene\(root\)/);
+  assert.match(recordBlock, /createLedgerMotionScene\(root, data\)/);
+  assert.match(html, /Mosofin\.motionGeometry = \(function \(\) \{/);
+  assert.match(html, /getPointAtLength/);
   assert.match(recordBlock, /performance\.now\(\)/);
   assert.doesNotMatch(
     recordBlock,
