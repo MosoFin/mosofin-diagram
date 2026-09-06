@@ -135,6 +135,8 @@ export function applyTemplate(template, {
   visualPreset = 'classic',
   nodeStyle = 'box',
   guidedViews = [],
+  presentation = null,
+  health = null,
   sourceEvidence = null,
   ledger = null,
   ledgerSlot = '',
@@ -185,7 +187,12 @@ export function applyTemplate(template, {
     ? localizedTemplate.replace(I18N_PLACEHOLDER, () => i18nData)
     : localizedTemplate.replace(GUIDED_VIEWS_PLACEHOLDER, () => `${i18nData}\n    ${GUIDED_VIEWS_PLACEHOLDER}`);
   return templateWithI18n
-    .replace(TEMPLATE_PLACEHOLDERS[0], () => `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}">`)
+    .replace(TEMPLATE_PLACEHOLDERS[0], () => {
+      const presentationAttr = presentation
+        ? ` data-presentation="${esc(String(presentation))}"`
+        : '';
+      return `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}"${presentationAttr}>`;
+    })
     .replace(TEMPLATE_PLACEHOLDERS[1], () => `<title>${esc(translateMessage(resolvedLocale, 'page.title', { title }))}</title>`)
     .replace(TEMPLATE_PLACEHOLDERS[2], () => `<h1>${esc(title)}</h1>`)
     .replace(SUBTITLE_SLOT_RE, (_match, indent, newline = '') => renderedSubtitle
@@ -193,7 +200,12 @@ export function applyTemplate(template, {
       : '')
     .replace(SVG_SLOT_RE, () => svg)
     .replace(CARDS_SLOT_RE, () => cards)
-    .replace(GUIDED_VIEWS_PLACEHOLDER, () => `<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`)
+    .replace(GUIDED_VIEWS_PLACEHOLDER, () => {
+      const healthJson = health && typeof health === 'object'
+        ? `<script id="mosofin-health-data" type="application/json">${serializeScriptJson(health)}</script>\n    `
+        : '';
+      return `${healthJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
+    })
     .replace(SOURCE_EVIDENCE_PLACEHOLDER, () => sourceEvidence
       ? `    <script id="mosofin-source-evidence-data" type="application/json">${sourceEvidenceJson}</script>`
       : '')

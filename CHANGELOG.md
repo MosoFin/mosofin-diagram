@@ -8,6 +8,12 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Three-statements **Present / Health** live mode (gated by `meta.presentation: "articulation"`):
+  chrome-minimal Present with large verdict captions and auto/one-click walk of the four
+  guided joints; Health tint from optional authored `meta.health` only (`?present=1`,
+  `?health=1`, toolbar Present | Health | Walk the joints). Ordinary architecture diagrams
+  unchanged. Docs: `docs/cfo-live-articulation.md`, `docs/html-popularity.md`.
+
 - Ledger **City 3D** (`Mosofin.city3d`): optional Three.js layer on `data-ledger-view="city"` with
   OrbitControls (orbit/zoom/pan), health-colored account/entity meshes from authored tie-outs only,
   roads as tubes, and playback-synced vehicles from `schedule()`. **Iso | 3D** toggle defaults to

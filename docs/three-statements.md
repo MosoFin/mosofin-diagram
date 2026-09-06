@@ -13,3 +13,9 @@ An accountant reads the three financial statements as one closed story. This map
 Zones: Income Statement (period) → Balance Sheet (point in time, **A = L + E**) → Cash Flow Statement (period). Guided view **earnings-quality** focuses net income, the WC bridge, operating cash, ending cash, and BS cash — NI is not CFO when working capital moves.
 
 **Proof: authored.** Round sample tags (~$24k sales, ~$12k cash net) come from the Northline July GL fixture. No invented Net Income dollar (payroll splits stay unmapped). Sibling maps: [`ledger-northline-gl-city.html`](../mosofin/examples/ledger-northline-gl-city.html) · [`northline-money-map.html`](samples/northline-money-map.html).
+
+## Live session
+
+Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Present / Health / Teach). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
+
+Try Present and Health on the sample: [`samples/northline-three-statements.html?present=1`](samples/northline-three-statements.html?present=1) · [`samples/northline-three-statements.html?health=1`](samples/northline-three-statements.html?health=1).

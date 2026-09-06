@@ -89,6 +89,29 @@
         "views": {
           "$ref": "common.schema.json#/$defs/guidedViews"
         },
+        "presentation": {
+          "type": "string",
+          "enum": [
+            "articulation"
+          ],
+          "description": "Optional live-session mode for CFO articulation maps (Present/Health chrome)."
+        },
+        "health": {
+          "type": "object",
+          "description": "Optional authored node health 0..1 or unknown. Never invent scores at render time.",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "const": "unknown"
+              }
+            ]
+          }
+        },
         "legend": {
           "type": "object",
           "additionalProperties": false,
