@@ -92,9 +92,10 @@
         "presentation": {
           "type": "string",
           "enum": [
-            "articulation"
+            "articulation",
+            "ask-first"
           ],
-          "description": "Optional live-session mode for CFO articulation maps (Present/Health chrome)."
+          "description": "Optional live-session mode for CFO articulation maps. ask-first shows conversation question cards before the diagram; articulation keeps Present/Health chrome."
         },
         "health": {
           "type": "object",
@@ -163,6 +164,46 @@
           "items": false,
           "minItems": 2,
           "maxItems": 2
+        },
+        "asks": {
+          "type": "array",
+          "description": "Authored question cards for ask-first / articulation conversation UI. Verdicts must be authored — never invented at render time.",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "question",
+              "verdict",
+              "viewId"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "verdict": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 220
+              },
+              "viewId": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "focus": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "common.schema.json#/$defs/id"
+                }
+              }
+            }
+          }
         }
       }
     },

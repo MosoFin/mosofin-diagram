@@ -29,7 +29,7 @@ For the finance-first walkthrough — the exact prompt, command trail and receip
 
 How the **three financial statements** lock: [docs/three-statements.md](docs/three-statements.md) and the rendered sample [docs/samples/northline-three-statements.html](docs/samples/northline-three-statements.html) (NI → equity, NI → cash from ops, ending cash → BS cash).
 
-**For CFOs:** live 15-min owner/board playbook with Present/Health on the HTML (not PPT) — [docs/cfo-live-articulation.md](docs/cfo-live-articulation.md). How the file becomes popular (share, gallery, LinkedIn loop) — [docs/html-popularity.md](docs/html-popularity.md). Try [`?present=1`](docs/samples/northline-three-statements.html?present=1) and [`?health=1`](docs/samples/northline-three-statements.html?health=1).
+**For CFOs:** live 15-min owner/board playbook with **Ask-first** conversation UI on the HTML (not PPT) — [docs/cfo-live-articulation.md](docs/cfo-live-articulation.md). How the file becomes popular (share, gallery, LinkedIn loop) — [docs/html-popularity.md](docs/html-popularity.md). Try the sample or [`?ask=cash`](docs/samples/northline-three-statements.html?ask=cash).
 
 ## See it
 

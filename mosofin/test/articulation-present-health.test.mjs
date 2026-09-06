@@ -28,9 +28,9 @@ function svg(html) {
   return html.match(/<svg\b[\s\S]*?<\/svg>/)?.[0] || '';
 }
 
-test('three-statements articulation ships Present/Health URL + toolbar contracts', () => {
+test('three-statements ask-first keeps Present/Health code paths + health attrs', () => {
   const html = render('northline-three-statements.architecture.json', 'three.html');
-  assert.match(htmlOpenTag(html), /data-presentation="articulation"/);
+  assert.match(htmlOpenTag(html), /data-presentation="ask-first"/);
   assert.match(html, /id="mosofin-health-data"/);
   assert.match(html, /get\('health'\) === '1'/);
   assert.match(html, /get\('present'\) === '1'/);

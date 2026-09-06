@@ -23,6 +23,11 @@
           if (new URLSearchParams(window.location.search).get('health') === '1') {
             document.documentElement.setAttribute('data-health', 'true');
           }
+          var askParam = new URLSearchParams(window.location.search).get('ask');
+          if (askParam) {
+            document.documentElement.setAttribute('data-ask', askParam);
+            document.documentElement.setAttribute('data-ask-mode', 'active');
+          }
         } catch (_) {}
         if (!theme) {
           try { theme = localStorage.getItem('mosofin-theme'); } catch (_) {}
@@ -660,6 +665,167 @@
       border-color: color-mix(in srgb, #22c55e 55%, var(--toolbar-border));
       color: #4ade80;
     }
+
+    /* Ask-first: hide Present/Health chrome; conversation cards lead. */
+    html[data-presentation="ask-first"] #btn-present,
+    html[data-presentation="ask-first"] #btn-health,
+    html[data-presentation="ask-first"] #btn-articulation-walk {
+      display: none !important;
+    }
+    html[data-presentation="ask-first"] .arch-health-legend,
+    html[data-presentation="articulation"]:has(#mosofin-asks-data) .arch-health-legend {
+      display: none !important;
+    }
+
+    .ask-first-panel {
+      position: relative;
+      z-index: 6;
+      margin: 0 0 0.85rem;
+      padding: 1rem 1.1rem 1.15rem;
+      border-radius: 1rem;
+      border: 1px solid color-mix(in srgb, var(--frontend-stroke) 35%, var(--toolbar-border));
+      background: color-mix(in srgb, var(--toolbar-menu-bg) 92%, transparent);
+      box-shadow: 0 18px 40px color-mix(in srgb, #000 28%, transparent);
+    }
+    html[data-ask-mode="active"] .ask-first-panel,
+    html[data-ask-mode="map"] .ask-first-panel {
+      padding: 0.7rem 0.85rem;
+    }
+    .ask-first-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+    .ask-first-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+    .ask-first-actions {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .ask-first-actions button {
+      appearance: none;
+      border: 1px solid var(--toolbar-border);
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+      color: inherit;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .ask-first-actions button:hover {
+      border-color: var(--frontend-stroke);
+      color: var(--frontend-stroke);
+    }
+    .ask-first-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+      gap: 0.75rem;
+    }
+    html[data-ask-mode="active"] .ask-first-grid,
+    html[data-ask-mode="map"] .ask-first-grid {
+      display: none;
+    }
+    .ask-card {
+      appearance: none;
+      text-align: left;
+      width: 100%;
+      border: 1.5px solid color-mix(in srgb, var(--frontend-stroke) 40%, var(--toolbar-border));
+      border-radius: 0.9rem;
+      padding: 1rem 1rem 0.95rem;
+      background: color-mix(in srgb, var(--panel) 78%, transparent);
+      color: inherit;
+      cursor: pointer;
+      min-height: 6.5rem;
+      transition: border-color 120ms ease, transform 120ms ease, background 120ms ease;
+    }
+    .ask-card:hover,
+    .ask-card:focus-visible {
+      border-color: var(--frontend-stroke);
+      background: color-mix(in srgb, var(--frontend-stroke) 12%, var(--panel));
+      outline: none;
+      transform: translateY(-1px);
+    }
+    .ask-card[aria-pressed="true"] {
+      border-color: var(--frontend-stroke);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frontend-stroke) 55%, transparent);
+    }
+    .ask-card-kicker {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+      margin-bottom: 0.45rem;
+      font-weight: 600;
+    }
+    .ask-card-question {
+      display: block;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      font-weight: 650;
+    }
+    .ask-verdict {
+      display: none;
+      margin-top: 0.15rem;
+      padding: 0.75rem 0.85rem;
+      border-radius: 0.75rem;
+      border: 1px solid color-mix(in srgb, var(--frontend-stroke) 40%, var(--toolbar-border));
+      background: color-mix(in srgb, var(--toolbar-menu-bg) 88%, transparent);
+    }
+    html[data-ask-mode="active"] .ask-verdict {
+      display: block;
+    }
+    .ask-verdict-label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 650;
+      opacity: 0.75;
+      margin-bottom: 0.3rem;
+    }
+    .ask-verdict-text {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+    .ask-verdict-question {
+      margin: 0 0 0.35rem;
+      font-size: 0.95rem;
+      font-weight: 650;
+      opacity: 0.92;
+    }
+
+    /* Dim / cover the diagram until a question is chosen or full map is requested. */
+    html[data-presentation="ask-first"]:not([data-ask-mode="active"]):not([data-ask-mode="map"]) .diagram-container,
+    html[data-presentation="articulation"]:has(#mosofin-asks-data):not([data-ask-mode="active"]):not([data-ask-mode="map"]) .diagram-container {
+      position: relative;
+    }
+    html[data-presentation="ask-first"]:not([data-ask-mode="active"]):not([data-ask-mode="map"]) .diagram-container::after,
+    html[data-presentation="articulation"]:has(#mosofin-asks-data):not([data-ask-mode="active"]):not([data-ask-mode="map"]) .diagram-container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 0.75rem;
+      background: color-mix(in srgb, var(--panel) 58%, transparent);
+      backdrop-filter: blur(1.5px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    html[data-presentation="ask-first"]:not([data-ask-mode="active"]):not([data-ask-mode="map"]) .guided-views,
+    html[data-presentation="articulation"]:has(#mosofin-asks-data):not([data-ask-mode="active"]):not([data-ask-mode="map"]) .guided-views {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
 
     /* Authored architecture health tint — unknown stays role-neutral (never invent green). */
     html[data-health="true"] [data-node-id][data-arch-health]:not([data-arch-health="unknown"]) > rect.c-mask + rect {
@@ -5325,6 +5491,22 @@
         <h1>[PROJECT NAME] Architecture</h1>
       </div>
       <p class="subtitle">[Subtitle description]</p>
+    </div>
+
+    <div class="ask-first-panel no-print" id="ask-first-panel" hidden aria-label="{{i18n:viewer.asks.region}}">
+      <div class="ask-first-head">
+        <h2 id="ask-first-prompt">{{i18n:viewer.asks.prompt}}</h2>
+        <div class="ask-first-actions">
+          <button type="button" id="ask-first-back" hidden title="{{i18n:viewer.asks.back.title}}">{{i18n:viewer.asks.back}}</button>
+          <button type="button" id="ask-first-see-map" title="{{i18n:viewer.asks.seeMap.title}}">{{i18n:viewer.asks.seeMap}}</button>
+        </div>
+      </div>
+      <div class="ask-first-grid" id="ask-first-grid" role="group" aria-label="{{i18n:viewer.asks.region}}"></div>
+      <div class="ask-verdict" id="ask-verdict" hidden>
+        <span class="ask-verdict-label">{{i18n:viewer.asks.verdict}}</span>
+        <p class="ask-verdict-question" id="ask-verdict-question"></p>
+        <p class="ask-verdict-text" id="ask-verdict-text"></p>
+      </div>
     </div>
 
     <!-- MOSOFIN:GUIDED_VIEWS_DATA -->
@@ -13821,7 +14003,9 @@
       var walkBtn = document.getElementById('btn-articulation-walk');
       var dataEl = document.getElementById('mosofin-health-data');
       var svg = document.querySelector('.diagram-container svg');
-      var isArticulation = html.getAttribute('data-presentation') === 'articulation';
+      var presentationMode = html.getAttribute('data-presentation') || '';
+      var isArticulation = presentationMode === 'articulation' || presentationMode === 'ask-first';
+      var isAskFirst = presentationMode === 'ask-first';
       var healthMap = null;
       try { healthMap = dataEl ? JSON.parse(dataEl.textContent || '{}') : null; } catch (_) { healthMap = null; }
       var available = !!(isArticulation || (healthMap && typeof healthMap === 'object' && Object.keys(healthMap).length));
@@ -13864,18 +14048,20 @@
 
       function render(next) {
         if (!btn) return;
-        btn.hidden = !available;
+        btn.hidden = !available || isAskFirst;
         btn.setAttribute('aria-pressed', next ? 'true' : 'false');
         btn.setAttribute('aria-label', viewerText(next ? 'viewer.health.exit' : 'viewer.health.enter'));
         btn.title = viewerText(next ? 'viewer.health.exit.title' : 'viewer.health.enter.title');
         if (label) label.textContent = viewerText('viewer.health.toggle');
         if (legend) {
-          legend.hidden = !(available && next);
-          legend.setAttribute('aria-hidden', (available && next) ? 'false' : 'true');
+          legend.hidden = !(available && next) || isAskFirst;
+          legend.setAttribute('aria-hidden', (available && next && !isAskFirst) ? 'false' : 'true');
         }
         if (walkBtn) {
-          walkBtn.hidden = !isArticulation;
+          walkBtn.hidden = !isArticulation || isAskFirst;
         }
+        var presentBtn = document.getElementById('btn-present');
+        if (presentBtn && isAskFirst) presentBtn.hidden = true;
         var captionIndex = document.getElementById('guided-story-caption-index');
         if (captionIndex && isArticulation) {
           captionIndex.setAttribute('data-verdict-prefix', viewerText('viewer.articulation.verdict'));
@@ -13928,6 +14114,157 @@
         toggle: toggle,
         active: active,
         available: function () { return available; }
+      };
+    })();
+
+    /* ============================================================
+       Ask-first — conversation UI for articulation / ask-first maps.
+       Authored meta.asks only; verdicts never invented. Deep-link ?ask=.
+       ============================================================ */
+    Mosofin.asks = (function () {
+      var html = document.documentElement;
+      var presentation = html.getAttribute('data-presentation') || '';
+      var dataEl = document.getElementById('mosofin-asks-data');
+      var panel = document.getElementById('ask-first-panel');
+      var grid = document.getElementById('ask-first-grid');
+      var verdictEl = document.getElementById('ask-verdict');
+      var verdictQ = document.getElementById('ask-verdict-question');
+      var verdictText = document.getElementById('ask-verdict-text');
+      var seeMapBtn = document.getElementById('ask-first-see-map');
+      var backBtn = document.getElementById('ask-first-back');
+      var asks = [];
+      try { asks = dataEl ? JSON.parse(dataEl.textContent || '[]') : []; } catch (_) { asks = []; }
+      var gated = (presentation === 'ask-first' || presentation === 'articulation') && Array.isArray(asks) && asks.length > 0;
+      var activeId = null;
+      var mode = 'landing'; // landing | active | map
+
+      if (!gated || !panel || !grid) {
+        if (panel) panel.hidden = true;
+        return { available: function () { return false; }, active: function () { return null; } };
+      }
+
+      function updateUrl(id) {
+        try {
+          var url = new URL(window.location.href);
+          if (id) url.searchParams.set('ask', id);
+          else url.searchParams.delete('ask');
+          history.replaceState(null, '', url.pathname + url.search + url.hash);
+        } catch (_) {}
+      }
+
+      function setMode(next, id) {
+        mode = next;
+        activeId = id || null;
+        if (next === 'landing') {
+          html.removeAttribute('data-ask-mode');
+          html.removeAttribute('data-ask');
+        } else if (next === 'map') {
+          html.setAttribute('data-ask-mode', 'map');
+          html.removeAttribute('data-ask');
+        } else {
+          html.setAttribute('data-ask-mode', 'active');
+          if (id) html.setAttribute('data-ask', id);
+        }
+        Array.prototype.forEach.call(grid.querySelectorAll('.ask-card'), function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-ask-id') === activeId ? 'true' : 'false');
+        });
+        if (verdictEl) {
+          var ask = asks.find(function (item) { return item.id === activeId; });
+          if (next === 'active' && ask) {
+            verdictEl.hidden = false;
+            if (verdictQ) verdictQ.textContent = ask.question || '';
+            if (verdictText) verdictText.textContent = ask.verdict || '';
+          } else {
+            verdictEl.hidden = true;
+            if (verdictQ) verdictQ.textContent = '';
+            if (verdictText) verdictText.textContent = '';
+          }
+        }
+        if (backBtn) backBtn.hidden = next === 'landing';
+        if (seeMapBtn) seeMapBtn.hidden = next === 'map';
+      }
+
+      function applyAsk(ask, options) {
+        options = options || {};
+        if (!ask) return false;
+        setMode('active', ask.id);
+        if (options.updateUrl !== false) updateUrl(ask.id);
+        if (Mosofin.guidedViews && typeof Mosofin.guidedViews.activate === 'function') {
+          try { Mosofin.guidedViews.activate(ask.viewId, { updateUrl: true }); } catch (_) {}
+        }
+        if (Array.isArray(ask.focus) && ask.focus.length && Mosofin.focus && typeof Mosofin.focus.setMany === 'function') {
+          try {
+            Mosofin.focus.setMany(ask.focus, {
+              toggle: false,
+              updateUrl: false,
+              mode: 'selection',
+              label: ask.question,
+              hideChip: true
+            });
+          } catch (_) {}
+        }
+        return true;
+      }
+
+      function showLanding(options) {
+        options = options || {};
+        setMode('landing');
+        if (options.updateUrl !== false) updateUrl(null);
+        if (Mosofin.guidedViews && typeof Mosofin.guidedViews.showAll === 'function') {
+          try { Mosofin.guidedViews.showAll({ clearFocus: true, updateUrl: true }); } catch (_) {}
+        }
+      }
+
+      function showMap(options) {
+        options = options || {};
+        setMode('map');
+        if (options.updateUrl !== false) updateUrl(null);
+        if (Mosofin.guidedViews && typeof Mosofin.guidedViews.showAll === 'function') {
+          try { Mosofin.guidedViews.showAll({ clearFocus: true, updateUrl: true }); } catch (_) {}
+        }
+      }
+
+      function selectById(id, options) {
+        var ask = asks.find(function (item) { return item.id === id; });
+        return ask ? applyAsk(ask, options) : false;
+      }
+
+      asks.forEach(function (ask, index) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ask-card';
+        btn.setAttribute('data-ask-id', ask.id);
+        btn.setAttribute('aria-pressed', 'false');
+        btn.innerHTML = '<span class="ask-card-kicker">Q' + (index + 1) + '</span>' +
+          '<span class="ask-card-question"></span>';
+        btn.querySelector('.ask-card-question').textContent = ask.question;
+        btn.addEventListener('click', function () { applyAsk(ask); });
+        grid.appendChild(btn);
+      });
+
+      panel.hidden = false;
+      if (seeMapBtn) seeMapBtn.addEventListener('click', function () { showMap(); });
+      if (backBtn) backBtn.addEventListener('click', function () { showLanding(); });
+
+      // Defer URL restore until guided views have booted.
+      setTimeout(function () {
+        var initial = null;
+        try { initial = new URLSearchParams(window.location.search).get('ask'); } catch (_) {}
+        if (initial && selectById(initial, { updateUrl: false })) return;
+        if (html.getAttribute('data-ask-mode') === 'active' && html.getAttribute('data-ask')) {
+          if (selectById(html.getAttribute('data-ask'), { updateUrl: false })) return;
+        }
+        showLanding({ updateUrl: false });
+      }, 0);
+
+      return {
+        available: function () { return true; },
+        active: function () { return activeId; },
+        mode: function () { return mode; },
+        select: selectById,
+        showMap: showMap,
+        showLanding: showLanding,
+        list: function () { return asks.slice(); }
       };
     })();
 

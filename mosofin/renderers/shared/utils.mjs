@@ -137,6 +137,7 @@ export function applyTemplate(template, {
   guidedViews = [],
   presentation = null,
   health = null,
+  asks = null,
   sourceEvidence = null,
   ledger = null,
   ledgerSlot = '',
@@ -204,7 +205,10 @@ export function applyTemplate(template, {
       const healthJson = health && typeof health === 'object'
         ? `<script id="mosofin-health-data" type="application/json">${serializeScriptJson(health)}</script>\n    `
         : '';
-      return `${healthJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
+      const asksJson = Array.isArray(asks) && asks.length
+        ? `<script id="mosofin-asks-data" type="application/json">${serializeScriptJson(asks)}</script>\n    `
+        : '';
+      return `${healthJson}${asksJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
     })
     .replace(SOURCE_EVIDENCE_PLACEHOLDER, () => sourceEvidence
       ? `    <script id="mosofin-source-evidence-data" type="application/json">${sourceEvidenceJson}</script>`

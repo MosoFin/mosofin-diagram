@@ -264,6 +264,13 @@ const MESSAGE_PAIRS = {
   'viewer.articulation.walk': ['Walk the joints'],
   'viewer.articulation.walk.title': ['Play guided articulation views'],
   'viewer.articulation.health.legend': ['Health tint is authored only — unknown stays neutral'],
+  'viewer.asks.region': ['Ask first'],
+  'viewer.asks.prompt': ['Start with a question'],
+  'viewer.asks.seeMap': ['See full map'],
+  'viewer.asks.seeMap.title': ['Reveal the whole diagram without a selected question'],
+  'viewer.asks.back': ['All questions'],
+  'viewer.asks.back.title': ['Return to the question cards'],
+  'viewer.asks.verdict': ['Verdict'],
 
   'viewer.export.button': ['Export'],
   'viewer.export.button.title': ['Export diagram (E)'],

@@ -16,6 +16,8 @@ Zones: Income Statement (period) → Balance Sheet (point in time, **A = L + E**
 
 ## Live session
 
-Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Present / Health / Teach). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
+**Preferred presentation: Ask-first.** The sample lands on three large question cards (Did we earn? / What's our position? / Did cash show up?) with an optional earnings-quality fourth. Clicking a question focuses the matching guided view and shows an **authored** verdict — never an invented NI dollar. Use **See full map** to reveal the diagram without a selected question. Deep-link with `?ask=earn|position|cash|quality`.
 
-Try Present and Health on the sample: [`samples/northline-three-statements.html?present=1`](samples/northline-three-statements.html?present=1) · [`samples/northline-three-statements.html?health=1`](samples/northline-three-statements.html?health=1).
+Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Ask-first preferred; Present / Health remain available on `presentation: "articulation"`). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
+
+Try Ask-first on the sample: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?ask=cash`](samples/northline-three-statements.html?ask=cash).

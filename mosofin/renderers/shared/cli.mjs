@@ -79,6 +79,7 @@ ${bundle}
     guidedViews: meta.views || [],
     presentation: meta.presentation || null,
     health: meta.health || null,
+    asks: meta.asks || null,
     sourceEvidence,
     ledger,
     ledgerSlot,
