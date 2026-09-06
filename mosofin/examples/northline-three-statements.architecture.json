@@ -59,7 +59,22 @@
         ],
         "note": "NI is not cash. Watch the WC bridge: accrual profit and CFO diverge when A/R, inventory, or A/P move."
       }
-    ]
+    ],
+    "presentation": "articulation",
+    "health": {
+      "revenue": 0.85,
+      "cash": 0.85,
+      "ending_cash": 0.85,
+      "begin_cash": 0.75,
+      "equity": 0.7,
+      "net_income": "unknown",
+      "wc_bridge": "unknown",
+      "expenses": "unknown",
+      "liabilities": "unknown",
+      "operating": "unknown",
+      "investing": "unknown",
+      "financing": "unknown"
+    }
   },
   "components": [
     {

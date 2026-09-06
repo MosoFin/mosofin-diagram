@@ -1007,7 +1007,17 @@ function renderComponent(c) {
   const logoLayer = logoArt || renderLogolessBox(c, { x: c.x, y: c.y, width: c.width, height: c.height, kind: c.type });
   const logoLabelY = c.y + c.height - 9;
   const labelFontSize = fittedNodeFontSize(c.label, brandLabelFitWidth(c, c.width), 11, 8);
-  const passport = { kind: c.type, sublabel: c.sublabel, tag: c.tag, context: componentContext(c), ...brandMetadataFor(c) };
+  const authoredHealth = arch.meta?.health && Object.prototype.hasOwnProperty.call(arch.meta.health, c.id)
+    ? arch.meta.health[c.id]
+    : undefined;
+  const passport = {
+    kind: c.type,
+    sublabel: c.sublabel,
+    tag: c.tag,
+    context: componentContext(c),
+    health: authoredHealth === undefined ? undefined : String(authoredHealth),
+    ...brandMetadataFor(c),
+  };
   return `        <g ${focusNodeAttrs(c.id, c.label, passport, arch.meta.locale)}>
           ${focusNodeTitle(c.label, passport)}
           <rect x="${c.x}" y="${c.y}" width="${c.width}" height="${c.height}" rx="6" class="c-mask"/>

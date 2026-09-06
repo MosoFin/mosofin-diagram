@@ -29,6 +29,8 @@ For the finance-first walkthrough — the exact prompt, command trail and receip
 
 How the **three financial statements** lock: [docs/three-statements.md](docs/three-statements.md) and the rendered sample [docs/samples/northline-three-statements.html](docs/samples/northline-three-statements.html) (NI → equity, NI → cash from ops, ending cash → BS cash).
 
+**For CFOs:** live 15-min owner/board playbook with Present/Health on the HTML (not PPT) — [docs/cfo-live-articulation.md](docs/cfo-live-articulation.md). How the file becomes popular (share, gallery, LinkedIn loop) — [docs/html-popularity.md](docs/html-popularity.md). Try [`?present=1`](docs/samples/northline-three-statements.html?present=1) and [`?health=1`](docs/samples/northline-three-statements.html?health=1).
+
 ## See it
 
 Every image below is a real delivered artifact — no mockups. Each one validated at **9/9 checks,
@@ -81,7 +83,7 @@ Click any screenshot for the full-size capture; dark-theme versions sit beside t
 | `finance-payout-rec` | dataflow | [![Stripe payout reconciliation](docs/samples/images/northline-payout-rec.light.png)](docs/samples/images/northline-payout-rec.light.png) | [HTML](docs/samples/northline-payout-rec.html) · [spec](mosofin/examples/northline-payout-rec.dataflow.json) |
 | `finance-customer-ar` | architecture | [![Who can say a customer owes us](docs/samples/images/northline-customer-ar.light.png)](docs/samples/images/northline-customer-ar.light.png) | [HTML](docs/samples/northline-customer-ar.html) · [spec](mosofin/examples/northline-customer-ar.architecture.json) |
 | `finance-cash-runway` | dataflow | [![Cash to payroll date](docs/samples/images/northline-cash-runway.light.png)](docs/samples/images/northline-cash-runway.light.png) | [HTML](docs/samples/northline-cash-runway.html) · [spec](mosofin/examples/northline-cash-runway.dataflow.json) |
-| three statements | architecture | — | [HTML](docs/samples/northline-three-statements.html) · [spec](mosofin/examples/northline-three-statements.architecture.json) · [how to read](docs/three-statements.md) |
+| three statements | architecture | — | [HTML](docs/samples/northline-three-statements.html) · [spec](mosofin/examples/northline-three-statements.architecture.json) · [how to read](docs/three-statements.md) · [CFO playbook](docs/cfo-live-articulation.md) · [popularity](docs/html-popularity.md) |
 
 Reproduce any of them from the skill directory:
 
@@ -269,7 +271,7 @@ Every artifact is one standalone HTML file with dark/light themes, pan/zoom, sea
 ## Reference and scope
 
 - [Skill](mosofin/SKILL.md) · [Business onboarding contract](mosofin/references/business-onboarding.md) · [Finance onboarding contract](mosofin/references/finance-onboarding.md) · [Schema reference](mosofin/schemas/README.md) · [Examples](mosofin/examples/) · [Agent cookbook](docs/authoring-cookbook.md)
-- [Use case](docs/USE-CASE.md) · [Scenario guide](https://diagram.mosofin.com/guide.html) · [Proof gallery](https://diagram.mosofin.com/gallery.html)
+- [Use case](docs/USE-CASE.md) · [Three statements](docs/three-statements.md) · [CFO live articulation](docs/cfo-live-articulation.md) · [HTML popularity](docs/html-popularity.md) · [Scenario guide](https://diagram.mosofin.com/guide.html) · [Proof gallery](https://diagram.mosofin.com/gallery.html)
 - [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
 - [Design handoff](docs/design-handoff/00-START-HERE.md) — every inherited visual component (logos, sigils, legends, chrome, presets, tokens) with sources, captures and a proposed finance redesign; rebuilt by `npm run build:design-handoff`
 

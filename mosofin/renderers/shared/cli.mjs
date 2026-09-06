@@ -77,6 +77,8 @@ ${bundle}
     visualPreset: meta.visual_preset || 'classic',
     nodeStyle: meta.node_style || 'box',
     guidedViews: meta.views || [],
+    presentation: meta.presentation || null,
+    health: meta.health || null,
     sourceEvidence,
     ledger,
     ledgerSlot,
@@ -210,6 +212,7 @@ export function focusNodeAttrs(id, label, metadata = {}, locale) {
     ['data-node-brand-id', metadata.brandId],
     ['data-node-brand-status', metadata.brandStatus],
     ['data-node-brand-source', metadata.brandSource],
+    ['data-arch-health', metadata.health],
   ].filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
     .map(([name, value]) => ` ${name}="${esc(String(value))}"`)
     .join('');
