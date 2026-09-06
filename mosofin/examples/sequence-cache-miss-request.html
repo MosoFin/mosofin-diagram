@@ -827,6 +827,167 @@
     }
 
 
+    .ask-card-metric {
+      display: block;
+      margin-top: 0.7rem;
+      font-size: 1.35rem;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+    .ask-card-metric-label {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      opacity: 0.78;
+      font-weight: 550;
+    }
+    .ask-card-delta {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      opacity: 0.88;
+    }
+    .ask-card-verdict {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+      margin-top: 0.55rem;
+      font-size: 0.86rem;
+      line-height: 1.4;
+      opacity: 0.82;
+    }
+    .ask-card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.55rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 650;
+      border: 1px solid color-mix(in srgb, var(--toolbar-border) 80%, transparent);
+      opacity: 0.9;
+    }
+    .ask-card-status[data-status="ok"] {
+      color: #34d399;
+      border-color: color-mix(in srgb, #34d399 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #34d399 12%, transparent);
+    }
+    .ask-card-status[data-status="watch"] {
+      color: #fbbf24;
+      border-color: color-mix(in srgb, #fbbf24 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #fbbf24 12%, transparent);
+    }
+    .ask-card-status[data-status="unknown"] {
+      color: #94a3b8;
+      border-color: color-mix(in srgb, #94a3b8 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #94a3b8 10%, transparent);
+    }
+    .ask-card:not(:has(.ask-card-metric)) {
+      min-height: 6.5rem;
+    }
+    .ask-card:has(.ask-card-metric) {
+      min-height: 9.5rem;
+    }
+
+    .ask-perf-strip {
+      display: none;
+      margin: 0 0 0.75rem;
+      padding: 0.85rem 1rem;
+      border-radius: 0.9rem;
+      border: 1px solid color-mix(in srgb, var(--frontend-stroke) 40%, var(--toolbar-border));
+      background: color-mix(in srgb, var(--toolbar-menu-bg) 90%, transparent);
+      box-shadow: 0 12px 28px color-mix(in srgb, #000 22%, transparent);
+      gap: 0.85rem 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    html[data-ask-mode="active"] .ask-perf-strip {
+      display: flex;
+    }
+    .ask-perf-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: min(100%, 16rem);
+      flex: 1 1 14rem;
+    }
+    .ask-perf-metric {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+      line-height: 1.15;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .ask-perf-label {
+      margin: 0;
+      font-size: 0.82rem;
+      opacity: 0.78;
+      font-weight: 550;
+    }
+    .ask-perf-delta {
+      margin: 0.15rem 0 0;
+      font-size: 0.88rem;
+      line-height: 1.35;
+      opacity: 0.9;
+    }
+    .ask-perf-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 2 1 18rem;
+      min-width: min(100%, 18rem);
+    }
+    .ask-perf-question {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+    .ask-perf-verdict {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      opacity: 0.9;
+    }
+    .ask-perf-status {
+      display: inline-flex;
+      align-self: flex-start;
+      align-items: center;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 650;
+      border: 1px solid var(--toolbar-border);
+    }
+    .ask-perf-status[data-status="ok"] {
+      color: #34d399;
+      border-color: color-mix(in srgb, #34d399 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #34d399 12%, transparent);
+    }
+    .ask-perf-status[data-status="watch"] {
+      color: #fbbf24;
+      border-color: color-mix(in srgb, #fbbf24 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #fbbf24 12%, transparent);
+    }
+    .ask-perf-status[data-status="unknown"] {
+      color: #94a3b8;
+      border-color: color-mix(in srgb, #94a3b8 45%, var(--toolbar-border));
+      background: color-mix(in srgb, #94a3b8 10%, transparent);
+    }
+    html[data-ask-mode="active"] .ask-verdict {
+      display: none;
+    }
+
     /* Authored architecture health tint — unknown stays role-neutral (never invent green). */
     html[data-health="true"] [data-node-id][data-arch-health]:not([data-arch-health="unknown"]) > rect.c-mask + rect {
       fill: color-mix(in srgb, var(--arch-health-color, #94a3b8) 34%, var(--panel));
@@ -5505,6 +5666,19 @@
         <span class="ask-verdict-label">Verdict</span>
         <p class="ask-verdict-question" id="ask-verdict-question"></p>
         <p class="ask-verdict-text" id="ask-verdict-text"></p>
+      </div>
+    </div>
+
+    <div class="ask-perf-strip no-print" id="ask-perf-strip" hidden aria-live="polite">
+      <div class="ask-perf-main">
+        <p class="ask-perf-metric" id="ask-perf-metric"></p>
+        <p class="ask-perf-label" id="ask-perf-label"></p>
+        <p class="ask-perf-delta" id="ask-perf-delta" hidden></p>
+      </div>
+      <span class="ask-perf-status" id="ask-perf-status" hidden></span>
+      <div class="ask-perf-meta">
+        <p class="ask-perf-question" id="ask-perf-question"></p>
+        <p class="ask-perf-verdict" id="ask-perf-verdict"></p>
       </div>
     </div>
 
@@ -14244,7 +14418,7 @@
 
     /* ============================================================
        Ask-first — conversation UI for articulation / ask-first maps.
-       Authored meta.asks only; verdicts never invented. Deep-link ?ask=.
+       Authored meta.asks only; verdicts + metrics never invented. Deep-link ?ask=.
        ============================================================ */
     Mosofin.asks = (function () {
       var html = document.documentElement;
@@ -14255,6 +14429,13 @@
       var verdictEl = document.getElementById('ask-verdict');
       var verdictQ = document.getElementById('ask-verdict-question');
       var verdictText = document.getElementById('ask-verdict-text');
+      var perfStrip = document.getElementById('ask-perf-strip');
+      var perfMetric = document.getElementById('ask-perf-metric');
+      var perfLabel = document.getElementById('ask-perf-label');
+      var perfDelta = document.getElementById('ask-perf-delta');
+      var perfStatus = document.getElementById('ask-perf-status');
+      var perfQuestion = document.getElementById('ask-perf-question');
+      var perfVerdict = document.getElementById('ask-perf-verdict');
       var seeMapBtn = document.getElementById('ask-first-see-map');
       var backBtn = document.getElementById('ask-first-back');
       var asks = [];
@@ -14262,9 +14443,11 @@
       var gated = (presentation === 'ask-first' || presentation === 'articulation') && Array.isArray(asks) && asks.length > 0;
       var activeId = null;
       var mode = 'landing'; // landing | active | map
+      var statusLabels = { ok: 'ok', watch: 'watch', unknown: 'unknown' };
 
       if (!gated || !panel || !grid) {
         if (panel) panel.hidden = true;
+        if (perfStrip) perfStrip.hidden = true;
         return { available: function () { return false; }, active: function () { return null; } };
       }
 
@@ -14275,6 +14458,46 @@
           else url.searchParams.delete('ask');
           history.replaceState(null, '', url.pathname + url.search + url.hash);
         } catch (_) {}
+      }
+
+      function statusLabel(status) {
+        if (status === 'ok' || status === 'watch' || status === 'unknown') return statusLabels[status];
+        return '';
+      }
+
+      function fillPerfStrip(ask) {
+        if (!perfStrip) return;
+        if (!ask || !ask.metric) {
+          perfStrip.hidden = true;
+          if (perfMetric) perfMetric.textContent = '';
+          if (perfLabel) perfLabel.textContent = '';
+          if (perfDelta) { perfDelta.hidden = true; perfDelta.textContent = ''; }
+          if (perfStatus) { perfStatus.hidden = true; perfStatus.textContent = ''; perfStatus.removeAttribute('data-status'); }
+          if (perfQuestion) perfQuestion.textContent = '';
+          if (perfVerdict) perfVerdict.textContent = '';
+          return;
+        }
+        perfStrip.hidden = false;
+        if (perfMetric) perfMetric.textContent = ask.metric || '';
+        if (perfLabel) perfLabel.textContent = ask.metricLabel || '';
+        if (perfDelta) {
+          if (ask.delta) { perfDelta.hidden = false; perfDelta.textContent = ask.delta; }
+          else { perfDelta.hidden = true; perfDelta.textContent = ''; }
+        }
+        if (perfStatus) {
+          var label = statusLabel(ask.status);
+          if (label) {
+            perfStatus.hidden = false;
+            perfStatus.textContent = label;
+            perfStatus.setAttribute('data-status', ask.status);
+          } else {
+            perfStatus.hidden = true;
+            perfStatus.textContent = '';
+            perfStatus.removeAttribute('data-status');
+          }
+        }
+        if (perfQuestion) perfQuestion.textContent = ask.question || '';
+        if (perfVerdict) perfVerdict.textContent = ask.verdict || '';
       }
 
       function setMode(next, id) {
@@ -14293,8 +14516,8 @@
         Array.prototype.forEach.call(grid.querySelectorAll('.ask-card'), function (btn) {
           btn.setAttribute('aria-pressed', btn.getAttribute('data-ask-id') === activeId ? 'true' : 'false');
         });
+        var ask = asks.find(function (item) { return item.id === activeId; });
         if (verdictEl) {
-          var ask = asks.find(function (item) { return item.id === activeId; });
           if (next === 'active' && ask) {
             verdictEl.hidden = false;
             if (verdictQ) verdictQ.textContent = ask.question || '';
@@ -14305,6 +14528,8 @@
             if (verdictText) verdictText.textContent = '';
           }
         }
+        if (next === 'active' && ask) fillPerfStrip(ask);
+        else fillPerfStrip(null);
         if (backBtn) backBtn.hidden = next === 'landing';
         if (seeMapBtn) seeMapBtn.hidden = next === 'map';
       }
@@ -14360,9 +14585,27 @@
         btn.className = 'ask-card';
         btn.setAttribute('data-ask-id', ask.id);
         btn.setAttribute('aria-pressed', 'false');
-        btn.innerHTML = '<span class="ask-card-kicker">Q' + (index + 1) + '</span>' +
-          '<span class="ask-card-question"></span>';
-        btn.querySelector('.ask-card-question').textContent = ask.question;
+        var parts = ['<span class="ask-card-kicker">Q' + (index + 1) + '</span>',
+          '<span class="ask-card-question"></span>'];
+        if (ask.metric) parts.push('<span class="ask-card-metric"></span>');
+        if (ask.metricLabel) parts.push('<span class="ask-card-metric-label"></span>');
+        if (ask.delta) parts.push('<span class="ask-card-delta"></span>');
+        if (ask.verdict) parts.push('<span class="ask-card-verdict"></span>');
+        if (ask.status === 'ok' || ask.status === 'watch' || ask.status === 'unknown') {
+          parts.push('<span class="ask-card-status" data-status="' + ask.status + '"></span>');
+        }
+        btn.innerHTML = parts.join('');
+        btn.querySelector('.ask-card-question').textContent = ask.question || '';
+        var metricEl = btn.querySelector('.ask-card-metric');
+        if (metricEl) metricEl.textContent = ask.metric;
+        var labelEl = btn.querySelector('.ask-card-metric-label');
+        if (labelEl) labelEl.textContent = ask.metricLabel;
+        var deltaEl = btn.querySelector('.ask-card-delta');
+        if (deltaEl) deltaEl.textContent = ask.delta;
+        var verdictCardEl = btn.querySelector('.ask-card-verdict');
+        if (verdictCardEl) verdictCardEl.textContent = ask.verdict;
+        var statusEl = btn.querySelector('.ask-card-status');
+        if (statusEl) statusEl.textContent = statusLabel(ask.status);
         btn.addEventListener('click', function () { applyAsk(ask); });
         grid.appendChild(btn);
       });

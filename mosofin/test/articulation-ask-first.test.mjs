@@ -39,6 +39,13 @@ test('three-statements ask-first ships asks markup + URL contract', () => {
   assert.match(html, /"id":"quality"/);
   assert.match(html, /Did we earn\?/);
   assert.match(html, /Did cash show up\?/);
+  assert.match(html, /"metric":"Sales ~\$24k"/);
+  assert.match(html, /"metricLabel":"sample · GL"/);
+  assert.match(html, /"status":"watch"/);
+  assert.match(html, /"metric":"NI ≠ CFO when WC moves"/);
+  assert.match(html, /id="ask-perf-strip"/);
+  assert.match(html, /ask-card-metric/);
+  assert.match(html, /fillPerfStrip/);
   // Present/Health remain in DOM/code paths but are hidden for ask-first.
   assert.match(html, /id="btn-present"/);
   assert.match(html, /id="btn-health"/);

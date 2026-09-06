@@ -8,7 +8,7 @@ Help an owner or board see **one closed story**: profit → equity, profit → c
 
 ## Preferred: Ask-first
 
-Ask-first replaces mode chrome on the chart with a **conversation UI**. The Northline sample uses `meta.presentation: "ask-first"` plus authored `meta.asks[]` (`id`, `question`, `verdict`, `viewId`, optional `focus`). Land on the questions, click one for the matching guided view + authored verdict, or **See full map**. Deep-link: `?ask=earn|position|cash|quality`. Present/Health toggles are de-emphasized on ask-first (code paths remain for `presentation: "articulation"`).
+Ask-first replaces mode chrome on the chart with a **conversation UI**. The Northline sample uses `meta.presentation: "ask-first"` plus authored `meta.asks[]` (`id`, `question`, `verdict`, `viewId`, optional `focus`, plus performance fields `metric` / `metricLabel` / `delta` / `status`). Land on the questions (each card shows the big authored number), click one for the matching guided view + persistent performance strip + authored verdict, or **See full map**. Vs PPT: same slide-like number navigation, plus articulation joints on the diagram. Deep-link: `?ask=earn|position|cash|quality`. Present/Health toggles are de-emphasized on ask-first (code paths remain for `presentation: "articulation"`).
 
 Try: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?ask=cash`](samples/northline-three-statements.html?ask=cash).
 

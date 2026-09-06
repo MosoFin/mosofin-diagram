@@ -16,7 +16,7 @@ Zones: Income Statement (period) → Balance Sheet (point in time, **A = L + E**
 
 ## Live session
 
-**Preferred presentation: Ask-first.** The sample lands on three large question cards (Did we earn? / What's our position? / Did cash show up?) with an optional earnings-quality fourth. Clicking a question focuses the matching guided view and shows an **authored** verdict — never an invented NI dollar. Use **See full map** to reveal the diagram without a selected question. Deep-link with `?ask=earn|position|cash|quality`.
+**Preferred presentation: Ask-first.** The sample lands on three large question cards (Did we earn? / What's our position? / Did cash show up?) with an optional earnings-quality fourth. Each card carries an **authored performance metric** (e.g. Sales ~$24k, A = L + E, CFS ending ↔ BS cash) plus label, status, and short verdict — PPT-like numbers with diagram-like why. Clicking a question focuses the matching guided view and keeps a persistent **performance strip** on the metric while you navigate asks like slides. Advantage vs PPT: question navigation *with* numbers *plus* the articulation joints on the map. Never invent an NI dollar. Use **See full map** to reveal the diagram without a selected question. Deep-link with `?ask=earn|position|cash|quality`.
 
 Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Ask-first preferred; Present / Health remain available on `presentation: "articulation"`). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
 

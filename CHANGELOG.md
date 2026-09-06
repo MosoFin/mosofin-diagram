@@ -8,6 +8,12 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Ask-first **performance metrics**: authored `meta.asks[]` fields `metric`, `metricLabel`,
+  optional `delta`, and `status` (`ok`|`watch`|`unknown`). Question cards show PPT-like
+  headline numbers; selecting an ask keeps a persistent performance strip above the diagram
+  (navigate asks ≈ navigate slides of numbers) while articulation joints stay on the map.
+  Northline sample remains honest (Sales ~$24k / no invented NI $). Docs: `docs/three-statements.md`.
+
 - Three-statements **Present / Health** live mode (gated by `meta.presentation: "articulation"`):
   chrome-minimal Present with large verdict captions and auto/one-click walk of the four
   guided joints; Health tint from optional authored `meta.health` only (`?present=1`,

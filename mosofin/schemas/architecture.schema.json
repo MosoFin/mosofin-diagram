@@ -167,7 +167,7 @@
         },
         "asks": {
           "type": "array",
-          "description": "Authored question cards for ask-first / articulation conversation UI. Verdicts must be authored — never invented at render time.",
+          "description": "Authored question cards for ask-first / articulation conversation UI. Verdicts and optional performance metrics (metric, metricLabel, delta, status) must be authored — never invented at render time.",
           "maxItems": 6,
           "items": {
             "type": "object",
@@ -201,6 +201,29 @@
                 "items": {
                   "$ref": "common.schema.json#/$defs/id"
                 }
+              },
+              "metric": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "description": "Authored performance headline for the ask card / strip (PPT-like number). Never invent at render time."
+              },
+              "metricLabel": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Short label under the metric (source, unit, or context)."
+              },
+              "delta": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "description": "Optional secondary performance line (delta, sub-metric, or honesty note)."
+              },
+              "status": {
+                "type": "string",
+                "enum": ["ok", "watch", "unknown"],
+                "description": "Authored performance status for the ask. unknown stays neutral — never invent green."
               }
             }
           }
