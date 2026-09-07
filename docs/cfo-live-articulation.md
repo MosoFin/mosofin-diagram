@@ -6,28 +6,30 @@ Use the self-contained three-statements HTML as the live board surface — not a
 
 Help an owner or board see **one closed story**: profit → equity, profit → cash (indirect), ending cash → balance-sheet cash. Leave with a clear ask and a file they can reopen without login.
 
-## Preferred: Ask-first
+## Preferred: Conversation (statements + joints + Draft)
 
-Ask-first replaces mode chrome on the chart with a **conversation UI**. The Northline sample uses `meta.presentation: "ask-first"` plus authored `meta.asks[]` (`id`, `question`, `verdict`, `viewId`, optional `focus`, plus performance fields `metric` / `metricLabel` / `delta` / `status`). Land on the questions (each card shows the big authored number), click one for the matching guided view + persistent performance strip + authored verdict, or **See full map**. Vs PPT: same slide-like number navigation, plus articulation joints on the diagram. Deep-link: `?ask=earn|position|cash|quality`. Present/Health toggles are de-emphasized on ask-first (code paths remain for `presentation: "articulation"`).
+Default landing is the Asset-Map-shaped **conversation layer** — not more Ask cards. See [`conversation-layer.md`](conversation-layer.md).
 
-Try: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?ask=cash`](samples/northline-three-statements.html?ask=cash).
+- **Left:** mini Income / Balance / Cash-flow lines from the July GL fixture (click a line to focus joints)
+- **Right:** the three-statements articulation SVG (why profit ≠ cash)
+- **Baseline | Draft:** Draft toggles authored WHAT-IF amounts from ledger scenario `dtc-plus-10` (+10% DTC) — never invent
+- **Verdict strip:** authored “Profit vs cash: …”
+
+Deep-link: `?line=revenue` · `?draft=1`. Optional **Ask mode** still ships `meta.asks[]` (`?ask=earn|position|cash|quality`). Present/Health remain for `presentation: "articulation"`.
+
+Try: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?line=revenue`](samples/northline-three-statements.html?line=revenue) · [`?draft=1`](samples/northline-three-statements.html?draft=1) · Ask [`?ask=cash`](samples/northline-three-statements.html?ask=cash).
 
 ## Script
 
-1. **Ask-first landing** — Open the HTML (default ask UI). Do not start in Present. Let the three cards set the agenda; optional fourth covers earnings quality.
-2. **Three questions** — Click before walking the map:
-   - Did we earn? (P&L / NI → Equity)
-   - What's our position? (BS / A=L+E / cash on BS)
-   - Did cash show up? (CFS / WC bridge / ending cash = BS cash)
-3. **Joints** — Each question focuses an authored guided view. Optionally use Play on guided views in order:
+1. **Conversation landing** — Open the HTML (default statements + joints). Do not start in Present. Toggle Baseline vs Draft once so the board sees WHAT-IF is labeled.
+2. **Walk the statements** — Click Revenue → Net Income → Cash from ops → Ending Cash before free-roaming the map.
+3. **Joints** — Each line focuses authored nodes; guided views still available:
    - `income-to-equity` — NI closes into retained earnings
    - `indirect-bridge` — NI → WC bridge → CFO, then investing / financing
    - `cash-tie-out` — ending cash ties to BS cash; A = L + E is structural
-   - `earnings-quality` — NI ≠ CFO when A/R, inventory, or A/P move
-4. **Red-only** — Toggle **Health** (`?health=1` / key `H`). Tint is **authored only**. Unknown nodes stay neutral — never invent a green NI or fake reconciliation. Use red/amber attention to open the earnings-quality conversation, not to shame the books.
-5. **Ask** — One next step: send GL export / books brief, install the skill, or schedule the money-map sibling. Hand off the HTML before you leave the call.
+4. **Optional Ask mode** — Use Ask mode if the room wants Q cards (Did we earn? / position / cash / quality).
 
-## Ask-first vs Present vs Health vs Teach
+## Conversation vs Ask mode vs Present vs Health vs Teach
 
 | Mode | When | What it does |
 |------|------|----------------|

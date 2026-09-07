@@ -93,9 +93,10 @@
           "type": "string",
           "enum": [
             "articulation",
-            "ask-first"
+            "ask-first",
+            "conversation"
           ],
-          "description": "Optional live-session mode for CFO articulation maps. ask-first shows conversation question cards before the diagram; articulation keeps Present/Health chrome."
+          "description": "Optional live-session mode for CFO articulation maps. conversation = Asset-Map-shaped statements + joints + Draft (default for three-statements sample); ask-first shows question cards before the diagram; articulation keeps Present/Health chrome."
         },
         "health": {
           "type": "object",
@@ -167,7 +168,7 @@
         },
         "asks": {
           "type": "array",
-          "description": "Authored question cards for ask-first / articulation conversation UI. Verdicts and optional performance metrics (metric, metricLabel, delta, status) must be authored — never invented at render time.",
+          "description": "Authored question cards for ask-first / articulation conversation UI. Verdicts and optional performance metrics (metric, metricLabel, delta, status) must be authored \u2014 never invented at render time.",
           "maxItems": 6,
           "items": {
             "type": "object",
@@ -222,11 +223,220 @@
               },
               "status": {
                 "type": "string",
-                "enum": ["ok", "watch", "unknown"],
-                "description": "Authored performance status for the ask. unknown stays neutral — never invent green."
+                "enum": [
+                  "ok",
+                  "watch",
+                  "unknown"
+                ],
+                "description": "Authored performance status for the ask. unknown stays neutral \u2014 never invent green."
               }
             }
           }
+        },
+        "statements": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Mini statement panes for conversation presentation. Authored lines only \u2014 amounts never invented at render time.",
+          "required": [
+            "income",
+            "balance",
+            "cashflow"
+          ],
+          "properties": {
+            "income": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "label",
+                  "focus"
+                ],
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "amount": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "description": "Authored performance amount or honesty tag. Never invent at render time."
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "focus": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    }
+                  },
+                  "joint": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80,
+                    "description": "Optional joint label linking this line to an articulation edge on the map."
+                  }
+                }
+              }
+            },
+            "balance": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "label",
+                  "focus"
+                ],
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "amount": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "description": "Authored performance amount or honesty tag. Never invent at render time."
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "focus": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    }
+                  },
+                  "joint": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80,
+                    "description": "Optional joint label linking this line to an articulation edge on the map."
+                  }
+                }
+              }
+            },
+            "cashflow": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "label",
+                  "focus"
+                ],
+                "properties": {
+                  "id": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "amount": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "description": "Authored performance amount or honesty tag. Never invent at render time."
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "focus": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    }
+                  },
+                  "joint": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80,
+                    "description": "Optional joint label linking this line to an articulation edge on the map."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "draft": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional WHAT-IF draft overlay (Asset-Map Drafts style). Amounts must be authored from a ledger scenario or fixture \u2014 never invented.",
+          "required": [
+            "id",
+            "label"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "banner": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "scenarioId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "verdict": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 220
+            },
+            "amounts": {
+              "type": "object",
+              "description": "Map of statement line id \u2192 authored alternate amount string.",
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            }
+          }
+        },
+        "verdict": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220,
+          "description": "One-line conversation verdict strip (e.g. Profit vs cash). Authored only."
         }
       }
     },

@@ -138,6 +138,9 @@ export function applyTemplate(template, {
   presentation = null,
   health = null,
   asks = null,
+  statements = null,
+  draft = null,
+  verdict = null,
   sourceEvidence = null,
   ledger = null,
   ledgerSlot = '',
@@ -208,7 +211,16 @@ export function applyTemplate(template, {
       const asksJson = Array.isArray(asks) && asks.length
         ? `<script id="mosofin-asks-data" type="application/json">${serializeScriptJson(asks)}</script>\n    `
         : '';
-      return `${healthJson}${asksJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
+      const statementsJson = statements && typeof statements === 'object'
+        ? `<script id="mosofin-statements-data" type="application/json">${serializeScriptJson(statements)}</script>\n    `
+        : '';
+      const draftJson = draft && typeof draft === 'object'
+        ? `<script id="mosofin-draft-data" type="application/json">${serializeScriptJson(draft)}</script>\n    `
+        : '';
+      const verdictJson = typeof verdict === 'string' && verdict.trim()
+        ? `<script id="mosofin-verdict-data" type="application/json">${serializeScriptJson(verdict)}</script>\n    `
+        : '';
+      return `${healthJson}${asksJson}${statementsJson}${draftJson}${verdictJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
     })
     .replace(SOURCE_EVIDENCE_PLACEHOLDER, () => sourceEvidence
       ? `    <script id="mosofin-source-evidence-data" type="application/json">${sourceEvidenceJson}</script>`

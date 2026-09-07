@@ -16,8 +16,10 @@ Zones: Income Statement (period) → Balance Sheet (point in time, **A = L + E**
 
 ## Live session
 
-**Preferred presentation: Ask-first.** The sample lands on three large question cards (Did we earn? / What's our position? / Did cash show up?) with an optional earnings-quality fourth. Each card carries an **authored performance metric** (e.g. Sales ~$24k, A = L + E, CFS ending ↔ BS cash) plus label, status, and short verdict — PPT-like numbers with diagram-like why. Clicking a question focuses the matching guided view and keeps a persistent **performance strip** on the metric while you navigate asks like slides. Advantage vs PPT: question navigation *with* numbers *plus* the articulation joints on the map. Never invent an NI dollar. Use **See full map** to reveal the diagram without a selected question. Deep-link with `?ask=earn|position|cash|quality`.
+**Preferred presentation: Conversation** (Asset-Map-shaped). Default landing splits **mini statements** (left) + **articulation joints** (right) with a **Baseline | Draft** toggle and a one-line profit-vs-cash verdict. Click a statement line to focus joint nodes/edges. Draft shows authored WHAT-IF amounts from ledger scenario `dtc-plus-10` (+10% DTC) — never invent. Deep-link `?line=revenue` / `?draft=1`. See [`conversation-layer.md`](conversation-layer.md) for why this vs Fathom/Asset-Map.
 
-Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Ask-first preferred; Present / Health remain available on `presentation: "articulation"`). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
+**Optional Ask mode** still ships the question cards (Did we earn? / position / cash / quality) with authored metrics — use the Ask mode control or `?ask=earn|position|cash|quality`. Never invent an NI dollar.
 
-Try Ask-first on the sample: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?ask=cash`](samples/northline-three-statements.html?ask=cash).
+Fractional CFOs: run the 15-minute owner/board walk with the live HTML — [`cfo-live-articulation.md`](cfo-live-articulation.md) (Conversation preferred; Ask mode optional; Present / Health on `presentation: "articulation"`). Making the artifact forwardable: [`html-popularity.md`](html-popularity.md).
+
+Try Conversation: [`samples/northline-three-statements.html`](samples/northline-three-statements.html) · [`?line=revenue`](samples/northline-three-statements.html?line=revenue) · [`?draft=1`](samples/northline-three-statements.html?draft=1) · Ask [`?ask=cash`](samples/northline-three-statements.html?ask=cash).

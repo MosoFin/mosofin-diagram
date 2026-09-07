@@ -8,6 +8,13 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Three-statements **Conversation** layer (`meta.presentation: "conversation"`): Asset-Map-shaped
+  split of authored mini statements (Income / Balance / Cash flow) + articulation joints SVG +
+  **Baseline | Draft** toggle (`meta.statements`, `meta.draft`, `meta.verdict`). Draft amounts come
+  from ledger scenario `dtc-plus-10` and are labeled WHAT-IF — never invented. Default landing for
+  the Northline sample; Ask-first remains optional (`?ask=` / Ask mode). Deep-links `?line=` /
+  `?draft=1`. Docs: `docs/conversation-layer.md`, `docs/three-statements.md`.
+
 - Ask-first **performance metrics**: authored `meta.asks[]` fields `metric`, `metricLabel`,
   optional `delta`, and `status` (`ok`|`watch`|`unknown`). Question cards show PPT-like
   headline numbers; selecting an ask keeps a persistent performance strip above the diagram

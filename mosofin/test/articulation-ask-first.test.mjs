@@ -24,9 +24,9 @@ function htmlOpenTag(html) {
   return html.match(/<html\b[^>]*>/)?.[0] || '';
 }
 
-test('three-statements ask-first ships asks markup + URL contract', () => {
+test('three-statements conversation still ships asks markup for optional Ask mode', () => {
   const html = render('northline-three-statements.architecture.json', 'three-ask.html');
-  assert.match(htmlOpenTag(html), /data-presentation="ask-first"/);
+  assert.match(htmlOpenTag(html), /data-presentation="conversation"/);
   assert.match(html, /id="mosofin-asks-data"/);
   assert.match(html, /id="ask-first-panel"/);
   assert.match(html, /id="ask-first-see-map"/);
@@ -46,10 +46,11 @@ test('three-statements ask-first ships asks markup + URL contract', () => {
   assert.match(html, /id="ask-perf-strip"/);
   assert.match(html, /ask-card-metric/);
   assert.match(html, /fillPerfStrip/);
-  // Present/Health remain in DOM/code paths but are hidden for ask-first.
+  assert.match(html, /enterAskMode/);
+  // Present/Health remain in DOM/code paths but are hidden for conversation.
   assert.match(html, /id="btn-present"/);
   assert.match(html, /id="btn-health"/);
-  assert.match(html, /data-presentation="ask-first"[^>]*>[\s\S]*#btn-present/);
+  assert.match(html, /data-presentation="conversation"[^>]*>[\s\S]*#btn-present/);
   assert.match(html, /id="mosofin-health-data"/);
 });
 

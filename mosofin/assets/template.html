@@ -988,6 +988,243 @@
       display: none;
     }
 
+    /* Conversation layer — Asset-Map-shaped statements + joints + Draft. */
+    html[data-presentation="conversation"] #btn-present,
+    html[data-presentation="conversation"] #btn-health,
+    html[data-presentation="conversation"] #btn-articulation-walk {
+      display: none !important;
+    }
+    html[data-presentation="conversation"] .arch-health-legend {
+      display: none !important;
+    }
+    html[data-presentation="conversation"]:not([data-ask-mode="active"]):not([data-ask-mode="landing"]) #ask-first-panel {
+      display: none !important;
+    }
+    html[data-presentation="conversation"][data-ask-mode="landing"] .conversation-layer,
+    html[data-presentation="conversation"][data-ask-mode="active"] .conversation-layer,
+    html[data-presentation="conversation"][data-ask-mode="map"] .conversation-layer {
+      display: none !important;
+    }
+    .conversation-layer {
+      display: none;
+      margin: 0 0 0.85rem;
+      gap: 0.75rem;
+      flex-direction: column;
+    }
+    html[data-presentation="conversation"]:not([data-ask-mode]) .conversation-layer {
+      display: flex;
+    }
+    .conversation-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem 1rem;
+    }
+    .conversation-mode {
+      display: inline-flex;
+      border: 1px solid var(--toolbar-border);
+      border-radius: 999px;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--panel) 78%, transparent);
+    }
+    .conversation-mode button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+    }
+    .conversation-mode button[aria-pressed="true"] {
+      background: color-mix(in srgb, var(--frontend-stroke) 22%, var(--panel));
+      color: var(--frontend-stroke);
+    }
+    .conversation-ask-link {
+      appearance: none;
+      border: 1px solid var(--toolbar-border);
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 0.82rem;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      opacity: 0.85;
+    }
+    .conversation-ask-link:hover {
+      border-color: var(--frontend-stroke);
+      color: var(--frontend-stroke);
+      opacity: 1;
+    }
+    .conversation-draft-banner {
+      display: none;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 0.65rem;
+      border: 1px dashed color-mix(in srgb, #fbbf24 55%, var(--toolbar-border));
+      background: color-mix(in srgb, #fbbf24 10%, transparent);
+      color: #fbbf24;
+      font-size: 0.82rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+    html[data-draft="1"] .conversation-draft-banner {
+      display: flex;
+    }
+    .conversation-verdict {
+      margin: 0;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.75rem;
+      border: 1px solid color-mix(in srgb, var(--frontend-stroke) 30%, var(--toolbar-border));
+      background: color-mix(in srgb, var(--toolbar-menu-bg) 88%, transparent);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .conversation-verdict strong {
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+    .conversation-split {
+      display: grid;
+      grid-template-columns: minmax(15rem, 22rem) minmax(0, 1fr);
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+    @media (max-width: 980px) {
+      .conversation-split {
+        grid-template-columns: 1fr;
+      }
+    }
+    #statement-pane {
+      border: 1px solid var(--toolbar-border);
+      border-radius: 0.9rem;
+      background: color-mix(in srgb, var(--panel) 82%, transparent);
+      padding: 0.7rem 0.75rem 0.85rem;
+      min-height: 18rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .statement-pane-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .statement-pane-head h2 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+    .statement-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .statement-tabs button {
+      appearance: none;
+      border: 1px solid var(--toolbar-border);
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+      cursor: pointer;
+    }
+    .statement-tabs button[aria-pressed="true"] {
+      border-color: var(--frontend-stroke);
+      background: color-mix(in srgb, var(--frontend-stroke) 16%, transparent);
+      color: var(--frontend-stroke);
+    }
+    .statement-section[hidden] { display: none !important; }
+    .statement-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+    .statement-line {
+      appearance: none;
+      width: 100%;
+      text-align: left;
+      border: 1px solid transparent;
+      border-radius: 0.65rem;
+      padding: 0.55rem 0.65rem;
+      background: color-mix(in srgb, var(--toolbar-menu-bg) 55%, transparent);
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.2rem 0.75rem;
+    }
+    .statement-line:hover,
+    .statement-line:focus-visible {
+      border-color: var(--frontend-stroke);
+      outline: none;
+    }
+    .statement-line[aria-pressed="true"] {
+      border-color: var(--frontend-stroke);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--frontend-stroke) 45%, transparent);
+      background: color-mix(in srgb, var(--frontend-stroke) 12%, var(--panel));
+    }
+    .statement-line-label {
+      font-weight: 650;
+      font-size: 0.88rem;
+    }
+    .statement-line-amount {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-align: right;
+    }
+    html[data-draft="1"] .statement-line-amount {
+      color: #fbbf24;
+    }
+    .statement-line-note {
+      grid-column: 1 / -1;
+      font-size: 0.75rem;
+      opacity: 0.75;
+      line-height: 1.35;
+    }
+    .conversation-joints {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .conversation-joints-label {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+    html[data-presentation="conversation"]:not([data-ask-mode]) .guided-views {
+      margin-bottom: 0.35rem;
+    }
+    /* Move the live diagram into the joints column when conversation is active. */
+    html[data-presentation="conversation"]:not([data-ask-mode]) .conversation-joints > .diagram-container,
+    html[data-presentation="conversation"]:not([data-ask-mode]) #conversation-joints-slot:empty + .diagram-container {
+      /* placeholder — JS relocates .diagram-container into #conversation-joints-slot */
+    }
+    html[data-presentation="conversation"]:not([data-ask-mode]) #conversation-joints-slot .diagram-container {
+      margin: 0;
+      min-height: 22rem;
+    }
+
+
     /* Authored architecture health tint — unknown stays role-neutral (never invent green). */
     html[data-health="true"] [data-node-id][data-arch-health]:not([data-arch-health="unknown"]) > rect.c-mask + rect {
       fill: color-mix(in srgb, var(--arch-health-color, #94a3b8) 34%, var(--panel));
@@ -5680,6 +5917,42 @@
       <div class="ask-perf-meta">
         <p class="ask-perf-question" id="ask-perf-question"></p>
         <p class="ask-perf-verdict" id="ask-perf-verdict"></p>
+      </div>
+    </div>
+
+
+    <div class="conversation-layer no-print" id="conversation-layer" hidden aria-label="{{i18n:viewer.conversation.region}}">
+      <div class="conversation-toolbar">
+        <div class="conversation-mode" role="group" aria-label="{{i18n:viewer.conversation.mode}}">
+          <button type="button" id="conversation-baseline" aria-pressed="true">{{i18n:viewer.conversation.baseline}}</button>
+          <button type="button" id="conversation-draft" aria-pressed="false">{{i18n:viewer.conversation.draft}}</button>
+        </div>
+        <button type="button" class="conversation-ask-link" id="conversation-ask-mode" hidden>{{i18n:viewer.conversation.askMode}}</button>
+      </div>
+      <div class="conversation-draft-banner" id="conversation-draft-banner" role="status">
+        <span id="conversation-draft-banner-text"></span>
+      </div>
+      <p class="conversation-verdict" id="conversation-verdict" aria-live="polite">
+        <strong>{{i18n:viewer.conversation.verdictLabel}}</strong><span id="conversation-verdict-text"></span>
+      </p>
+      <div class="conversation-split">
+        <aside id="statement-pane" aria-label="{{i18n:viewer.conversation.statements}}">
+          <div class="statement-pane-head">
+            <h2>{{i18n:viewer.conversation.statements}}</h2>
+          </div>
+          <div class="statement-tabs" role="group" aria-label="{{i18n:viewer.conversation.statements}}">
+            <button type="button" id="statement-tab-income" data-statement-tab="income" aria-pressed="true" aria-controls="statement-section-income">{{i18n:viewer.conversation.income}}</button>
+            <button type="button" id="statement-tab-balance" data-statement-tab="balance" aria-pressed="false" aria-controls="statement-section-balance">{{i18n:viewer.conversation.balance}}</button>
+            <button type="button" id="statement-tab-cashflow" data-statement-tab="cashflow" aria-pressed="false" aria-controls="statement-section-cashflow">{{i18n:viewer.conversation.cashflow}}</button>
+          </div>
+          <div class="statement-section" id="statement-section-income" data-statement-section="income"></div>
+          <div class="statement-section" id="statement-section-balance" data-statement-section="balance" hidden></div>
+          <div class="statement-section" id="statement-section-cashflow" data-statement-section="cashflow" hidden></div>
+        </aside>
+        <div class="conversation-joints">
+          <p class="conversation-joints-label">{{i18n:viewer.conversation.joints}}</p>
+          <div id="conversation-joints-slot"></div>
+        </div>
       </div>
     </div>
 
@@ -14178,7 +14451,7 @@
       var dataEl = document.getElementById('mosofin-health-data');
       var svg = document.querySelector('.diagram-container svg');
       var presentationMode = html.getAttribute('data-presentation') || '';
-      var isArticulation = presentationMode === 'articulation' || presentationMode === 'ask-first';
+      var isArticulation = presentationMode === 'articulation' || presentationMode === 'ask-first' || presentationMode === 'conversation';
       var isAskFirst = presentationMode === 'ask-first';
       var healthMap = null;
       try { healthMap = dataEl ? JSON.parse(dataEl.textContent || '{}') : null; } catch (_) { healthMap = null; }
@@ -14315,7 +14588,8 @@
       var backBtn = document.getElementById('ask-first-back');
       var asks = [];
       try { asks = dataEl ? JSON.parse(dataEl.textContent || '[]') : []; } catch (_) { asks = []; }
-      var gated = (presentation === 'ask-first' || presentation === 'articulation') && Array.isArray(asks) && asks.length > 0;
+      var isConversation = presentation === 'conversation';
+      var gated = (presentation === 'ask-first' || presentation === 'articulation' || isConversation) && Array.isArray(asks) && asks.length > 0;
       var activeId = null;
       var mode = 'landing'; // landing | active | map
       var statusLabels = { ok: 'ok', watch: 'watch', unknown: 'unknown' };
@@ -14323,7 +14597,12 @@
       if (!gated || !panel || !grid) {
         if (panel) panel.hidden = true;
         if (perfStrip) perfStrip.hidden = true;
-        return { available: function () { return false; }, active: function () { return null; } };
+        return {
+          available: function () { return false; },
+          active: function () { return null; },
+          enterAskMode: function () { return false; },
+          exitAskMode: function () { return false; }
+        };
       }
 
       function updateUrl(id) {
@@ -14485,17 +14764,53 @@
         grid.appendChild(btn);
       });
 
-      panel.hidden = false;
+      function enterAskMode(options) {
+        options = options || {};
+        panel.hidden = false;
+        if (options.askId && selectById(options.askId, { updateUrl: options.updateUrl !== false })) return true;
+        showLanding({ updateUrl: options.updateUrl !== false });
+        return true;
+      }
+
+      function exitAskMode(options) {
+        options = options || {};
+        setMode('landing');
+        html.removeAttribute('data-ask-mode');
+        html.removeAttribute('data-ask');
+        panel.hidden = true;
+        fillPerfStrip(null);
+        if (options.updateUrl !== false) updateUrl(null);
+        if (Mosofin.conversation && typeof Mosofin.conversation.show === 'function') {
+          try { Mosofin.conversation.show(); } catch (_) {}
+        }
+        return true;
+      }
+
       if (seeMapBtn) seeMapBtn.addEventListener('click', function () { showMap(); });
-      if (backBtn) backBtn.addEventListener('click', function () { showLanding(); });
+      if (backBtn) backBtn.addEventListener('click', function () {
+        if (isConversation) exitAskMode();
+        else showLanding();
+      });
 
       // Defer URL restore until guided views have booted.
       setTimeout(function () {
         var initial = null;
         try { initial = new URLSearchParams(window.location.search).get('ask'); } catch (_) {}
+        if (isConversation && !initial) {
+          panel.hidden = true;
+          fillPerfStrip(null);
+          html.removeAttribute('data-ask-mode');
+          html.removeAttribute('data-ask');
+          return;
+        }
+        panel.hidden = false;
         if (initial && selectById(initial, { updateUrl: false })) return;
         if (html.getAttribute('data-ask-mode') === 'active' && html.getAttribute('data-ask')) {
           if (selectById(html.getAttribute('data-ask'), { updateUrl: false })) return;
+        }
+        if (isConversation) {
+          panel.hidden = true;
+          return;
         }
         showLanding({ updateUrl: false });
       }, 0);
@@ -14507,9 +14822,261 @@
         select: selectById,
         showMap: showMap,
         showLanding: showLanding,
+        enterAskMode: enterAskMode,
+        exitAskMode: exitAskMode,
         list: function () { return asks.slice(); }
       };
     })();
+
+    /* ============================================================
+       Conversation — Asset-Map-shaped statements + joints + Draft.
+       Authored meta.statements / meta.draft / meta.verdict only.
+       Deep-link ?line= / ?draft=1. Optional Ask mode via meta.asks.
+       ============================================================ */
+    Mosofin.conversation = (function () {
+      var html = document.documentElement;
+      var presentation = html.getAttribute('data-presentation') || '';
+      var layer = document.getElementById('conversation-layer');
+      var statementsEl = document.getElementById('mosofin-statements-data');
+      var draftEl = document.getElementById('mosofin-draft-data');
+      var verdictEl = document.getElementById('mosofin-verdict-data');
+      var baselineBtn = document.getElementById('conversation-baseline');
+      var draftBtn = document.getElementById('conversation-draft');
+      var askModeBtn = document.getElementById('conversation-ask-mode');
+      var banner = document.getElementById('conversation-draft-banner');
+      var bannerText = document.getElementById('conversation-draft-banner-text');
+      var verdictText = document.getElementById('conversation-verdict-text');
+      var jointsSlot = document.getElementById('conversation-joints-slot');
+      var statements = null;
+      var draft = null;
+      var baselineVerdict = '';
+      try { statements = statementsEl ? JSON.parse(statementsEl.textContent || 'null') : null; } catch (_) { statements = null; }
+      try { draft = draftEl ? JSON.parse(draftEl.textContent || 'null') : null; } catch (_) { draft = null; }
+      try {
+        var rawVerdict = verdictEl ? JSON.parse(verdictEl.textContent || '""') : '';
+        baselineVerdict = typeof rawVerdict === 'string' ? rawVerdict : '';
+      } catch (_) { baselineVerdict = ''; }
+
+      var available = presentation === 'conversation'
+        && statements
+        && typeof statements === 'object'
+        && Array.isArray(statements.income)
+        && Array.isArray(statements.balance)
+        && Array.isArray(statements.cashflow);
+      var activeLineId = null;
+      var draftOn = false;
+      var sections = {
+        income: document.getElementById('statement-section-income'),
+        balance: document.getElementById('statement-section-balance'),
+        cashflow: document.getElementById('statement-section-cashflow')
+      };
+      var tabs = {
+        income: document.getElementById('statement-tab-income'),
+        balance: document.getElementById('statement-tab-balance'),
+        cashflow: document.getElementById('statement-tab-cashflow')
+      };
+      var sectionOrder = ['income', 'balance', 'cashflow'];
+      var lineIndex = {};
+
+      if (!available || !layer) {
+        if (layer) layer.hidden = true;
+        return { available: function () { return false; } };
+      }
+
+      function updateUrl() {
+        try {
+          var url = new URL(window.location.href);
+          if (activeLineId) url.searchParams.set('line', activeLineId);
+          else url.searchParams.delete('line');
+          if (draftOn) url.searchParams.set('draft', '1');
+          else url.searchParams.delete('draft');
+          history.replaceState(null, '', url.pathname + url.search + url.hash);
+        } catch (_) {}
+      }
+
+      function amountFor(line) {
+        if (draftOn && draft && draft.amounts && Object.prototype.hasOwnProperty.call(draft.amounts, line.id)) {
+          return draft.amounts[line.id];
+        }
+        return line.amount || '';
+      }
+
+      function setVerdict() {
+        if (!verdictText) return;
+        if (draftOn && draft && draft.verdict) verdictText.textContent = draft.verdict;
+        else verdictText.textContent = baselineVerdict || '';
+      }
+
+      function setDraft(on, options) {
+        options = options || {};
+        draftOn = !!on && !!(draft && draft.id);
+        html.setAttribute('data-draft', draftOn ? '1' : '0');
+        if (baselineBtn) baselineBtn.setAttribute('aria-pressed', draftOn ? 'false' : 'true');
+        if (draftBtn) {
+          draftBtn.disabled = !(draft && draft.id);
+          draftBtn.setAttribute('aria-pressed', draftOn ? 'true' : 'false');
+        }
+        if (bannerText) {
+          bannerText.textContent = (draft && (draft.banner || draft.label)) || 'WHAT-IF / Draft';
+        }
+        // Refresh visible amounts
+        Object.keys(lineIndex).forEach(function (id) {
+          var meta = lineIndex[id];
+          if (!meta || !meta.amountEl) return;
+          meta.amountEl.textContent = amountFor(meta.line);
+        });
+        setVerdict();
+        if (options.updateUrl !== false) updateUrl();
+      }
+
+      function activateTab(name) {
+        sectionOrder.forEach(function (key) {
+          if (tabs[key]) tabs[key].setAttribute('aria-pressed', key === name ? 'true' : 'false');
+          if (sections[key]) sections[key].hidden = key !== name;
+        });
+      }
+
+      function focusLine(line, options) {
+        options = options || {};
+        if (!line) return false;
+        activeLineId = line.id;
+        Object.keys(lineIndex).forEach(function (id) {
+          var btn = lineIndex[id].button;
+          if (btn) btn.setAttribute('aria-pressed', id === activeLineId ? 'true' : 'false');
+        });
+        // Prefer authored joint view when present
+        if (line.joint && Mosofin.guidedViews && typeof Mosofin.guidedViews.activate === 'function') {
+          try { Mosofin.guidedViews.activate(line.joint, { updateUrl: true }); } catch (_) {}
+        }
+        if (Array.isArray(line.focus) && line.focus.length && Mosofin.focus && typeof Mosofin.focus.setMany === 'function') {
+          try {
+            Mosofin.focus.setMany(line.focus, {
+              toggle: false,
+              updateUrl: false,
+              mode: 'selection',
+              label: line.label,
+              hideChip: true
+            });
+          } catch (_) {}
+        }
+        if (options.updateUrl !== false) updateUrl();
+        return true;
+      }
+
+      function selectById(id, options) {
+        var meta = lineIndex[id];
+        if (!meta) return false;
+        activateTab(meta.section);
+        return focusLine(meta.line, options);
+      }
+
+      function buildSection(name, lines) {
+        var host = sections[name];
+        if (!host) return;
+        host.textContent = '';
+        var ul = document.createElement('ul');
+        ul.className = 'statement-list';
+        (lines || []).forEach(function (line) {
+          var li = document.createElement('li');
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'statement-line';
+          btn.setAttribute('data-line-id', line.id);
+          btn.setAttribute('aria-pressed', 'false');
+          var label = document.createElement('span');
+          label.className = 'statement-line-label';
+          label.textContent = line.label || line.id;
+          var amount = document.createElement('span');
+          amount.className = 'statement-line-amount';
+          amount.textContent = amountFor(line);
+          btn.appendChild(label);
+          btn.appendChild(amount);
+          if (line.note) {
+            var note = document.createElement('span');
+            note.className = 'statement-line-note';
+            note.textContent = line.note;
+            btn.appendChild(note);
+          }
+          btn.addEventListener('click', function () { focusLine(line); });
+          li.appendChild(btn);
+          ul.appendChild(li);
+          lineIndex[line.id] = { line: line, section: name, button: btn, amountEl: amount };
+        });
+        host.appendChild(ul);
+      }
+
+      function relocateDiagram() {
+        var diagram = document.querySelector('.container > .diagram-container')
+          || document.querySelector('.diagram-container');
+        if (!diagram || !jointsSlot) return;
+        if (diagram.parentElement === jointsSlot) return;
+        jointsSlot.appendChild(diagram);
+      }
+
+      function show() {
+        layer.hidden = false;
+        html.removeAttribute('data-ask-mode');
+        html.removeAttribute('data-ask');
+        relocateDiagram();
+      }
+
+      function hide() {
+        layer.hidden = true;
+      }
+
+      buildSection('income', statements.income);
+      buildSection('balance', statements.balance);
+      buildSection('cashflow', statements.cashflow);
+      sectionOrder.forEach(function (key) {
+        if (tabs[key]) {
+          tabs[key].addEventListener('click', function () { activateTab(key); });
+        }
+      });
+      if (baselineBtn) baselineBtn.addEventListener('click', function () { setDraft(false); });
+      if (draftBtn) draftBtn.addEventListener('click', function () { setDraft(true); });
+      if (askModeBtn) {
+        var asksData = document.getElementById('mosofin-asks-data');
+        if (asksData) {
+          askModeBtn.hidden = false;
+          askModeBtn.addEventListener('click', function () {
+            hide();
+            if (Mosofin.asks && typeof Mosofin.asks.enterAskMode === 'function') {
+              Mosofin.asks.enterAskMode({ updateUrl: true });
+            }
+          });
+        }
+      }
+
+      show();
+      setDraft(false, { updateUrl: false });
+      setVerdict();
+
+      setTimeout(function () {
+        relocateDiagram();
+        var params;
+        try { params = new URLSearchParams(window.location.search); } catch (_) { params = null; }
+        if (!params) return;
+        if (params.get('ask')) {
+          // Ask deep-link wins — conversation stays hidden while asks module activates.
+          hide();
+          return;
+        }
+        if (params.get('draft') === '1') setDraft(true, { updateUrl: false });
+        var line = params.get('line');
+        if (line) selectById(line, { updateUrl: false });
+      }, 0);
+
+      return {
+        available: function () { return true; },
+        activeLine: function () { return activeLineId; },
+        draft: function () { return draftOn; },
+        select: selectById,
+        setDraft: setDraft,
+        show: show,
+        hide: hide
+      };
+    })();
+
 
     /* ============================================================
        Node Finder — stable-ID search over the existing semantic SVG.

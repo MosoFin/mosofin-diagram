@@ -272,6 +272,18 @@ const MESSAGE_PAIRS = {
   'viewer.asks.back.title': ['Return to the question cards'],
   'viewer.asks.verdict': ['Verdict'],
 
+  'viewer.conversation.region': ['Conversation'],
+  'viewer.conversation.mode': ['Baseline or Draft'],
+  'viewer.conversation.baseline': ['Baseline'],
+  'viewer.conversation.draft': ['Draft'],
+  'viewer.conversation.askMode': ['Ask mode'],
+  'viewer.conversation.verdictLabel': ['Verdict'],
+  'viewer.conversation.statements': ['Statements'],
+  'viewer.conversation.income': ['Income'],
+  'viewer.conversation.balance': ['Balance sheet'],
+  'viewer.conversation.cashflow': ['Cash flow'],
+  'viewer.conversation.joints': ['Articulation joints'],
+
   'viewer.export.button': ['Export'],
   'viewer.export.button.title': ['Export diagram (E)'],
   'viewer.export.diagram': ['Export diagram'],
