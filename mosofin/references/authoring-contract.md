@@ -154,6 +154,10 @@ Stages express transformation or custody. Rows separate parallel streams. Label 
 
 Main phases use columns `0..4`; event and terminal bands use columns `0..2`. A recoverable failure needs a real transition back to an active state. A card or guided view saying “retry” is not topology.
 
+### Pillars
+
+Three to six pillars, one per domain, each owning exactly one system of record. The roof is the shared goal in one sentence, never a restatement of the title. Items are the facts a system owns (at most five, short enough to read at full size across five pillars); the plinth `tag` is the one-phrase truth claim. The foundation names the entity, basis, and truth rules. A pillar diagram has no relationships, so it never stands in for a flow, a handoff, or a tie-out; when the question is how money or work moves, choose another type.
+
 ## Repository evidence
 
 When the diagram must reflect real code, inspect repository entrypoints, runtime boundaries, storage, transports, and deployment configuration before authoring. Record only evidence you actually verified. Use `--repo-root <path>` when the chosen renderer supports evidence receipts. Never infer runtime causality from file proximity or naming alone.

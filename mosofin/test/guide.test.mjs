@@ -9,14 +9,14 @@ import {
 } from '../recipes/scenarios.mjs';
 
 test('guide: exposes unique recipes across every diagram type', () => {
-  assert.equal(SCENARIO_RECIPES.length, 22);
-  assert.equal(new Set(SCENARIO_RECIPES.map((recipe) => recipe.id)).size, 22);
+  assert.equal(SCENARIO_RECIPES.length, 23);
+  assert.equal(new Set(SCENARIO_RECIPES.map((recipe) => recipe.id)).size, 23);
   assert.deepEqual(
-    Object.fromEntries(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle'].map((type) => [
+    Object.fromEntries(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars'].map((type) => [
       type,
       SCENARIO_RECIPES.filter((recipe) => recipe.type === type).length,
     ])),
-    { architecture: 5, workflow: 5, sequence: 4, dataflow: 5, lifecycle: 3 },
+    { architecture: 5, workflow: 5, sequence: 4, dataflow: 5, lifecycle: 3, pillars: 1 },
   );
 });
 
@@ -56,6 +56,7 @@ test('guide: representative scenarios map to specialized recipes', () => {
     ['Stripe payout rec vs bank', 'finance-payout-rec'],
     ['who owes us sales receipt vs invoice', 'finance-customer-ar'],
     ['can we make payroll Friday', 'finance-cash-runway'],
+    ['show the operating model on one page as strategic pillars', 'business-pillars'],
   ];
 
   for (const [query, expected] of cases) {
@@ -76,7 +77,7 @@ test('guide: exact ids win and unknown questions fall back honestly', () => {
 
 test('guide: public data includes English copy and weighted signals', () => {
   const data = publicGuideData();
-  assert.equal(data.length, 22);
+  assert.equal(data.length, 23);
   for (const recipe of data) {
     assert.ok(recipe.en.title);
     assert.ok(recipe.proof, `${recipe.id}: verified proof is required`);

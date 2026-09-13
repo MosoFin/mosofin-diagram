@@ -49,7 +49,7 @@ export async function loadDiagramWithBrandMarks(options) {
   return loaded;
 }
 
-const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars']);
 
 // Common CLI tail: fill the template and write the standalone HTML file.
 export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null }) {
@@ -72,13 +72,26 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
   console.log(outPath);
 }
 
+// A type may spread its semantic nodes over several collections; pillars keeps
+// the roof (one object), the pillars, and the foundation apart because they
+// are drawn differently, yet every one of them is a focusable node.
 const SEMANTIC_COLLECTIONS = {
   architecture: 'components',
   workflow: 'nodes',
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  pillars: ['roof', 'pillars', 'foundation'],
 };
+
+export function semanticNodesOf(diagramType, diagram) {
+  const collections = [SEMANTIC_COLLECTIONS[diagramType]].flat().filter(Boolean);
+  return collections.flatMap((collection) => {
+    const value = diagram?.[collection];
+    if (Array.isArray(value)) return value;
+    return value && typeof value === 'object' ? [value] : [];
+  });
+}
 
 const RELATIONSHIP_COLLECTIONS = {
   architecture: 'connections',
@@ -120,8 +133,8 @@ export function validateRelationshipIds(diagramType, diagram) {
 export function validateGuidedViews(diagramType, diagram) {
   const views = diagram.meta?.views;
   if (!Array.isArray(views) || views.length === 0) return;
-  const collection = SEMANTIC_COLLECTIONS[diagramType];
-  const semanticIds = new Set((diagram[collection] || []).map((item) => item.id));
+  const collection = [SEMANTIC_COLLECTIONS[diagramType]].flat().join('+');
+  const semanticIds = new Set(semanticNodesOf(diagramType, diagram).map((item) => item.id));
   const seen = new Set();
   const problems = [];
 

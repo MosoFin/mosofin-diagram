@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MosoFin/mosofin-diagram/schemas/pillars.schema.json",
+  "title": "Mosofin Pillars Diagram",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "diagram_type",
+    "meta",
+    "roof",
+    "pillars"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "diagram_type": {
+      "const": "pillars"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locale": {
+          "$ref": "common.schema.json#/$defs/locale"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "animation": {
+          "enum": [
+            "trace",
+            "none"
+          ]
+        },
+        "visual_preset": {
+          "enum": [
+            "classic",
+            "signal-flow",
+            "blueprint",
+            "editorial"
+          ]
+        },
+        "node_style": {
+          "enum": [
+            "box",
+            "logo"
+          ]
+        },
+        "quality_profile": {
+          "enum": [
+            "standard",
+            "showcase"
+          ]
+        },
+        "views": {
+          "$ref": "common.schema.json#/$defs/guidedViews"
+        },
+        "legend": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "$ref": "common.schema.json#/$defs/legendMode"
+            },
+            "entries": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "frontend": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "backend": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "database": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "cloud": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "security": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "messagebus": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                },
+                "external": {
+                  "$ref": "common.schema.json#/$defs/legendEntry"
+                }
+              }
+            }
+          }
+        },
+        "viewBox": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 640
+            },
+            {
+              "type": "number",
+              "minimum": 420
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "roof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "sublabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        }
+      }
+    },
+    "pillars": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "type": {
+            "$ref": "common.schema.json#/$defs/componentType"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "sublabel": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "tag": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "brand": {
+            "$ref": "common.schema.json#/$defs/brandMark"
+          },
+          "items": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            }
+          }
+        }
+      }
+    },
+    "foundation": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "type": {
+            "$ref": "common.schema.json#/$defs/componentType"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 48
+          },
+          "sublabel": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          "brand": {
+            "$ref": "common.schema.json#/$defs/brandMark"
+          }
+        }
+      }
+    },
+    "cards": {
+      "$ref": "common.schema.json#/$defs/cards"
+    }
+  }
+}

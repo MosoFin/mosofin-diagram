@@ -13,6 +13,7 @@ const COLLECTIONS = Object.freeze({
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  pillars: ['pillars', 'foundation'],
 });
 const MARK_BY_LOOKUP = new Map();
 const MARK_BY_DOMAIN = new Map();
@@ -452,12 +453,15 @@ async function mapConcurrent(values, limit, visit) {
 }
 
 export async function prepareDiagramBrandMarks(diagramType, diagram) {
-  const collection = COLLECTIONS[diagramType];
-  const nodes = collection && Array.isArray(diagram[collection]) ? diagram[collection] : [];
+  const collections = [COLLECTIONS[diagramType]].flat().filter(Boolean);
+  const collection = collections.join('+');
+  const nodes = collections.flatMap((name) => (Array.isArray(diagram[name])
+    ? diagram[name].map((node, index) => ({ node, collection: name, index }))
+    : []));
   const unknown = [];
   const remoteByUrl = new Map();
   const deadline = Date.now() + captureTimeoutMilliseconds();
-  await mapConcurrent(nodes, MAX_CAPTURE_CONCURRENCY, async (node, index) => {
+  await mapConcurrent(nodes, MAX_CAPTURE_CONCURRENCY, async ({ node, collection, index }) => {
     if (!node.brand) return;
     if (typeof node.brand === 'object') {
       const url = asUrl(node.brand.url);

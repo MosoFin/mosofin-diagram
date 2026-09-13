@@ -26,6 +26,19 @@ const RAW_RECIPES = [
     },
   },
   {
+    id: 'business-pillars', type: 'pillars', proof: 'operating-pillars',
+    presentation: { preset: 'classic', motion: 'static', views: 'recommended' },
+    signals: [['pillars', 18], ['pillar diagram', 18], ['operating model', 16], ['on one page', 15], ['one page', 12], ['strategic pillars', 17], ['what holds the business up', 17], ['business on a page', 17], ['foundation', 10], ['temple', 12]],
+    en: {
+      title: 'Business pillars', question: 'What holds the business up, which system owns each pillar, and what does it all stand on?',
+      summary: 'The operating model on one page: a roof for the business in one sentence, one pillar per domain with its system of record and the facts it owns, and a foundation for the entity and the truth rules.',
+      useWhen: 'A board, buyer, or new hire needs the whole operating model in one glance, or the brief is fresh and you want to confirm it before mapping any flow.',
+      avoidWhen: 'The question is how work or money moves (operating map, handoffs, order journey) or a number that must tie out (finance recipes).',
+      include: ['3–6 pillars, one per domain', 'system of record on each capital', 'facts owned, not tasks or amounts', 'entity and truth rules as the foundation'],
+      prompt: 'Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin pillars mode to state the operating model on one page. The roof is the business in one sentence. Make one pillar per domain the business runs (3–6), name the system of record in the sublabel and set brand only for a real product, list the facts that system owns as items, and put the one-phrase truth claim in the tag. The foundation names the entity, the accounting basis, and the truth rules. Do not draw flows, ties, amounts, or headcounts.',
+    },
+  },
+  {
     id: 'business-order-journey', type: 'sequence', proof: 'order-path',
     presentation: { preset: 'classic', motion: 'trace', views: 'recommended' },
     signals: [['one order through every system', 17], ['order journey', 16], ['customer journey systems', 15], ['end to end order', 16], ['what happens when someone buys', 17]],

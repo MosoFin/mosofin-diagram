@@ -15,6 +15,7 @@ const TARGETS = [
   ['dataflow', 'product-analytics.dataflow.json', 'dataflow-product-analytics.html'],
   ['lifecycle', 'agent-run.lifecycle.json', 'lifecycle-agent-run.html'],
   ['architecture', 'web-app.architecture.json', 'web-app-rendered.html'],
+  ['pillars', 'northline-operating-pillars.pillars.json', 'pillars-northline-operating-pillars.html'],
 ];
 
 for (const [mode, input, output] of TARGETS) {

@@ -30,6 +30,17 @@ const CASES = [
     descriptionEn: 'The whole business in one map: demand, supply chain, inventory, commerce, payments, spend, payroll, bank and three separate ledgers, each node naming its system of record.',
   },
   {
+    id: 'operating-pillars',
+    type: 'pillars',
+    input: 'northline-operating-pillars.pillars.json',
+    output: 'northline-operating-pillars.pillars.html',
+    focus: 'books',
+    view: 'where-cash-lands',
+    accent: '#0f766e',
+    titleEn: 'How the Business Stands',
+    descriptionEn: 'The operating model on one page: the business in one sentence, five pillars each naming its system of record and the facts it owns, and the entity and truth rules underneath.',
+  },
+  {
     id: 'money-map',
     type: 'architecture',
     input: 'northline-money-map.architecture.json',
@@ -125,6 +136,7 @@ const SHAPES = {
   sequence: ['participants', 'messages'],
   dataflow: ['nodes', 'flows'],
   lifecycle: ['states', 'transitions'],
+  pillars: ['pillars', 'none'],
 };
 
 const TYPE_LABELS = {
@@ -133,6 +145,7 @@ const TYPE_LABELS = {
   sequence: 'Sequence',
   dataflow: 'Data flow',
   lifecycle: 'Lifecycle',
+  pillars: 'Pillars',
 };
 
 // Print-depth type hues shared with the site palette (guide page uses the same map).
@@ -142,6 +155,7 @@ const TYPE_ACCENTS = {
   sequence: '#6d28d9',
   dataflow: '#b45309',
   lifecycle: '#be123c',
+  pillars: '#0f766e',
 };
 
 function digest(buffer) {

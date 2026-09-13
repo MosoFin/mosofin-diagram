@@ -28,6 +28,7 @@ const EXAMPLES = {
   dataflow: 'product-analytics.dataflow.json',
   lifecycle: 'agent-run.lifecycle.json',
   architecture: 'web-app.architecture.json',
+  pillars: 'northline-operating-pillars.pillars.json',
 };
 
 function load(mode) {
@@ -315,6 +316,32 @@ const CASES = [
     ['Tag', 'legible', 'widen size']],
   ['architecture: component overlap suggests fix', 'architecture',
     (d) => { d.components[1].pos = [...d.components[0].pos]; }, ['Suggested fix', 'move "']],
+
+  // ---- pillars layout rules ----
+  ['pillars: duplicate id across roof and pillars', 'pillars',
+    (d) => { delete d.meta.views; d.pillars[0].id = d.roof.id; }, ['is used by both roof and pillars', 'unique across roof, pillars, and foundation']],
+  ['pillars: item wider than its legible minimum', 'pillars',
+    (d) => { d.pillars[0].items[0] = 'This fact is far too long to sit inside one pillar shaft'; },
+    ['Item', '7.5px legible minimum', 'shorten the item']],
+  ['pillars: label wider than its legible minimum', 'pillars',
+    (d) => { d.pillars[0].label = 'An Extremely Long Pillar Label Overflow'; },
+    ['Label', '8px legible minimum', 'shorten the label']],
+  ['pillars: roof sublabel wider than the lintel', 'pillars',
+    (d) => {
+      d.meta.viewBox = [640, 900];
+      d.pillars = d.pillars.slice(0, 3);
+      delete d.meta.views;
+      d.roof.sublabel = 'A supporting sentence that keeps going far beyond what one narrow lintel can carry at the legible minimum font size';
+    },
+    ['Roof sublabel', '8px legible minimum']],
+  ['pillars: authored viewBox shorter than the content', 'pillars',
+    (d) => { d.meta.viewBox = [960, 420]; }, ['viewBox height 420 is too short', 'set meta.viewBox[1] to at least']],
+  ['pillars: too many pillars for the authored width', 'pillars',
+    (d) => {
+      d.meta.viewBox = [640, 900];
+      d.pillars.push({ id: 'sixth', type: 'external', label: 'Sixth', items: ['a'] });
+      d.meta.views = [];
+    }, ['leave only', 'minimum 96px', 'widen meta.viewBox[0] to at least']],
 
 ];
 
@@ -1395,6 +1422,44 @@ test('sequence: segment title badge clears a nearby first message label', () => 
     && segmentY < messageY + messageH
     && segmentY + segmentH > messageY;
   assert.equal(overlaps, false, 'segment title badge must not cover the first message label');
+});
+
+test('pillars: the roof, pillars, and foundation are all focusable and views may cite any of them', () => {
+  const d = load('pillars');
+  d.meta.views = [{ id: 'all-bands', label: 'All bands', focus: [d.roof.id, d.pillars[0].id, d.foundation[0].id] }];
+  const { code, stderr, outPath } = render('pillars', d);
+  assert.equal(code, 0, stderr);
+  const svg = fs.readFileSync(outPath, 'utf8').match(/<svg\b[\s\S]*?<\/svg>/)[0];
+  for (const id of [d.roof.id, ...d.pillars.map((p) => p.id), ...d.foundation.map((f) => f.id)]) {
+    assert.match(svg, new RegExp(`data-node-id="${id}"`), id);
+  }
+  assert.doesNotMatch(svg, /data-edge-from=/, 'a pillar diagram draws no relationships');
+  assert.match(svg, /data-node-kind="roof"/);
+  assert.match(svg, /class="node-logo"/, 'branded capitals carry the logo layer');
+  assert.match(svg, /class="node-logoless"/, 'unbranded capitals carry the sigil plate');
+});
+
+test('pillars: a view citing an unknown id is rejected', () => {
+  const d = load('pillars');
+  d.meta.views = [{ id: 'ghost', label: 'Ghost', focus: ['ghost'] }];
+  const { code, stderr } = render('pillars', d);
+  assert.notEqual(code, 0);
+  assert.match(stderr, /references unknown semantic id "ghost"/);
+});
+
+test('pillars: the auto viewBox grows with the longest item list and the legend stays inside it', () => {
+  const short = load('pillars');
+  short.pillars.forEach((p) => { p.items = p.items.slice(0, 2); });
+  const long = load('pillars');
+  long.pillars[0].items = ['one', 'two', 'three', 'four', 'five'];
+  const heightOf = (doc) => {
+    const { code, stderr, outPath } = render('pillars', doc);
+    assert.equal(code, 0, stderr);
+    return Number(fs.readFileSync(outPath, 'utf8').match(/<svg viewBox="0 0 960 (\d+)"/)[1]);
+  };
+  const shortH = heightOf(short);
+  const longH = heightOf(long);
+  assert.equal(longH - shortH, 2 * 22, 'two extra item lines add two 22px rows');
 });
 
 process.on('exit', () => fs.rmSync(tmp, { recursive: true, force: true }));

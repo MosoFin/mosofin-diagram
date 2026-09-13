@@ -8,6 +8,17 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- New `pillars` diagram type: the operating model on one page, drawn as a temple. The roof states
+  the business in one sentence, each of 3–6 pillars is one domain with its system of record on the
+  capital (brand mark or role sigil), the facts that system owns in the shaft, and a one-phrase
+  truth claim on the plinth; the foundation names the entity and the truth rules. It has no
+  relationships, so it never implies a flow or a tie-out. Ships with `schemas/pillars.schema.json`,
+  `renderers/pillars/`, the `business-pillars` recipe (23 recipes), the Northline proof
+  `northline-operating-pillars` (gallery is now 10 artifacts / 90 checks), logo mode, guided views,
+  and legend support. Guided views and brand capture now accept types whose semantic nodes span
+  several collections.
+- Business onboarding now asks for the trigger and the outcome before a workflow is mapped, and
+  routes "what holds the business up, on one page" to `pillars`.
 - Dropped Chinese from the public site, recipe guide, viewer catalog, and
   identity gates. The skill is English-only: `meta.locale` accepts `en`.
 - How it works is now four named steps in a left-to-right slider: Add the skill,

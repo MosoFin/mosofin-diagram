@@ -107,6 +107,7 @@ try {
     ['sequence', 'cache-miss-request.sequence.json'],
     ['dataflow', 'product-analytics.dataflow.json'],
     ['lifecycle', 'agent-run.lifecycle.json'],
+    ['pillars', 'northline-operating-pillars.pillars.json'],
   ];
   for (const [mode, fixture] of fixtures) {
     const receipt = JSON.parse(run([
