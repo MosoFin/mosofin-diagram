@@ -1,0 +1,73 @@
+Date,JE,Account,Name,Debit,Credit,Memo
+2026-07-01,JE-412,1002 Cash - Chase 1002,Shopify DTC customers,1842.10,,Shopify sales receipt batch 07/01
+2026-07-01,JE-412,4000 Sales - DTC,Shopify DTC customers,,1842.10,Shopify sales receipt batch 07/01
+2026-07-03,JE-413,1002 Cash - Chase 1002,Shopify DTC customers,1210.55,,Shopify sales receipt batch 07/03
+2026-07-03,JE-413,4000 Sales - DTC,Shopify DTC customers,,1210.55,Shopify sales receipt batch 07/03
+2026-07-06,JE-414,1002 Cash - Chase 1002,Shopify DTC customers,2044.00,,Shopify sales receipt batch 07/06
+2026-07-06,JE-414,4000 Sales - DTC,Shopify DTC customers,,2044.00,Shopify sales receipt batch 07/06
+2026-07-09,JE-415,1002 Cash - Chase 1002,Shopify DTC customers,1568.30,,Shopify sales receipt batch 07/09
+2026-07-09,JE-415,4000 Sales - DTC,Shopify DTC customers,,1568.30,Shopify sales receipt batch 07/09
+2026-07-13,JE-416,1002 Cash - Chase 1002,Shopify DTC customers,1930.75,,Shopify sales receipt batch 07/13
+2026-07-13,JE-416,4000 Sales - DTC,Shopify DTC customers,,1930.75,Shopify sales receipt batch 07/13
+2026-07-16,JE-417,1002 Cash - Chase 1002,Shopify DTC customers,1402.20,,Shopify sales receipt batch 07/16
+2026-07-16,JE-417,4000 Sales - DTC,Shopify DTC customers,,1402.20,Shopify sales receipt batch 07/16
+2026-07-20,JE-418,1002 Cash - Chase 1002,Shopify DTC customers,2215.40,,Shopify sales receipt batch 07/20
+2026-07-20,JE-418,4000 Sales - DTC,Shopify DTC customers,,2215.40,Shopify sales receipt batch 07/20
+2026-07-23,JE-419,1002 Cash - Chase 1002,Shopify DTC customers,1687.90,,Shopify sales receipt batch 07/23
+2026-07-23,JE-419,4000 Sales - DTC,Shopify DTC customers,,1687.90,Shopify sales receipt batch 07/23
+2026-07-27,JE-420,1002 Cash - Chase 1002,Shopify DTC customers,1774.60,,Shopify sales receipt batch 07/27
+2026-07-27,JE-420,4000 Sales - DTC,Shopify DTC customers,,1774.60,Shopify sales receipt batch 07/27
+2026-07-30,JE-421,1002 Cash - Chase 1002,Shopify DTC customers,1998.15,,Shopify sales receipt batch 07/30
+2026-07-30,JE-421,4000 Sales - DTC,Shopify DTC customers,,1998.15,Shopify sales receipt batch 07/30
+2026-07-08,JE-422,4000 Sales - DTC,Shopify DTC customers,96.40,,Void sales receipt #10488 (duplicate)
+2026-07-08,JE-422,1002 Cash - Chase 1002,Shopify DTC customers,,96.40,Void sales receipt #10488 (duplicate)
+2026-07-02,JE-423,6050 Merchant Fees,Stripe,58.42,,Stripe processing fees w/e 07/02
+2026-07-02,JE-423,1002 Cash - Chase 1002,Stripe,,58.42,Stripe processing fees w/e 07/02
+2026-07-09,JE-424,6050 Merchant Fees,Stripe,71.10,,Stripe processing fees w/e 07/09
+2026-07-09,JE-424,1002 Cash - Chase 1002,Stripe,,71.10,Stripe processing fees w/e 07/09
+2026-07-16,JE-425,6050 Merchant Fees,Stripe,66.85,,Stripe processing fees w/e 07/16
+2026-07-16,JE-425,1002 Cash - Chase 1002,Stripe,,66.85,Stripe processing fees w/e 07/16
+2026-07-23,JE-426,6050 Merchant Fees,Stripe,74.02,,Stripe processing fees w/e 07/23
+2026-07-23,JE-426,1002 Cash - Chase 1002,Stripe,,74.02,Stripe processing fees w/e 07/23
+2026-07-30,JE-427,6050 Merchant Fees,Stripe,63.90,,Stripe processing fees w/e 07/30
+2026-07-30,JE-427,1002 Cash - Chase 1002,Stripe,,63.90,Stripe processing fees w/e 07/30
+2026-07-10,JE-428,4900 Refunds & Allowances,Shopify DTC customers,48.00,,Refund order #10502
+2026-07-10,JE-428,1002 Cash - Chase 1002,Shopify DTC customers,,48.00,Refund order #10502
+2026-07-24,JE-429,4900 Refunds & Allowances,Shopify DTC customers,72.50,,Refund order #10611 (damaged)
+2026-07-24,JE-429,1002 Cash - Chase 1002,Shopify DTC customers,,72.50,Refund order #10611 (damaged)
+2026-07-02,JE-430,1200 Accounts Receivable,Blue Bottle Wholesale,2400.00,,Invoice 1041 — 60 lb roasted
+2026-07-02,JE-430,4100 Sales - Wholesale,Blue Bottle Wholesale,,2400.00,Invoice 1041 — 60 lb roasted
+2026-07-15,JE-431,1200 Accounts Receivable,Harbor Grocery Co-op,960.00,,Invoice 1042 — 24 lb roasted
+2026-07-15,JE-431,4100 Sales - Wholesale,Harbor Grocery Co-op,,960.00,Invoice 1042 — 24 lb roasted
+2026-07-22,JE-432,1200 Accounts Receivable,Blue Bottle Wholesale,3200.00,,Invoice 1043 — 80 lb roasted
+2026-07-22,JE-432,4100 Sales - Wholesale,Blue Bottle Wholesale,,3200.00,Invoice 1043 — 80 lb roasted
+2026-07-14,JE-433,1002 Cash - Chase 1002,Blue Bottle Wholesale,2400.00,,ACH 88213 — pays invoice 1041
+2026-07-14,JE-433,1200 Accounts Receivable,Blue Bottle Wholesale,,2400.00,ACH 88213 — pays invoice 1041
+2026-07-29,JE-434,1002 Cash - Chase 1002,Harbor Grocery Co-op,960.00,,ACH 88377 — pays invoice 1042
+2026-07-29,JE-434,1200 Accounts Receivable,Harbor Grocery Co-op,,960.00,ACH 88377 — pays invoice 1042
+2026-07-05,JE-435,1300 Inventory - Green Coffee,Cafe Importadora SA,4380.00,,Bill IMP-2207 — 3 bags Huila
+2026-07-05,JE-435,2000 Accounts Payable,Cafe Importadora SA,,4380.00,Bill IMP-2207 — 3 bags Huila
+2026-07-19,JE-436,1300 Inventory - Green Coffee,Cafe Importadora SA,3120.00,,Bill IMP-2231 — 2 bags Sidamo
+2026-07-19,JE-436,2000 Accounts Payable,Cafe Importadora SA,,3120.00,Bill IMP-2231 — 2 bags Sidamo
+2026-07-12,JE-437,2000 Accounts Payable,Cafe Importadora SA,4380.00,,Pay bill IMP-2207
+2026-07-12,JE-437,1002 Cash - Chase 1002,Cafe Importadora SA,,4380.00,Pay bill IMP-2207
+2026-07-28,JE-438,2000 Accounts Payable,Cafe Importadora SA,3120.00,,Pay bill IMP-2231
+2026-07-28,JE-438,1002 Cash - Chase 1002,Cafe Importadora SA,,3120.00,Pay bill IMP-2231
+2026-07-15,JE-439,5000 Cost of Goods Sold,Shopify DTC customers,2910.00,,COGS relief — first half July
+2026-07-15,JE-439,1300 Inventory - Green Coffee,Shopify DTC customers,,2910.00,COGS relief — first half July
+2026-07-31,JE-440,5000 Cost of Goods Sold,Shopify DTC customers,3245.00,,COGS relief — second half July
+2026-07-31,JE-440,1300 Inventory - Green Coffee,Shopify DTC customers,,3245.00,COGS relief — second half July
+2026-07-07,JE-441,6100 Shipping & Supplies,Uline,240.00,,Boxes and mailers
+2026-07-07,JE-441,1002 Cash - Chase 1002,Uline,,240.00,Boxes and mailers
+2026-07-18,JE-442,6100 Shipping & Supplies,Bay Freight LLC,185.00,,LTL to Harbor Grocery
+2026-07-18,JE-442,1002 Cash - Chase 1002,Bay Freight LLC,,185.00,LTL to Harbor Grocery
+2026-07-25,JE-443,6100 Shipping & Supplies,Pacific Roasting Supply,312.40,,Valve bags
+2026-07-25,JE-443,1002 Cash - Chase 1002,Pacific Roasting Supply,,312.40,Valve bags
+2026-07-15,JE-444,6200 Payroll,Payroll (7 employees),6120.00,,Payroll 07/15 — net pay + withholdings
+2026-07-15,JE-444,1002 Cash - Chase 1002,Payroll (7 employees),,4896.00,Payroll 07/15 — net pay + withholdings
+2026-07-15,JE-444,2200 Payroll Taxes Payable,Payroll (7 employees),,1224.00,Payroll 07/15 — net pay + withholdings
+2026-07-31,JE-445,6200 Payroll,Payroll (7 employees),6120.00,,Payroll 07/31 — net pay + withholdings
+2026-07-31,JE-445,1002 Cash - Chase 1002,Payroll (7 employees),,4896.00,Payroll 07/31 — net pay + withholdings
+2026-07-31,JE-445,2200 Payroll Taxes Payable,Payroll (7 employees),,1224.00,Payroll 07/31 — net pay + withholdings
+2026-07-20,JE-446,2200 Payroll Taxes Payable,State Dept. of Revenue,1180.00,,Remit June withholdings
+2026-07-20,JE-446,1002 Cash - Chase 1002,State Dept. of Revenue,,1180.00,Remit June withholdings

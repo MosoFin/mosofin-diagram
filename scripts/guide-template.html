@@ -258,8 +258,8 @@
     (function () {
       'use strict';
       var recipes = JSON.parse(document.getElementById('guide-data').textContent);
-      var types = ['architecture','workflow','sequence','dataflow','lifecycle'];
-      var colors = { architecture:'#0891b2', workflow:'#047857', sequence:'#6d28d9', dataflow:'#b45309', lifecycle:'#be123c' };
+      var types = ['architecture','workflow','sequence','dataflow','lifecycle','ledger'];
+      var colors = { architecture:'#0891b2', workflow:'#047857', sequence:'#6d28d9', dataflow:'#b45309', lifecycle:'#be123c', ledger:'#0f766e' };
       var language = 'en';
       var activeType = 'all';
       var lastRecipe = null;
@@ -292,7 +292,7 @@
         document.getElementById('samples').innerHTML = t('samples').map(function (sample) { return '<button class="chip" type="button" data-query="'+escapeHtml(sample[1])+'">'+escapeHtml(sample[0])+'</button>'; }).join('');
       }
       function renderFilters() {
-        var labels = {architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle'};
+        var labels = {architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle',ledger:'Ledger'};
         document.getElementById('filters').innerHTML = ['all'].concat(types).map(function (type) { return '<button class="filter '+(activeType === type ? 'active':'')+'" type="button" data-filter="'+type+'">'+escapeHtml(type === 'all' ? t('all') : labels[type])+'</button>'; }).join('');
       }
       function renderCards() {

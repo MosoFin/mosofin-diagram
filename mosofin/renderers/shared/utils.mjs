@@ -108,6 +108,9 @@ const SUBTITLE_SLOT_RE = /^([ \t]*)<p class="subtitle">\[Subtitle description\]<
 const GUIDED_VIEWS_PLACEHOLDER = '<!-- MOSOFIN:GUIDED_VIEWS_DATA -->';
 const SOURCE_EVIDENCE_PLACEHOLDER = '    <!-- MOSOFIN:SOURCE_EVIDENCE_DATA -->';
 const I18N_PLACEHOLDER = '    <!-- MOSOFIN:I18N_DATA -->';
+const LEDGER_DATA_PLACEHOLDER = '    <!-- MOSOFIN:LEDGER_DATA -->';
+const CITY3D_VENDOR_PLACEHOLDER = '    <!-- MOSOFIN:CITY3D_VENDOR -->';
+const LEDGER_SLOT_RE = /    <!-- MOSOFIN:LEDGER_SLOT_START -->[\s\S]*?    <!-- MOSOFIN:LEDGER_SLOT_END -->/;
 
 function serializeScriptJson(value) {
   return JSON.stringify(value)
@@ -132,7 +135,13 @@ export function applyTemplate(template, {
   visualPreset = 'classic',
   nodeStyle = 'box',
   guidedViews = [],
+  presentation = null,
+  health = null,
+  asks = null,
   sourceEvidence = null,
+  ledger = null,
+  ledgerSlot = '',
+  city3dVendor = '',
 }) {
   if (!SVG_SLOT_RE.test(template)) {
     throw new Error('applyTemplate: template missing MOSOFIN:SVG_SLOT sentinel');
@@ -154,7 +163,17 @@ export function applyTemplate(template, {
   if (sourceEvidence && !template.includes(SOURCE_EVIDENCE_PLACEHOLDER)) {
     throw new Error(`applyTemplate: repository evidence requires placeholder ${JSON.stringify(SOURCE_EVIDENCE_PLACEHOLDER)}`);
   }
-  // Function replacers: a literal `$&`, `$'`, `$\`` or `$$` in titles, labels,
+  // The ledger slot is mandatory only when a ledger is actually delivered,
+  // mirroring the repository-evidence rule above.
+  if (ledger && (!template.includes(LEDGER_DATA_PLACEHOLDER) || !LEDGER_SLOT_RE.test(template))) {
+    throw new Error('applyTemplate: ledger playback requires the MOSOFIN:LEDGER_DATA and MOSOFIN:LEDGER_SLOT sentinels');
+  }
+  // City 3D vendor is optional for legacy/minimal templates; required only when injecting.
+  if (city3dVendor && !template.includes(CITY3D_VENDOR_PLACEHOLDER)) {
+    throw new Error('applyTemplate: City 3D vendor requires the MOSOFIN:CITY3D_VENDOR sentinel');
+  }
+  const ledgerJson = serializeScriptJson(ledger);
+  // Function replacers: a literal `  // Function replacers: a literal `$&``, `$'`, `$\`` or `$$` in titles, labels,
   // or rendered SVG must not be interpreted as a replacement pattern.
   const guidedViewsJson = serializeScriptJson(guidedViews);
   const sourceEvidenceJson = serializeScriptJson(sourceEvidence);
@@ -169,7 +188,12 @@ export function applyTemplate(template, {
     ? localizedTemplate.replace(I18N_PLACEHOLDER, () => i18nData)
     : localizedTemplate.replace(GUIDED_VIEWS_PLACEHOLDER, () => `${i18nData}\n    ${GUIDED_VIEWS_PLACEHOLDER}`);
   return templateWithI18n
-    .replace(TEMPLATE_PLACEHOLDERS[0], () => `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}">`)
+    .replace(TEMPLATE_PLACEHOLDERS[0], () => {
+      const presentationAttr = presentation
+        ? ` data-presentation="${esc(String(presentation))}"`
+        : '';
+      return `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}"${presentationAttr}>`;
+    })
     .replace(TEMPLATE_PLACEHOLDERS[1], () => `<title>${esc(translateMessage(resolvedLocale, 'page.title', { title }))}</title>`)
     .replace(TEMPLATE_PLACEHOLDERS[2], () => `<h1>${esc(title)}</h1>`)
     .replace(SUBTITLE_SLOT_RE, (_match, indent, newline = '') => renderedSubtitle
@@ -177,10 +201,23 @@ export function applyTemplate(template, {
       : '')
     .replace(SVG_SLOT_RE, () => svg)
     .replace(CARDS_SLOT_RE, () => cards)
-    .replace(GUIDED_VIEWS_PLACEHOLDER, () => `<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`)
+    .replace(GUIDED_VIEWS_PLACEHOLDER, () => {
+      const healthJson = health && typeof health === 'object'
+        ? `<script id="mosofin-health-data" type="application/json">${serializeScriptJson(health)}</script>\n    `
+        : '';
+      const asksJson = Array.isArray(asks) && asks.length
+        ? `<script id="mosofin-asks-data" type="application/json">${serializeScriptJson(asks)}</script>\n    `
+        : '';
+      return `${healthJson}${asksJson}<script id="mosofin-guided-views-data" type="application/json">${guidedViewsJson}</script>`;
+    })
     .replace(SOURCE_EVIDENCE_PLACEHOLDER, () => sourceEvidence
       ? `    <script id="mosofin-source-evidence-data" type="application/json">${sourceEvidenceJson}</script>`
-      : '');
+      : '')
+    .replace(LEDGER_DATA_PLACEHOLDER, () => ledger
+      ? `    <script id="mosofin-ledger-data" type="application/json">${ledgerJson}</script>`
+      : '')
+    .replace(LEDGER_SLOT_RE, () => (ledger && ledgerSlot ? ledgerSlot : ''))
+    .replace(CITY3D_VENDOR_PLACEHOLDER, () => (city3dVendor || ''));
 }
 
 // CJK and other wide/fullwidth glyphs render at roughly twice the advance

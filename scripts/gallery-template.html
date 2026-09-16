@@ -287,6 +287,7 @@
           <button class="filter-button" type="button" data-filter="sequence" aria-pressed="false">Sequence</button>
           <button class="filter-button" type="button" data-filter="dataflow" aria-pressed="false">Data flow</button>
           <button class="filter-button" type="button" data-filter="lifecycle" aria-pressed="false">Lifecycle</button>
+          <button class="filter-button" type="button" data-filter="ledger" aria-pressed="false">Ledger</button>
         </div>
         <div class="controls-note" data-en="Live HTML previews · open any artifact to explore">Live HTML previews · open any artifact to explore</div>
       </div>
@@ -295,7 +296,7 @@
     <section class="gallery-section" id="gallery">
       <div class="shell">
         <div class="section-intro">
-          <h2 data-en="Five lenses. Nine business stories.">Five lenses. Nine business stories.</h2>
+          <h2 data-en="Six lenses. Ten business stories.">Six lenses. Ten business stories.</h2>
           <p data-en="Every scenario has named reader views with a path-aware Story Trail, shareable navigation, dark/light rendering, self-contained export, and a machine-readable quality receipt.">Every scenario has named reader views with a path-aware Story Trail, shareable navigation, dark/light rendering, self-contained export, and a machine-readable quality receipt.</p>
         </div>
         <div class="gallery-grid" id="gallery-grid">
@@ -421,7 +422,7 @@ receipt [[CHECK_COUNT]] checks / [[ENTRY_COUNT]] artifacts / deterministic hashe
       });
       document.getElementById('preview-theme').addEventListener('click', function () { applyPreviewTheme(previewTheme === 'dark' ? 'light' : 'dark'); });
 
-      var allowed = ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle'];
+      var allowed = ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger'];
       var requested = new URLSearchParams(location.search).get('type') || 'all';
       applyFilter(allowed.indexOf(requested) >= 0 ? requested : 'all', false);
 

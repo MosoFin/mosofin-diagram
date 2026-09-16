@@ -19,6 +19,7 @@ const sampleImages = [
   'northline-order-path.dark.png',
   'northline-revenue-walk.dark.png',
   'northline-dispute.dark.png',
+  'northline-gl-2026-07.dark.png',
 ];
 
 test('landing metadata describes the full technical-diagram product and trusted hero promise', () => {
@@ -47,11 +48,11 @@ test('landing how-it-works is four numbered steps', () => {
 
 test('landing switchers are static and reference only real artifacts', () => {
   assert.equal((landing.match(/class="demo-tab"/g) || []).length, 3);
-  assert.equal((landing.match(/class="type-row"/g) || []).length, 5);
+  assert.equal((landing.match(/class="type-row"/g) || []).length, 6);
   assert.equal((landing.match(/class="agent-tab"/g) || []).length, 4);
   // Tabs are real buttons with selection state, so the switcher is reachable
   // by keyboard and announced to assistive tech.
-  assert.equal((landing.match(/role="tab"/g) || []).length, 12);
+  assert.equal((landing.match(/role="tab"/g) || []).length, 13);
   // One selected tab per switcher in the markup. CSS selectors also contain the
   // attribute, so count only where it appears on a button.
   assert.equal((landing.match(/role="tab" aria-selected="true"/g) || []).length, 3);

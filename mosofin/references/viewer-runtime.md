@@ -24,9 +24,39 @@ Story transitions classify only the exact relationship between adjacent authored
 
 `meta.animation: "trace"` enables a finite reader-controlled Live/Still trace. Static is the default. Still, reduced motion, page hiding, print, and canonical export preserve complete static meaning. Presentation Stage changes viewer chrome and framing, never authored geometry. This is not a mobile product feature; narrow layouts get containment only.
 
+## Ledger playback
+
+Only a `ledger` artifact carries this surface (`data-diagram-kind="ledger"` on the SVG and an
+embedded `mosofin-ledger-data` block). The strip under the diagram replays the period day by day:
+one aggregated money token per flow per day rides the authored path (`count · sum`; a reversal runs
+the same path backwards), the tempo is 0.5 to 10 days per second, and `G` toggles play. Playback
+claims the motion governor as owner `ledger`; Still, reduced motion, a hidden tab, print, or a
+running story pause it. Whenever tokens are not moving, volume badges at each flow midpoint carry
+the same totals, and the static tie-out panel below always shows accounts, flows, entities,
+tie-outs and the unmapped rows. `#ledger=day:YYYY-MM-DD` restores a still day. Overlays never enter
+canonical exports.
+
+When `ledger.scenarios[]` is present, the strip offers a scenario selector. Choosing one keeps a
+persistent **SCENARIO** banner, plays hollow projected tokens beside the baseline series on the same
+authored paths, and reveals a projected totals block in the panel. Tie-outs and the proof line never
+include scenario money. Export → WebM still records the baseline schedule only.
+
+
+## Ledger City 3D
+
+On a City artifact (`data-ledger-view="city"`), the strip offers **Iso | 3D**. Iso is the default and
+keeps the authored SVG City for orthogonal checks, single-svg gates, and PNG/WebM export. Choosing
+**3D** mounts `Mosofin.city3d` (Three.js + OrbitControls) over the diagram panel: account buildings
+by silhouette, entity ring, road tubes, health materials from the same tie-out rules as City Sim
+(unknown stays grey — never invent green). While `Mosofin.ledger` plays, vehicle meshes ride the
+road curves; inactive buildings dim and the destination pulses. FOLLOW lerps the 3D camera when
+enabled. Map view and non-ledger types never load the Three.js vendor bundle. Offline path uses the
+vendored IIFE in `assets/vendor/city3d.bundle.min.js` (pinned `three@0.170.0`); see
+`assets/vendor/README.md` for rebuild and optional CDN fallback.
+
 ## Canonical exports
 
-The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record a trace-enabled WebM. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.
+The export menu can copy/download full-diagram PNG, download JPEG/WebP, download a dual-theme SVG, and record WebM. Trace diagrams still use the ambient edge/node pulse scene. A `ledger` artifact records the GL month from the same `schedule()` the live strip plays: vehicles ride authored Map edges or City `city-road` paths, refunds reverse, and unmapped rows never become fake vehicles. Capture length is `days/daysPerSecond + 1s` (cap 20s). WebM is optional; Still and reduced-motion keep full static meaning without it. Viewer state—Guide, Lens, finder, focus, route, story, camera, radar, presentation, motion ownership, and temporary overlays—must be removed from canonical export.
 
 ### Share Card
 

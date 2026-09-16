@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "How the business runs — logo mode (as of 2026-07)",
+    "title": "How the business runs \u2014 logo mode (as of 2026-07)",
     "output": "business-operating-map-logo.html",
     "animation": "trace",
     "quality_profile": "showcase",
@@ -40,7 +40,7 @@
           "books_c",
           "close"
         ],
-        "note": "Operations are shared across the group; the books are not. Each entity closes its own period in its own QuickBooks company."
+        "note": "Operations are shared; each entity closes in its own QuickBooks. July GL replay: Map + City ledger samples."
       }
     ],
     "node_style": "logo"
@@ -49,8 +49,8 @@
     {
       "id": "crm",
       "type": "external",
-      "label": "Demand · CRM",
-      "sublabel": "HubSpot · pipeline",
+      "label": "Demand \u00b7 CRM",
+      "sublabel": "HubSpot \u00b7 pipeline",
       "brand": "hubspot",
       "pos": [
         40,
@@ -66,7 +66,7 @@
       "id": "commerce",
       "type": "frontend",
       "label": "Commerce",
-      "sublabel": "Shopify · orders · tax",
+      "sublabel": "Shopify \u00b7 orders \u00b7 tax",
       "brand": "shopify",
       "pos": [
         290,
@@ -82,7 +82,7 @@
       "id": "suppliers",
       "type": "external",
       "label": "Suppliers",
-      "sublabel": "vendors · lead times",
+      "sublabel": "vendors \u00b7 lead times",
       "pos": [
         40,
         60
@@ -95,8 +95,8 @@
     {
       "id": "erp",
       "type": "backend",
-      "label": "Supply chain · ERP",
-      "sublabel": "purchase orders · BOM",
+      "label": "Supply chain \u00b7 ERP",
+      "sublabel": "purchase orders \u00b7 BOM",
       "pos": [
         290,
         60
@@ -110,8 +110,8 @@
     {
       "id": "wms",
       "type": "backend",
-      "label": "Inventory · 3PL",
-      "sublabel": "warehouse · fulfilment",
+      "label": "Inventory \u00b7 3PL",
+      "sublabel": "warehouse \u00b7 fulfilment",
       "pos": [
         290,
         200
@@ -126,7 +126,7 @@
       "id": "payments",
       "type": "backend",
       "label": "Payments",
-      "sublabel": "Stripe · fees · payouts",
+      "sublabel": "Stripe \u00b7 fees \u00b7 payouts",
       "brand": "stripe",
       "pos": [
         550,
@@ -140,8 +140,8 @@
     {
       "id": "spend",
       "type": "security",
-      "label": "Spend · AP",
-      "sublabel": "bills · cards · approvals",
+      "label": "Spend \u00b7 AP",
+      "sublabel": "bills \u00b7 cards \u00b7 approvals",
       "pos": [
         550,
         60
@@ -159,8 +159,8 @@
     {
       "id": "payroll",
       "type": "security",
-      "label": "Payroll · HR",
-      "sublabel": "wages · taxes",
+      "label": "Payroll \u00b7 HR",
+      "sublabel": "wages \u00b7 taxes",
       "pos": [
         550,
         200
@@ -190,7 +190,7 @@
     {
       "id": "books_a",
       "type": "database",
-      "label": "Books — Entity A",
+      "label": "Books \u2014 Entity A",
       "sublabel": "QuickBooks company A",
       "pos": [
         1050,
@@ -206,7 +206,7 @@
     {
       "id": "books_b",
       "type": "database",
-      "label": "Books — Entity B",
+      "label": "Books \u2014 Entity B",
       "sublabel": "QuickBooks company B",
       "pos": [
         1050,
@@ -222,7 +222,7 @@
     {
       "id": "books_c",
       "type": "database",
-      "label": "Books — Entity C",
+      "label": "Books \u2014 Entity C",
       "sublabel": "QuickBooks company C",
       "pos": [
         1050,
@@ -238,8 +238,8 @@
     {
       "id": "close",
       "type": "external",
-      "label": "Close · reporting",
-      "sublabel": "controller · per entity",
+      "label": "Close \u00b7 reporting",
+      "sublabel": "controller \u00b7 per entity",
       "pos": [
         800,
         470
@@ -254,7 +254,7 @@
   "boundaries": [
     {
       "kind": "region",
-      "label": "Shared operating stack — one instance serves all three entities",
+      "label": "Shared operating stack \u2014 one instance serves all three entities",
       "wraps": [
         "crm",
         "commerce",
@@ -265,7 +265,7 @@
     },
     {
       "kind": "region",
-      "label": "Separate books — one entity per ledger, never consolidated here",
+      "label": "Separate books \u2014 one entity per ledger, never consolidated here",
       "wraps": [
         "books_a",
         "books_b",
@@ -292,7 +292,7 @@
       "id": "stock",
       "from": "erp",
       "to": "wms",
-      "label": "receipts · COGS",
+      "label": "receipts \u00b7 COGS",
       "variant": "dashed",
       "labelAt": [
         370,
@@ -394,7 +394,7 @@
       "id": "wages",
       "from": "payroll",
       "to": "bank",
-      "label": "wages · taxes",
+      "label": "wages \u00b7 taxes",
       "variant": "security"
     },
     {
@@ -514,27 +514,27 @@
       "dot": "emerald",
       "title": "Source of truth per domain",
       "items": [
-        "Customers and pipeline: CRM · Orders and tax collected: Commerce",
+        "Customers and pipeline: CRM \u00b7 Orders and tax collected: Commerce",
         "Cost, purchase orders and inventory: ERP / WMS",
-        "Settled cash: the bank · Revenue, AP, payroll and P&L: QuickBooks"
+        "Settled cash: the bank \u00b7 Revenue, AP, payroll and P&L: QuickBooks"
       ]
     },
     {
       "dot": "amber",
       "title": "Guardrails",
       "items": [
-        "The operating stack is shared; the ledgers are not — one entity per company file",
+        "The operating stack is shared; the ledgers are not \u2014 one entity per company file",
         "No consolidation is drawn: eliminations are a separate, stated decision",
-        "No amounts, balances or unit counts shown — none were supplied for 2026-07"
+        "No amounts, balances or unit counts shown \u2014 none were supplied for 2026-07"
       ]
     },
     {
       "dot": "cyan",
       "title": "How to read it",
       "items": [
-        "Solid emphasis is the money rail: order → charge → payout → bank → books",
+        "Solid emphasis is the money rail: order \u2192 charge \u2192 payout \u2192 bank \u2192 books",
         "Dashed lines carry facts that are not cash: stock, COGS, sales sync",
-        "Red-outlined nodes are approval gates — spend and payroll leave cash only through them"
+        "Red-outlined nodes are approval gates \u2014 spend and payroll leave cash only through them"
       ]
     }
   ]

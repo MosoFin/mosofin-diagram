@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import { applyTemplate, renderCards, esc } from './utils.mjs';
@@ -49,14 +50,24 @@ export async function loadDiagramWithBrandMarks(options) {
   return loaded;
 }
 
-const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger']);
 
 // Common CLI tail: fill the template and write the standalone HTML file.
-export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null }) {
+export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null, ledger = null, ledgerSlot = '' }) {
   if (!START_TYPES.has(diagramType)) throw new Error(`writeDiagram: unknown diagram type ${JSON.stringify(diagramType)}`);
   const outputGuard = outputPathGuards.get(outPath);
   if (outputGuard) resolveOutputPath(outputGuard);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  let city3dVendor = '';
+  if (ledger && ledger.view === 'city') {
+    const bundlePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../assets/vendor/city3d.bundle.min.js');
+    if (fs.existsSync(bundlePath)) {
+      const bundle = fs.readFileSync(bundlePath, 'utf8');
+      city3dVendor = `    <script id="mosofin-city3d-vendor">
+${bundle}
+    </script>`;
+    }
+  }
   fs.writeFileSync(outPath, applyTemplate(template, {
     title: meta.title,
     subtitle: meta.subtitle,
@@ -66,7 +77,13 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
     visualPreset: meta.visual_preset || 'classic',
     nodeStyle: meta.node_style || 'box',
     guidedViews: meta.views || [],
+    presentation: meta.presentation || null,
+    health: meta.health || null,
+    asks: meta.asks || null,
     sourceEvidence,
+    ledger,
+    ledgerSlot,
+    city3dVendor,
   }));
   outputPathGuards.delete(outPath);
   console.log(outPath);
@@ -78,6 +95,7 @@ const SEMANTIC_COLLECTIONS = {
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  ledger: 'accounts',
 };
 
 const RELATIONSHIP_COLLECTIONS = {
@@ -86,6 +104,7 @@ const RELATIONSHIP_COLLECTIONS = {
   sequence: 'messages',
   dataflow: 'flows',
   lifecycle: 'transitions',
+  ledger: 'flows',
 };
 
 // Relationship IDs are optional for backwards compatibility, but once an
@@ -158,7 +177,10 @@ export function svgRootAttrs(meta, kind) {
   const requestedProfile = process.env.MOSOFIN_QUALITY_PROFILE || meta.quality_profile;
   const qualityProfile = requestedProfile === 'showcase' ? 'showcase' : 'standard';
   const advisory = requestedProfile ? '' : ' data-quality-gates="advisory"';
-  return `role="img" lang="${esc(resolveLocale(meta.locale))}" aria-labelledby="mosofin-diagram-title mosofin-diagram-description"${animation}${preset}${engineeringProfile} data-quality-profile="${esc(qualityProfile)}"${advisory}`;
+  // Emitted only by the ledger renderer so the viewer can gate its playback
+  // module on the artifact rather than on a runtime guess.
+  const diagramKind = kind === 'ledger' ? ' data-diagram-kind="ledger"' : '';
+  return `role="img" lang="${esc(resolveLocale(meta.locale))}" aria-labelledby="mosofin-diagram-title mosofin-diagram-description"${animation}${preset}${engineeringProfile}${diagramKind} data-quality-profile="${esc(qualityProfile)}"${advisory}`;
 }
 
 // Keep the accessible name inside the SVG so it survives standalone SVG
@@ -191,6 +213,7 @@ export function focusNodeAttrs(id, label, metadata = {}, locale) {
     ['data-node-brand-id', metadata.brandId],
     ['data-node-brand-status', metadata.brandStatus],
     ['data-node-brand-source', metadata.brandSource],
+    ['data-arch-health', metadata.health],
   ].filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
     .map(([name, value]) => ` ${name}="${esc(String(value))}"`)
     .join('');
