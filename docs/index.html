@@ -146,7 +146,7 @@
   <div style="width:min(1120px,calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;border-top:1px solid #e6e8ec;border-bottom:1px solid #e6e8ec;padding:22px 0">
     <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">1 file</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">self-contained HTML</p></div>
     <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">9/9</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">validation checks</p></div>
-    <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">5 types</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">one visual language each</p></div>
+    <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">6 types</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">one visual language each</p></div>
     <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">181</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">brand marks built in</p></div>
     <div><p style="margin:0;font:700 22px/1.1 'Onest',sans-serif;letter-spacing:-.02em;color:#0a0b0d">MIT</p><p style="margin:4px 0 0;font-size:13px;color:#8b919c">free · no account</p></div>
   </div>
@@ -234,7 +234,7 @@
 
 <section id="types" style="padding:96px 0 0">
   <div style="width:min(1120px,calc(100% - 48px));margin:0 auto">
-    <p style="margin:0 0 14px;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0bb330">04 — Five ways to see the business</p>
+    <p style="margin:0 0 14px;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0bb330">04 — Six ways to see the business</p>
     <h2 style="margin:0 0 12px;max-width:22ch;font-size:clamp(28px,3.4vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.03em;color:#0a0b0d;text-wrap:balance">Pick the question. The type follows.</h2>
     <p style="margin:0 0 32px;max-width:58ch;font-size:16px;line-height:1.7;color:#5c6370">Describe what you need and Mosofin picks the right visual language. Every image is a real delivered artifact.</p>
     <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:28px;align-items:start">
@@ -272,6 +272,13 @@
             <span style="display:block">
               <span style="display:block;font-size:16px;font-weight:700;letter-spacing:-.01em">Lifecycle</span>
               <span class="type-sub">Refunds and disputes as states</span>
+            </span>
+          </button>
+          <button type="button" class="type-row" data-type="5" role="tab" aria-selected="false">
+            <span class="type-num">06</span>
+            <span style="display:block">
+              <span style="display:block;font-size:16px;font-weight:700;letter-spacing:-.01em">Ledger</span>
+              <span class="type-sub">The month replayed from the GL</span>
             </span>
           </button>
         <a href="https://diagram.mosofin.com/gallery.html" target="_blank" rel="noopener" style="margin-top:14px;font-size:14px;font-weight:600;color:#0a0b0d">Browse all nine verified demos →</a>
@@ -446,7 +453,8 @@
     { name: 'Workflow', img: 'samples/images/northline-close.dark.png', desc: 'Lanes by team or system: every handoff named, every gate that can stop the work, and an exception lane for breaks.' },
     { name: 'Sequence', img: 'samples/images/northline-order-path.dark.png', desc: 'One order, invoice or payout traced across every system it touches — the charge, the payout, the bank feed, and the three facts the books match.' },
     { name: 'Data Flow', img: 'samples/images/northline-revenue-walk.dark.png', desc: 'Gross to net, contra and pass-through items, timing differences, and the residual that must be zero.' },
-    { name: 'Lifecycle', img: 'samples/images/northline-dispute.dark.png', desc: 'What is in flight, what is awaiting the bank, what is booked, and what is a break.' }
+    { name: 'Lifecycle', img: 'samples/images/northline-dispute.dark.png', desc: 'What is in flight, what is awaiting the bank, what is booked, and what is a break.' },
+    { name: 'Ledger', img: 'samples/images/northline-gl-2026-07.dark.png', desc: 'The general-ledger export replayed day by day across the accounts: sales landing in cash, bills paid, payroll leaving, with tie-outs and every unmapped row listed.' }
   ];
   var agents = [
     { label: 'Claude Code', cmd: 'npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent claude-code --global --copy --yes' },

@@ -13,6 +13,7 @@ const COLLECTIONS = Object.freeze({
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  ledger: 'accounts',
 });
 const MARK_BY_LOOKUP = new Map();
 const MARK_BY_DOMAIN = new Map();

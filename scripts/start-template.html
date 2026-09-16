@@ -259,6 +259,7 @@
                 <button class="type-tab" type="button" role="tab" data-type="sequence" data-en="Sequence">Sequence</button>
                 <button class="type-tab" type="button" role="tab" data-type="dataflow" data-en="Data flow">Data flow</button>
                 <button class="type-tab" type="button" role="tab" data-type="lifecycle" data-en="Lifecycle">Lifecycle</button>
+                <button class="type-tab" type="button" role="tab" data-type="ledger" data-en="Ledger">Ledger</button>
               </div>
             </div>
             <p class="secondary-note" data-en="The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded.">The Start link carries only your agent, language, diagram type, and a coarse source label. Journey events stay in this browser session and are never sent by Mosofin. No repository path, title, node, relationship, or source JSON is recorded.</p>
@@ -315,7 +316,7 @@
       'use strict';
 
       var DATA = JSON.parse(document.getElementById('start-data').textContent);
-      var KNOWN_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+      var KNOWN_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'ledger']);
       var KNOWN_AGENTS = new Set(['cursor', 'codex', 'claude-code', 'opencode']);
       var KNOWN_SOURCES = new Set(['artifact', 'gallery', 'readme', 'direct']);
       var EVENT_KEY = 'mosofin.start.events.v1';

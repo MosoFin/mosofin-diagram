@@ -284,7 +284,20 @@ const RAW_RECIPES = [
       include: ['queued and running states', 'verification and approval', 'promotion and rollback', 'success, failure, cancellation'],
       prompt: 'Use Mosofin lifecycle mode to model the deployment object. Show queued, building, verifying, waiting for approval, promoting, rolling back, and every terminal outcome. Label the events and guards that permit each transition.',
     },
-  }];
+  },  {
+    id: 'gl-replay', type: 'ledger', proof: 'gl-replay',
+    presentation: { preset: 'classic', motion: 'trace', views: 'recommended' },
+    signals: [['replay the ledger', 18], ['general ledger', 16], ['journal entries', 16], ['watch the month', 15], ['money moving through the books', 18], ['gl export', 15], ['animate the books', 16], ['see the month unfold', 15], ['ledger replay', 18], ['play the month', 15]],
+    en: {
+      title: 'GL replay', question: 'What did the month look like as it moved through the books, entry by entry?',
+      summary: 'An account map replayed from the general-ledger journal: every dated row rides an authored credit-to-debit flow, the counterparties are listed, and what could not be placed is shown rather than allocated.',
+      useWhen: 'A controller or founder wants to watch the period run, sales landing in cash, bills paid, payroll leaving, and see the tie-outs and unmapped rows beside it.',
+      avoidWhen: 'You need the systems map rather than the accounts (business-operating-map), a single order in time (sequence), or a walk with no journal behind it.',
+      include: ['at most 12 accounts, cash marked', 'authored credit-to-debit flows only', 'the GL export as ledger.events with Proof: CSV', 'split entries unmapped, tie-outs only for supplied figures'],
+      prompt: 'Read references/finance-onboarding.md and the workspace FINANCE-BRIEF.md. Use Mosofin ledger mode to replay the period from the general-ledger export the user supplied. Author the accounts (mark the operating cash account), the credit-to-debit flows the journal actually uses, and the entities named in the export. Place every journal row on an authored flow as a ledger event; list split entries and off-map accounts as unmapped rows and never allocate them. Add a tie-out only for a figure the user supplied. Do not invent amounts, dates, or counterparties.',
+    },
+  },
+];
 
 // Every recipe links to one verified finance proof in the gallery (docs/gallery). Finance recipes
 // point at their own Northline Coffee artifact; the generic engineering recipes point at the

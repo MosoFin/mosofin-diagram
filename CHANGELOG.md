@@ -8,6 +8,69 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Three-statements **Conversation** layer (`meta.presentation: "conversation"`): Asset-Map-shaped
+  split of authored mini statements (Income / Balance / Cash flow) + articulation joints SVG +
+  **Baseline | Draft** toggle (`meta.statements`, `meta.draft`, `meta.verdict`). Draft amounts come
+  from ledger scenario `dtc-plus-10` and are labeled WHAT-IF — never invented. Default landing for
+  the Northline sample; Ask-first remains optional (`?ask=` / Ask mode). Deep-links `?line=` /
+  `?draft=1`. Docs: `docs/conversation-layer.md`, `docs/three-statements.md`.
+
+- Ask-first **performance metrics**: authored `meta.asks[]` fields `metric`, `metricLabel`,
+  optional `delta`, and `status` (`ok`|`watch`|`unknown`). Question cards show PPT-like
+  headline numbers; selecting an ask keeps a persistent performance strip above the diagram
+  (navigate asks ≈ navigate slides of numbers) while articulation joints stay on the map.
+  Northline sample remains honest (Sales ~$24k / no invented NI $). Docs: `docs/three-statements.md`.
+
+- Three-statements **Present / Health** live mode (gated by `meta.presentation: "articulation"`):
+  chrome-minimal Present with large verdict captions and auto/one-click walk of the four
+  guided joints; Health tint from optional authored `meta.health` only (`?present=1`,
+  `?health=1`, toolbar Present | Health | Walk the joints). Ordinary architecture diagrams
+  unchanged. Docs: `docs/cfo-live-articulation.md`, `docs/html-popularity.md`.
+
+- Ledger **City 3D** (`Mosofin.city3d`): optional Three.js layer on `data-ledger-view="city"` with
+  OrbitControls (orbit/zoom/pan), health-colored account/entity meshes from authored tie-outs only,
+  roads as tubes, and playback-synced vehicles from `schedule()`. **Iso | 3D** toggle defaults to
+  Iso (SVG City stays the portable/check/export surface; PNG/WebM still from SVG). Vendored pinned
+  `three@0.170.0` + OrbitControls under `mosofin/assets/vendor/` (IIFE bundle injected only into City
+  HTML). WebGL mount is skipped in CI without a browser.
+
+- Ledger **City Sim** upgrade: zoom/pan/wheel camera gated for `data-ledger-view="city"`, optional
+  **follow active token** while Play runs, and **orbit/rotate** of the isometric stage (buttons,
+  Alt/right-drag; Reset restores angle). Layout uses larger buildings, more district spacing, labels
+  below buildings with collision tiers, thicker lane-style `city-road`s, and clearer vehicles.
+  Playback dims the rest of the city and pulses the destination building. **Health colors**
+  (red→green) tint account buildings from authored tie-out residuals only — unknown stays neutral
+  grey (never invented green); legend explains Health. Map view and proof rules unchanged.
+
+- Ledger **Phase 3 what-if scenarios** (`ledger.scenarios[]`): named driver assumptions and projected
+  events ride the same authored flows as a second `schedule()` series. The viewer draws hollow tokens
+  plus a persistent **SCENARIO** banner; projected money is labelled in the panel overlay and never
+  enters tie-outs or the proof line. Cross-currency scenarios stay unconverted and show
+  "not comparable". Export → WebM records the **baseline** schedule only (safer shareable clip).
+  Northline ships a clearly labelled `+10% DTC sales (what-if)` fixture on Map and City.
+
+- Ledger **City/Map WebM**: Export → WebM records the GL month from `schedule()` as vehicles on
+  authored roads/edges (refunds reverse; unmapped never invent paths). Duration is
+  `days/daysPerSecond + 1s`, capped at 20s. Shared `Mosofin.motionGeometry` samples paths for both
+  the existing trace scene and the ledger scene registry (`Mosofin.motionScenes`). Still/reduced-motion
+  readers keep complete static meaning without recording.
+- Ledger **City view** (`meta.view: "city"`): same accounts, flows, entities and schedule as Map,
+  drawn as an isometric district (account buildings, entity-class ring, `city-road` markers). One
+  SVG per render; `meta.sibling` links the Map|City toggle. Ships `northline-gl-2026-07.city.ledger.json`
+  → `ledger-northline-gl-city.html`.
+- New `ledger` diagram type: an account map replayed from a general-ledger journal. Accounts are
+  the nodes, authored credit-to-debit flows are the only paths money may travel, and `ledger.events`
+  are dated, sourced rows that ride them (a reversal runs the same flow backwards). Split entries
+  and off-map accounts land in an always-visible unmapped bucket and are never allocated. The
+  artifact carries a static tie-out panel (accounts, flows, entities by class, tie-outs with
+  residuals, unmapped rows) computed in integer cents, a day-by-day playback strip
+  (`Mosofin.ledger`, key `G`) on the shared flow-token engine, volume badges for still and
+  reduced-motion readers, and `#ledger=day:` deep links. `proof` is `authored` or `csv`;
+  `connected` is unrepresentable, and a CSV badge names the file, SHA-256 and row count. Ships
+  with a Northline GL fixture whose CSV and events come from one journal definition
+  (`scripts/build-ledger-fixture.mjs`). The five existing diagram types are unchanged; their goldens
+  re-render only because the shared viewer grew.
+
 - Dropped Chinese from the public site, recipe guide, viewer catalog, and
   identity gates. The skill is English-only: `meta.locale` accepts `en`.
 - How it works is now four named steps in a left-to-right slider: Add the skill,
