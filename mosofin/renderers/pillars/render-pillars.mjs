@@ -26,6 +26,7 @@ import { resolveLegend, renderLegend as renderResolvedLegend } from '../shared/l
 import { fittedNodeFontSize, minimumNodeTextWidth, nodeTextFit } from '../shared/text-fit.mjs';
 import { brandMetadataFor, renderBrandMark } from '../shared/brand-marks.mjs';
 import { renderLogoNode, renderLogolessBox } from '../shared/node-style.mjs';
+import { renderDomainIcon } from '../shared/domain-icons.mjs';
 import { translateMessage as i18nText } from '../shared/i18n.mjs';
 import { asArray } from '../shared/geometry.mjs';
 
@@ -260,7 +261,8 @@ function renderPillar(pillar) {
   const sub = hasSub
     ? `\n          <text data-detail="context" x="${cx}" y="${capital.y + 52}" class="t-muted" font-size="${fittedNodeFontSize(pillar.sublabel, capital.width, ...textFit.sublabel)}" text-anchor="middle">${esc(pillar.sublabel)}</text>`
     : '';
-  const brand = renderBrandMark(pillar, { x: capital.x + capital.width - 22, y: capital.y + 6 });
+  const brand = renderBrandMark(pillar, { x: capital.x + capital.width - 22, y: capital.y + 6 })
+    || renderDomainIcon(pillar, { x: capital.x + capital.width - 20, y: capital.y + 7, size: 13, kind: pillar.type });
   const logoArt = renderLogoNode(pillar, { ...capital, label: pillar.label });
   const logoLayer = logoArt || renderLogolessBox(pillar, { ...capital, kind: pillar.type });
   const items = asArray(pillar.items).map((item, index) => {
@@ -303,7 +305,8 @@ function renderFoundationBlock(block) {
   const sub = hasSub
     ? `\n          <text data-detail="context" x="${block.cx}" y="${block.y + 38}" class="t-muted" font-size="${fittedNodeFontSize(block.sublabel, block.width, ...textFit.foundationSublabel)}" text-anchor="middle">${esc(block.sublabel)}</text>`
     : '';
-  const brand = renderBrandMark(block, { x: block.x + block.width - 22, y: block.y + 6 });
+  const brand = renderBrandMark(block, { x: block.x + block.width - 22, y: block.y + 6 })
+    || renderDomainIcon(block, { x: block.x + block.width - 20, y: block.y + 7, size: 13, kind: block.type });
   const logoArt = renderLogoNode(block, { x: block.x, y: block.y, width: block.width, height: block.height, label: block.label });
   const logoLayer = logoArt || renderLogolessBox(block, { x: block.x, y: block.y, width: block.width, height: block.height, kind: block.type });
   const passport = {

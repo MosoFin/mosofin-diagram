@@ -69,6 +69,8 @@ foundation exists. A complete worked example lives at
   leave it out when the brief does not state them.
 - `meta.node_style: "logo"` swaps every capital for its brand mark, exactly as
   in the other renderers; geometry is identical in both styles.
+- A pillar or foundation block with no brand mark can set `icon` to a domain
+  pictogram (`mosofin icons`), such as `close`, `entity`, or `rules`.
 
 ## Failure modes
 

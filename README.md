@@ -233,6 +233,11 @@ mark ships inside the skill: no network call, no account. A node whose software 
 semantic role glyph rather than borrowing someone else's logo, and readers can switch either way in
 the viewer (**Box / Logo** in the toolbar) without re-rendering.
 
+Where there is no logo to show (suppliers, a 3PL warehouse, the controller, a legal entity, or a
+product with no openly licensed mark such as NetSuite or Ramp) set `icon` to one of 31 business
+pictograms from Lucide (ISC). `node bin/mosofin.mjs icons` lists them. They draw in the node's
+semantic colour, so they read as a role and never as a vendor logo.
+
 Mosofin also accepts pasted Mermaid `flowchart`, `sequenceDiagram`, and `stateDiagram` input and re-authors it as a checked diagram.
 
 ## How it works

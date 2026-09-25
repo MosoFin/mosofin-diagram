@@ -105,6 +105,7 @@
       "label": "Close and review",
       "sublabel": "Controller · monthly",
       "tag": "zero-difference gate",
+      "icon": "close",
       "items": [
         "Payout rec to zero",
         "Bank rec to statement",
@@ -118,13 +119,15 @@
       "id": "entity",
       "type": "external",
       "label": "Northline Coffee LLC",
-      "sublabel": "One legal entity · accrual basis · no consolidation drawn"
+      "sublabel": "One legal entity · accrual basis · no consolidation drawn",
+      "icon": "entity"
     },
     {
       "id": "truth",
       "type": "security",
       "label": "Truth rules",
-      "sublabel": "Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard"
+      "sublabel": "Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard",
+      "icon": "rules"
     }
   ],
   "cards": [

@@ -7,6 +7,7 @@ import { installRendererDiagnosticBoundary, throwDiagnosticProblems } from './di
 import { validateEngineeringProfile } from './engineering-profiles.mjs';
 import { resolveOutputPath } from './output-path.mjs';
 import { prepareDiagramBrandMarks } from './brand-marks.mjs';
+import { validateDomainIcons } from './domain-icons.mjs';
 import { resolveLocale, translateMessage } from './i18n.mjs';
 
 installRendererDiagnosticBoundary();
@@ -24,6 +25,7 @@ export function loadDiagram({ rendererDir, diagramType, defaultExample, argv = p
   validateGuidedViews(diagramType, diagram);
   validateRelationshipIds(diagramType, diagram);
   validateEngineeringProfile(diagramType, diagram);
+  validateDomainIcons(diagramType, semanticNodesWithPaths(diagramType, diagram));
   const sourceEvidence = verifyRepositoryEvidence(diagramType, diagram, process.env.MOSOFIN_REPO_ROOT);
   const template = fs.readFileSync(path.join(skillRoot, 'assets/template.html'), 'utf8');
   // Optional chaining: in degraded mode (no ajv) malformed input must still
@@ -83,6 +85,15 @@ const SEMANTIC_COLLECTIONS = {
   lifecycle: 'states',
   pillars: ['roof', 'pillars', 'foundation'],
 };
+
+export function semanticNodesWithPaths(diagramType, diagram) {
+  const collections = [SEMANTIC_COLLECTIONS[diagramType]].flat().filter(Boolean);
+  return collections.flatMap((collection) => {
+    const value = diagram?.[collection];
+    if (Array.isArray(value)) return value.map((node, index) => ({ node, path: `/${collection}/${index}` }));
+    return value && typeof value === 'object' ? [{ node: value, path: `/${collection}` }] : [];
+  });
+}
 
 export function semanticNodesOf(diagramType, diagram) {
   const collections = [SEMANTIC_COLLECTIONS[diagramType]].flat().filter(Boolean);

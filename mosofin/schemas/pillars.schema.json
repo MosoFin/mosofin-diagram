@@ -181,6 +181,9 @@
           "brand": {
             "$ref": "common.schema.json#/$defs/brandMark"
           },
+          "icon": {
+            "$ref": "common.schema.json#/$defs/domainIcon"
+          },
           "items": {
             "type": "array",
             "maxItems": 5,
@@ -223,6 +226,9 @@
           },
           "brand": {
             "$ref": "common.schema.json#/$defs/brandMark"
+          },
+          "icon": {
+            "$ref": "common.schema.json#/$defs/domainIcon"
           }
         }
       }

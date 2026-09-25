@@ -74,6 +74,7 @@
       "type": "external",
       "label": "Suppliers",
       "sublabel": "green coffee · vendors",
+      "icon": "supplier",
       "pos": [
         40,
         40
@@ -89,6 +90,7 @@
       "label": "Supply chain · ERP",
       "sublabel": "NetSuite · POs · landed cost",
       "tag": "cost SoT",
+      "icon": "supply-chain",
       "pos": [
         195,
         130
@@ -104,6 +106,7 @@
       "label": "Inventory · 3PL",
       "sublabel": "NetSuite WMS · 3PL",
       "tag": "units SoT",
+      "icon": "warehouse",
       "pos": [
         460,
         130
@@ -151,6 +154,7 @@
       "label": "Spend · AP",
       "sublabel": "Ramp · bills · cards",
       "tag": "approval gate",
+      "icon": "spend",
       "pos": [
         195,
         236

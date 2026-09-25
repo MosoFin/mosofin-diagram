@@ -74,6 +74,11 @@ const SIGIL_SHAPE = {
             <circle cx="8" cy="8" r="1.2" class="sigil-fill"/>`,
 };
 
+// The colour tone a node kind draws its sigil or domain icon in.
+export function sigilTone(kind) {
+  return SIGIL_TONE[Object.hasOwn(SIGIL_SHAPE, kind) ? kind : 'neutral'] || 'external';
+}
+
 // A quiet, renderer-owned role stamp. It is authored SVG content rather than a
 // viewer overlay, so it survives canonical export while adding no focus target,
 // accessible name, layout box, or interaction state of its own.

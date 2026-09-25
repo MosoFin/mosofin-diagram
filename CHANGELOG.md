@@ -8,6 +8,15 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Domain icons for nodes without a logo. Architecture components and pillars accept an optional
+  `icon` naming one of 31 business pictograms (supplier, supply-chain, warehouse, spend, close,
+  entity, rules, and more) drawn from Lucide (ISC, pinned `lucide-static` 1.48.0, licence shipped in
+  `domain-icons/`). Logo mode draws it in place of the generic role sigil and box mode shows it in
+  the corner badge slot; a brand mark always wins. `mosofin icons` lists them, unknown values fail
+  validation with suggestions, and `npm test` checks the generated catalogue is fresh. NetSuite and
+  Ramp stay unbranded: neither ships an openly licensed mark in Simple Icons 16.32, and Oracle's
+  guidelines forbid imitating its logos. The operating map and pillars samples now use icons for
+  Suppliers, NetSuite, the 3PL, Ramp, Close and review, the legal entity and the truth rules.
 - Redesigned the business operating map around the layout finance professionals already use:
   procure to pay on the left, order to cash on the right, inventory and the bank in the middle,
   and record to report along the bottom. Goods run left to right and cash converges on the bank.

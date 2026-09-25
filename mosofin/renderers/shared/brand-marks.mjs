@@ -6,6 +6,7 @@ import net from 'node:net';
 import { BRAND_MARKS } from './generated-brand-marks.mjs';
 import { throwDiagnosticError } from './diagnostics.mjs';
 import { esc, textUnits } from './utils.mjs';
+import { domainIconFor } from './domain-icons.mjs';
 
 const COLLECTIONS = Object.freeze({
   architecture: 'components',
@@ -522,12 +523,16 @@ export function brandMetadataFor(node) {
   } : {};
 }
 
+function hasCornerMark(node) {
+  return Boolean(brandMarkFor(node) || domainIconFor(node));
+}
+
 export function brandLabelFitWidth(node, width) {
-  return brandMarkFor(node) ? Math.max(1, width - 48) : width;
+  return hasCornerMark(node) ? Math.max(1, width - 48) : width;
 }
 
 export function brandTopRailProblem(node, width, minimumFontSize, subject = 'Node') {
-  if (!brandMarkFor(node)) return null;
+  if (!hasCornerMark(node)) return null;
   const available = width - 48;
   const required = textUnits(node.label) * minimumFontSize * 0.6;
   if (available >= required) return null;

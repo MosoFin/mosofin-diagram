@@ -50,6 +50,7 @@ while IFS= read -r -d '' record; do
     mosofin/test | mosofin/test/* | \
     mosofin/package-lock.json | \
     mosofin/scripts/generate-brand-marks.mjs | \
+    mosofin/scripts/generate-domain-icons.mjs | \
     mosofin/scripts/generate-validators.mjs)
       continue
       ;;

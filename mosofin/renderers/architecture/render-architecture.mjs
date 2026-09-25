@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { esc, renderDefinitions, renderSemanticSigil, textUnits } from '../shared/utils.mjs';
 import { animateAttr, focusEdgeAttrs, focusNodeAttrs, focusNodeTitle, loadDiagramWithBrandMarks, writeDiagram, svgAccessibleText, svgRootAttrs } from '../shared/cli.mjs';
 import { renderLogoNode, renderLogolessBox } from '../shared/node-style.mjs';
+import { renderDomainIcon } from '../shared/domain-icons.mjs';
 import { componentBox, boundaryBox, connectionPath } from '../shared/layout-report.mjs';
 import { throwDiagnosticProblems } from '../shared/diagnostics.mjs';
 import { legendFootprint, relationshipLegendObstacles, resolveLegend, renderLegend as renderResolvedLegend } from '../shared/legend.mjs';
@@ -1002,7 +1003,8 @@ function renderComponent(c) {
   const tag = c.tag
     ? `\n        <text data-detail="fine" x="${cx}" y="${c.y + c.height - 8}" class="${accent}" font-size="${fittedNodeFontSize(c.tag, c.width, componentTextFit.tagPreferred, componentTextFit.tagMinimum)}" text-anchor="middle">${esc(c.tag)}</text>`
     : '';
-  const brand = renderBrandMark(c, { x: c.x + c.width - 22, y: c.y + 6 });
+  const brand = renderBrandMark(c, { x: c.x + c.width - 22, y: c.y + 6 })
+    || renderDomainIcon(c, { x: c.x + c.width - 20, y: c.y + 7, size: 13, kind: c.type });
   const logoArt = renderLogoNode(c, { x: c.x, y: c.y, width: c.width, height: c.height, label: c.label });
   const logoLayer = logoArt || renderLogolessBox(c, { x: c.x, y: c.y, width: c.width, height: c.height, kind: c.type });
   const logoLabelY = c.y + c.height - 9;
