@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="mosofin 1.0.0-dev.0">
-  <title>Northline Coffee — Month-End Close Runbook (2026-07) Diagram</title>
+  <title>Northline Coffee — How the business stands (as of 2026-07) Diagram</title>
   <script>
     // Resolve the theme before first paint so light-preference users don't
     // see a dark flash. The toolbar script below re-applies with UI state.
@@ -4980,11 +4980,11 @@
            data-preset-badge-blueprint="BLUEPRINT / REV 01"
            data-preset-badge-editorial="EDITORIAL / FIELD NOTE">
         <div class="pulse-dot"></div>
-        <h1>Northline Coffee — Month-End Close Runbook (2026-07)</h1>
+        <h1>Northline Coffee — How the business stands (as of 2026-07)</h1>
       </div>
     </div>
 
-    <script id="mosofin-guided-views-data" type="application/json">[{"id":"pull-sources","label":"Pull the sources","focus":["freeze","export_payouts","bank_statement","sync_receipts"],"note":"Each system hands over its month: Shopify orders, Stripe payouts and fees, the Chase statement, and the QuickBooks sync."},{"id":"reconcile-and-review","label":"Reconcile and review","focus":["book_fees","bank_rec","review_pl","lock"],"note":"The controller books fees, reconciles Chase 1002 to zero difference, reviews the P\u0026L, and only then locks the period."},{"id":"breaks","label":"When it does not tie","focus":["bank_rec","unmatched","book_fees"],"note":"An unmatched deposit stops the close. It is investigated and re-booked; the period is never locked with an open break."}]</script>
+    <script id="mosofin-guided-views-data" type="application/json">[{"id":"what-sells","label":"What sells and who charges","focus":["commerce","payments"],"note":"Shopify owns the order and the tax it collected; Stripe owns the charge, the fee and the payout. Neither is the books."},{"id":"where-cash-lands","label":"Where cash lands","focus":["payments","bank","books"],"note":"A payout is settled cash only when Chase 1002 shows it. QuickBooks recognizes revenue; the Shopify dashboard never does."},{"id":"who-closes","label":"Who closes and on what rules","focus":["controller","books","truth"],"note":"The controller ties payouts and the bank to zero before the period locks. The truth rules underneath decide every disagreement."}]</script>
 
     <script id="mosofin-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Commerce","viewer.kind.backend":"Payments","viewer.kind.database":"Ledger","viewer.kind.cloud":"Bank","viewer.kind.security":"Control","viewer.kind.messagebus":"Sync","viewer.kind.external":"Counterparty","viewer.kind.neutral":"Note","viewer.kind.node":"System","viewer.kind.start":"Opened","viewer.kind.active":"In flight","viewer.kind.waiting":"Awaiting","viewer.kind.decision":"Tie-out","viewer.kind.success":"Booked","viewer.kind.failure":"Break","viewer.kind.roof":"Shared goal","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.nodestyle.title":"Switch node style (box or logo)","viewer.nodestyle.box":"Box","viewer.nodestyle.logo":"Logo","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"S cycles","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"MOSOFIN / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.story":"the guided story","viewer.owner.chapter":"the active chapter","viewer.owner.chapterPreview":"the chapter delta preview","viewer.owner.handoff":"the chapter handoff","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyShareCard":"Copy Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.period":"Clipboard image write not supported by this browser.","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.copiedShare":"Copied Share Card","viewer.export.downloadedShare":"Downloaded Share Card","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Route: {source} → {target} · {count} directed hop","viewer.export.card.routeSummary.other":"Route: {source} → {target} · {count} directed hops","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"MOSOFIN · ROUTE · {hops}","viewer.export.card.reachBadge":"MOSOFIN · {direction} REACH","viewer.export.card.defaultBadge":"MOSOFIN · {preset} · {theme}","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guided.region":"Guided diagram views","viewer.guided.previous":"Previous guided view","viewer.guided.previous.title":"Previous guided view ([)","viewer.guided.next":"Next guided view","viewer.guided.next.title":"Next guided view (])","viewer.guided.views":"Guided views","viewer.guided.explore":"Explore this system","viewer.guided.intro":"Step through curated paths without changing the source diagram.","viewer.guided.trail":"Story trail","viewer.guided.beat":"Beat","viewer.guided.nextBeat":"Next","viewer.guided.play":"Play guided story","viewer.guided.play.title":"Play guided story (P)","viewer.guided.pause":"Pause guided story","viewer.guided.pause.title":"Pause guided story (P)","viewer.guided.replay":"Replay guided story","viewer.guided.replay.title":"Replay guided story (P)","viewer.guided.playStory":"Play story","viewer.guided.pauseStory":"Pause","viewer.guided.replayStory":"Replay story","viewer.guided.motionUnavailable":"Story playback unavailable while motion is Still","viewer.guided.enableMotion":"Switch motion to Live to play the guided story","viewer.guided.selectBeatLink":"Select a Story Beat to copy its exact link","viewer.guided.copyMoment":"Copy moment","viewer.guided.momentCopied":"Moment link copied","viewer.guided.momentCopyFailed":"Could not copy story moment link","viewer.guided.copied":"Copied","viewer.guided.copyFailed":"Copy failed","viewer.guided.showAll":"Show all","viewer.guided.showAll.aria":"Show entire diagram","viewer.guided.chapters":"Story chapters","viewer.guided.storyTrail":"Story trail for {label}: {count} beats","viewer.guided.chapter.open":"Open chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.current":"Current chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.selectedNodes":"{count} selected nodes","viewer.guided.chapter.stops":"{count} stops","viewer.guided.chapter.stop.one":"{count} stop","viewer.guided.chapter.stop.other":"{count} stops","viewer.guided.chapter.current.title":"{label} — current chapter, {count} stops","viewer.guided.chapter.delta.expanded":"{stay} stay, {enter} enter, {leave} leave","viewer.guided.chapter.delta.aria":"Open chapter {index} of {total}: {label}. Chapter focus delta: {delta}","viewer.guided.chapter.delta.title":"{label} — {delta} chapter focus","viewer.guided.handoff":"{from} → {to} · via {label}","viewer.guided.share.chapter":"Chapter {index} / {total}","viewer.guided.share.initial":"Chapter 01 / 01","viewer.guided.share.default":"Guided chapter","viewer.guided.state.ready":"Ready","viewer.guided.state.playing":"Playing","viewer.guided.state.settled":"Settled","viewer.guided.state.paused":"Paused","viewer.guided.state.pinned":"Pinned","viewer.guided.state.still":"Still","viewer.guided.share.step":"Step {index} / {total} · {label}","viewer.guided.share.staticMoment":"{step} · Static moment","viewer.guided.share.complete":"{count} steps complete · {note}","viewer.guided.share.settled":"Path settled for reading.","viewer.guided.share.staticPath":"{count} steps · Static path","viewer.guided.share.ready":"{count} steps · Ready","viewer.guided.share.aria":"{state} chapter {index} of {total}: {label}. {beat}. {route}","viewer.guided.beat.start":"Beat {index} / {total} · {label} · starting point","viewer.guided.beat.forward":"Beat {index} / {total} · {from} → {to}","viewer.guided.beat.reverse":"Beat {index} / {total} · {from} → {to} · reverse authored link","viewer.guided.beat.multiple":"Beat {index} / {total} · {from} ⇄ {to} · {count} authored links","viewer.guided.beat.group":"Beat {index} / {total} · {from} · {to} · grouped · no direct link","viewer.guided.beat.aria.prefix":"Story beat {index} of {total}: {label}. ","viewer.guided.beat.aria.start":"Starting point.","viewer.guided.beat.aria.forward":"From {from} through one authored forward relationship.","viewer.guided.beat.aria.reverse":"From {from}; the authored relationship points from {to} to {from}.","viewer.guided.beat.aria.multiple":"From {from} through {count} authored relationships; shown without arbitrary motion.","viewer.guided.beat.aria.group":"Grouped from {from} with no direct authored relationship.","viewer.guided.caption.start":"Starting point","viewer.guided.caption.grouped":"Grouped transition · no direct authored link","viewer.guided.caption.more":" +{count} more","viewer.guided.caption.reverse":"Reverse authored relationship","viewer.guided.caption.relationships":"{count} authored relationships","viewer.guided.caption.relationship":"Authored relationship","viewer.guided.caption.direction":"authored direction: {from} → {to}","viewer.guided.caption.starting":"Authored starting point","viewer.guided.beatLink":"Copy link to current story moment: Beat {index} of {total}: {label}","viewer.guided.noStory":"This diagram has no authored guided story.","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.story":"Play the guided story","viewer.guide.story.hint":"Walk the authored chapters and real relationships.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships} · {views}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.fact.view.one":"{count} guided view","viewer.guide.fact.view.other":"{count} guided views","viewer.guide.story.available.one":"Walk {count} authored chapter and its real relationships.","viewer.guide.story.available.other":"Walk {count} authored chapters and their real relationships.","viewer.guide.story.unavailable":"No authored guided story in this diagram.","viewer.guide.open":"Open diagram guide","viewer.guide.noStory":"This diagram has no authored guided story.","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Route probe","viewer.route.start":"Choose a start node","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Traced route","viewer.route.pickTwo":"Pick two semantic nodes on the diagram","viewer.route.pickOne":"Pick a semantic node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Choose the source, then the destination. Direction matters.","viewer.route.destination":"Choose a destination from {label}","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"A route needs two distinct semantic nodes.","viewer.route.unreachable":"No directed route to {label}","viewer.route.unreachable.detail":"{target} is not reachable from {source}. Pick a highlighted destination.","viewer.route.start.instructions":"Select the source. The next step will reveal only directed destinations.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest authored route","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} directed hop","viewer.route.overview.hop.other":"{count} directed hops","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} directed destination available. Pick a highlighted node.","viewer.route.destination.count.other":"{count} directed destinations available. Pick a highlighted node.","viewer.route.noOutgoing":"No outgoing route starts here. Clear and choose another source.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare business roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two roles. One reveals everything it touches; two compare only the direct links between them.","viewer.lens.kinds":"Business roles","viewer.lens.choose":"Choose a role to inspect its systems and everything they touch.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
     <div class="guided-views no-print" id="guided-views" hidden aria-label="Guided diagram views">
@@ -5029,9 +5029,9 @@
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="MOSOFIN / PLATE 04">
-      <svg viewBox="0 0 720 900" role="img" lang="en" aria-labelledby="mosofin-diagram-title mosofin-diagram-description" data-animation="trace" data-preset="classic" data-quality-profile="showcase">
-        <title id="mosofin-diagram-title">Northline Coffee — Month-End Close Runbook (2026-07)</title>
-        <desc id="mosofin-diagram-description">A workflow diagram generated by Mosofin.</desc>
+      <svg viewBox="0 0 960 458" role="img" lang="en" aria-labelledby="mosofin-diagram-title mosofin-diagram-description" data-preset="classic" data-quality-profile="showcase">
+        <title id="mosofin-diagram-title">Northline Coffee — How the business stands (as of 2026-07)</title>
+        <desc id="mosofin-diagram-description">A pillars diagram generated by Mosofin.</desc>
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -5054,221 +5054,282 @@
         <!-- Background Grid -->
         <rect width="100%" height="100%" fill="url(#grid)" />
 
-        <!-- Swimlanes -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-0" x="40" y="52" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="74" class="t-dim" font-size="10" font-weight="600">01 / Shopify</text>
+        <!-- Roof: the shared goal -->
+        <g id="node-goal" data-node-id="goal" data-node-label="Northline Coffee roasts and sells coffee direct to consumers and to wholesale accounts" tabindex="0" role="button" aria-label="Focus Northline Coffee roasts and sells coffee direct to consumers and to wholesale accounts, One legal entity · accrual basis · one system of record per fact · as of 2026-07, Shared goal" aria-pressed="false" data-node-kind="roof" data-node-sublabel="One legal entity · accrual basis · one system of record per fact · as of 2026-07" data-node-context="Shared goal">
+          <title>Northline Coffee roasts and sells coffee direct to consumers and to wholesale accounts · One legal entity · accrual basis · one system of record per fact · as of 2026-07 · Shared goal</title>
+          <g class="pillars-roof">
+            <polygon points="72,58 480,30 888,58" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <rect x="72" y="58" width="816" height="46" class="c-mask"/>
+            <rect x="72" y="58" width="816" height="46" class="c-lane" style="stroke-dasharray:none" stroke-width="1.2"/>
+            <text data-node-label="" data-detail-anchor="" x="480" y="78" class="t-primary" font-size="14" font-weight="700" text-anchor="middle">Northline Coffee roasts and sells coffee direct to consumers and to wholesale accounts</text>
+            <text data-detail="context" x="480" y="94" class="t-muted" font-size="9.5" text-anchor="middle">One legal entity · accrual basis · one system of record per fact · as of 2026-07</text>
+          </g>
+        </g>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-1" x="40" y="176" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="198" class="t-dim" font-size="10" font-weight="600">02 / Stripe</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-2" x="40" y="300" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="322" class="t-dim" font-size="10" font-weight="600">03 / Chase 1002</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-3" x="40" y="424" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="446" class="t-dim" font-size="10" font-weight="600">04 / QuickBooks</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-4" x="40" y="548" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="570" class="t-dim" font-size="10" font-weight="600">05 / Controller</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-5" x="40" y="672" width="640" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="exception-lane" data-composition-frame-id="lane-5-exception" x="46" y="678" width="628" height="92" rx="8" class="c-security-group" stroke-width="1"/>
-        <text x="54" y="694" class="t-security" font-size="10" font-weight="600">EX / Breaks</text>
-
-        <!-- Phase headers -->
-        <line x1="42" y1="35" x2="266" y2="35" class="a-default" stroke-width="1.1"/>
-        <rect x="42" y="27" width="224" height="16" rx="4" class="c-mask"/>
-        <text x="154" y="39" class="t-muted" font-size="8" font-weight="600" text-anchor="middle">Gather (day 1–2)</text>
-        <line x1="254" y1="35" x2="476" y2="35" class="a-emphasis" stroke-width="1.1"/>
-        <rect x="254" y="27" width="222" height="16" rx="4" class="c-mask"/>
-        <text x="365" y="39" class="t-backend" font-size="8" font-weight="600" text-anchor="middle">Tie out (day 3–4)</text>
-        <line x1="454" y1="35" x2="671" y2="35" class="a-dashed" stroke-width="1.1"/>
-        <rect x="454" y="27" width="217" height="16" rx="4" class="c-mask"/>
-        <text x="562.5" y="39" class="t-messagebus" font-size="8" font-weight="600" text-anchor="middle">Sign off (day 5)</text>
-
-        <!-- Workflow groups -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="group" data-composition-frame-id="group-0" x="250" y="586" width="230" height="58" rx="9" class="c-lane" stroke-width="1"/>
-        <text x="260" y="600" class="t-backend" font-size="7" font-weight="600">Zero-difference gate</text>
-
-        <!-- Edge paths -->
-        <path data-edge-from="freeze" data-edge-to="export_payouts" data-edge-key="0" data-composition-points="88,145;88,166;220,166;220,217" d="M 88 145 L 88 166 L 220 166 L 220 217" class="a-emphasis" data-animate="edge" style="--step:0" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="export_payouts" data-edge-to="bank_statement" data-edge-key="1" data-composition-points="220,269;220,290;300,290;300,333" d="M 220 269 L 220 290 L 300 290 L 300 333" class="a-emphasis" data-animate="edge" style="--step:1" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="bank_statement" data-edge-to="sync_receipts" data-edge-key="2" data-composition-points="300,401;300,414;300,414;300,465" d="M 300 401 L 300 414 L 300 414 L 300 465" class="a-emphasis" data-animate="edge" style="--step:2" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="sync_receipts" data-edge-to="book_fees" data-edge-key="3" data-composition-points="346,491;384,491" d="M 346 491 L 384 491" class="a-default" data-animate="edge" style="--step:3" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="book_fees" data-edge-to="bank_rec" data-edge-label="tie" data-edge-key="4" data-composition-points="430,517;430,538;430,538;430,581" d="M 430 517 L 430 538 L 430 538 L 430 581" class="a-emphasis" data-animate="edge" style="--step:4" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="bank_rec" data-edge-to="review_pl" data-edge-label="0 diff" data-edge-key="5" data-composition-points="476,615;579,615" d="M 476 615 L 579 615" class="a-default" data-animate="edge" style="--step:5" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="review_pl" data-edge-to="lock" data-edge-label="signed" data-edge-key="6" data-composition-points="625,581;625,538;625,538;625,525" d="M 625 581 L 625 538 L 625 538 L 625 525" class="a-emphasis" data-animate="edge" style="--step:6" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="bank_rec" data-edge-to="unmatched" data-edge-label="break" data-edge-key="7" data-composition-points="430,649;430,662;430,662;430,705" d="M 430 649 L 430 662 L 430 662 L 430 705" class="a-security" data-animate="edge" style="--step:12" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="unmatched" data-edge-to="book_fees" data-edge-label="re-book" data-edge-key="8" data-composition-points="384,739;356,739;356,491;384,491" d="M 384 739 L 356 739 L 356 491 L 384 491" class="a-dashed" data-animate="edge" style="--step:12" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
-
-        <!-- Nodes -->
-        <g id="node-freeze" data-node-id="freeze" data-node-label="Freeze" tabindex="0" role="button" aria-label="Focus Freeze, July orders, Shopify › Gather (day 1–2), Shopify" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="July orders" data-node-context="Shopify › Gather (day 1–2)" data-node-brand="Shopify" data-node-brand-id="shopify" data-node-brand-status="preset" data-node-brand-source="https://www.shopify.com/brand-assets">
-          <title>Freeze · July orders · Shopify › Gather (day 1–2) · Shopify</title>
-          <rect x="42" y="93" width="92" height="52" rx="6" class="c-mask"/>
-          <rect x="42" y="93" width="92" height="52" rx="6" class="c-frontend" data-animate="node" style="--step:0" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(48 99) scale(0.6875)">
+        <!-- Pillars: one domain, one system of record each -->
+        <g id="node-commerce" data-node-id="commerce" data-node-label="Commerce" tabindex="0" role="button" aria-label="Focus Commerce, Shopify · orders and customers, Pillar, Shopify" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shopify · orders and customers" data-node-tag="orders SoT" data-node-context="Pillar" data-node-brand="Shopify" data-node-brand-id="shopify" data-node-brand-status="preset" data-node-brand-source="https://www.shopify.com/brand-assets">
+          <title>Commerce · Shopify · orders and customers · Pillar · orders SoT · Shopify</title>
+          <rect x="72" y="120" width="140.8" height="64" rx="6" class="c-mask"/>
+          <rect x="72" y="120" width="140.8" height="64" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(78 126) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="shopify" data-brand-title="Shopify" data-brand-status="preset" data-brand-source="https://www.shopify.com/brand-assets" class="brand-mark" transform="translate(112 99)">
+          <g aria-hidden="true" data-brand-mark="shopify" data-brand-title="Shopify" data-brand-status="preset" data-brand-source="https://www.shopify.com/brand-assets" class="brand-mark" transform="translate(190.8 126)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z" transform="translate(3 3) scale(0.4166666666666667)" fill="#7AB55C"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="88" y="114" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Freeze</text>
-          <text data-detail="context" x="88" y="131" class="t-muted" font-size="8" text-anchor="middle">July orders</text>
+          <text data-node-label="" data-detail-anchor="" x="142.4" y="158" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Commerce</text>
+          <text data-detail="context" x="142.4" y="172" class="t-muted" font-size="7.3" text-anchor="middle">Shopify · orders and customers</text>
+          <g class="node-logo" aria-hidden="true">
+            <g transform="translate(73 121)">
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-plate"/>
+              <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z" transform="translate(56.8 9.9) scale(1.05)" fill="#7AB55C"/>
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-frame"/>
+            </g>
+          </g>
+          <text class="node-logo-label" x="142.4" y="175" font-size="9.5" font-weight="600" text-anchor="middle">Commerce</text>
+          <g class="pillars-shaft">
+            <rect x="72" y="184" width="140.8" height="108" class="c-mask"/>
+            <rect x="72" y="184" width="140.8" height="108" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <circle cx="85" cy="206" r="1.7" class="t-frontend"/>
+            <text data-detail="context" x="93" y="209" class="t-primary" font-size="8.5">Orders and customers</text>
+            <circle cx="85" cy="228" r="1.7" class="t-frontend"/>
+            <text data-detail="context" x="93" y="231" class="t-primary" font-size="8.5">Tax collected</text>
+            <circle cx="85" cy="250" r="1.7" class="t-frontend"/>
+            <text data-detail="context" x="93" y="253" class="t-primary" font-size="8.5">Gift card liability</text>
+            <circle cx="85" cy="272" r="1.7" class="t-frontend"/>
+            <text data-detail="context" x="93" y="275" class="t-primary" font-size="8.5">DTC sales receipts</text>
+            <rect x="72" y="292" width="140.8" height="20" rx="3" class="c-frontend" stroke-width="1.2"/>
+            <text data-detail="fine" x="142.4" y="305.5" class="t-frontend" font-size="7.5" font-weight="600" text-anchor="middle">orders SoT</text>
+          </g>
         </g>
 
-        <g id="node-export_payouts" data-node-id="export_payouts" data-node-label="Export" tabindex="0" role="button" aria-label="Focus Export, payouts + fees, Stripe › Gather (day 1–2), Stripe" aria-pressed="false" data-node-kind="backend" data-node-sublabel="payouts + fees" data-node-context="Stripe › Gather (day 1–2)" data-node-brand="Stripe" data-node-brand-id="stripe" data-node-brand-status="preset" data-node-brand-source="https://stripe.com/newsroom/information">
-          <title>Export · payouts + fees · Stripe › Gather (day 1–2) · Stripe</title>
-          <rect x="174" y="217" width="92" height="52" rx="6" class="c-mask"/>
-          <rect x="174" y="217" width="92" height="52" rx="6" class="c-backend" data-animate="node" style="--step:1" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(180 223) scale(0.6875)">
+        <g id="node-payments" data-node-id="payments" data-node-label="Payments" tabindex="0" role="button" aria-label="Focus Payments, Stripe · charges and payouts, Pillar, Stripe" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Stripe · charges and payouts" data-node-tag="charges and fees SoT" data-node-context="Pillar" data-node-brand="Stripe" data-node-brand-id="stripe" data-node-brand-status="preset" data-node-brand-source="https://stripe.com/newsroom/information">
+          <title>Payments · Stripe · charges and payouts · Pillar · charges and fees SoT · Stripe</title>
+          <rect x="240.8" y="120" width="140.8" height="64" rx="6" class="c-mask"/>
+          <rect x="240.8" y="120" width="140.8" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(246.8 126) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="stripe" data-brand-title="Stripe" data-brand-status="preset" data-brand-source="https://stripe.com/newsroom/information" class="brand-mark" transform="translate(244 223)">
+          <g aria-hidden="true" data-brand-mark="stripe" data-brand-title="Stripe" data-brand-status="preset" data-brand-source="https://stripe.com/newsroom/information" class="brand-mark" transform="translate(359.6 126)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z" transform="translate(3 3) scale(0.4166666666666667)" fill="#635BFF"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="220" y="238" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">Export</text>
-          <text data-detail="context" x="220" y="255" class="t-muted" font-size="8" text-anchor="middle">payouts + fees</text>
+          <text data-node-label="" data-detail-anchor="" x="311.2" y="158" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Payments</text>
+          <text data-detail="context" x="311.2" y="172" class="t-muted" font-size="7.9" text-anchor="middle">Stripe · charges and payouts</text>
+          <g class="node-logo" aria-hidden="true">
+            <g transform="translate(241.8 121)">
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-plate"/>
+              <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z" transform="translate(56.8 9.9) scale(1.05)" fill="#635BFF"/>
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-frame"/>
+            </g>
+          </g>
+          <text class="node-logo-label" x="311.2" y="175" font-size="9.5" font-weight="600" text-anchor="middle">Payments</text>
+          <g class="pillars-shaft">
+            <rect x="240.8" y="184" width="140.8" height="108" class="c-mask"/>
+            <rect x="240.8" y="184" width="140.8" height="108" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <circle cx="253.8" cy="206" r="1.7" class="t-backend"/>
+            <text data-detail="context" x="261.8" y="209" class="t-primary" font-size="8.5">Card capture</text>
+            <circle cx="253.8" cy="228" r="1.7" class="t-backend"/>
+            <text data-detail="context" x="261.8" y="231" class="t-primary" font-size="8.5">Fees netted in payout</text>
+            <circle cx="253.8" cy="250" r="1.7" class="t-backend"/>
+            <text data-detail="context" x="261.8" y="253" class="t-primary" font-size="8.5">T+2 payout batches</text>
+            <circle cx="253.8" cy="272" r="1.7" class="t-backend"/>
+            <text data-detail="context" x="261.8" y="275" class="t-primary" font-size="8.5">Refunds and disputes</text>
+            <rect x="240.8" y="292" width="140.8" height="20" rx="3" class="c-backend" stroke-width="1.2"/>
+            <text data-detail="fine" x="311.2" y="305.5" class="t-backend" font-size="7.5" font-weight="600" text-anchor="middle">charges and fees SoT</text>
+          </g>
         </g>
 
-        <g id="node-bank_statement" data-node-id="bank_statement" data-node-label="Statement" tabindex="0" role="button" aria-label="Focus Statement, Chase 1002 July, Chase 1002 › Tie out (day 3–4)" aria-pressed="false" data-node-kind="database" data-node-sublabel="Chase 1002 July" data-node-tag="cash SoT" data-node-context="Chase 1002 › Tie out (day 3–4)">
-          <title>Statement · Chase 1002 July · Chase 1002 › Tie out (day 3–4) · cash SoT</title>
-          <rect x="254" y="333" width="92" height="68" rx="6" class="c-mask"/>
-          <rect x="254" y="333" width="92" height="68" rx="6" class="c-database" data-animate="node" style="--step:2" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(260 339) scale(0.6875)">
+        <g id="node-bank" data-node-id="bank" data-node-label="Bank" tabindex="0" role="button" aria-label="Focus Bank, Chase 1002 operating account, Pillar, Chase" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="Chase 1002 operating account" data-node-tag="settled cash SoT" data-node-context="Pillar" data-node-brand="Chase" data-node-brand-id="chase" data-node-brand-status="preset" data-node-brand-source="https://commons.wikimedia.org/wiki/File:Chase_logo_2007.svg">
+          <title>Bank · Chase 1002 operating account · Pillar · settled cash SoT · Chase</title>
+          <rect x="409.6" y="120" width="140.8" height="64" rx="6" class="c-mask"/>
+          <rect x="409.6" y="120" width="140.8" height="64" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(415.6 126) scale(0.6875)">
+            <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+          </g>
+          <g aria-hidden="true" data-brand-mark="chase" data-brand-title="Chase" data-brand-status="preset" data-brand-source="https://commons.wikimedia.org/wiki/File:Chase_logo_2007.svg" class="brand-mark" transform="translate(528.4000000000001 126)">
+            <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
+            <path d="M0 15.415c0 .468.38.85.848.85h5.937V.575L0 7.72v7.695m15.416 8.582c.467 0 .846-.38.846-.849v-5.937H.573l7.146 6.785h7.697M24 8.587a.844.844 0 0 0-.847-.846h-5.938V23.43l6.782-7.148L24 8.586M8.585.003a.847.847 0 0 0-.847.847v5.94h15.688L16.282.003H8.585Z" transform="translate(3 3) scale(0.4166666666666667)" fill="#117ACA"/>
+            <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="480" y="158" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Bank</text>
+          <text data-detail="context" x="480" y="172" class="t-muted" font-size="7.9" text-anchor="middle">Chase 1002 operating account</text>
+          <g class="node-logo" aria-hidden="true">
+            <g transform="translate(410.6 121)">
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-plate"/>
+              <path d="M0 15.415c0 .468.38.85.848.85h5.937V.575L0 7.72v7.695m15.416 8.582c.467 0 .846-.38.846-.849v-5.937H.573l7.146 6.785h7.697M24 8.587a.844.844 0 0 0-.847-.846h-5.938V23.43l6.782-7.148L24 8.586M8.585.003a.847.847 0 0 0-.847.847v5.94h15.688L16.282.003H8.585Z" transform="translate(56.8 9.9) scale(1.05)" fill="#117ACA"/>
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-frame"/>
+            </g>
+          </g>
+          <text class="node-logo-label" x="480" y="175" font-size="9.5" font-weight="600" text-anchor="middle">Bank</text>
+          <g class="pillars-shaft">
+            <rect x="409.6" y="184" width="140.8" height="108" class="c-mask"/>
+            <rect x="409.6" y="184" width="140.8" height="108" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <circle cx="422.6" cy="206" r="1.7" class="t-cloud"/>
+            <text data-detail="context" x="430.6" y="209" class="t-primary" font-size="7.9">Stripe payouts land here</text>
+            <circle cx="422.6" cy="228" r="1.7" class="t-cloud"/>
+            <text data-detail="context" x="430.6" y="231" class="t-primary" font-size="8.5">Wholesale ACH receipts</text>
+            <circle cx="422.6" cy="250" r="1.7" class="t-cloud"/>
+            <text data-detail="context" x="430.6" y="253" class="t-primary" font-size="7.6">Payroll and vendor debits</text>
+            <circle cx="422.6" cy="272" r="1.7" class="t-cloud"/>
+            <text data-detail="context" x="430.6" y="275" class="t-primary" font-size="7.9">Statement is the tie-out</text>
+            <rect x="409.6" y="292" width="140.8" height="20" rx="3" class="c-cloud" stroke-width="1.2"/>
+            <text data-detail="fine" x="480" y="305.5" class="t-cloud" font-size="7.5" font-weight="600" text-anchor="middle">settled cash SoT</text>
+          </g>
+        </g>
+
+        <g id="node-books" data-node-id="books" data-node-label="Books" tabindex="0" role="button" aria-label="Focus Books, QuickBooks Online, Pillar, QuickBooks" aria-pressed="false" data-node-kind="database" data-node-sublabel="QuickBooks Online" data-node-tag="revenue SoT" data-node-context="Pillar" data-node-brand="QuickBooks" data-node-brand-id="quickbooks" data-node-brand-status="preset" data-node-brand-source="https://design.intuit.com/quickbooks/brand">
+          <title>Books · QuickBooks Online · Pillar · revenue SoT · QuickBooks</title>
+          <rect x="578.4" y="120" width="140.8" height="64" rx="6" class="c-mask"/>
+          <rect x="578.4" y="120" width="140.8" height="64" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(584.4 126) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="300" y="354" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Statement</text>
-          <text data-detail="context" x="300" y="371" class="t-muted" font-size="8" text-anchor="middle">Chase 1002 July</text>
-        <text data-detail="fine" x="300" y="389" class="t-database" font-size="7" text-anchor="middle">cash SoT</text>
-        </g>
-
-        <g id="node-sync_receipts" data-node-id="sync_receipts" data-node-label="Sync receipts" tabindex="0" role="button" aria-label="Focus Sync receipts, sales + tax, QuickBooks › Tie out (day 3–4)" aria-pressed="false" data-node-kind="database" data-node-sublabel="sales + tax" data-node-context="QuickBooks › Tie out (day 3–4)">
-          <title>Sync receipts · sales + tax · QuickBooks › Tie out (day 3–4)</title>
-          <rect x="254" y="465" width="92" height="52" rx="6" class="c-mask"/>
-          <rect x="254" y="465" width="92" height="52" rx="6" class="c-database" data-animate="node" style="--step:3" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(260 471) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          <g aria-hidden="true" data-brand-mark="quickbooks" data-brand-title="QuickBooks" data-brand-status="preset" data-brand-source="https://design.intuit.com/quickbooks/brand" class="brand-mark" transform="translate(697.2 126)">
+            <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
+            <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm.642 4.1335c.9554 0 1.7296.776 1.7296 1.7332v9.0667h1.6c1.614 0 2.9275-1.3156 2.9275-2.933 0-1.6173-1.3136-2.9333-2.9276-2.9333h-.6654V7.3334h.6654c2.5722 0 4.6577 2.0897 4.6577 4.667 0 2.5774-2.0855 4.6666-4.6577 4.6666H12.642zM7.9837 7.333h3.3291v12.533c-.9555 0-1.73-.7759-1.73-1.7332V9.0662H7.9837c-1.6146 0-2.9277 1.316-2.9277 2.9334 0 1.6175 1.3131 2.9333 2.9277 2.9333h.6654v1.7332h-.6654c-2.5725 0-4.6577-2.0892-4.6577-4.6665 0-2.5771 2.0852-4.6666 4.6577-4.6666Z" transform="translate(3 3) scale(0.4166666666666667)" fill="#2CA01C"/>
+            <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="300" y="486" class="t-primary" font-size="10.7" font-weight="600" text-anchor="middle">Sync receipts</text>
-          <text data-detail="context" x="300" y="503" class="t-muted" font-size="8" text-anchor="middle">sales + tax</text>
-        </g>
-
-        <g id="node-book_fees" data-node-id="book_fees" data-node-label="Book fees" tabindex="0" role="button" aria-label="Focus Book fees, Stripe export, QuickBooks › Tie out (day 3–4)" aria-pressed="false" data-node-kind="database" data-node-sublabel="Stripe export" data-node-context="QuickBooks › Tie out (day 3–4)">
-          <title>Book fees · Stripe export · QuickBooks › Tie out (day 3–4)</title>
-          <rect x="384" y="465" width="92" height="52" rx="6" class="c-mask"/>
-          <rect x="384" y="465" width="92" height="52" rx="6" class="c-database" data-animate="node" style="--step:4" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(390 471) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          <text data-node-label="" data-detail-anchor="" x="648.8" y="158" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Books</text>
+          <text data-detail="context" x="648.8" y="172" class="t-muted" font-size="8" text-anchor="middle">QuickBooks Online</text>
+          <g class="node-logo" aria-hidden="true">
+            <g transform="translate(579.4 121)">
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-plate"/>
+              <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm.642 4.1335c.9554 0 1.7296.776 1.7296 1.7332v9.0667h1.6c1.614 0 2.9275-1.3156 2.9275-2.933 0-1.6173-1.3136-2.9333-2.9276-2.9333h-.6654V7.3334h.6654c2.5722 0 4.6577 2.0897 4.6577 4.667 0 2.5774-2.0855 4.6666-4.6577 4.6666H12.642zM7.9837 7.333h3.3291v12.533c-.9555 0-1.73-.7759-1.73-1.7332V9.0662H7.9837c-1.6146 0-2.9277 1.316-2.9277 2.9334 0 1.6175 1.3131 2.9333 2.9277 2.9333h.6654v1.7332h-.6654c-2.5725 0-4.6577-2.0892-4.6577-4.6665 0-2.5771 2.0852-4.6666 4.6577-4.6666Z" transform="translate(56.8 9.9) scale(1.05)" fill="#2CA01C"/>
+              <rect width="138.8" height="45" rx="8.1" class="node-logo-frame"/>
+            </g>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="430" y="486" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Book fees</text>
-          <text data-detail="context" x="430" y="503" class="t-muted" font-size="8" text-anchor="middle">Stripe export</text>
+          <text class="node-logo-label" x="648.8" y="175" font-size="9.5" font-weight="600" text-anchor="middle">Books</text>
+          <g class="pillars-shaft">
+            <rect x="578.4" y="184" width="140.8" height="108" class="c-mask"/>
+            <rect x="578.4" y="184" width="140.8" height="108" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <circle cx="591.4" cy="206" r="1.7" class="t-database"/>
+            <text data-detail="context" x="599.4" y="209" class="t-primary" font-size="8.3">Revenue recognized here</text>
+            <circle cx="591.4" cy="228" r="1.7" class="t-database"/>
+            <text data-detail="context" x="599.4" y="231" class="t-primary" font-size="8.5">Sales receipts for DTC</text>
+            <circle cx="591.4" cy="250" r="1.7" class="t-database"/>
+            <text data-detail="context" x="599.4" y="253" class="t-primary" font-size="8.3">Wholesale invoices, A/R</text>
+            <circle cx="591.4" cy="272" r="1.7" class="t-database"/>
+            <text data-detail="context" x="599.4" y="275" class="t-primary" font-size="8.5">Tax payable and P&amp;L</text>
+            <rect x="578.4" y="292" width="140.8" height="20" rx="3" class="c-database" stroke-width="1.2"/>
+            <text data-detail="fine" x="648.8" y="305.5" class="t-database" font-size="7.5" font-weight="600" text-anchor="middle">revenue SoT</text>
+          </g>
         </g>
 
-        <g id="node-bank_rec" data-node-id="bank_rec" data-node-label="Reconcile" tabindex="0" role="button" aria-label="Focus Reconcile, Chase = QBO, Controller › Zero-difference gate › Tie out (day 3–4)" aria-pressed="false" data-node-kind="security" data-node-sublabel="Chase = QBO" data-node-tag="0 difference" data-node-context="Controller › Zero-difference gate › Tie out (day 3–4)">
-          <title>Reconcile · Chase = QBO · Controller › Zero-difference gate › Tie out (day 3–4) · 0 difference</title>
-          <rect x="384" y="581" width="92" height="68" rx="6" class="c-mask"/>
-          <rect x="384" y="581" width="92" height="68" rx="6" class="c-security" data-animate="node" style="--step:5" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(390 587) scale(0.6875)">
+        <g id="node-controller" data-node-id="controller" data-node-label="Close and review" tabindex="0" role="button" aria-label="Focus Close and review, Controller · monthly, Pillar" aria-pressed="false" data-node-kind="security" data-node-sublabel="Controller · monthly" data-node-tag="zero-difference gate" data-node-context="Pillar">
+          <title>Close and review · Controller · monthly · Pillar · zero-difference gate</title>
+          <rect x="747.2" y="120" width="140.8" height="64" rx="6" class="c-mask"/>
+          <rect x="747.2" y="120" width="140.8" height="64" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(753.2 126) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="430" y="602" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Reconcile</text>
-          <text data-detail="context" x="430" y="619" class="t-muted" font-size="8" text-anchor="middle">Chase = QBO</text>
-        <text data-detail="fine" x="430" y="637" class="t-security" font-size="7" text-anchor="middle">0 difference</text>
-        </g>
-
-        <g id="node-review_pl" data-node-id="review_pl" data-node-label="Review P&amp;L" tabindex="0" role="button" aria-label="Focus Review P&amp;L, flux vs June, Controller › Sign off (day 5)" aria-pressed="false" data-node-kind="security" data-node-sublabel="flux vs June" data-node-tag="human gate" data-node-context="Controller › Sign off (day 5)">
-          <title>Review P&amp;L · flux vs June · Controller › Sign off (day 5) · human gate</title>
-          <rect x="579" y="581" width="92" height="68" rx="6" class="c-mask"/>
-          <rect x="579" y="581" width="92" height="68" rx="6" class="c-security" data-animate="node" style="--step:6" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(585 587) scale(0.6875)">
+          <text data-node-label="" data-detail-anchor="" x="817.6" y="158" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Close and review</text>
+          <text data-detail="context" x="817.6" y="172" class="t-muted" font-size="8" text-anchor="middle">Controller · monthly</text>
+          <g class="node-logoless" aria-hidden="true">
+            <g transform="translate(748.2 121)">
+              <rect width="138.8" height="45" rx="8.1" class="node-logoless-plate"/>
+              <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(56.8 9.9) scale(1.575)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="625" y="602" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Review P&amp;L</text>
-          <text data-detail="context" x="625" y="619" class="t-muted" font-size="8" text-anchor="middle">flux vs June</text>
-        <text data-detail="fine" x="625" y="637" class="t-security" font-size="7" text-anchor="middle">human gate</text>
-        </g>
-
-        <g id="node-lock" data-node-id="lock" data-node-label="Lock period" tabindex="0" role="button" aria-label="Focus Lock period, close date set, QuickBooks › Sign off (day 5)" aria-pressed="false" data-node-kind="database" data-node-sublabel="close date set" data-node-tag="books SoT" data-node-context="QuickBooks › Sign off (day 5)">
-          <title>Lock period · close date set · QuickBooks › Sign off (day 5) · books SoT</title>
-          <rect x="579" y="457" width="92" height="68" rx="6" class="c-mask"/>
-          <rect x="579" y="457" width="92" height="68" rx="6" class="c-database" data-animate="node" style="--step:7" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(585 463) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+            </g>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="625" y="478" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Lock period</text>
-          <text data-detail="context" x="625" y="495" class="t-muted" font-size="8" text-anchor="middle">close date set</text>
-        <text data-detail="fine" x="625" y="513" class="t-database" font-size="7" text-anchor="middle">books SoT</text>
+          <text class="node-logo-label" x="817.6" y="175" font-size="9.5" font-weight="600" text-anchor="middle">Close and review</text>
+          <g class="pillars-shaft">
+            <rect x="747.2" y="184" width="140.8" height="108" class="c-mask"/>
+            <rect x="747.2" y="184" width="140.8" height="108" class="c-lane" style="stroke-dasharray:none" stroke-width="1"/>
+            <circle cx="760.2" cy="206" r="1.7" class="t-security"/>
+            <text data-detail="context" x="768.2" y="209" class="t-primary" font-size="8.5">Payout rec to zero</text>
+            <circle cx="760.2" cy="228" r="1.7" class="t-security"/>
+            <text data-detail="context" x="768.2" y="231" class="t-primary" font-size="8.5">Bank rec to statement</text>
+            <circle cx="760.2" cy="250" r="1.7" class="t-security"/>
+            <text data-detail="context" x="768.2" y="253" class="t-primary" font-size="8.5">P&amp;L review, then lock</text>
+            <circle cx="760.2" cy="272" r="1.7" class="t-security"/>
+            <text data-detail="context" x="768.2" y="275" class="t-primary" font-size="8.3">A break stops the close</text>
+            <rect x="747.2" y="292" width="140.8" height="20" rx="3" class="c-security" stroke-width="1.2"/>
+            <text data-detail="fine" x="817.6" y="305.5" class="t-security" font-size="7.5" font-weight="600" text-anchor="middle">zero-difference gate</text>
+          </g>
         </g>
 
-        <g id="node-unmatched" data-node-id="unmatched" data-node-label="Unmatched" tabindex="0" role="button" aria-label="Focus Unmatched, deposit break, Breaks › Tie out (day 3–4)" aria-pressed="false" data-node-kind="security" data-node-sublabel="deposit break" data-node-tag="owner: controller" data-node-context="Breaks › Tie out (day 3–4)">
-          <title>Unmatched · deposit break · Breaks › Tie out (day 3–4) · owner: controller</title>
-          <rect x="384" y="705" width="92" height="68" rx="6" class="c-mask"/>
-          <rect x="384" y="705" width="92" height="68" rx="6" class="c-security" data-animate="node" style="--step:12" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(390 711) scale(0.6875)">
+        <!-- Foundation: what everything stands on -->
+        <g id="node-entity" data-node-id="entity" data-node-label="Northline Coffee LLC" tabindex="0" role="button" aria-label="Focus Northline Coffee LLC, One legal entity · accrual basis · no consolidation drawn, Foundation" aria-pressed="false" data-node-kind="external" data-node-sublabel="One legal entity · accrual basis · no consolidation drawn" data-node-context="Foundation">
+          <title>Northline Coffee LLC · One legal entity · accrual basis · no consolidation drawn · Foundation</title>
+          <rect x="72" y="330" width="400" height="52" rx="6" class="c-mask"/>
+          <rect x="72" y="330" width="400" height="52" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(78 336) scale(0.6875)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="272" y="354" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Northline Coffee LLC</text>
+          <text data-detail="context" x="272" y="368" class="t-muted" font-size="8" text-anchor="middle">One legal entity · accrual basis · no consolidation drawn</text>
+          <g class="node-logoless" aria-hidden="true">
+            <g transform="translate(73 331)">
+              <rect width="398" height="33" rx="5.9" class="node-logoless-plate"/>
+              <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(189.8 7.3) scale(1.15625)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+            </g>
+          </g>
+          <text class="node-logo-label" x="272" y="373" font-size="9.5" font-weight="600" text-anchor="middle">Northline Coffee LLC</text>
+        </g>
+
+        <g id="node-truth" data-node-id="truth" data-node-label="Truth rules" tabindex="0" role="button" aria-label="Focus Truth rules, Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard, Foundation" aria-pressed="false" data-node-kind="security" data-node-sublabel="Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard" data-node-context="Foundation">
+          <title>Truth rules · Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard · Foundation</title>
+          <rect x="488" y="330" width="400" height="52" rx="6" class="c-mask"/>
+          <rect x="488" y="330" width="400" height="52" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(494 336) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="430" y="726" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Unmatched</text>
-          <text data-detail="context" x="430" y="743" class="t-muted" font-size="8" text-anchor="middle">deposit break</text>
-        <text data-detail="fine" x="430" y="761" class="t-security" font-size="7" text-anchor="middle">owner: controller</text>
-        </g>
-
-        <!-- Edge labels -->
-
-
-
-
-        <g data-detail="context" data-edge-from="book_fees" data-edge-to="bank_rec" data-edge-label="tie" data-edge-key="4">
-          <rect x="415" y="518" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="430" y="528" class="t-backend" font-size="8" text-anchor="middle">tie</text>
-        </g>
-        <g data-detail="context" data-edge-from="bank_rec" data-edge-to="review_pl" data-edge-label="0 diff" data-edge-key="5">
-          <rect x="508.1" y="595" width="38.8" height="14" rx="3" class="c-mask"/>
-          <text x="527.5" y="605" class="t-muted" font-size="8" text-anchor="middle">0 diff</text>
-        </g>
-        <g data-detail="context" data-edge-from="review_pl" data-edge-to="lock" data-edge-label="signed" data-edge-key="6">
-          <rect x="605.6" y="529" width="38.8" height="14" rx="3" class="c-mask"/>
-          <text x="625" y="539" class="t-backend" font-size="8" text-anchor="middle">signed</text>
-        </g>
-        <g data-detail="context" data-edge-from="bank_rec" data-edge-to="unmatched" data-edge-label="break" data-edge-key="7">
-          <rect x="413" y="653" width="34" height="14" rx="3" class="c-mask"/>
-          <text x="430" y="663" class="t-security" font-size="8" text-anchor="middle">break</text>
-        </g>
-        <g data-detail="context" data-edge-from="unmatched" data-edge-to="book_fees" data-edge-label="re-book" data-edge-key="8">
-          <rect x="334.2" y="595" width="43.6" height="14" rx="3" class="c-mask"/>
-          <text x="356" y="605" class="t-database" font-size="8" text-anchor="middle">re-book</text>
+          <text data-node-label="" data-detail-anchor="" x="688" y="354" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Truth rules</text>
+          <text data-detail="context" x="688" y="368" class="t-muted" font-size="8" text-anchor="middle">Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard</text>
+          <g class="node-logoless" aria-hidden="true">
+            <g transform="translate(489 331)">
+              <rect width="398" height="33" rx="5.9" class="node-logoless-plate"/>
+              <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(189.8 7.3) scale(1.15625)">
+            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
+            <path d="m5.8 8 1.5 1.5 3-3"/>
+          </g>
+            </g>
+          </g>
+          <text class="node-logo-label" x="688" y="373" font-size="9.5" font-weight="600" text-anchor="middle">Truth rules</text>
         </g>
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="20" y="800" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Commerce" data-legend-x="20" data-legend-baseline="820" data-legend-width="78">
-            <rect x="20" y="812" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
-            <text x="42" y="820" class="t-muted" font-size="7.5" font-weight="500">Commerce</text>
+          <text x="72" y="402" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Commerce" data-legend-x="72" data-legend-baseline="422" data-legend-width="83">
+            <rect x="72" y="413" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="94" y="422" class="t-muted" font-size="10" font-weight="500">Commerce</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Payments" data-legend-x="105" data-legend-baseline="820" data-legend-width="78">
-            <rect x="105" y="812" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
-            <text x="127" y="820" class="t-muted" font-size="7.5" font-weight="500">Payments</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Operations" data-legend-x="177" data-legend-baseline="422" data-legend-width="93">
+            <rect x="177" y="413" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="199" y="422" class="t-muted" font-size="10" font-weight="500">Operations</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Control" data-legend-x="190" data-legend-baseline="820" data-legend-width="74">
-            <rect x="190" y="812" width="14" height="9" rx="2" class="c-security" stroke-width="1"/>
-            <text x="212" y="820" class="t-muted" font-size="7.5" font-weight="500">Control</text>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Books" data-legend-x="292" data-legend-baseline="422" data-legend-width="68">
+            <rect x="292" y="413" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="314" y="422" class="t-muted" font-size="10" font-weight="500">Books</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Books" data-legend-x="271" data-legend-baseline="820" data-legend-width="65">
-            <rect x="271" y="812" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
-            <text x="293" y="820" class="t-muted" font-size="7.5" font-weight="500">Books</text>
+          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Bank" data-legend-x="382" data-legend-baseline="422" data-legend-width="63">
+            <rect x="382" y="413" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
+            <text x="404" y="422" class="t-muted" font-size="10" font-weight="500">Bank</text>
+          </g>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Control" data-legend-x="467" data-legend-baseline="422" data-legend-width="78">
+            <rect x="467" y="413" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
+            <text x="489" y="422" class="t-muted" font-size="10" font-weight="500">Control</text>
+          </g>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="Counterparty" data-legend-x="567" data-legend-baseline="422" data-legend-width="103">
+            <rect x="567" y="413" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="589" y="422" class="t-muted" font-size="10" font-weight="500">Counterparty</text>
           </g>
         </g>
       </svg>
@@ -5460,36 +5521,36 @@
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>Who owns each gate</h3>
+          <h3>One system of record per pillar</h3>
         </div>
         <ul>
-          <li>&bull; Shopify freeze: operations</li>
-          <li>&bull; Stripe export and statement pull: bookkeeper</li>
-          <li>&bull; Reconcile, review, and lock: controller</li>
+          <li>&bull; Orders, customers, tax collected, gift cards: Shopify</li>
+          <li>&bull; Charges, fees, payouts, disputes: Stripe</li>
+          <li>&bull; Settled cash: Chase 1002 · Revenue, A/R, P&amp;L: QuickBooks</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-dot rose"></div>
-          <h3>Stop conditions</h3>
+          <div class="card-dot amber"></div>
+          <h3>Guardrails</h3>
         </div>
         <ul>
-          <li>&bull; Chase 1002 does not reconcile to a zero difference</li>
-          <li>&bull; A deposit has no Stripe payout or wholesale ACH behind it</li>
-          <li>&bull; The period is never locked with an open break</li>
+          <li>&bull; No amounts or balances: none were supplied for 2026-07</li>
+          <li>&bull; A Shopify or Stripe dashboard total is never revenue</li>
+          <li>&bull; DTC is a sales receipt; A/R exists only for wholesale invoices</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-dot cyan"></div>
-          <h3>Evidence kept</h3>
+          <h3>How to read it</h3>
         </div>
         <ul>
-          <li>&bull; Stripe payout export and Chase statement filed with the close</li>
-          <li>&bull; Reconciliation report at zero difference</li>
-          <li>&bull; Lock date recorded in QuickBooks</li>
+          <li>&bull; Roof: the business in one sentence</li>
+          <li>&bull; Capital: system of record · shaft: facts it owns · plinth: the truth claim</li>
+          <li>&bull; Foundation: the entity and the rules that settle disagreements</li>
         </ul>
       </div>
     </div>

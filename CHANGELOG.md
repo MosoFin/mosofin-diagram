@@ -8,6 +8,13 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Redesigned the business operating map around the layout finance professionals already use:
+  procure to pay on the left, order to cash on the right, inventory and the bank in the middle,
+  and record to report along the bottom. Goods run left to right and cash converges on the bank.
+  The map now uses the brief's real entities (Northline Coffee, Cafés and Wholesale LLC) instead
+  of "Entity A/B/C", drops to 12 nodes and 13 edges, and fits a 1440×900 screen. The Ramp node
+  now draws its role glyph instead of a remote favicon capture, so the gallery and node-style
+  tests rebuild offline. The operating-map recipe and business onboarding describe the layout.
 - New `pillars` diagram type: the operating model on one page, drawn as a temple. The roof states
   the business in one sentence, each of 3–6 pillars is one domain with its system of record on the
   capital (brand mark or role sigil), the facts that system owns in the shaft, and a one-phrase

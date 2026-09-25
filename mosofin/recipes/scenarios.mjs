@@ -5,11 +5,11 @@ const RAW_RECIPES = [
     signals: [['how the business runs', 18], ['whole business', 17], ['entire business', 17], ['business diagram', 16], ['operating map', 16], ['our stack', 14], ['software we use', 15], ['all our systems', 15], ['tech stack', 13], ['supply chain crm', 15], ['crm erp', 13], ['understand my business', 16], ['outline my business', 16], ['map my business', 17]],
     en: {
       title: 'Business operating map', question: 'How does the whole business run, and which system owns each part of it?',
-      summary: 'One bounded map of every domain the business operates — demand, supply, fulfilment, money, people, books — with the system of record named on each node.',
+      summary: 'The whole business as three finance cycles meeting at the bank: procure to pay on the left, order to cash on the right, record to report underneath, with the system of record named on each node.',
       useWhen: 'Explaining the business to a new hire, an operator, a buyer, or yourself; before choosing what to fix or replace.',
       avoidWhen: 'The question is about one process in order (workflow), one order in time (sequence), or numbers that must foot (finance recipes).',
-      include: ['8–12 domains, not 30 apps', 'system of record per domain', 'one primary rail from demand to books', 'shared vs per-entity boundaries'],
-      prompt: 'Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin architecture mode to map how the whole business runs. Group by domain (demand/CRM, commerce, supply chain, inventory, fulfilment, payments, spend, payroll, bank, books, data) and name the real tool in each sublabel — at most 12 primary nodes. Draw one primary rail from demand through to the books, mark approval gates, and put shared vs per-entity systems in separate boundaries. Do not invent amounts, volumes, or headcounts.',
+      include: ['8–12 domains, not 30 apps', 'system of record per domain', 'P2P, O2C and R2R as named regions', 'shared vs per-entity books'],
+      prompt: 'Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin architecture mode to map how the whole business runs. Group by domain (demand/CRM, commerce, supply chain, inventory, fulfilment, payments, spend, payroll, bank, books, data) and name the real tool in each sublabel — at most 12 primary nodes. Lay it out as the three finance cycles: procure to pay (suppliers, ERP, spend) on the left, order to cash (CRM, commerce, payments) on the right, inventory and the bank in the middle, and record to report (one ledger per entity) along the bottom. Goods run left to right, cash converges on the bank, and every ledger is fed from the bank. Mark approval gates, say which cycles are shared and which books are per entity, and use the real entity names. Do not invent amounts, volumes, or headcounts.',
     },
   },
   {

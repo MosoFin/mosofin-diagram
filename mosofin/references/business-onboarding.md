@@ -137,7 +137,7 @@ chapters), not extra nodes.
 
 | User intent | Type | Include |
 |---|---|---|
-| How does the whole business run, end to end? | `architecture` | 8–12 domains, one primary rail, named crossings |
+| How does the whole business run, end to end? | `architecture` | 8–12 domains laid out as the three finance cycles (see below), named crossings |
 | What does each team/system own, and where are the handoffs? | `architecture` | ownership tags, boundary per team or entity |
 | Walk one order / job / customer through every system | `sequence` | real IDs if known; the handoffs and the waits |
 | Where does data come from and who consumes it? | `dataflow` | source → transform → store → consume |
@@ -179,6 +179,23 @@ record on the capital and the facts it owns in the shaft, and the foundation is
 the entity line plus the truth rules. It contains no flows, so it never claims a
 tie-out. Offer it when the user wants the whole operating model in one glance,
 or to confirm a fresh brief before mapping any flow.
+
+For the whole-business `architecture` map, use the layout finance professionals
+already read: the three finance cycles meeting at the bank.
+
+- **Procure to pay** on the left: suppliers, the ERP that raises the PO, and the
+  spend/AP gate that releases cash.
+- **Order to cash** on the right: CRM, commerce, and the payment processor.
+- **The hinge** in the middle: inventory above the bank. Goods run left to
+  right; cash converges on the bank from both sides, and payroll joins it
+  through its own gate.
+- **Record to report** along the bottom: one ledger per entity, each fed from
+  the bank, named with the real entity from the brief.
+
+Draw each cycle as a named region and say in its title whether it is shared or
+per entity. Put counterparties (suppliers, and CRM as the demand source) on a
+raised row at the outer corners so the value chain reads from both ends. Keep
+the page short enough for a 1440×900 screen: a wide map, one-line card items.
 
 Cap primary nodes at 12 even when the user listed thirty apps. **Group by domain
 and name the tools in the sublabel** — one `Supply chain · ERP` node whose

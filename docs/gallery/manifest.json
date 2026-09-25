@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "generator": "scripts/build-gallery.mjs",
   "mosofinVersion": "1.0.0-dev.0",
-  "entryCount": 9,
-  "checkCount": 81,
+  "entryCount": 10,
+  "checkCount": 90,
   "entries": [
     {
       "id": "business-map",
       "type": "architecture",
-      "title": "How the business runs — demand to books across three entities (as of 2026-07)",
+      "title": "How the business runs (2026-07)",
       "subtitle": "",
       "input": "gallery/sources/business-operating-map.architecture.json",
       "artifact": "gallery/artifacts/business-operating-map.architecture.html",
@@ -16,21 +16,21 @@
       "view": "order-to-cash",
       "viewCount": 3,
       "viewIds": [
+        "procure-to-pay",
         "order-to-cash",
-        "supply-side",
-        "three-ledgers"
+        "record-to-report"
       ],
       "guidedPlayback": true,
       "schemaVersion": 1,
       "visualPreset": "classic",
       "animation": "trace",
       "engineeringProfile": null,
-      "nodeCount": 13,
-      "edgeCount": 14,
-      "artifactBytes": 792219,
-      "artifactSha256": "26c37e47e9650787dddcdd9c65ac726afed4e9c6c10cef3862689cced514259a",
-      "sourceBytes": 10394,
-      "sourceSha256": "d16648089bc36f51f9b79b016f20ecedf9aaaaacdbdaef8eb750f4cc6d0ac28f",
+      "nodeCount": 12,
+      "edgeCount": 13,
+      "artifactBytes": 747541,
+      "artifactSha256": "3a5e3d4f2108c472c6ca7ef79f8f40fb1e5f7e2dd716d9800c6869a200ad5bbc",
+      "sourceBytes": 8819,
+      "sourceSha256": "a671c6fe3e3030c78f9e71ef71c130d5cbc354a8a62506b90c1eb2f7c1a780b5",
       "checks": [
         {
           "name": "single_svg",
@@ -82,15 +82,115 @@
           "ambiguousCorridors": 0,
           "containerBorderRuns": 0,
           "labelRouteClearanceIssues": 0,
-          "minLabelRouteClearance": 31.6,
+          "minLabelRouteClearance": 11,
           "desktopReadabilityIssues": 0,
           "minProjectedNodeTextPx": null,
-          "maxBends": 3,
-          "routesOverSuggestedBends": 4,
-          "maxStretch": 1.5,
-          "routesOverSuggestedStretch": 3,
-          "minSegmentPx": 39,
-          "minInteriorSegmentPx": 39,
+          "maxBends": 2,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": 1.226,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": 33,
+          "minInteriorSegmentPx": 36,
+          "shortSegmentCount": 0,
+          "shortEndpointSegmentCount": 0,
+          "shortInteriorSegmentCount": 0,
+          "microSegmentCount": 0
+        },
+        "suggestedLimits": {
+          "bendsPerRelationship": 2,
+          "stretch": 1.35,
+          "segmentPx": 16,
+          "microSegmentPx": 8
+        },
+        "issues": []
+      }
+    },
+    {
+      "id": "operating-pillars",
+      "type": "pillars",
+      "title": "Northline Coffee — How the business stands (as of 2026-07)",
+      "subtitle": "",
+      "input": "gallery/sources/northline-operating-pillars.pillars.json",
+      "artifact": "gallery/artifacts/northline-operating-pillars.pillars.html",
+      "focus": "books",
+      "view": "where-cash-lands",
+      "viewCount": 3,
+      "viewIds": [
+        "what-sells",
+        "where-cash-lands",
+        "who-closes"
+      ],
+      "guidedPlayback": true,
+      "schemaVersion": 1,
+      "visualPreset": "classic",
+      "animation": "static",
+      "engineeringProfile": null,
+      "nodeCount": 5,
+      "edgeCount": 0,
+      "artifactBytes": 724278,
+      "artifactSha256": "977791275ee8df9dfb6fd2be70b857b263b872454fd427c89d46b7d72fc3790e",
+      "sourceBytes": 4469,
+      "sourceSha256": "8a6d13da004d1bc2a14902694ea51dd5ed1797532fbb707d4d24c7f5c1b2d349",
+      "checks": [
+        {
+          "name": "single_svg",
+          "ok": true
+        },
+        {
+          "name": "finite_svg",
+          "ok": true
+        },
+        {
+          "name": "orthogonal_arrows",
+          "ok": true
+        },
+        {
+          "name": "label_route_clearance",
+          "ok": true
+        },
+        {
+          "name": "relationship_crossings",
+          "ok": true
+        },
+        {
+          "name": "relationship_corridors",
+          "ok": true
+        },
+        {
+          "name": "container_border_runs",
+          "ok": true
+        },
+        {
+          "name": "route_rhythm",
+          "ok": true
+        },
+        {
+          "name": "legend_clearance",
+          "ok": true
+        }
+      ],
+      "composition": {
+        "schemaVersion": 1,
+        "profile": "showcase",
+        "status": "pass",
+        "summary": {
+          "errors": 0,
+          "warnings": 0
+        },
+        "metrics": {
+          "properCrossings": 0,
+          "ambiguousCorridors": 0,
+          "containerBorderRuns": 0,
+          "labelRouteClearanceIssues": 0,
+          "minLabelRouteClearance": null,
+          "desktopReadabilityIssues": 0,
+          "minProjectedNodeTextPx": null,
+          "maxBends": 0,
+          "routesOverSuggestedBends": 0,
+          "maxStretch": null,
+          "routesOverSuggestedStretch": 0,
+          "minSegmentPx": null,
+          "minInteriorSegmentPx": null,
           "shortSegmentCount": 0,
           "shortEndpointSegmentCount": 0,
           "shortInteriorSegmentCount": 0,
@@ -127,8 +227,8 @@
       "engineeringProfile": null,
       "nodeCount": 6,
       "edgeCount": 8,
-      "artifactBytes": 720371,
-      "artifactSha256": "fa4f5270e1238a8088ea31a05f77b52c31ae9d34457e4cc26d6aa06b19212475",
+      "artifactBytes": 720404,
+      "artifactSha256": "45e18cf58e0e9d2309278bb8c1c2a39d6c0828504c2fc44fbebd6d646734e788",
       "sourceBytes": 5181,
       "sourceSha256": "58c8231f8459b2cb620d8d9c69f93a2bb3fa5a6a4823843f607aaad62047bed3",
       "checks": [
@@ -227,8 +327,8 @@
       "engineeringProfile": null,
       "nodeCount": 5,
       "edgeCount": 10,
-      "artifactBytes": 713732,
-      "artifactSha256": "56c6d786cd77a9c147c034361cbc406b1ce7fc539662f501179d7db21991eb0e",
+      "artifactBytes": 713765,
+      "artifactSha256": "996af298a7d9c0d238db882aaecc39680422a2023c0fd23bf02b8e71b89a715c",
       "sourceBytes": 5311,
       "sourceSha256": "5251a487ab4c18364d51b93437274ccde0409de61215543f80590b5377dcb87c",
       "checks": [
@@ -327,8 +427,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 717742,
-      "artifactSha256": "1a5483b449e9cc38bd9427b78435945b149cef34e6dfbe737e93736e9b76a99d",
+      "artifactBytes": 717775,
+      "artifactSha256": "ca425ede1f79c201c3c2a877dd505acdc36705f42ad5aaa459cb251fd2e61fe2",
       "sourceBytes": 4839,
       "sourceSha256": "86f8b4b8772c1b2b04919897e1636640103700b4abc074142b1d61257cbd8899",
       "checks": [
@@ -427,8 +527,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 9,
-      "artifactBytes": 717680,
-      "artifactSha256": "352b2c603ffbf05f5f834cb15fcfe397f1a5e58c1eb8960828310bbff9da3bf7",
+      "artifactBytes": 717713,
+      "artifactSha256": "ce007ceb67e9423fb2e741c1a357bc9f6720b996bc152f3e12b1445a7df728a7",
       "sourceBytes": 6566,
       "sourceSha256": "7afb0c25d51afb7ad370a4254a775efa5e09576072e74d689be968beb897e05d",
       "checks": [
@@ -527,8 +627,8 @@
       "engineeringProfile": null,
       "nodeCount": 10,
       "edgeCount": 6,
-      "artifactBytes": 712839,
-      "artifactSha256": "ddce5b946c8d113dadf9f2a539daa0128e76cccfdd81af8256e4c04e808aeeb1",
+      "artifactBytes": 712872,
+      "artifactSha256": "cd4f281470e6b8d5ade40b8caea6cea3a88113710aed2184dc078cf16559cf9d",
       "sourceBytes": 6221,
       "sourceSha256": "4220d1005b770c3c70488263ebd8ff174a26ecc4dce88ca7e270cea6e318a4de",
       "checks": [
@@ -627,8 +727,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 716380,
-      "artifactSha256": "155caa5c1dfaefc01d458ce970b7a9441f8ed6b488d8f3aa80298aa1a58b6441",
+      "artifactBytes": 716413,
+      "artifactSha256": "80d9461155157bfca2f62f1e82806100ce416e4489cc26a5b13e3d6f3161e669",
       "sourceBytes": 6837,
       "sourceSha256": "aba3a2aa6ebdbb82aabdac81e087ce8371812779b3ab652794896359da4a76ad",
       "checks": [
@@ -727,8 +827,8 @@
       "engineeringProfile": null,
       "nodeCount": 8,
       "edgeCount": 7,
-      "artifactBytes": 724391,
-      "artifactSha256": "7e78f85b73b063441f591201b77d38fa2a8cc6cdfcb4fc9ebfe42fa1cc63927a",
+      "artifactBytes": 724424,
+      "artifactSha256": "dbff4fbdeb3bdf25fe7613aaa2f40f9f89ae3765bb516fce530a96784f16d6a8",
       "sourceBytes": 5842,
       "sourceSha256": "e5661ecb639b8a69c69acae419c658035f122572b1ad4de8b119cc06f6d812cb",
       "checks": [
@@ -827,8 +927,8 @@
       "engineeringProfile": null,
       "nodeCount": 9,
       "edgeCount": 8,
-      "artifactBytes": 716152,
-      "artifactSha256": "da822c3db4e175c57e74a7f593661ce594271a37c5eabebdb1df0ba828509bde",
+      "artifactBytes": 716185,
+      "artifactSha256": "f68ffd11c6ce43ec4b83eaac0327a6ad7b1ceff324c0b165e7f6a7af537263f0",
       "sourceBytes": 6892,
       "sourceSha256": "999cc77ee74eafbd2e782b7c9263be59dc5bb74c2208fc9d9f1909385ed56249",
       "checks": [

@@ -27,7 +27,7 @@ const CASES = [
     accent: '#38bdf8',
     featured: true,
     titleEn: 'Business Operating Map',
-    descriptionEn: 'The whole business in one map: demand, supply chain, inventory, commerce, payments, spend, payroll, bank and three separate ledgers, each node naming its system of record.',
+    descriptionEn: 'The whole business as three finance cycles: procure to pay, order to cash, and record to report into three separate ledgers, meeting at the bank, with the system of record on every node.',
   },
   {
     id: 'operating-pillars',
