@@ -7,6 +7,7 @@
   <title>Choose the Right Business Diagram — MosoFin-diagram Guide</title>
   <meta name="description" content="Describe the business question you need answered. MosoFin-diagram recommends one of 23 diagram recipes, the evidence to include, and a prompt to copy.">
   <link rel="canonical" href="https://diagram.mosofin.com/guide.html">
+  <link rel="alternate" type="text/plain" href="https://diagram.mosofin.com/llms.txt" title="llms.txt: site summary for AI agents">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MosoFin-diagram">
@@ -196,6 +197,13 @@
     .filter:hover { color:var(--ink); border-color:var(--ink); }
     .filter.active { color:var(--paper); background:var(--ink); border-color:var(--ink); }
     .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .recipe-index { margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line, #e4e6ea); }
+    .recipe-index h3 { font-size:1.05rem; margin-bottom:1rem; }
+    .recipe-index ul { list-style:none; padding:0; columns:2 320px; column-gap:2rem; }
+    .recipe-index li { break-inside:avoid; margin:0 0 .6rem; font-size:.9rem; line-height:1.45; }
+    .recipe-index li a { font-weight:600; }
+    .recipe-index li span { display:block; opacity:.7; font-size:.8rem; }
+    .recipe-index-note { margin-top:1.25rem; font-size:.8rem; opacity:.75; }
     .card { min-width:0; min-height:206px; padding:1.375rem 1.5rem; text-align:left; border:1px solid var(--line-hi); border-radius:12px; background:var(--paper-raised); cursor:pointer; transition:transform .22s var(--ease-out),border-color .22s var(--ease-out),box-shadow .22s var(--ease-out); position:relative; font-family:inherit; }
     .card:hover,.card:focus-visible { transform:translateY(-3px); border-color:var(--ink); box-shadow:0 14px 36px rgba(20,23,26,.1); outline:none; }
     .card-type { color:var(--type-color,var(--accent)); font-family:var(--font-mono); font-size:.5625rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
@@ -319,11 +327,40 @@
 
     <section class="library" id="library">
       <div class="section-head">
-        <div><div class="lead-label" data-i18n="libraryEyebrow">Recipe library</div><h2 data-i18n="libraryTitle">Nineteen small, opinionated starting points.</h2></div>
-        <p data-i18n="libraryBody">Each recipe answers one technical question. That boundary keeps the result legible, reviewable, and honest about missing evidence.</p>
+        <div><div class="lead-label" data-i18n="libraryEyebrow">Recipe library</div><h2 data-i18n="libraryTitle">Small, opinionated starting points, one question each.</h2></div>
+        <p data-i18n="libraryBody">Each recipe answers one business, finance or systems question. That boundary keeps the result legible, reviewable, and honest about missing evidence.</p>
       </div>
       <div class="filters" id="filters" aria-label="Filter recipes"></div>
       <div class="cards" id="cards"></div>
+      <nav class="recipe-index" aria-labelledby="recipe-index-title">
+        <h3 id="recipe-index-title">Every recipe has its own answer page</h3>
+        <ul>
+          <li><a href="recipes/business-operating-map.html">How does the whole business run, and which system owns each part of it?</a><span>Business operating map · architecture diagram</span></li>
+          <li><a href="recipes/business-handoffs.html">Which team or system owns each step, and where does work change hands?</a><span>Business handoffs · workflow diagram</span></li>
+          <li><a href="recipes/business-pillars.html">What holds the business up, which system owns each pillar, and what does it all stand on?</a><span>Business pillars · pillars diagram</span></li>
+          <li><a href="recipes/business-order-journey.html">What happens to one order, in time, across every system it touches?</a><span>Order journey across systems · sequence diagram</span></li>
+          <li><a href="recipes/finance-money-map.html">How does this company make money, and what is source of truth for orders, cash, and books?</a><span>Finance money map · architecture diagram</span></li>
+          <li><a href="recipes/finance-order-path.html">What happened to one order or payout, in time, across commerce, payments, and the books?</a><span>Finance order path · sequence diagram</span></li>
+          <li><a href="recipes/finance-revenue-walk.html">Why don’t Shopify, Stripe, and QuickBooks show the same revenue?</a><span>Finance revenue walk · data flow diagram</span></li>
+          <li><a href="recipes/finance-close.html">What is month-end, in order, and who owns each gate?</a><span>Finance month-end close · workflow diagram</span></li>
+          <li><a href="recipes/finance-dispute-lifecycle.html">If commerce refunded it, is the money actually done?</a><span>Finance dispute lifecycle · lifecycle diagram</span></li>
+          <li><a href="recipes/finance-payout-rec.html">Where did Stripe cash go relative to the bank and QuickBooks?</a><span>Finance payout rec · data flow diagram</span></li>
+          <li><a href="recipes/finance-customer-ar.html">Who is allowed to say this customer owes us?</a><span>Finance customer and AR · architecture diagram</span></li>
+          <li><a href="recipes/finance-cash-runway.html">Can we make payroll, and what inflows are actually named?</a><span>Finance cash to a date · data flow diagram</span></li>
+          <li><a href="recipes/system-overview.html">What exists, who owns it, and how is it connected?</a><span>System overview · architecture diagram</span></li>
+          <li><a href="recipes/deployment-ownership.html">Where does each workload run, and what crosses a boundary?</a><span>Deployment ownership · architecture diagram</span></li>
+          <li><a href="recipes/agent-tool-call.html">How does an agent plan, get permission, act, recover, and report?</a><span>Agent tool-call loop · workflow diagram</span></li>
+          <li><a href="recipes/delivery-workflow.html">How does a change move safely from commit to production?</a><span>Delivery workflow · workflow diagram</span></li>
+          <li><a href="recipes/incident-runbook.html">How do responders detect, triage, mitigate, verify, and escalate?</a><span>Incident runbook · workflow diagram</span></li>
+          <li><a href="recipes/api-request.html">Who calls whom, in what order, and what returns?</a><span>API request chain · sequence diagram</span></li>
+          <li><a href="recipes/async-roundtrip.html">What happens after the initial request returns?</a><span>Async roundtrip · sequence diagram</span></li>
+          <li><a href="recipes/data-lineage.html">Where does data come from, how does it change, and who consumes it?</a><span>Data lineage · data flow diagram</span></li>
+          <li><a href="recipes/event-stream.html">Which events move through which topics, processors, groups, and failure paths?</a><span>Event-stream topology · data flow diagram</span></li>
+          <li><a href="recipes/object-lifecycle.html">Which states exist, what events move between them, and how does it end?</a><span>Object lifecycle · lifecycle diagram</span></li>
+          <li><a href="recipes/deployment-lifecycle.html">What state is a release in, and what can happen next?</a><span>Deployment lifecycle · lifecycle diagram</span></li>
+        </ul>
+        <p class="recipe-index-note">For AI agents: <a href="llms.txt">llms.txt</a> · <a href="llms-full.txt">llms-full.txt</a> · <a href="recipes.json">recipes.json</a></p>
+      </nav>
     </section>
   </main>
 
@@ -377,7 +414,7 @@
       var copy = {
         en: {
           navGuide:'How it works',navProof:'Examples',navLogos:'Logos',navInstall:'Get started →',versionLabel:'Scenario guide / development / v1.0.0-dev.0',eyebrow:'Question-first diagramming', headline:'Choose the question.<br>Get the <em>right diagram.</em>', lede:'Describe what your audience needs to understand. Mosofin recommends one bounded visual recipe—plus the evidence it must contain, when not to use it, and a prompt you can copy.',
-          metricRecipes:'real-world<br>recipes',metricModes:'typed diagram<br>modes',metricRuntime:'runtime<br>dependencies',chooserTitle:'What must the diagram explain?',chooserBody:'Write a situation, not a diagram type. Specific system facts produce a stronger recommendation.',placeholder:'Example: Map how our business runs, from HubSpot leads and NetSuite purchase orders through Shopify, Stripe and the bank into QuickBooks.',recommend:'Recommend a recipe →',clear:'Clear',libraryEyebrow:'Recipe library',libraryTitle:'Nineteen small, opinionated starting points.',libraryBody:'Each recipe answers one technical question. That boundary keeps the result legible, reviewable, and honest about missing evidence.',footerLeft:'Generated from the same recipe source as the Mosofin CLI.',all:'All recipes',recommended:'Recommended recipe',use:'Use when',avoid:'Avoid when',must:'Evidence to include',presentation:'Presentation',prompt:'Copy-ready prompt',copyPrompt:'Copy prompt',copied:'Copied',alternatives:'Other possible fits:',confidence:'confidence',open:'Open recipe',proofReady:'Verified proof',proofLink:'Open verified example ↗',
+          metricRecipes:'real-world<br>recipes',metricModes:'typed diagram<br>modes',metricRuntime:'runtime<br>dependencies',chooserTitle:'What must the diagram explain?',chooserBody:'Write a situation, not a diagram type. Specific system facts produce a stronger recommendation.',placeholder:'Example: Map how our business runs, from HubSpot leads and NetSuite purchase orders through Shopify, Stripe and the bank into QuickBooks.',recommend:'Recommend a recipe →',clear:'Clear',libraryEyebrow:'Recipe library',libraryTitle:'Small, opinionated starting points, one question each.',libraryBody:'Each recipe answers one business, finance or systems question. That boundary keeps the result legible, reviewable, and honest about missing evidence.',footerLeft:'Generated from the same recipe source as the Mosofin CLI.',all:'All recipes',recommended:'Recommended recipe',use:'Use when',avoid:'Avoid when',must:'Evidence to include',presentation:'Presentation',prompt:'Copy-ready prompt',copyPrompt:'Copy prompt',copied:'Copied',alternatives:'Other possible fits:',confidence:'confidence',open:'Open recipe',proofReady:'Verified proof',proofLink:'Open verified example ↗',
           samples:[['Whole business','Map how our business runs — HubSpot leads, Shopify orders, NetSuite purchase orders, Stripe payouts, Ramp bills and Gusto payroll landing in each entity\'s QuickBooks.'],['Revenue walk','Why doesn\'t Shopify revenue match QuickBooks for July? Walk gross to net with every deduction as its own step.'],['Month-end close','What is month-end in order, who owns each gate, and what stops the period lock?']]
         }
       };

@@ -1,0 +1,64 @@
+# MosoFin-diagram
+
+> A free, open-source (MIT) agent skill that turns a short interview about a business into a validated, self-contained HTML diagram of how it runs. It runs inside Claude Code, Cursor, Codex CLI and OpenCode, never invents a number, and never connects to a ledger, processor or bank. MIT license, version 1.0.0-dev.0.
+
+Use MosoFin-diagram when a user wants to see how a business runs or needs a finance diagram that must stay true to what they stated. Install it with one command, then follow its SKILL.md. Every recipe below is an answer page with a copy-ready prompt and a verified example.
+
+## Start here
+
+- [Full agent guide](https://diagram.mosofin.com/llms-full.txt): what it is, when to use it, install, workflow, guardrails, every recipe and the FAQ in one file
+- [Get started](https://diagram.mosofin.com/start.html): install commands for each agent and the four steps to a diagram
+- [Recipe index](https://diagram.mosofin.com/recipes/): 23 questions, each answered with the right diagram and a prompt
+- [Recipe catalogue as JSON](https://diagram.mosofin.com/recipes.json): the same recipes as data
+- [SKILL.md](https://github.com/MosoFin/mosofin-diagram/blob/main/mosofin/SKILL.md): the authoring instructions the agent follows
+
+## Business recipes
+
+- [Business operating map](https://diagram.mosofin.com/recipes/business-operating-map.md): How does the whole business run, and which system owns each part of it? (architecture)
+- [Business handoffs](https://diagram.mosofin.com/recipes/business-handoffs.md): Which team or system owns each step, and where does work change hands? (workflow)
+- [Business pillars](https://diagram.mosofin.com/recipes/business-pillars.md): What holds the business up, which system owns each pillar, and what does it all stand on? (pillars)
+- [Order journey across systems](https://diagram.mosofin.com/recipes/business-order-journey.md): What happens to one order, in time, across every system it touches? (sequence)
+
+## Finance recipes
+
+- [Finance money map](https://diagram.mosofin.com/recipes/finance-money-map.md): How does this company make money, and what is source of truth for orders, cash, and books? (architecture)
+- [Finance order path](https://diagram.mosofin.com/recipes/finance-order-path.md): What happened to one order or payout, in time, across commerce, payments, and the books? (sequence)
+- [Finance revenue walk](https://diagram.mosofin.com/recipes/finance-revenue-walk.md): Why don’t Shopify, Stripe, and QuickBooks show the same revenue? (data flow)
+- [Finance month-end close](https://diagram.mosofin.com/recipes/finance-close.md): What is month-end, in order, and who owns each gate? (workflow)
+- [Finance dispute lifecycle](https://diagram.mosofin.com/recipes/finance-dispute-lifecycle.md): If commerce refunded it, is the money actually done? (lifecycle)
+- [Finance payout rec](https://diagram.mosofin.com/recipes/finance-payout-rec.md): Where did Stripe cash go relative to the bank and QuickBooks? (data flow)
+- [Finance customer and AR](https://diagram.mosofin.com/recipes/finance-customer-ar.md): Who is allowed to say this customer owes us? (architecture)
+- [Finance cash to a date](https://diagram.mosofin.com/recipes/finance-cash-runway.md): Can we make payroll, and what inflows are actually named? (data flow)
+
+## Systems and engineering recipes
+
+- [System overview](https://diagram.mosofin.com/recipes/system-overview.md): What exists, who owns it, and how is it connected? (architecture)
+- [Deployment ownership](https://diagram.mosofin.com/recipes/deployment-ownership.md): Where does each workload run, and what crosses a boundary? (architecture)
+- [Agent tool-call loop](https://diagram.mosofin.com/recipes/agent-tool-call.md): How does an agent plan, get permission, act, recover, and report? (workflow)
+- [Delivery workflow](https://diagram.mosofin.com/recipes/delivery-workflow.md): How does a change move safely from commit to production? (workflow)
+- [Incident runbook](https://diagram.mosofin.com/recipes/incident-runbook.md): How do responders detect, triage, mitigate, verify, and escalate? (workflow)
+- [API request chain](https://diagram.mosofin.com/recipes/api-request.md): Who calls whom, in what order, and what returns? (sequence)
+- [Async roundtrip](https://diagram.mosofin.com/recipes/async-roundtrip.md): What happens after the initial request returns? (sequence)
+- [Data lineage](https://diagram.mosofin.com/recipes/data-lineage.md): Where does data come from, how does it change, and who consumes it? (data flow)
+- [Event-stream topology](https://diagram.mosofin.com/recipes/event-stream.md): Which events move through which topics, processors, groups, and failure paths? (data flow)
+- [Object lifecycle](https://diagram.mosofin.com/recipes/object-lifecycle.md): Which states exist, what events move between them, and how does it end? (lifecycle)
+- [Deployment lifecycle](https://diagram.mosofin.com/recipes/deployment-lifecycle.md): What state is a release in, and what can happen next? (lifecycle)
+
+## Verified examples
+
+- [How the business runs (2026-07)](https://diagram.mosofin.com/gallery/artifacts/business-operating-map.architecture.html): architecture diagram, 12 nodes, validated
+- [Northline Coffee — How the business stands (as of 2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-operating-pillars.pillars.html): pillars diagram, 5 nodes, validated
+- [Northline Coffee — Money Map (as of 2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-money-map.architecture.html): architecture diagram, 6 nodes, validated
+- [Northline Coffee — One DTC Order to the Books (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-order-path.sequence.html): sequence diagram, 5 nodes, validated
+- [Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-revenue-walk.dataflow.html): dataflow diagram, 9 nodes, validated
+- [Northline Coffee — Month-End Close Runbook (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html): workflow diagram, 9 nodes, validated
+- [Northline Coffee — Refund and Chargeback Lifecycle (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-dispute.lifecycle.html): lifecycle diagram, 10 nodes, validated
+- [Northline Coffee — Stripe Payout Reconciliation to Chase 1002 (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-payout-rec.dataflow.html): dataflow diagram, 9 nodes, validated
+- [Northline Coffee — Who Can Say a Customer Owes Us (2026-07)](https://diagram.mosofin.com/gallery/artifacts/northline-customer-ar.architecture.html): architecture diagram, 8 nodes, validated
+- [Northline Coffee — Cash to Payroll Date (as of 2026-07-31)](https://diagram.mosofin.com/gallery/artifacts/northline-cash-runway.dataflow.html): dataflow diagram, 9 nodes, validated
+
+## Optional
+
+- [Gallery](https://diagram.mosofin.com/gallery.html): every verified example with its JSON source
+- [Logos and business icons](https://diagram.mosofin.com/logos.html): the finance logos and business icons a node can show
+- [Source code](https://github.com/MosoFin/mosofin-diagram): MIT-licensed repository

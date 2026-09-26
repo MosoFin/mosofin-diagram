@@ -62,8 +62,9 @@ export function softwareApplication(version) {
  * @param {string} page.title      the <title> text (also og:title)
  * @param {string} page.description meta and social description, ideally 110–160 characters
  * @param {object[]} [page.jsonLd]  schema.org nodes for this page
+ * @param {string} [page.markdown]   site path of this page's Markdown twin, for agents
  */
-export function seoHead({ path, title, description, jsonLd = [] }) {
+export function seoHead({ path, title, description, jsonLd = [], markdown = null }) {
   if (!path || !title || !description) throw new Error('seoHead: path, title and description are required');
   const url = absoluteUrl(path);
   const graph = { '@context': 'https://schema.org', '@graph': [
@@ -72,6 +73,8 @@ export function seoHead({ path, title, description, jsonLd = [] }) {
   ] };
   return [
     `<link rel="canonical" href="${escapeAttr(url)}">`,
+    ...(markdown ? [`<link rel="alternate" type="text/markdown" href="${escapeAttr(absoluteUrl(markdown))}" title="Markdown version">`] : []),
+    `<link rel="alternate" type="text/plain" href="${absoluteUrl('/llms.txt')}" title="llms.txt: site summary for AI agents">`,
     '<meta name="robots" content="index, follow, max-image-preview:large">',
     '<meta property="og:type" content="website">',
     `<meta property="og:site_name" content="${SITE_NAME}">`,

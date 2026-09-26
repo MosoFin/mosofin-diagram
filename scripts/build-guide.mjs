@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { publicGuideData } from '../mosofin/recipes/scenarios.mjs';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
 import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
+import { RECIPES } from './site-content.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -13,6 +14,7 @@ const templatePath = path.join(__dirname, 'guide-template.html');
 const outputPath = path.resolve(process.argv[2] || path.join(repoRoot, 'docs/guide.html'));
 const packageJson = JSON.parse(fs.readFileSync(path.join(repoRoot, 'mosofin/package.json'), 'utf8'));
 
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const guideJson = JSON.stringify(publicGuideData())
   .replaceAll('&', '\\u0026')
   .replaceAll('<', '\\u003c')
@@ -35,6 +37,8 @@ const replacements = {
   '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
   '[[RECIPE_COUNT]]': String(publicGuideData().length),
   '[[GUIDE_JSON]]': guideJson,
+  // Server-rendered links: AI crawlers do not run the card script above.
+  '[[RECIPE_INDEX]]': RECIPES.map((recipe) => `          <li><a href="recipes/${recipe.id}.html">${escapeHtml(recipe.question)}</a><span>${escapeHtml(recipe.title)} · ${escapeHtml(recipe.typeLabel.toLowerCase())} diagram</span></li>`).join('\n'),
 };
 
 let output = fs.readFileSync(templatePath, 'utf8');
