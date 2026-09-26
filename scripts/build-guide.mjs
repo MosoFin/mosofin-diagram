@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { publicGuideData } from '../mosofin/recipes/scenarios.mjs';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
+import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -17,7 +18,18 @@ const guideJson = JSON.stringify(publicGuideData())
   .replaceAll('<', '\\u003c')
   .replaceAll('>', '\\u003e');
 
+const guideDescription = `Describe the business question you need answered. MosoFin-diagram recommends one of ${publicGuideData().length} diagram recipes, the evidence to include, and a prompt to copy.`;
 const replacements = {
+  '[[SEO_DESCRIPTION]]': guideDescription,
+  '[[SEO_HEAD]]': seoHead({
+    path: '/guide.html',
+    title: 'Choose the Right Business Diagram — MosoFin-diagram Guide',
+    description: guideDescription,
+    jsonLd: [
+      breadcrumb('Scenario guide', '/guide.html'),
+      { '@type': 'WebPage', name: 'Choose the Right Business Diagram', url: absoluteUrl('/guide.html'), description: guideDescription },
+    ],
+  }),
   '[[MOSOFIN_VERSION]]': packageJson.version,
   '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'guide' }),
   '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),

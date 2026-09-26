@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SCENARIO_RECIPES } from '../mosofin/recipes/scenarios.mjs';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
+import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -40,7 +41,31 @@ const startJson = JSON.stringify(startData)
   .replaceAll('<', '\\u003c')
   .replaceAll('>', '\\u003e');
 
+const startDescription = 'Add the skill, describe the business, ask one question, and share the map. Install MosoFin-diagram for Claude Code, Cursor, Codex CLI or OpenCode.';
+const START_STEPS = [
+  ['Add the skill', 'Install MosoFin-diagram into your coding agent with one command.'],
+  ['Describe the business', 'Answer a short interview: what the business does, its entities, and which system owns each domain.'],
+  ['Ask one question', 'Ask the one question the diagram must answer; the skill picks the diagram type.'],
+  ['Share the map', 'Open the self-contained HTML, explore it, and forward it.'],
+];
 const replacements = {
+  '[[SEO_DESCRIPTION]]': startDescription,
+  '[[SEO_HEAD]]': seoHead({
+    path: '/start.html',
+    title: 'Get Started with MosoFin-diagram — Four Steps to a Shared Map',
+    description: startDescription,
+    jsonLd: [
+      breadcrumb('Get started', '/start.html'),
+      {
+        '@type': 'HowTo',
+        name: 'Make a business diagram with MosoFin-diagram',
+        url: absoluteUrl('/start.html'),
+        totalTime: 'PT10M',
+        tool: [{ '@type': 'HowToTool', name: 'A coding agent such as Claude Code, Cursor, Codex CLI or OpenCode' }],
+        step: START_STEPS.map(([name, text], index) => ({ '@type': 'HowToStep', position: index + 1, name, text })),
+      },
+    ],
+  }),
   '[[MOSOFIN_VERSION]]': packageJson.version,
   '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'start' }),
   '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),

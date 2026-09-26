@@ -138,6 +138,7 @@ export function applyTemplate(template, {
   nodeStyle = 'box',
   guidedViews = [],
   sourceEvidence = null,
+  description = '',
 }) {
   if (!SVG_SLOT_RE.test(template)) {
     throw new Error('applyTemplate: template missing MOSOFIN:SVG_SLOT sentinel');
@@ -175,7 +176,7 @@ export function applyTemplate(template, {
     : localizedTemplate.replace(GUIDED_VIEWS_PLACEHOLDER, () => `${i18nData}\n    ${GUIDED_VIEWS_PLACEHOLDER}`);
   return templateWithI18n
     .replace(TEMPLATE_PLACEHOLDERS[0], () => `<html lang="${esc(resolvedLocale)}" data-theme="dark" data-preset="${esc(visualPreset)}" data-node-style="${esc(nodeStyle)}">`)
-    .replace(TEMPLATE_PLACEHOLDERS[1], () => `<title>${esc(translateMessage(resolvedLocale, 'page.title', { title }))}</title>`)
+    .replace(TEMPLATE_PLACEHOLDERS[1], () => `<title>${esc(translateMessage(resolvedLocale, 'page.title', { title }))}</title>${description ? `\n  <meta name="description" content="${esc(description)}">` : ''}`)
     .replace(TEMPLATE_PLACEHOLDERS[2], () => `<h1>${esc(title)}</h1>`)
     .replace(SUBTITLE_SLOT_RE, (_match, indent, newline = '') => renderedSubtitle
       ? `${indent}${renderedSubtitle}${newline}`

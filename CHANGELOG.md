@@ -8,6 +8,17 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Site SEO: every page on diagram.mosofin.com now carries a canonical URL, robots directive, full Open
+  Graph and Twitter card tags with image dimensions and alt text, and schema.org JSON-LD
+  (SoftwareApplication on the landing page, CollectionPage with an ItemList on the gallery, HowTo on
+  Get started, breadcrumbs everywhere) from one helper, `scripts/site-seo.mjs`. Titles and
+  descriptions are rewritten to be unique and search-length. `npm run build:seo` regenerates the
+  landing block, a sitemap with accurate `lastmod` dates that lists the new pillars proof and drops
+  sample pages that duplicate gallery artifacts, and a robots.txt that keeps the internal design
+  handoff out of the index. Every rendered diagram now has a meta description built from its title
+  and guided views.
+- Site pages: the landing page shows six diagram types including Pillars and ten verified demos, and
+  the logos page gains a "No logo? A business icon." section listing all 31 domain icons.
 - Domain icons for nodes without a logo. Architecture components and pillars accept an optional
   `icon` naming one of 31 business pictograms (supplier, supply-chain, warehouse, spend, close,
   entity, rules, and more) drawn from Lucide (ISC, pinned `lucide-static` 1.48.0, licence shipped in

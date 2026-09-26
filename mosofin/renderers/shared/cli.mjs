@@ -51,6 +51,27 @@ export async function loadDiagramWithBrandMarks(options) {
   return loaded;
 }
 
+const TYPE_NOUNS = {
+  architecture: 'architecture',
+  workflow: 'workflow',
+  sequence: 'sequence',
+  dataflow: 'data-flow',
+  lifecycle: 'lifecycle',
+  pillars: 'pillars',
+};
+
+// A search-result description for the standalone page: the authored subtitle
+// when there is one, otherwise the title and the named reader views. Authored
+// copy only; nothing is inferred from the nodes.
+export function artifactDescription(diagramType, meta = {}) {
+  const subtitle = typeof meta.subtitle === 'string' ? meta.subtitle.trim() : '';
+  if (subtitle) return subtitle;
+  const views = (meta.views || []).map((view) => view.label).filter(Boolean);
+  const noun = TYPE_NOUNS[diagramType] || 'diagram';
+  const lead = views.length ? `${meta.title}: ${views.join(', ')}.` : `${meta.title}.`;
+  return `${lead} An interactive ${noun} diagram made with MosoFin-diagram.`;
+}
+
 const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars']);
 
 // Common CLI tail: fill the template and write the standalone HTML file.
@@ -69,6 +90,7 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
     nodeStyle: meta.node_style || 'box',
     guidedViews: meta.views || [],
     sourceEvidence,
+    description: artifactDescription(diagramType, meta),
   }));
   outputPathGuards.delete(outPath);
   console.log(outPath);

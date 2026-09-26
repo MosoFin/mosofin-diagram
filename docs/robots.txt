@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /design-handoff/
 
 Sitemap: https://diagram.mosofin.com/sitemap.xml

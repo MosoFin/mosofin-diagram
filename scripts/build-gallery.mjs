@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
+import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -303,10 +304,36 @@ const manifest = {
 const manifestJson = JSON.stringify(manifest, null, 2);
 fs.writeFileSync(path.join(outputRoot, 'gallery', 'manifest.json'), `${manifestJson}\n`);
 
+const galleryDescription = `${entries.length} verified example diagrams of how a small business runs: operating map, pillars, money map, close runbook, revenue walk and more, each with its JSON source.`;
 const replacements = {
   '[[MOSOFIN_VERSION]]': packageJson.version,
   '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'gallery' }),
   '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
+  '[[SEO_DESCRIPTION]]': galleryDescription,
+  '[[SEO_HEAD]]': seoHead({
+    path: '/gallery.html',
+    title: 'Business Diagram Examples — MosoFin-diagram Gallery',
+    description: galleryDescription,
+    jsonLd: [
+      breadcrumb('Gallery', '/gallery.html'),
+      {
+        '@type': 'CollectionPage',
+        name: 'Business Diagram Examples',
+        url: absoluteUrl('/gallery.html'),
+        description: galleryDescription,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: entries.length,
+          itemListElement: entries.map((entry, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: entry.titleEn,
+            url: absoluteUrl(`/gallery/artifacts/${entry.output}`),
+          })),
+        },
+      },
+    ],
+  }),
   '[[ENTRY_COUNT]]': String(manifest.entryCount),
   '[[CHECK_COUNT]]': String(manifest.checkCount),
   '[[GALLERY_CARDS]]': entries.map(renderCard).join('\n'),

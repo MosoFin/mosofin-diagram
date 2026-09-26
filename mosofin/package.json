@@ -27,7 +27,8 @@
     "render:examples": "node scripts/render-examples.mjs ../examples",
     "build:design-handoff": "node ../scripts/build-design-handoff.mjs",
     "build:zip": "node ../scripts/require-node22.mjs && bash ../scripts/build-zip.sh",
-    "build:logos": "node ../scripts/build-logos.mjs"
+    "build:logos": "node ../scripts/build-logos.mjs",
+    "build:seo": "node ../scripts/build-seo.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
