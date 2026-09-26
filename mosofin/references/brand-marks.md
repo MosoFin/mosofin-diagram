@@ -4,6 +4,29 @@ Use a brand mark only when a real product, provider, model family, channel, or
 service identity helps the reader. Semantic `type` still explains what the node
 does; `brand` explains whose product it is.
 
+## When there is no brand mark
+
+Many nodes have no logo to show: suppliers, a warehouse or 3PL, the controller,
+a legal entity, truth rules. Some real products have no openly licensed mark in
+the catalogue either (NetSuite, Ramp). Never draw, trace or borrow a logo for
+them. Set `icon` to a **domain icon** instead, a business pictogram from the
+curated Lucide set (ISC licence, shipped in `domain-icons/`):
+
+```bash
+node bin/mosofin.mjs icons --json
+node bin/mosofin.mjs icons warehouse
+```
+
+```json
+{ "id": "erp", "type": "backend", "label": "Supply chain · ERP", "sublabel": "NetSuite · POs", "icon": "supply-chain" }
+```
+
+A domain icon draws in the node's semantic colour, so it reads as a role, never
+as a brand. In logo mode it replaces the generic role sigil; in box mode it sits
+in the corner slot a brand badge would use. A resolved `brand` always wins over
+`icon`. Unknown values fail validation with the closest IDs. Architecture
+components and pillars (pillars and foundation blocks) accept `icon`.
+
 ## Agent decision path
 
 1. Search the built-in catalogue when the request names a recognizable brand:

@@ -8,6 +8,44 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- Site SEO: every page on diagram.mosofin.com now carries a canonical URL, robots directive, full Open
+  Graph and Twitter card tags with image dimensions and alt text, and schema.org JSON-LD
+  (SoftwareApplication on the landing page, CollectionPage with an ItemList on the gallery, HowTo on
+  Get started, breadcrumbs everywhere) from one helper, `scripts/site-seo.mjs`. Titles and
+  descriptions are rewritten to be unique and search-length. `npm run build:seo` regenerates the
+  landing block, a sitemap with accurate `lastmod` dates that lists the new pillars proof and drops
+  sample pages that duplicate gallery artifacts, and a robots.txt that keeps the internal design
+  handoff out of the index. Every rendered diagram now has a meta description built from its title
+  and guided views.
+- Site pages: the landing page shows six diagram types including Pillars and ten verified demos, and
+  the logos page gains a "No logo? A business icon." section listing all 31 domain icons.
+- Domain icons for nodes without a logo. Architecture components and pillars accept an optional
+  `icon` naming one of 31 business pictograms (supplier, supply-chain, warehouse, spend, close,
+  entity, rules, and more) drawn from Lucide (ISC, pinned `lucide-static` 1.48.0, licence shipped in
+  `domain-icons/`). Logo mode draws it in place of the generic role sigil and box mode shows it in
+  the corner badge slot; a brand mark always wins. `mosofin icons` lists them, unknown values fail
+  validation with suggestions, and `npm test` checks the generated catalogue is fresh. NetSuite and
+  Ramp stay unbranded: neither ships an openly licensed mark in Simple Icons 16.32, and Oracle's
+  guidelines forbid imitating its logos. The operating map and pillars samples now use icons for
+  Suppliers, NetSuite, the 3PL, Ramp, Close and review, the legal entity and the truth rules.
+- Redesigned the business operating map around the layout finance professionals already use:
+  procure to pay on the left, order to cash on the right, inventory and the bank in the middle,
+  and record to report along the bottom. Goods run left to right and cash converges on the bank.
+  The map now uses the brief's real entities (Northline Coffee, Cafés and Wholesale LLC) instead
+  of "Entity A/B/C", drops to 12 nodes and 13 edges, and fits a 1440×900 screen. The Ramp node
+  now draws its role glyph instead of a remote favicon capture, so the gallery and node-style
+  tests rebuild offline. The operating-map recipe and business onboarding describe the layout.
+- New `pillars` diagram type: the operating model on one page, drawn as a temple. The roof states
+  the business in one sentence, each of 3–6 pillars is one domain with its system of record on the
+  capital (brand mark or role sigil), the facts that system owns in the shaft, and a one-phrase
+  truth claim on the plinth; the foundation names the entity and the truth rules. It has no
+  relationships, so it never implies a flow or a tie-out. Ships with `schemas/pillars.schema.json`,
+  `renderers/pillars/`, the `business-pillars` recipe (23 recipes), the Northline proof
+  `northline-operating-pillars` (gallery is now 10 artifacts / 90 checks), logo mode, guided views,
+  and legend support. Guided views and brand capture now accept types whose semantic nodes span
+  several collections.
+- Business onboarding now asks for the trigger and the outcome before a workflow is mapped, and
+  routes "what holds the business up, on one page" to `pillars`.
 - Dropped Chinese from the public site, recipe guide, viewer catalog, and
   identity gates. The skill is English-only: `meta.locale` accepts `en`.
 - How it works is now four named steps in a left-to-right slider: Add the skill,

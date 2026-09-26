@@ -179,8 +179,8 @@ const specialComponents = Array.from({ length: 11 }, (_, index) => ({
   type: index === 0 ? 'external' : index === 10 ? 'database' : 'backend',
   label: index === 0 ? specialSourceLabel : index === 10 ? specialTargetLabel : `step ${index} · service_${index} ⚙️`,
   sublabel: `hop ${index}`,
-  pos: [40 + index * 820, 280],
-  size: [index === 0 || index === 10 ? 780 : 220, 72],
+  pos: [40 + index * 840, 280],
+  size: [index === 0 || index === 10 ? 810 : 220, 72],
 }));
 const specialRouteSource = {
   schema_version: 1,

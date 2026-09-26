@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="mosofin guide [[MOSOFIN_VERSION]]">
-  <title>MosoFin-diagram Scenario Guide — Choose the Right Diagram</title>
-  <meta name="description" content="Describe the technical question you need to answer. Mosofin recommends a bounded diagram recipe, evidence checklist, and copy-ready prompt.">
+  <title>Choose the Right Business Diagram — MosoFin-diagram Guide</title>
+  <meta name="description" content="[[SEO_DESCRIPTION]]">
+[[SEO_HEAD]]
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/png" href="assets/mosofin-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -258,8 +259,8 @@
     (function () {
       'use strict';
       var recipes = JSON.parse(document.getElementById('guide-data').textContent);
-      var types = ['architecture','workflow','sequence','dataflow','lifecycle'];
-      var colors = { architecture:'#0891b2', workflow:'#047857', sequence:'#6d28d9', dataflow:'#b45309', lifecycle:'#be123c' };
+      var types = ['architecture','workflow','sequence','dataflow','lifecycle','pillars'];
+      var colors = { architecture:'#0891b2', workflow:'#047857', sequence:'#6d28d9', dataflow:'#b45309', lifecycle:'#be123c', pillars:'#0f766e' };
       var language = 'en';
       var activeType = 'all';
       var lastRecipe = null;
@@ -292,7 +293,7 @@
         document.getElementById('samples').innerHTML = t('samples').map(function (sample) { return '<button class="chip" type="button" data-query="'+escapeHtml(sample[1])+'">'+escapeHtml(sample[0])+'</button>'; }).join('');
       }
       function renderFilters() {
-        var labels = {architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle'};
+        var labels = {architecture:'Architecture',workflow:'Workflow',sequence:'Sequence',dataflow:'Data flow',lifecycle:'Lifecycle',pillars:'Pillars'};
         document.getElementById('filters').innerHTML = ['all'].concat(types).map(function (type) { return '<button class="filter '+(activeType === type ? 'active':'')+'" type="button" data-filter="'+type+'">'+escapeHtml(type === 'all' ? t('all') : labels[type])+'</button>'; }).join('');
       }
       function renderCards() {

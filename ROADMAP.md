@@ -11,6 +11,7 @@ The current development line is `v1.0.0-dev.0`; it contains the work under Chang
 - Period-over-period flux dataflow recipe with materiality thresholds.
 - Multi-entity consolidation money map.
 - Client-facing "explain this diagram" companion note per artifact.
+- Workflow decision-gateway shape and a user-stated value-stream time ladder (assessed alongside the pillars type; deferred).
 
 ## Standing boundaries
 - Last-Good Live Preview is an optional local loop only: no server state, port, path, error, or reload token enters HTML or any export, and installed ZIP skills keep the zero-dependency contract.

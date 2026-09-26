@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "diagram_type": "pillars",
+  "meta": {
+    "title": "Northline Coffee — How the business stands (as of 2026-07)",
+    "output": "northline-operating-pillars.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "what-sells",
+        "label": "What sells and who charges",
+        "focus": [
+          "commerce",
+          "payments"
+        ],
+        "note": "Shopify owns the order and the tax it collected; Stripe owns the charge, the fee and the payout. Neither is the books."
+      },
+      {
+        "id": "where-cash-lands",
+        "label": "Where cash lands",
+        "focus": [
+          "payments",
+          "bank",
+          "books"
+        ],
+        "note": "A payout is settled cash only when Chase 1002 shows it. QuickBooks recognizes revenue; the Shopify dashboard never does."
+      },
+      {
+        "id": "who-closes",
+        "label": "Who closes and on what rules",
+        "focus": [
+          "controller",
+          "books",
+          "truth"
+        ],
+        "note": "The controller ties payouts and the bank to zero before the period locks. The truth rules underneath decide every disagreement."
+      }
+    ]
+  },
+  "roof": {
+    "id": "goal",
+    "label": "Northline Coffee roasts and sells coffee direct to consumers and to wholesale accounts",
+    "sublabel": "One legal entity · accrual basis · one system of record per fact · as of 2026-07"
+  },
+  "pillars": [
+    {
+      "id": "commerce",
+      "type": "frontend",
+      "label": "Commerce",
+      "sublabel": "Shopify · orders and customers",
+      "brand": "shopify",
+      "tag": "orders SoT",
+      "items": [
+        "Orders and customers",
+        "Tax collected",
+        "Gift card liability",
+        "DTC sales receipts"
+      ]
+    },
+    {
+      "id": "payments",
+      "type": "backend",
+      "label": "Payments",
+      "sublabel": "Stripe · charges and payouts",
+      "brand": "stripe",
+      "tag": "charges and fees SoT",
+      "items": [
+        "Card capture",
+        "Fees netted in payout",
+        "T+2 payout batches",
+        "Refunds and disputes"
+      ]
+    },
+    {
+      "id": "bank",
+      "type": "cloud",
+      "label": "Bank",
+      "sublabel": "Chase 1002 operating account",
+      "brand": "chase",
+      "tag": "settled cash SoT",
+      "items": [
+        "Stripe payouts land here",
+        "Wholesale ACH receipts",
+        "Payroll and vendor debits",
+        "Statement is the tie-out"
+      ]
+    },
+    {
+      "id": "books",
+      "type": "database",
+      "label": "Books",
+      "sublabel": "QuickBooks Online",
+      "brand": "quickbooks",
+      "tag": "revenue SoT",
+      "items": [
+        "Revenue recognized here",
+        "Sales receipts for DTC",
+        "Wholesale invoices, A/R",
+        "Tax payable and P&L"
+      ]
+    },
+    {
+      "id": "controller",
+      "type": "security",
+      "label": "Close and review",
+      "sublabel": "Controller · monthly",
+      "tag": "zero-difference gate",
+      "icon": "close",
+      "items": [
+        "Payout rec to zero",
+        "Bank rec to statement",
+        "P&L review, then lock",
+        "A break stops the close"
+      ]
+    }
+  ],
+  "foundation": [
+    {
+      "id": "entity",
+      "type": "external",
+      "label": "Northline Coffee LLC",
+      "sublabel": "One legal entity · accrual basis · no consolidation drawn",
+      "icon": "entity"
+    },
+    {
+      "id": "truth",
+      "type": "security",
+      "label": "Truth rules",
+      "sublabel": "Orders in Shopify · cash in Chase · revenue in QuickBooks, never the dashboard",
+      "icon": "rules"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "One system of record per pillar",
+      "items": [
+        "Orders, customers, tax collected, gift cards: Shopify",
+        "Charges, fees, payouts, disputes: Stripe",
+        "Settled cash: Chase 1002 · Revenue, A/R, P&L: QuickBooks"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Guardrails",
+      "items": [
+        "No amounts or balances: none were supplied for 2026-07",
+        "A Shopify or Stripe dashboard total is never revenue",
+        "DTC is a sales receipt; A/R exists only for wholesale invoices"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "How to read it",
+      "items": [
+        "Roof: the business in one sentence",
+        "Capital: system of record · shaft: facts it owns · plinth: the truth claim",
+        "Foundation: the entity and the rules that settle disagreements"
+      ]
+    }
+  ]
+}

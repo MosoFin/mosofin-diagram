@@ -10,7 +10,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const skillRoot = path.resolve(__dirname, '..');
 
-const TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars']);
 
 function usage() {
   return `Usage:
@@ -25,12 +25,13 @@ function usage() {
   mosofin guide [scenario or question] [--json] [--lang en]
   mosofin brands [name, alias, domain, or category] [--json]
   mosofin brands capture <url> [--json]
+  mosofin icons [domain, role, or alias] [--json]
   mosofin examples
   mosofin doctor
   mosofin demo [output-directory]
 
 Types:
-  architecture, workflow, sequence, dataflow, lifecycle
+  architecture, workflow, sequence, dataflow, lifecycle, pillars
 `;
 }
 
@@ -1318,6 +1319,7 @@ async function commandDoctor() {
     sequence: 'cache-miss-request.sequence.json',
     dataflow: 'product-analytics.dataflow.json',
     lifecycle: 'agent-run.lifecycle.json',
+    pillars: 'northline-operating-pillars.pillars.json',
   };
 
   for (const type of TYPES) {
@@ -1462,6 +1464,33 @@ async function commandBrands(args) {
   for (const [category, entries] of grouped) {
     console.log(`${category}: ${entries.map((mark) => mark.id).join(', ')}`);
   }
+}
+
+async function commandIcons(args) {
+  const json = args.includes('--json');
+  const unknown = args.filter((arg) => arg.startsWith('--') && arg !== '--json');
+  if (unknown.length) fail(`Unknown icons option "${unknown[0]}".`);
+  const query = args.filter((arg) => arg !== '--json').join(' ').trim();
+  const { listDomainIcons, DOMAIN_ICON_SOURCE } = await import('../renderers/shared/domain-icons.mjs');
+  const icons = listDomainIcons(query);
+  if (json) {
+    console.log(JSON.stringify({
+      schemaVersion: 1,
+      ok: true,
+      command: 'icons',
+      query,
+      count: icons.length,
+      source: DOMAIN_ICON_SOURCE,
+      icons,
+      note: 'Set a node\'s "icon" only when it has no brand mark; a domain icon is a role pictogram, never a vendor logo.',
+    }, null, 2));
+    return;
+  }
+  if (!icons.length) {
+    console.log(`No domain icon matched "${query}". Run "mosofin icons" to list them all.`);
+    return;
+  }
+  for (const icon of icons) console.log(`${icon.id.padEnd(14)} ${icon.use}`);
 }
 
 function commandDemo(args) {
@@ -1630,6 +1659,9 @@ switch (command) {
     break;
   case 'guide':
     await commandGuide(args);
+    break;
+  case 'icons':
+    await commandIcons(args);
     break;
   case 'brands':
     await commandBrands(args);

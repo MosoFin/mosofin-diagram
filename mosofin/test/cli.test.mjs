@@ -81,7 +81,7 @@ test('cli: help lists commands and diagram types', () => {
   assert.match(result.stdout, /mosofin guide \[scenario or question\]/);
   assert.match(result.stdout, /mosofin doctor/);
   assert.match(result.stdout, /mosofin demo \[output-directory\]/);
-  assert.match(result.stdout, /architecture, workflow, sequence, dataflow, lifecycle/);
+  assert.match(result.stdout, /architecture, workflow, sequence, dataflow, lifecycle, pillars/);
 });
 
 test('cli: doctor reports a complete installation is ready', () => {
@@ -97,6 +97,7 @@ test('cli: doctor reports a complete installation is ready', () => {
   assert.match(result.stdout, /\[ok\] Standalone schema validators/);
   assert.match(result.stdout, /\[ok\] architecture renderer, schema, and example/);
   assert.match(result.stdout, /\[ok\] lifecycle renderer, schema, and example/);
+  assert.match(result.stdout, /\[ok\] pillars renderer, schema, and example/);
   assert.match(result.stdout, /Mosofin is ready\./);
 });
 
@@ -149,6 +150,7 @@ test('cli: examples renders from an installed skill', () => {
     'dataflow-product-analytics.html',
     'lifecycle-agent-run.html',
     'web-app-rendered.html',
+    'pillars-northline-operating-pillars.html',
   ]) {
     assert.equal(fs.existsSync(path.join(installedRoot, 'examples', output)), true, output);
   }
@@ -158,8 +160,8 @@ test('cli: guide lists all scenario recipes by diagram type', () => {
   const result = run(['guide']);
 
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Mosofin scenario recipes \(22\)/);
-  for (const type of ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']) {
+  assert.match(result.stdout, /Mosofin scenario recipes \(23\)/);
+  for (const type of ['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars']) {
     assert.match(result.stdout, new RegExp(`\\[${type}\\]`));
   }
 });
@@ -390,6 +392,7 @@ test('cli: deliver works from an installed skill without node_modules', () => {
     ['sequence', 'sequence', 'cache-miss-request.sequence.json'],
     ['dataflow', 'dataflow', 'product-analytics.dataflow.json'],
     ['lifecycle', 'lifecycle', 'agent-run.lifecycle.json'],
+    ['pillars', 'pillars', 'northline-operating-pillars.pillars.json'],
   ];
 
   for (const [label, type, example] of cases) {

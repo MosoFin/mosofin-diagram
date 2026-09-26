@@ -47,6 +47,8 @@ test('this is a finance catalogue: developer tooling is not listed', () => {
   assert.doesNotMatch(html, /bill-com|netsuite|brex|plaid|rippling/);
   assert.match(html, /The financial logos the skill can draw/);
   assert.match(html, /Finance systems/);
+  assert.match(html, /No logo\? A business icon\./);
+  assert.equal((html.match(/class="glyph"/g) || []).length, 31, 'every business icon is listed once');
   for (const mark of otherMarks) {
     assert.ok(!catalogue.includes(`<code>${mark.id}</code>`), `${mark.id}: developer marks must not be listed`);
   }

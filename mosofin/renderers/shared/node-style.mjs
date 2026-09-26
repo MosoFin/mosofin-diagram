@@ -19,6 +19,7 @@
 
 import { esc, renderSemanticSigil } from './utils.mjs';
 import { brandMarkFor } from './brand-marks.mjs';
+import { domainIconFor, renderDomainIcon } from './domain-icons.mjs';
 
 export const NODE_STYLES = Object.freeze(['box', 'logo']);
 export const DEFAULT_NODE_STYLE = 'box';
@@ -97,10 +98,11 @@ export function renderLogoNode(node, { x, y, width, height, label }) {
 }
 
 /**
- * The fallback for a logo-mode node with no brand mark: its semantic sigil, drawn
- * at the same scale as a real logo so the row reads evenly. The glyph carries the
- * node's role — counterparty, ledger, bank, control — which is honest for the many
- * nodes that are not software at all.
+ * The fallback for a logo-mode node with no brand mark: its authored domain icon
+ * (a supplier's truck, a controller's checklist) when `node.icon` names one,
+ * otherwise its semantic sigil, drawn at the same scale as a real logo so the row
+ * reads evenly. Either glyph carries the node's role in its semantic colour, which
+ * is honest for the many nodes that are not software at all.
  */
 export function renderLogolessBox(node, { x, y, width, height, kind }) {
   const { plateX, plateY, plateW, plateH, radius, square } = plateGeometry({ x, y, width, height });
@@ -110,7 +112,9 @@ export function renderLogolessBox(node, { x, y, width, height, kind }) {
   return `<g class="node-logoless" aria-hidden="true">
             <g transform="translate(${plateX} ${plateY})">
               <rect width="${plateW}" height="${plateH}" rx="${radius}" class="node-logoless-plate"/>
-              ${renderSemanticSigil(kind, { x: glyphX, y: glyphY, size: glyph })}
+              ${domainIconFor(node)
+    ? renderDomainIcon(node, { x: glyphX, y: glyphY, size: glyph, kind })
+    : renderSemanticSigil(kind, { x: glyphX, y: glyphY, size: glyph })}
             </g>
           </g>`;
 }

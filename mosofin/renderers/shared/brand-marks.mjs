@@ -6,6 +6,7 @@ import net from 'node:net';
 import { BRAND_MARKS } from './generated-brand-marks.mjs';
 import { throwDiagnosticError } from './diagnostics.mjs';
 import { esc, textUnits } from './utils.mjs';
+import { domainIconFor } from './domain-icons.mjs';
 
 const COLLECTIONS = Object.freeze({
   architecture: 'components',
@@ -13,6 +14,7 @@ const COLLECTIONS = Object.freeze({
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  pillars: ['pillars', 'foundation'],
 });
 const MARK_BY_LOOKUP = new Map();
 const MARK_BY_DOMAIN = new Map();
@@ -452,12 +454,15 @@ async function mapConcurrent(values, limit, visit) {
 }
 
 export async function prepareDiagramBrandMarks(diagramType, diagram) {
-  const collection = COLLECTIONS[diagramType];
-  const nodes = collection && Array.isArray(diagram[collection]) ? diagram[collection] : [];
+  const collections = [COLLECTIONS[diagramType]].flat().filter(Boolean);
+  const collection = collections.join('+');
+  const nodes = collections.flatMap((name) => (Array.isArray(diagram[name])
+    ? diagram[name].map((node, index) => ({ node, collection: name, index }))
+    : []));
   const unknown = [];
   const remoteByUrl = new Map();
   const deadline = Date.now() + captureTimeoutMilliseconds();
-  await mapConcurrent(nodes, MAX_CAPTURE_CONCURRENCY, async (node, index) => {
+  await mapConcurrent(nodes, MAX_CAPTURE_CONCURRENCY, async ({ node, collection, index }) => {
     if (!node.brand) return;
     if (typeof node.brand === 'object') {
       const url = asUrl(node.brand.url);
@@ -518,12 +523,16 @@ export function brandMetadataFor(node) {
   } : {};
 }
 
+function hasCornerMark(node) {
+  return Boolean(brandMarkFor(node) || domainIconFor(node));
+}
+
 export function brandLabelFitWidth(node, width) {
-  return brandMarkFor(node) ? Math.max(1, width - 48) : width;
+  return hasCornerMark(node) ? Math.max(1, width - 48) : width;
 }
 
 export function brandTopRailProblem(node, width, minimumFontSize, subject = 'Node') {
-  if (!brandMarkFor(node)) return null;
+  if (!hasCornerMark(node)) return null;
   const available = width - 48;
   const required = textUnits(node.label) * minimumFontSize * 0.6;
   if (available >= required) return null;

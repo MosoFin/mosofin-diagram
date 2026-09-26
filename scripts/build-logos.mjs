@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
+import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -15,6 +16,7 @@ const skillRoot = path.join(repoRoot, 'mosofin');
 const outputPath = path.join(repoRoot, 'docs', 'logos.html');
 
 const { BRAND_MARKS } = await import(pathToFileURL(path.join(skillRoot, 'renderers/shared/generated-brand-marks.mjs')).href);
+const { DOMAIN_ICONS, DOMAIN_ICON_SOURCE } = await import(pathToFileURL(path.join(skillRoot, 'renderers/shared/generated-domain-icons.mjs')).href);
 const packageJson = JSON.parse(fs.readFileSync(path.join(skillRoot, 'package.json'), 'utf8'));
 
 const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({
@@ -90,15 +92,35 @@ ${byCategory.get(category).map((mark) => `            <figure class="mark" data-
           </div>
         </section>`;
 const businessCards = businessCategories.map(renderCategory).join('\n');
+// Business icons: the pictograms a node shows when it has no logo. Drawn from the
+// same generated catalogue the renderer uses, in a neutral ink, never a brand colour.
+const iconCards = DOMAIN_ICONS.map((icon) => `            <figure class="glyph">
+              <span class="glyph-plate"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">${icon.body}</svg></span>
+              <figcaption>
+                <b>${esc(icon.title)}</b>
+                <code>${esc(icon.id)}</code>
+                <small>${esc(icon.use)}</small>
+              </figcaption>
+            </figure>`).join('\n');
 
+const logosDescription = `${businessCount} finance software logos and ${DOMAIN_ICONS.length} business icons the free MosoFin-diagram skill draws on a diagram: ledgers, banks, payroll, suppliers and more.`;
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="mosofin logos ${esc(packageJson.version)}">
-  <title>MosoFin-diagram — Logo Catalogue</title>
-  <meta name="description" content="Financial software logos the MosoFin-diagram skill can draw on a node — ledgers, processors, banks, and payroll.">
+  <title>Finance Software Logos & Business Icons — MosoFin-diagram</title>
+  <meta name="description" content="${esc(logosDescription)}">
+${seoHead({
+  path: '/logos.html',
+  title: 'Finance Software Logos & Business Icons — MosoFin-diagram',
+  description: logosDescription,
+  jsonLd: [
+    breadcrumb('Logos', '/logos.html'),
+    { '@type': 'CollectionPage', name: 'Finance software logos and business icons', url: absoluteUrl('/logos.html'), description: logosDescription },
+  ],
+})}
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/png" href="assets/mosofin-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,6 +181,15 @@ const html = `<!DOCTYPE html>
     .mark b { display:block; font-size:.8125rem; font-weight:600; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .mark code { display:block; font-family:var(--font-mono); font-size:.625rem; color:var(--dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .empty { display:none; padding:2.5rem 0 4rem; color:var(--muted); }
+    #icons { padding:.5rem 0 4rem; border-top:1px solid var(--line); }
+    .glyphs { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:.75rem; margin-top:1.5rem; }
+    .glyph { display:flex; align-items:flex-start; gap:.75rem; padding:.75rem .8rem; border:1px solid var(--line); border-radius:10px; background:var(--paper); }
+    .glyph-plate { flex-shrink:0; display:grid; place-items:center; width:44px; height:44px; border-radius:10px; background:var(--paper-2); border:1px solid var(--line); color:var(--ink-soft); }
+    .glyph-plate svg { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+    .glyph figcaption { min-width:0; }
+    .glyph b { display:block; font-size:.8125rem; font-weight:600; color:var(--ink); }
+    .glyph code { display:block; font-family:var(--font-mono); font-size:.625rem; color:var(--accent-deep); }
+    .glyph small { display:block; margin-top:.2rem; font-size:.75rem; line-height:1.45; color:var(--muted); }
 
     footer { border-top:1px solid var(--line); background:var(--paper-2); padding:2rem 0; }
     .foot-inner { width:min(1180px,calc(100% - 48px)); margin:0 auto; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; font-size:.8125rem; color:var(--muted); }
@@ -195,9 +226,10 @@ ${siteFooterStyles()}
     <div class="wrap">
       <div class="eyebrow">Finance logo catalogue</div>
       <h1>The financial logos the skill can draw.</h1>
-      <p>In logo mode a node is drawn as its software mark instead of a labelled box. These ${businessCount} marks are the systems a money map actually names — the ledger, the processor, the bank, payroll, the storefront, the 3PL. All of them ship inside the skill: no network call, no account. A node whose software is not here keeps its role glyph rather than borrowing someone else's logo.</p>
+      <p>In logo mode a node is drawn as its software mark instead of a labelled box. These ${businessCount} marks are the systems a money map actually names — the ledger, the processor, the bank, payroll, the storefront, the 3PL. All of them ship inside the skill: no network call, no account. A node with no logo here shows a <a href="#icons">business icon</a> instead, never someone else's logo.</p>
       <div class="counts">
         <span class="count"><b>${businessCount}</b> business &amp; finance marks</span>
+        <span class="count"><b>${DOMAIN_ICONS.length}</b> business icons</span>
         <span class="count">v${esc(packageJson.version)}</span>
       </div>
     </div>
@@ -217,6 +249,15 @@ ${siteFooterStyles()}
 ${businessCards}
     </div>
     <p class="empty" id="empty">No logo matches that search. If your software is missing, <a href="${esc(ISSUE_URL)}" target="_blank" rel="noopener">request it</a>.</p>
+    <section id="icons" aria-labelledby="icons-title">
+      <div class="band">
+        <h2 class="band-title" id="icons-title">No logo? A business icon.</h2>
+        <p class="band-note">Suppliers, a warehouse, the controller or a legal entity have no logo, and some software has no openly licensed mark. Set <code>icon</code> on the node and it shows one of these ${DOMAIN_ICONS.length} pictograms in its own semantic colour, so it reads as a role, never as a brand. Run <code>mosofin icons</code> to list them. Icons from <a href="${esc(DOMAIN_ICON_SOURCE.url)}" target="_blank" rel="noopener">Lucide</a> (${esc(DOMAIN_ICON_SOURCE.license)}).</p>
+      </div>
+      <div class="glyphs">
+${iconCards}
+      </div>
+    </section>
   </div>
 
   ${siteFooter({ version: packageJson.version, page: 'logos' })}

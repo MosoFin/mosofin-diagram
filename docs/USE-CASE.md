@@ -132,6 +132,7 @@ screenshots are in [`docs/samples/images/`](samples/images/).
 | Does the Stripe payout reconcile to the Chase deposit? | `finance-payout-rec` | dataflow | [northline-payout-rec.html](samples/northline-payout-rec.html) |
 | Who is allowed to say a customer owes us? | `finance-customer-ar` | architecture | [northline-customer-ar.html](samples/northline-customer-ar.html) |
 | Can we make payroll on 15 August? | `finance-cash-runway` | dataflow | [northline-cash-runway.html](samples/northline-cash-runway.html) |
+| What holds the business up, on one page? | `business-pillars` | pillars | [northline-operating-pillars.html](samples/northline-operating-pillars.html) |
 
 ![July revenue walk](samples/images/northline-revenue-walk.light.png)
 

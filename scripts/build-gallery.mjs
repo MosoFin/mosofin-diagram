@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { siteFooter, siteFooterStyles } from './site-footer.mjs';
+import { absoluteUrl, breadcrumb, seoHead } from './site-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -27,7 +28,18 @@ const CASES = [
     accent: '#38bdf8',
     featured: true,
     titleEn: 'Business Operating Map',
-    descriptionEn: 'The whole business in one map: demand, supply chain, inventory, commerce, payments, spend, payroll, bank and three separate ledgers, each node naming its system of record.',
+    descriptionEn: 'The whole business as three finance cycles: procure to pay, order to cash, and record to report into three separate ledgers, meeting at the bank, with the system of record on every node.',
+  },
+  {
+    id: 'operating-pillars',
+    type: 'pillars',
+    input: 'northline-operating-pillars.pillars.json',
+    output: 'northline-operating-pillars.pillars.html',
+    focus: 'books',
+    view: 'where-cash-lands',
+    accent: '#0f766e',
+    titleEn: 'How the Business Stands',
+    descriptionEn: 'The operating model on one page: the business in one sentence, five pillars each naming its system of record and the facts it owns, and the entity and truth rules underneath.',
   },
   {
     id: 'money-map',
@@ -125,6 +137,7 @@ const SHAPES = {
   sequence: ['participants', 'messages'],
   dataflow: ['nodes', 'flows'],
   lifecycle: ['states', 'transitions'],
+  pillars: ['pillars', 'none'],
 };
 
 const TYPE_LABELS = {
@@ -133,6 +146,7 @@ const TYPE_LABELS = {
   sequence: 'Sequence',
   dataflow: 'Data flow',
   lifecycle: 'Lifecycle',
+  pillars: 'Pillars',
 };
 
 // Print-depth type hues shared with the site palette (guide page uses the same map).
@@ -142,6 +156,7 @@ const TYPE_ACCENTS = {
   sequence: '#6d28d9',
   dataflow: '#b45309',
   lifecycle: '#be123c',
+  pillars: '#0f766e',
 };
 
 function digest(buffer) {
@@ -289,10 +304,36 @@ const manifest = {
 const manifestJson = JSON.stringify(manifest, null, 2);
 fs.writeFileSync(path.join(outputRoot, 'gallery', 'manifest.json'), `${manifestJson}\n`);
 
+const galleryDescription = `${entries.length} verified example diagrams of how a small business runs: operating map, pillars, money map, close runbook, revenue walk and more, each with its JSON source.`;
 const replacements = {
   '[[MOSOFIN_VERSION]]': packageJson.version,
   '[[SITE_FOOTER]]': siteFooter({ version: packageJson.version, page: 'gallery' }),
   '[[SITE_FOOTER_STYLES]]': siteFooterStyles(),
+  '[[SEO_DESCRIPTION]]': galleryDescription,
+  '[[SEO_HEAD]]': seoHead({
+    path: '/gallery.html',
+    title: 'Business Diagram Examples — MosoFin-diagram Gallery',
+    description: galleryDescription,
+    jsonLd: [
+      breadcrumb('Gallery', '/gallery.html'),
+      {
+        '@type': 'CollectionPage',
+        name: 'Business Diagram Examples',
+        url: absoluteUrl('/gallery.html'),
+        description: galleryDescription,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: entries.length,
+          itemListElement: entries.map((entry, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: entry.titleEn,
+            url: absoluteUrl(`/gallery/artifacts/${entry.output}`),
+          })),
+        },
+      },
+    ],
+  }),
   '[[ENTRY_COUNT]]': String(manifest.entryCount),
   '[[CHECK_COUNT]]': String(manifest.checkCount),
   '[[GALLERY_CARDS]]': entries.map(renderCard).join('\n'),

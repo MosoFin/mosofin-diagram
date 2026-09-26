@@ -16,6 +16,7 @@ const CASES = {
   sequence: 'cache-miss-request.sequence.json',
   dataflow: 'product-analytics.dataflow.json',
   lifecycle: 'agent-run.lifecycle.json',
+  pillars: 'northline-operating-pillars.pillars.json',
 };
 
 function render(mode, example) {

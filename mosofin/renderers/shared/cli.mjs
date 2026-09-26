@@ -7,6 +7,7 @@ import { installRendererDiagnosticBoundary, throwDiagnosticProblems } from './di
 import { validateEngineeringProfile } from './engineering-profiles.mjs';
 import { resolveOutputPath } from './output-path.mjs';
 import { prepareDiagramBrandMarks } from './brand-marks.mjs';
+import { validateDomainIcons } from './domain-icons.mjs';
 import { resolveLocale, translateMessage } from './i18n.mjs';
 
 installRendererDiagnosticBoundary();
@@ -24,6 +25,7 @@ export function loadDiagram({ rendererDir, diagramType, defaultExample, argv = p
   validateGuidedViews(diagramType, diagram);
   validateRelationshipIds(diagramType, diagram);
   validateEngineeringProfile(diagramType, diagram);
+  validateDomainIcons(diagramType, semanticNodesWithPaths(diagramType, diagram));
   const sourceEvidence = verifyRepositoryEvidence(diagramType, diagram, process.env.MOSOFIN_REPO_ROOT);
   const template = fs.readFileSync(path.join(skillRoot, 'assets/template.html'), 'utf8');
   // Optional chaining: in degraded mode (no ajv) malformed input must still
@@ -49,7 +51,28 @@ export async function loadDiagramWithBrandMarks(options) {
   return loaded;
 }
 
-const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const TYPE_NOUNS = {
+  architecture: 'architecture',
+  workflow: 'workflow',
+  sequence: 'sequence',
+  dataflow: 'data-flow',
+  lifecycle: 'lifecycle',
+  pillars: 'pillars',
+};
+
+// A search-result description for the standalone page: the authored subtitle
+// when there is one, otherwise the title and the named reader views. Authored
+// copy only; nothing is inferred from the nodes.
+export function artifactDescription(diagramType, meta = {}) {
+  const subtitle = typeof meta.subtitle === 'string' ? meta.subtitle.trim() : '';
+  if (subtitle) return subtitle;
+  const views = (meta.views || []).map((view) => view.label).filter(Boolean);
+  const noun = TYPE_NOUNS[diagramType] || 'diagram';
+  const lead = views.length ? `${meta.title}: ${views.join(', ')}.` : `${meta.title}.`;
+  return `${lead} An interactive ${noun} diagram made with MosoFin-diagram.`;
+}
+
+const START_TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'pillars']);
 
 // Common CLI tail: fill the template and write the standalone HTML file.
 export function writeDiagram({ outPath, template, diagramType, meta, svg, cards, sourceEvidence = null }) {
@@ -67,18 +90,41 @@ export function writeDiagram({ outPath, template, diagramType, meta, svg, cards,
     nodeStyle: meta.node_style || 'box',
     guidedViews: meta.views || [],
     sourceEvidence,
+    description: artifactDescription(diagramType, meta),
   }));
   outputPathGuards.delete(outPath);
   console.log(outPath);
 }
 
+// A type may spread its semantic nodes over several collections; pillars keeps
+// the roof (one object), the pillars, and the foundation apart because they
+// are drawn differently, yet every one of them is a focusable node.
 const SEMANTIC_COLLECTIONS = {
   architecture: 'components',
   workflow: 'nodes',
   sequence: 'participants',
   dataflow: 'nodes',
   lifecycle: 'states',
+  pillars: ['roof', 'pillars', 'foundation'],
 };
+
+export function semanticNodesWithPaths(diagramType, diagram) {
+  const collections = [SEMANTIC_COLLECTIONS[diagramType]].flat().filter(Boolean);
+  return collections.flatMap((collection) => {
+    const value = diagram?.[collection];
+    if (Array.isArray(value)) return value.map((node, index) => ({ node, path: `/${collection}/${index}` }));
+    return value && typeof value === 'object' ? [{ node: value, path: `/${collection}` }] : [];
+  });
+}
+
+export function semanticNodesOf(diagramType, diagram) {
+  const collections = [SEMANTIC_COLLECTIONS[diagramType]].flat().filter(Boolean);
+  return collections.flatMap((collection) => {
+    const value = diagram?.[collection];
+    if (Array.isArray(value)) return value;
+    return value && typeof value === 'object' ? [value] : [];
+  });
+}
 
 const RELATIONSHIP_COLLECTIONS = {
   architecture: 'connections',
@@ -120,8 +166,8 @@ export function validateRelationshipIds(diagramType, diagram) {
 export function validateGuidedViews(diagramType, diagram) {
   const views = diagram.meta?.views;
   if (!Array.isArray(views) || views.length === 0) return;
-  const collection = SEMANTIC_COLLECTIONS[diagramType];
-  const semanticIds = new Set((diagram[collection] || []).map((item) => item.id));
+  const collection = [SEMANTIC_COLLECTIONS[diagramType]].flat().join('+');
+  const semanticIds = new Set(semanticNodesOf(diagramType, diagram).map((item) => item.id));
   const seen = new Set();
   const problems = [];
 
