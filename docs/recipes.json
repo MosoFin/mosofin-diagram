@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "name": "MosoFin-diagram",
+  "version": "1.0.0-dev.0",
+  "url": "https://diagram.mosofin.com/recipes.json",
+  "install": {
+    "claude-code": "npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent claude-code --global --copy --yes",
+    "cursor": "npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent cursor --global --copy --yes",
+    "codex": "npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent codex --global --copy --yes",
+    "opencode": "npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent opencode --global --copy --yes"
+  },
+  "diagramTypes": [
+    {
+      "id": "architecture",
+      "label": "Architecture",
+      "use": "The whole operating stack: which system owns each domain, money maps, and where entities separate."
+    },
+    {
+      "id": "workflow",
+      "label": "Workflow",
+      "use": "Steps and gates in one process: team handoffs, the month-end close, approval chains, payment runs."
+    },
+    {
+      "id": "sequence",
+      "label": "Sequence",
+      "use": "One order, invoice or payout traced in time across every system it touches."
+    },
+    {
+      "id": "dataflow",
+      "label": "Data flow",
+      "use": "Revenue walks, payout reconciliations, cash runway and data lineage: where a number comes from."
+    },
+    {
+      "id": "lifecycle",
+      "label": "Lifecycle",
+      "use": "The states one object moves through: refunds, disputes, invoices, subscriptions."
+    },
+    {
+      "id": "pillars",
+      "label": "Pillars",
+      "use": "The operating model on one page: the business in one sentence, one pillar per domain, the rules underneath."
+    }
+  ],
+  "recipes": [
+    {
+      "id": "business-operating-map",
+      "group": "Business",
+      "type": "architecture",
+      "title": "Business operating map",
+      "question": "How does the whole business run, and which system owns each part of it?",
+      "answer": "Draw it as an architecture diagram with the MosoFin-diagram \"Business operating map\" recipe. The whole business as three finance cycles meeting at the bank: procure to pay on the left, order to cash on the right, record to report underneath, with the system of record named on each node. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Explaining the business to a new hire, an operator, a buyer, or yourself; before choosing what to fix or replace.",
+      "avoidWhen": "The question is about one process in order (workflow), one order in time (sequence), or numbers that must foot (finance recipes).",
+      "include": [
+        "8–12 domains, not 30 apps",
+        "system of record per domain",
+        "P2P, O2C and R2R as named regions",
+        "shared vs per-entity books"
+      ],
+      "prompt": "Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin architecture mode to map how the whole business runs. Group by domain (demand/CRM, commerce, supply chain, inventory, fulfilment, payments, spend, payroll, bank, books, data) and name the real tool in each sublabel — at most 12 primary nodes. Lay it out as the three finance cycles: procure to pay (suppliers, ERP, spend) on the left, order to cash (CRM, commerce, payments) on the right, inventory and the bank in the middle, and record to report (one ledger per entity) along the bottom. Goods run left to right, cash converges on the bank, and every ledger is fed from the bank. Mark approval gates, say which cycles are shared and which books are per entity, and use the real entity names. Do not invent amounts, volumes, or headcounts.",
+      "page": "https://diagram.mosofin.com/recipes/business-operating-map.html",
+      "markdown": "https://diagram.mosofin.com/recipes/business-operating-map.md",
+      "example": {
+        "title": "How the business runs (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/business-operating-map.architecture.html"
+      }
+    },
+    {
+      "id": "business-handoffs",
+      "group": "Business",
+      "type": "workflow",
+      "title": "Business handoffs",
+      "question": "Which team or system owns each step, and where does work change hands?",
+      "answer": "Draw it as a workflow diagram with the MosoFin-diagram \"Business handoffs\" recipe. Lanes by team or system across one end-to-end process, with every handoff and every exception path named. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Work is dropping between teams, onboarding an operator, or documenting who is accountable for each gate.",
+      "avoidWhen": "You need the system map rather than the process (business-operating-map), or numbers that must tie out.",
+      "include": [
+        "one lane per team or system",
+        "named handoffs",
+        "an exception lane",
+        "the gate that can stop the work"
+      ],
+      "prompt": "Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin workflow mode to show who owns each step of this process. One lane per team or system, one main path left to right, every handoff labelled with what actually changes hands, and a separate exception lane for the paths that stall or reverse. Do not invent owners or SLAs.",
+      "page": "https://diagram.mosofin.com/recipes/business-handoffs.html",
+      "markdown": "https://diagram.mosofin.com/recipes/business-handoffs.md",
+      "example": {
+        "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html"
+      }
+    },
+    {
+      "id": "business-pillars",
+      "group": "Business",
+      "type": "pillars",
+      "title": "Business pillars",
+      "question": "What holds the business up, which system owns each pillar, and what does it all stand on?",
+      "answer": "Draw it as a pillars diagram with the MosoFin-diagram \"Business pillars\" recipe. The operating model on one page: a roof for the business in one sentence, one pillar per domain with its system of record and the facts it owns, and a foundation for the entity and the truth rules. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "A board, buyer, or new hire needs the whole operating model in one glance, or the brief is fresh and you want to confirm it before mapping any flow.",
+      "avoidWhen": "The question is how work or money moves (operating map, handoffs, order journey) or a number that must tie out (finance recipes).",
+      "include": [
+        "3–6 pillars, one per domain",
+        "system of record on each capital",
+        "facts owned, not tasks or amounts",
+        "entity and truth rules as the foundation"
+      ],
+      "prompt": "Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin pillars mode to state the operating model on one page. The roof is the business in one sentence. Make one pillar per domain the business runs (3–6), name the system of record in the sublabel and set brand only for a real product, list the facts that system owns as items, and put the one-phrase truth claim in the tag. The foundation names the entity, the accounting basis, and the truth rules. Do not draw flows, ties, amounts, or headcounts.",
+      "page": "https://diagram.mosofin.com/recipes/business-pillars.html",
+      "markdown": "https://diagram.mosofin.com/recipes/business-pillars.md",
+      "example": {
+        "title": "Northline Coffee — How the business stands (as of 2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-operating-pillars.pillars.html"
+      }
+    },
+    {
+      "id": "business-order-journey",
+      "group": "Business",
+      "type": "sequence",
+      "title": "Order journey across systems",
+      "question": "What happens to one order, in time, across every system it touches?",
+      "answer": "Draw it as a sequence diagram with the MosoFin-diagram \"Order journey across systems\" recipe. One order traced in time from demand through commerce, inventory, fulfilment, payment and into the books. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Explaining the real sequence to a new hire, debugging where an order stalls, or scoping an integration.",
+      "avoidWhen": "You need the whole stack at a glance (business-operating-map) or a reconciliation that must foot.",
+      "include": [
+        "one order, real IDs if known",
+        "every system it touches",
+        "the waits and the async steps",
+        "where it becomes revenue"
+      ],
+      "prompt": "Read references/business-onboarding.md and the workspace BUSINESS-BRIEF.md. Use Mosofin sequence mode to trace one order in time across every system it touches — demand, commerce, inventory, fulfilment, payments, bank and books. Show the waits and the asynchronous steps as separate messages. Do not invent timestamps or amounts.",
+      "page": "https://diagram.mosofin.com/recipes/business-order-journey.html",
+      "markdown": "https://diagram.mosofin.com/recipes/business-order-journey.md",
+      "example": {
+        "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-order-path.sequence.html"
+      }
+    },
+    {
+      "id": "finance-money-map",
+      "group": "Finance",
+      "type": "architecture",
+      "title": "Finance money map",
+      "question": "How does this company make money, and what is source of truth for orders, cash, and books?",
+      "answer": "Draw it as an architecture diagram with the MosoFin-diagram \"Finance money map\" recipe. A bounded map of commerce, payments, bank, and ledger with one order-to-cash path and named crossings. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Onboarding a controller, explaining Shopify + Stripe + QuickBooks, or diligence on how cash reaches the books.",
+      "avoidWhen": "The audience needs one order’s timestamps, a payout rec that must foot, or month-end task ownership.",
+      "include": [
+        "8–12 systems",
+        "one order-to-cash path",
+        "named boundary crossings",
+        "one source of truth per fact"
+      ],
+      "prompt": "Read references/finance-onboarding.md and the workspace FINANCE-BRIEF.md. Use Mosofin architecture mode to map how money reaches the books. Show 8–12 systems (commerce, payments, bank, ledger), one primary order-to-cash path, and label every crossing with the real mechanism. Do not invent amounts. Do not give two systems the same source-of-truth fact. Put tax and gift-card liability on side branches, not on the revenue rail.",
+      "page": "https://diagram.mosofin.com/recipes/finance-money-map.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-money-map.md",
+      "example": {
+        "title": "Northline Coffee — Money Map (as of 2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-money-map.architecture.html"
+      }
+    },
+    {
+      "id": "finance-order-path",
+      "group": "Finance",
+      "type": "sequence",
+      "title": "Finance order path",
+      "question": "What happened to one order or payout, in time, across commerce, payments, and the books?",
+      "answer": "Draw it as a sequence diagram with the MosoFin-diagram \"Finance order path\" recipe. A time-ordered path from checkout through capture, fee netting, payout batch, bank, and the ledger split. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Debugging a break on one order, a double-charge complaint, or explaining why a deposit is a batch.",
+      "avoidWhen": "The audience only needs the stable system map, or a period rec that must foot across all payouts.",
+      "include": [
+        "real IDs when known",
+        "capture and returns",
+        "fee gap",
+        "payout then bank then books"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin sequence mode to walk one real order from cart to GL. Keep Shopify, Stripe, bank, and QuickBooks as participants. Show capture, fee netting, payout batching, and the ledger split. Use real IDs when the user supplied them. Do not invent amounts; omit or tag unknown. Keep the fee gap visible without turning it into the only path.",
+      "page": "https://diagram.mosofin.com/recipes/finance-order-path.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-order-path.md",
+      "example": {
+        "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-order-path.sequence.html"
+      }
+    },
+    {
+      "id": "finance-revenue-walk",
+      "group": "Finance",
+      "type": "dataflow",
+      "title": "Finance revenue walk",
+      "question": "Why don’t Shopify, Stripe, and QuickBooks show the same revenue?",
+      "answer": "Draw it as a data-flow diagram with the MosoFin-diagram \"Finance revenue walk\" recipe. A left-to-right walk from gross sales through discounts, returns, tax, gift cards, fees, and recognized income. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Founder and CFO disagree on “the number,” or Shopify sales do not match the P&L.",
+      "avoidWhen": "The question is one order’s timestamps, Stripe payout vs bank, or a close runbook.",
+      "include": [
+        "gross to contra",
+        "tax and gift cards as not-income",
+        "fees as expense not contra",
+        "landing on the books"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin dataflow mode to walk gross commerce sales to recognized QuickBooks income. Put discounts and returns on the commerce rail; style tax and gift cards as security / not-income; treat processor fees as an expense branch, not a contra to sales. Do not invent totals. If a number is missing, omit it or tag unknown. Extra questions become at most five guided views.",
+      "page": "https://diagram.mosofin.com/recipes/finance-revenue-walk.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-revenue-walk.md",
+      "example": {
+        "title": "Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-revenue-walk.dataflow.html"
+      }
+    },
+    {
+      "id": "finance-close",
+      "group": "Finance",
+      "type": "workflow",
+      "title": "Finance month-end close",
+      "question": "What is month-end, in order, and who owns each gate?",
+      "answer": "Draw it as a workflow diagram with the MosoFin-diagram \"Finance month-end close\" recipe. A close runbook with commerce, cash, books, and review lanes, plus an exception lane for unmatched items. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Explaining close to a founder, sharing ownership with a bookkeeper, or showing what blocks period lock.",
+      "avoidWhen": "The audience needs a payout rec that foots, or a state machine for one dispute.",
+      "include": [
+        "cutoff",
+        "payout and sales recs",
+        "exception lane",
+        "review then lock"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin workflow mode for this period’s close. Separate Shopify, Stripe/bank, QuickBooks, review, and exception lanes. Make cutoff → payout rec → sales rec → tax tie → review → lock the main path. Put unmatched payouts and open disputes on the exception lane. Tag owners. Do not mark a rec node done without evidence. Do not invent amounts.",
+      "page": "https://diagram.mosofin.com/recipes/finance-close.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-close.md",
+      "example": {
+        "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html"
+      }
+    },
+    {
+      "id": "finance-dispute-lifecycle",
+      "group": "Finance",
+      "type": "lifecycle",
+      "title": "Finance dispute lifecycle",
+      "question": "If commerce refunded it, is the money actually done?",
+      "answer": "Draw it as a lifecycle diagram with the MosoFin-diagram \"Finance dispute lifecycle\" recipe. A state model that separates Shopify refund, Stripe dispute waits, recoverable books catch-up, and terminal win or write-off. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Chargeback week, CX saying “refunded so we are fine,” or QBO still showing income.",
+      "avoidWhen": "The audience needs the close checklist or a gross-to-net walk for the whole period.",
+      "include": [
+        "captured start",
+        "non-terminal waits",
+        "books catch-up as recoverable failure",
+        "won and lost terminals"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin lifecycle mode for this refund or dispute. Keep Shopify refunded as a non-terminal step when Stripe still has an open dispute. Model QBO still showing income as a recoverable failure with a real transition back after a credit memo. Won and lost/write-off are terminals. Do not invent amounts or evidence due dates.",
+      "page": "https://diagram.mosofin.com/recipes/finance-dispute-lifecycle.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-dispute-lifecycle.md",
+      "example": {
+        "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-dispute.lifecycle.html"
+      }
+    },
+    {
+      "id": "finance-payout-rec",
+      "group": "Finance",
+      "type": "dataflow",
+      "title": "Finance payout rec",
+      "question": "Where did Stripe cash go relative to the bank and QuickBooks?",
+      "answer": "Draw it as a data-flow diagram with the MosoFin-diagram \"Finance payout rec\" recipe. A rec-shaped data flow: captured charges, netted fees, payouts, in-transit, bank credits, books, and residual. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Month-end payout rec, Stripe dashboard cash ≠ bank, or a clearing account that will not tie.",
+      "avoidWhen": "The question is why Shopify sales ≠ P&L, or the close checklist order.",
+      "include": [
+        "fees netted in payout",
+        "timing vs unexplained residual",
+        "bank then books",
+        "no invented residual"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin dataflow mode for Stripe payout vs bank vs QuickBooks. Separate timing (pending / in transit) from unexplained residual. Label fees as netted inside the payout. Do not invent a residual; if totals are unknown, omit amounts and keep the topology. Never mark the rec green unless the user supplied a zero difference.",
+      "page": "https://diagram.mosofin.com/recipes/finance-payout-rec.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-payout-rec.md",
+      "example": {
+        "title": "Northline Coffee — Stripe Payout Reconciliation to Chase 1002 (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-payout-rec.dataflow.html"
+      }
+    },
+    {
+      "id": "finance-customer-ar",
+      "group": "Finance",
+      "type": "architecture",
+      "title": "Finance customer and AR",
+      "question": "Who is allowed to say this customer owes us?",
+      "answer": "Draw it as an architecture diagram with the MosoFin-diagram \"Finance customer and AR\" recipe. A map of Shopify CRM, Stripe customer, and QuickBooks customer with an explicit DTC vs wholesale AR rule. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Wholesale just launched, three customer IDs disagree, or someone is aging a cash-and-carry brand.",
+      "avoidWhen": "The audience needs a cash forecast or a payout rec.",
+      "include": [
+        "three identity systems",
+        "DTC sales-receipt rule",
+        "wholesale invoice rule",
+        "CRM is not cash"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin architecture mode to show customer identity across Shopify, Stripe, and QuickBooks. State which system may claim AR. If DTC is sales receipts, say QuickBooks has no AR. If wholesale is Net 30, put aging on the QBO invoice. Do not treat Shopify CRM as cash. Do not invent balances.",
+      "page": "https://diagram.mosofin.com/recipes/finance-customer-ar.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-customer-ar.md",
+      "example": {
+        "title": "Northline Coffee — Who Can Say a Customer Owes Us (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-customer-ar.architecture.html"
+      }
+    },
+    {
+      "id": "finance-cash-runway",
+      "group": "Finance",
+      "type": "dataflow",
+      "title": "Finance cash to a date",
+      "question": "Can we make payroll, and what inflows are actually named?",
+      "answer": "Draw it as a data-flow diagram with the MosoFin-diagram \"Finance cash to a date\" recipe. A cash walk from a tied bank opening through in-transit payouts and known outflows, with user-stated items labelled. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Payroll Friday, runway to a date, or a founder asking whether next week’s Shopify sales count.",
+      "avoidWhen": "The audience needs the P&L walk or the close checklist.",
+      "include": [
+        "tied opening or explicit gap",
+        "named in-transit payouts",
+        "known outflows",
+        "no invented next-week sales"
+      ],
+      "prompt": "Read references/finance-onboarding.md and FINANCE-BRIEF.md. Use Mosofin dataflow mode for cash to a named date. Opening cash is red until tied to a bank rec, or the user accepts the gap. Inflows need a payout id, invoice id, or user-stated tag. Do not add next-week Shopify sales without an order or payout basis. Do not invent amounts.",
+      "page": "https://diagram.mosofin.com/recipes/finance-cash-runway.html",
+      "markdown": "https://diagram.mosofin.com/recipes/finance-cash-runway.md",
+      "example": {
+        "title": "Northline Coffee — Cash to Payroll Date (as of 2026-07-31)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-cash-runway.dataflow.html"
+      }
+    },
+    {
+      "id": "system-overview",
+      "group": "Systems and engineering",
+      "type": "architecture",
+      "title": "System overview",
+      "question": "What exists, who owns it, and how is it connected?",
+      "answer": "Draw it as an architecture diagram with the MosoFin-diagram \"System overview\" recipe. A bounded map of core components, external dependencies, primary paths, and trust boundaries. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Onboarding, design reviews, repository orientation, or explaining a service landscape.",
+      "avoidWhen": "The audience needs exact call order, state transitions, or row-level data lineage.",
+      "include": [
+        "8–12 core components",
+        "one primary path",
+        "external dependencies",
+        "trust boundaries"
+      ],
+      "prompt": "Analyze this repository, then use Mosofin to create a high-level architecture diagram. Show 8–12 core runtime components, one primary request or data path, external dependencies, ownership or trust boundaries, and put supporting detail in cards instead of adding more edges.",
+      "page": "https://diagram.mosofin.com/recipes/system-overview.html",
+      "markdown": "https://diagram.mosofin.com/recipes/system-overview.md",
+      "example": {
+        "title": "Northline Coffee — Money Map (as of 2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-money-map.architecture.html"
+      }
+    },
+    {
+      "id": "deployment-ownership",
+      "group": "Systems and engineering",
+      "type": "architecture",
+      "title": "Deployment ownership",
+      "question": "Where does each workload run, and what crosses a boundary?",
+      "answer": "Draw it as an architecture diagram with the MosoFin-diagram \"Deployment ownership\" recipe. A deployment-focused map of regions, networks, clusters, workloads, stores, and cross-boundary mechanisms. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Cloud reviews, production readiness, multi-region planning, or infrastructure ownership handoffs.",
+      "avoidWhen": "Deployment facts are unknown or the real question is application behavior rather than placement.",
+      "include": [
+        "regions and networks",
+        "workload ownership",
+        "stateful services",
+        "named boundary crossings"
+      ],
+      "prompt": "Use Mosofin to draw the production deployment topology. Group resources by region, network, cluster, and owner; show workloads and stateful services; label every cross-boundary mechanism. Do not invent deployment facts—mark unknown areas explicitly. If the user wants a fail-closed deployment review, ask before setting meta.engineering_profile to deployment-ownership; otherwise leave the engineering profile unset.",
+      "page": "https://diagram.mosofin.com/recipes/deployment-ownership.html",
+      "markdown": "https://diagram.mosofin.com/recipes/deployment-ownership.md",
+      "example": {
+        "title": "Northline Coffee — Who Can Say a Customer Owes Us (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-customer-ar.architecture.html"
+      }
+    },
+    {
+      "id": "agent-tool-call",
+      "group": "Systems and engineering",
+      "type": "workflow",
+      "title": "Agent tool-call loop",
+      "question": "How does an agent plan, get permission, act, recover, and report?",
+      "answer": "Draw it as a workflow diagram with the MosoFin-diagram \"Agent tool-call loop\" recipe. A lane-based agent loop with policy gates, tool execution, exception recovery, evidence, and final response. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Explaining agent runtimes, MCP/tool orchestration, approvals, retries, or observability.",
+      "avoidWhen": "The goal is only to show static agent components or exact API message timing.",
+      "include": [
+        "request and planning",
+        "policy or approval gate",
+        "tool execution",
+        "exception and evidence paths"
+      ],
+      "prompt": "Use Mosofin workflow mode to explain this agent tool-call loop. Separate user surface, agent runtime, policy boundary, exception handling, tool execution, and observability into lanes. Make the successful path primary and show approval, retry, blocked, and evidence paths explicitly.",
+      "page": "https://diagram.mosofin.com/recipes/agent-tool-call.html",
+      "markdown": "https://diagram.mosofin.com/recipes/agent-tool-call.md",
+      "example": {
+        "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html"
+      }
+    },
+    {
+      "id": "delivery-workflow",
+      "group": "Systems and engineering",
+      "type": "workflow",
+      "title": "Delivery workflow",
+      "question": "How does a change move safely from commit to production?",
+      "answer": "Draw it as a workflow diagram with the MosoFin-diagram \"Delivery workflow\" recipe. A delivery flow with build, checks, environments, approvals, smoke tests, rollback, and ownership lanes. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "CI/CD design, release reviews, deployment governance, or onboarding developers to delivery.",
+      "avoidWhen": "The question is where infrastructure runs or what states a deployment object can occupy.",
+      "include": [
+        "trigger and build",
+        "blocking checks",
+        "approval and environments",
+        "rollback and verification"
+      ],
+      "prompt": "Use Mosofin workflow mode to draw this delivery process from commit to production. Separate developer, CI, approval, environment, and exception lanes; mark blocking checks, smoke tests, ownership, and the rollback path. Keep one unmistakable happy path.",
+      "page": "https://diagram.mosofin.com/recipes/delivery-workflow.html",
+      "markdown": "https://diagram.mosofin.com/recipes/delivery-workflow.md",
+      "example": {
+        "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html"
+      }
+    },
+    {
+      "id": "incident-runbook",
+      "group": "Systems and engineering",
+      "type": "workflow",
+      "title": "Incident runbook",
+      "question": "How do responders detect, triage, mitigate, verify, and escalate?",
+      "answer": "Draw it as a workflow diagram with the MosoFin-diagram \"Incident runbook\" recipe. An operational workflow that separates signals, responders, mitigation, communications, and recovery proof. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Incident playbooks, on-call handoffs, reliability reviews, and tabletop exercises.",
+      "avoidWhen": "The audience needs live metrics or a post-incident component topology instead of response actions.",
+      "include": [
+        "detection signal",
+        "triage owner",
+        "mitigation and rollback",
+        "verification and communication"
+      ],
+      "prompt": "Use Mosofin workflow mode to turn this incident runbook into responder lanes. Show detection, triage, mitigation, escalation, communication, rollback, and recovery verification. Separate decision gates from actions and make missing ownership visible.",
+      "page": "https://diagram.mosofin.com/recipes/incident-runbook.html",
+      "markdown": "https://diagram.mosofin.com/recipes/incident-runbook.md",
+      "example": {
+        "title": "Northline Coffee — Month-End Close Runbook (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-close.workflow.html"
+      }
+    },
+    {
+      "id": "api-request",
+      "group": "Systems and engineering",
+      "type": "sequence",
+      "title": "API request chain",
+      "question": "Who calls whom, in what order, and what returns?",
+      "answer": "Draw it as a sequence diagram with the MosoFin-diagram \"API request chain\" recipe. A time-ordered request path with authentication, cache fallback, persistence, return traffic, and async trace. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "API documentation, debugging request latency, auth reviews, or explaining cache fallback.",
+      "avoidWhen": "Order is unimportant and the audience only needs the stable service topology.",
+      "include": [
+        "callers and callees",
+        "request and return messages",
+        "fallback or error path",
+        "async side effects"
+      ],
+      "prompt": "Use Mosofin sequence mode to show this request from caller to final response. Include authentication, cache hit or miss, persistence fallback, return messages, and asynchronous trace or event emission. Keep message labels short and order unambiguous.",
+      "page": "https://diagram.mosofin.com/recipes/api-request.html",
+      "markdown": "https://diagram.mosofin.com/recipes/api-request.md",
+      "example": {
+        "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-order-path.sequence.html"
+      }
+    },
+    {
+      "id": "async-roundtrip",
+      "group": "Systems and engineering",
+      "type": "sequence",
+      "title": "Async roundtrip",
+      "question": "What happens after the initial request returns?",
+      "answer": "Draw it as a sequence diagram with the MosoFin-diagram \"Async roundtrip\" recipe. A sequence view of enqueue, acknowledgement, background work, callbacks, retries, timeout, and final consistency. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Webhooks, jobs, queues, payment callbacks, eventual consistency, or async API contracts.",
+      "avoidWhen": "The primary question is topic topology and consumer ownership rather than time order.",
+      "include": [
+        "initial acknowledgement",
+        "queue or scheduler",
+        "background work",
+        "callback, retry, and timeout"
+      ],
+      "prompt": "Use Mosofin sequence mode to explain this asynchronous roundtrip. Show the initial acknowledgement, enqueue or scheduling step, background processing, callback or polling, retry and timeout behavior, and the point where the caller can observe final consistency.",
+      "page": "https://diagram.mosofin.com/recipes/async-roundtrip.html",
+      "markdown": "https://diagram.mosofin.com/recipes/async-roundtrip.md",
+      "example": {
+        "title": "Northline Coffee — One DTC Order to the Books (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-order-path.sequence.html"
+      }
+    },
+    {
+      "id": "data-lineage",
+      "group": "Systems and engineering",
+      "type": "dataflow",
+      "title": "Data lineage",
+      "question": "Where does data come from, how does it change, and who consumes it?",
+      "answer": "Draw it as a data-flow diagram with the MosoFin-diagram \"Data lineage\" recipe. A governed path from sources through consent, transforms, sensitive stores, warehouse, and consumers. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Analytics architecture, ETL/ELT review, PII assessment, warehouse design, or model feature lineage.",
+      "avoidWhen": "The audience needs request timing or operational task ownership rather than data assets.",
+      "include": [
+        "sources and assets",
+        "transform stages",
+        "classification or consent",
+        "stores and consumers"
+      ],
+      "prompt": "Use Mosofin dataflow mode to map this data lineage. Name every data asset and transform, show consent or classification boundaries, distinguish streaming from batch paths, and identify stores plus downstream consumers. Do not use unlabeled flows.",
+      "page": "https://diagram.mosofin.com/recipes/data-lineage.html",
+      "markdown": "https://diagram.mosofin.com/recipes/data-lineage.md",
+      "example": {
+        "title": "Northline Coffee — July Revenue Walk: Shopify to QuickBooks (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-revenue-walk.dataflow.html"
+      }
+    },
+    {
+      "id": "event-stream",
+      "group": "Systems and engineering",
+      "type": "dataflow",
+      "title": "Event-stream topology",
+      "question": "Which events move through which topics, processors, groups, and failure paths?",
+      "answer": "Draw it as a data-flow diagram with the MosoFin-diagram \"Event-stream topology\" recipe. A stream map of producers, topics, ordered processors, consumer groups, state, replay, and DLQ. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Kafka/event-platform design, stream processing reviews, ownership, replay, and failure handling.",
+      "avoidWhen": "Topic names, consumer groups, and delivery semantics are not known—use a generic workflow instead.",
+      "include": [
+        "producers and event names",
+        "topics and ordering",
+        "processors and consumer groups",
+        "state, replay, and DLQ"
+      ],
+      "prompt": "Use Mosofin dataflow mode to draw this event-stream topology. Name producers, events, topics, ordered processors, consumer groups, state stores, replay paths, and the DLQ. Show ownership and delivery semantics only when supported by evidence.",
+      "page": "https://diagram.mosofin.com/recipes/event-stream.html",
+      "markdown": "https://diagram.mosofin.com/recipes/event-stream.md",
+      "example": {
+        "title": "Northline Coffee — Stripe Payout Reconciliation to Chase 1002 (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-payout-rec.dataflow.html"
+      }
+    },
+    {
+      "id": "object-lifecycle",
+      "group": "Systems and engineering",
+      "type": "lifecycle",
+      "title": "Object lifecycle",
+      "question": "Which states exist, what events move between them, and how does it end?",
+      "answer": "Draw it as a lifecycle diagram with the MosoFin-diagram \"Object lifecycle\" recipe. A state model with active work, waits, retries, cancellation, failure, and explicit terminal outcomes. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Tasks, orders, tickets, subscriptions, jobs, agent runs, or any durable object with status.",
+      "avoidWhen": "The object has no durable state and the real question is participant interaction over time.",
+      "include": [
+        "start and active states",
+        "event-labelled transitions",
+        "wait and retry states",
+        "all terminal outcomes"
+      ],
+      "prompt": "Use Mosofin lifecycle mode to model this object. Separate main progress, waiting or interruption states, and terminal outcomes. Label transitions with events, include retry, cancellation, timeout, success, and failure where real, and never hide an ending.",
+      "page": "https://diagram.mosofin.com/recipes/object-lifecycle.html",
+      "markdown": "https://diagram.mosofin.com/recipes/object-lifecycle.md",
+      "example": {
+        "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-dispute.lifecycle.html"
+      }
+    },
+    {
+      "id": "deployment-lifecycle",
+      "group": "Systems and engineering",
+      "type": "lifecycle",
+      "title": "Deployment lifecycle",
+      "question": "What state is a release in, and what can happen next?",
+      "answer": "Draw it as a lifecycle diagram with the MosoFin-diagram \"Deployment lifecycle\" recipe. A deployment state model covering queued, building, verifying, approval, promotion, rollback, and terminal outcomes. Your coding agent returns one validated, self-contained HTML file.",
+      "useWhen": "Release controllers, GitOps reconciliation, environment promotion, or deployment status APIs.",
+      "avoidWhen": "The question is the human/CI sequence of delivery actions rather than the deployment object state.",
+      "include": [
+        "queued and running states",
+        "verification and approval",
+        "promotion and rollback",
+        "success, failure, cancellation"
+      ],
+      "prompt": "Use Mosofin lifecycle mode to model the deployment object. Show queued, building, verifying, waiting for approval, promoting, rolling back, and every terminal outcome. Label the events and guards that permit each transition.",
+      "page": "https://diagram.mosofin.com/recipes/deployment-lifecycle.html",
+      "markdown": "https://diagram.mosofin.com/recipes/deployment-lifecycle.md",
+      "example": {
+        "title": "Northline Coffee — Refund and Chargeback Lifecycle (2026-07)",
+        "url": "https://diagram.mosofin.com/gallery/artifacts/northline-dispute.lifecycle.html"
+      }
+    }
+  ]
+}

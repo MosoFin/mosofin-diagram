@@ -8,6 +8,17 @@ All notable changes to Mosofin are documented here. The format follows
 
 Development identity: `v1.0.0-dev.0`
 
+- The site is now written for AI agents as well as people (answer and generative engine
+  optimization). New `llms.txt` (llmstxt.org format) and `llms-full.txt` give an agent the whole
+  product in Markdown: when to use it, install commands per agent, the workflow and CLI, the
+  guardrails, every recipe with its prompt, and the FAQ; `recipes.json` carries the same catalogue
+  as data. Every recipe now has a server-rendered answer page under `/recipes/` with the question
+  as its H1, a 30–60 word answer first, a copy-ready prompt, steps, a verified example, a short FAQ,
+  TechArticle/HowTo/FAQPage/breadcrumb structured data, and a Markdown twin. The guide links all of
+  them without JavaScript. The landing FAQ grows to eight answer-first questions with FAQPage data
+  generated from the same text, robots.txt welcomes named AI crawlers, and every page advertises
+  `llms.txt`. One module, `scripts/site-content.mjs`, holds the facts all of these state;
+  `npm run build:site` regenerates the whole site.
 - Site SEO: every page on diagram.mosofin.com now carries a canonical URL, robots directive, full Open
   Graph and Twitter card tags with image dimensions and alt text, and schema.org JSON-LD
   (SoftwareApplication on the landing page, CollectionPage with an ItemList on the gallery, HowTo on

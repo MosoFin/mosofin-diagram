@@ -28,7 +28,10 @@
     "build:design-handoff": "node ../scripts/build-design-handoff.mjs",
     "build:zip": "node ../scripts/require-node22.mjs && bash ../scripts/build-zip.sh",
     "build:logos": "node ../scripts/build-logos.mjs",
-    "build:seo": "node ../scripts/build-seo.mjs"
+    "build:seo": "node ../scripts/build-seo.mjs",
+    "build:llms": "node ../scripts/build-llms.mjs",
+    "build:recipes": "node ../scripts/build-recipes.mjs",
+    "build:site": "npm run build:gallery && npm run build:guide && npm run build:start && npm run build:logos && npm run build:recipes && npm run build:llms && npm run build:seo"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

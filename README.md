@@ -238,6 +238,11 @@ product with no openly licensed mark such as NetSuite or Ramp) set `icon` to one
 pictograms from Lucide (ISC). `node bin/mosofin.mjs icons` lists them. They draw in the node's
 semantic colour, so they read as a role and never as a vendor logo.
 
+**For AI agents:** the site publishes [llms.txt](https://diagram.mosofin.com/llms.txt), a full agent guide at
+[llms-full.txt](https://diagram.mosofin.com/llms-full.txt), the recipe catalogue as
+[recipes.json](https://diagram.mosofin.com/recipes.json), and an answer page per recipe under
+[/recipes/](https://diagram.mosofin.com/recipes/).
+
 Mosofin also accepts pasted Mermaid `flowchart`, `sequenceDiagram`, and `stateDiagram` input and re-authors it as a checked diagram.
 
 ## How it works

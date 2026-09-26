@@ -11,6 +11,10 @@ docs, generators, and CI gates.
   `npm run generate:brand-marks`, `npm run generate:validators`, `npm run build:guide`,
   `npm run build:start`, `npm run build:gallery`, `node scripts/render-examples.mjs` (packaged
   examples) and `npm run render:examples` (repo-root `examples/`).
+- The public site is built for AI agents too: `npm run build:site` regenerates every page in order —
+  gallery, guide, start, logos, the recipe answer pages (`docs/recipes/`), `llms.txt`/`llms-full.txt`/
+  `recipes.json`, then the landing SEO block, FAQ, sitemap and robots.txt. Agent-facing facts live in
+  `scripts/site-content.mjs`; edit them there, never in the generated files.
 - `npm run build:zip` rebuilds `mosofin.zip` — **requires Node 22** (the script refuses other majors;
   CI byte-compares the result). Usually unnecessary: `.github/workflows/refresh-zip.yml` rebuilds and
   commits the zip on every push to `main` that touches `mosofin/`.
