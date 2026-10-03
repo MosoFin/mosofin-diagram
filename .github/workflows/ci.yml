@@ -70,21 +70,6 @@ jobs:
           MOSOFIN_CHROME: ${{ steps.setup-chrome.outputs.chrome-path }}
           MOSOFIN_CHROME_NO_SANDBOX: '1'
 
-  zip-freshness:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Rebuild mosofin.zip and compare exact bytes
-        run: |
-          scripts/build-zip.sh /tmp/fresh.zip
-          if ! cmp -s /tmp/fresh.zip mosofin.zip; then
-            echo '::error::mosofin.zip is stale — run scripts/build-zip.sh and commit the result'
-            exit 1
-          fi
-
   package-smoke:
     name: package smoke (${{ matrix.os }})
     strategy:
@@ -97,6 +82,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Build skill archive
+        shell: bash
+        run: scripts/build-zip.sh "$RUNNER_TEMP/mosofin.zip"
       - name: Extract packaged skill
         if: runner.os != 'Windows'
         run: |
@@ -104,13 +92,14 @@ jobs:
           package_root="$RUNNER_TEMP/mosofin-package"
           rm -rf "$package_root"
           mkdir -p "$package_root"
-          unzip -q mosofin.zip -d "$package_root"
+          unzip -q "$RUNNER_TEMP/mosofin.zip" -d "$package_root"
       - name: Extract packaged skill
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
           $packageRoot = Join-Path $env:RUNNER_TEMP 'mosofin-package'
+          $archive = Join-Path $env:RUNNER_TEMP 'mosofin.zip'
           if (Test-Path $packageRoot) { Remove-Item -Recurse -Force $packageRoot }
-          Expand-Archive -Path mosofin.zip -DestinationPath $packageRoot
+          Expand-Archive -Path $archive -DestinationPath $packageRoot
       - name: Validate packaged skill without installing dependencies
         run: node scripts/package-smoke.mjs

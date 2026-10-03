@@ -278,10 +278,6 @@ canonicalZipTest('archive build is byte-for-byte reproducible across caller time
       fs.readFileSync(utcArchive).equals(fs.readFileSync(honoluluArchive)),
       'identical tracked inputs must produce identical archive bytes',
     );
-    assert.ok(
-      fs.readFileSync(utcArchive).equals(fs.readFileSync(path.join(repoRoot, 'mosofin.zip'))),
-      'the canonical archive toolchain must reproduce the committed archive bytes',
-    );
     assert.deepEqual(
       fs.readdirSync(outputRoot).sort(),
       ['honolulu.zip', 'utc.zip'],

@@ -112,7 +112,7 @@ The runtime follows the Node range in `mosofin/package.json`, but canonical
 other Node majors so a different bundled zlib cannot publish a second byte
 representation of the same package contents.
 
-Bundled example or viewer changes normally require the Gallery rebuild. Skill runtime, schema, renderer, or published `SKILL.md` changes affect `mosofin.zip`; you do **not** have to rebuild it by hand, because `.github/workflows/refresh-zip.yml` rebuilds and commits the archive on every push to `main` that touches `mosofin/`. Rebuild locally with `npm run build:zip` (Node 22 only) when you want the committed bytes in your own PR.
+Bundled example or viewer changes normally require the Gallery rebuild. `mosofin.zip` is not committed. CI builds it during package smoke, and a release attaches that build. Rebuild locally with `npm run build:zip` (Node 22 only) when you need the archive yourself.
 
 List every regenerated file in the PR description. Do not regenerate unrelated HTML, GIFs, screenshots, manifests, or archives merely to make the branch look current. Generated artifacts are evidence and delivery payloads, not a substitute for reviewing the source change.
 

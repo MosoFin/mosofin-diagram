@@ -22,7 +22,7 @@ export const PRODUCT = Object.freeze({
   site: SITE_URL,
   repo: REPO_URL,
   skillFile: `${REPO_URL}/blob/main/mosofin/SKILL.md`,
-  zip: `${REPO_URL}/raw/main/mosofin.zip`,
+  zip: `${REPO_URL}/releases/latest/download/mosofin.zip`,
 });
 
 export const AGENTS = Object.freeze([

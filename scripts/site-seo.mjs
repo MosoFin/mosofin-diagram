@@ -48,7 +48,7 @@ export function softwareApplication(version) {
     softwareVersion: version,
     description: 'A free, open-source agent skill that turns a short interview about a business into a validated, self-contained diagram of how it runs.',
     url: absoluteUrl('/'),
-    downloadUrl: `${REPO_URL}/raw/main/mosofin.zip`,
+    downloadUrl: `${REPO_URL}/releases/latest/download/mosofin.zip`,
     license: `${REPO_URL}/blob/main/LICENSE`,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     publisher,
