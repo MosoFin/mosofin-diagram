@@ -22,3 +22,6 @@ node_modules/
 
 # Local reference material — never ship
 sample_codes/
+
+# Generated skill archive. Built in CI and attached to releases.
+mosofin.zip

@@ -118,8 +118,8 @@ What the flags do — none of them are guesswork, and every command above is non
 
 Two surfaces install by hand instead, because they are not agent-switcher targets:
 
-- **Claude.ai** — upload [`mosofin.zip`](mosofin.zip) under Settings → Capabilities → Skills.
-- **Raven** — a manual ZIP install: extract [`mosofin.zip`](mosofin.zip) into
+- **Claude.ai** — build `mosofin.zip` with `npm run build:zip` (Node 22) and upload it under Settings → Capabilities → Skills. The archive is not stored in the repo.
+- **Raven** — a manual ZIP install: extract that same archive into
   `~/.raven/workspace/skills`, which yields `~/.raven/workspace/skills/mosofin`.
 
 Verify it landed:
@@ -149,11 +149,10 @@ grep -o 'mosofin [0-9][^"]*' ~/.claude/skills/mosofin/assets/template.html | hea
 |---|---|
 | `--copy` (the commands above) | re-run the install command — a copy never updates itself |
 | without `--copy` (symlinked to a clone) | `git pull` in your clone; the skill follows immediately |
-| `mosofin.zip` on Claude.ai | download [`mosofin.zip`](mosofin.zip) again and re-upload it under Settings → Capabilities → Skills |
-| `mosofin.zip` on Raven | download it again and re-extract over `~/.raven/workspace/skills` |
+| `mosofin.zip` on Claude.ai | rebuild the archive and re-upload it under Settings → Capabilities → Skills |
+| `mosofin.zip` on Raven | rebuild it and re-extract over `~/.raven/workspace/skills` |
 
-[`mosofin.zip`](mosofin.zip) on the default branch is rebuilt automatically whenever anything inside
-`mosofin/` changes (see [Releasing](#releasing)), so it always matches the current skill.
+The archive is built on demand (see [Releasing](#releasing)). It is not committed, so a download from the repo root will 404.
 
 ### 2. Describe the business, then ask one question
 
@@ -286,15 +285,10 @@ Live accounting-system access, automatic Mermaid layout, hosted sharing, and WYS
 
 ## Releasing
 
-`mosofin.zip` is the packaged skill. It is **generated, not hand-edited**, and its bytes are
-canonical — CI byte-compares the committed file against a fresh build, so a stale zip fails the build.
+`mosofin.zip` is the packaged skill. It is **generated, not committed**. CI builds it on Node 22
+during package smoke, and the release workflow attaches that build to the GitHub Release.
 
-**You normally do not build it.** Push a change under `mosofin/` and
-[`.github/workflows/refresh-zip.yml`](.github/workflows/refresh-zip.yml) rebuilds the zip on Node 22
-and commits it back to `main`, so the download always matches the skill. Run it by hand from the
-Actions tab (*refresh zip → Run workflow*) whenever you want.
-
-To build it locally — needed only if you are cutting a release or debugging packaging:
+To build it locally:
 
 ```bash
 cd mosofin
@@ -306,10 +300,8 @@ workflow, and this script all use Node 22 so the three agree exactly.
 
 | Job | Where | What it does |
 |---|---|---|
-| `refresh zip` | on push to `main` touching `mosofin/` | rebuilds and commits `mosofin.zip` |
-| `zip-freshness` | every CI run | fails if the committed zip is stale |
-| `package-smoke` | every CI run, on Linux/macOS/Windows | unpacks the zip and exercises the skill |
-| `release` | on a version tag | re-verifies the zip and attaches it to the GitHub Release |
+| `package-smoke` | every CI run, on Linux/macOS/Windows | builds the zip, unpacks it, and exercises the skill |
+| `release` | on a version tag | builds the zip and attaches it to the GitHub Release |
 
 ## Origins and license
 

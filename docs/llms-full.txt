@@ -49,7 +49,7 @@ Install the skill into the agent the user works in:
   npx -y skills add MosoFin/mosofin-diagram --skill mosofin --agent opencode --global --copy --yes
   ```
 
-Raven is a manual ZIP install: download [mosofin.zip](https://github.com/MosoFin/mosofin-diagram/raw/main/mosofin.zip) and extract it into `~/.raven/workspace/skills`, which yields `~/.raven/workspace/skills/mosofin`.
+Raven is a manual ZIP install: download [mosofin.zip](https://github.com/MosoFin/mosofin-diagram/releases/latest/download/mosofin.zip) and extract it into `~/.raven/workspace/skills`, which yields `~/.raven/workspace/skills/mosofin`.
 
 ## How to produce a diagram
 

@@ -38,7 +38,9 @@ test('the zero-dependency archive works from the canonical Cursor-visible agent 
   const agentSkills = path.join(tmp, '.agents', 'skills');
   try {
     fs.mkdirSync(agentSkills, { recursive: true });
-    execFileSync('unzip', ['-q', path.join(repoRoot, 'mosofin.zip'), '-d', agentSkills]);
+    const archive = path.join(tmp, 'mosofin.zip');
+    execFileSync(path.join(repoRoot, 'scripts', 'build-zip.sh'), [archive], { cwd: repoRoot });
+    execFileSync('unzip', ['-q', archive, '-d', agentSkills]);
     const installed = path.join(agentSkills, 'mosofin');
     const cli = path.join(installed, 'bin', 'mosofin.mjs');
     const doctor = execFileSync(process.execPath, [cli, 'doctor'], { encoding: 'utf8' });

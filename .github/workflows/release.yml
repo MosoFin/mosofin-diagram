@@ -65,8 +65,8 @@ jobs:
           mkdir -p "$package_root"
           unzip -q /tmp/mosofin-built.zip -d "$package_root"
           node scripts/package-smoke.mjs "$package_root/mosofin"
-      - name: Committed zip must match the build (same gate as CI)
-        run: cmp -s /tmp/mosofin-built.zip mosofin.zip
+      - name: Stage the built archive for the release
+        run: cp /tmp/mosofin-built.zip "$GITHUB_WORKSPACE/mosofin.zip"
       - name: Create GitHub Release with the zip attached
         uses: softprops/action-gh-release@v2
         with:
